@@ -1,0 +1,194 @@
+MAGIC (WIZARD) HOWTO
+
+The goal of an HTML template should be to provide a simple, straightforward step-by-step approach to 
+let end-users who are not proficient in HTML, and who are uncomfortable/unwilling to use the HTML editor 
+to tweak their template.  
+
+The stated goals for a magic file are: 
+	1. make it easy/fast/simple (requiring little thought)
+	2. try and limit the number of choices to only what actually looks good together
+	3. make all choices compatible, never have "incompatible choices"
+	4. whenever possible avoid edge cases, they are NOT suitable for the wizard.
+	5. try and instantly give feedback, and make changes reversable. 
+
+So a good magic experience offers a limited number of highly cohesive choices.  If a user wants to customize 
+a template beyond what the magic allows they will need to either learn HTML or employ somebody who knows it.  
+
+The template is stored in index.html, it should use KISS markup which will interpolated with object data 
+at render time.  This document assumes the magic author is already familiar with KISS markup, and
+also a moderate level of javascript/jQuery. 
+
+The word "template" refers to the index.html file and any/all required graphics, along with the wizard.html
+which is optional.  The wizard.html file is intentionally tightly coupled to the index.html file, and provide
+a simple step-by-step approach to customizing the index.html using javascript.  The wizard.html file is stored
+separately so the resulting index.html is free from extraneous code and javascript (making the wizard result
+easier to edit for a novice user). 
+
+INTO THE WEEDS: 
+Internally a magically is a series of steps, each step is contained inside an HTML <fieldset>.  The steps are
+processed sequentially based on the order they appear in the file.
+
+Sample:
+
+<fieldset data-wizard-element-id="STEP1">
+<legend>Step 1</legend>
+<label for="step1_checkbox">step1 checkbox</label>
+<input id="step1_checkbox" />
+</fieldset>
+
+<fieldset data-wizard-element-id="STEP2">
+<legend>Step 2</legend>
+<label for="step2_txt">step2 textarea</label>
+<textarea id="step2_txt"></textarea>
+</fieldset>
+
+
+FIELDSET BEST PRACTICES:
+Fieldsets can include more than one input, such as multiple checkboxes.  Best practices dictate that fields on
+a step should be related to one another.  For example grouping shipping icons and shipping policy is okay, 
+but don't group all policies together.   
+
+If a fieldset includes more than one input, include a legend.  Buttons in the fieldset will have jqueryui button()
+applied to them.  Apply the CSS class="labelsAsBreaks" to the fieldset to have labels treated as block elements.
+
+It is a good idea to include HTML comments in the wizard.html explaining what/where in the index.html is looking
+for, and also in the index.html to identify fields linked/controlled by the wizard. 
+
+LEARNING MAGIC:
+Each fieldset will use javascript/jQuery to interact with the index.html using a series of "kiss_xxxx" functions 
+associated with onClick actions within buttons or other input types.  Developers should take care to only interact
+with the index.html via the KISS magic methods since they will provide excellent error handling/diagnostics to handle
+likely situations where a user has edited the index.html in such a way that has disabled/broken the associated 
+wizard (such as removing a div that would contain wizard configurable html).  
+
+** MAGIC AUTHORS SHOULD ALWAYS EXPECT/ANTICIPATE THAT THE USER HAS EDITED THE INDEX.HTML AND BROKEN THE WIZARD **
+** AS SUCH MAGIC CODE WILL ATTEMPT [WHENEVER POSSIBLE] TO PROVIDE DIAGNOSTIC "THIS IS WHY I'M BROKEN" ASSISTANCE **
+
+The KISS Magic functions are:
+
+* function kiss_inspect('ID') 
+  sets the focus of the object inspector and also returns a jQuery reference to the object if found.
+  
+* function kiss_medialib('IMAGE_ID')
+  prompts the user to select an image from their media library, copies the image into the template and selects it at the id specified.
+
+CURRENT: * function kiss_implement('VERB',{'$id':'ELEMENT_ID'})
+FUTURE:  * function kiss_implement('ELEMENT_ID','VERB',{'otherparameter':'value'})
+
+  this implements an action (VERB) on the index.html document
+  verbs are:
+  *  hide { 'attrib':'value' }  	 -- sets the css class of an id to 'none' (making it invisible), also sets any 'attrib':'value' (optional)
+  *  show { 'attrib':'value'}  		 -- sets the css class of an id to 'inline' (making it visible), also sets any 'attrib':'value' (optional)
+  *  set-value  { '$html':'value' } -- sets the inner html of an element, such as a div. 
+  *  set-attribs  { 'attrib':'value' } -- sets the attributes of an id, such as the height="" and width="" of an image.
+  *  append  { '$html':'value' }	 -- appends content to the html inside the id specified. 
+  *  empty   {}		   				 -- empties the html inside the id specified.
+  
+CURRENT: hide/show do not suppor optional 'attrib':'value'
+CURRENT: set-value uses '$input' instead of '$html'
+CURRENT: append uses 'html' instead of '$html'
+  
+Functional Examples/Snippets:
+
+<!-- 
+	Company Logo: The Company Logo ID will be selected, put into the template.
+		
+	INDEX.HTML: 
+	<img alt="3gss940817_royal_blue_backside.jpg" bgcolor="ffffff" data-label="Company Logo (200 x 150)" data-object="KISS" id="LOGO" src="https://www-sporks-zoovy-com.app-hosted.com/media/img/sporks/W300-H85-Bffffff/007/3gss940817_royal_blue_backside.jpg" type="IMAGE" height="85" border="0" width="300">
+	
+-->
+<fieldset data-wizard-element-id="LOGO" data-onfocus="kiss_inspect('LOGO');">
+	<label>Company Logo</label>
+	<button onClick="kiss_inspect('LOGO'); kiss_medialib('LOGO');">Select Image</button>
+</fieldset>
+
+
+<!--
+	Return Policy: 
+	
+	<span id="KISS_RETURN_POLICY">okay no problem!</span>
+-->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(kiss_inspect('KISS_RETURN_POLICY').html());">
+	<legend>Returns</legend>
+	<div><textarea onKeyUp="kiss_implement('set-value',{'id':'KISS_RETURN_POLICY','$input':$(this)});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
+<!--
+	
+	<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY" data-input-type="TEXTAREA">shipping lorem ipsum</span>
+	<div align="center">
+		<img data-enabled="true" src="fedex_logo.jpg" class="unwizardificated" data-label="FedEx Logo" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
+
+		<img data-enabled="true" src="ups_logo.jpg" class="unwizardificated" data-label="UPS Logo" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75" width="75">
+
+		<img data-enabled="true" src="usps_logo.jpg" class="unwizardificated" data-label="USPS Logo" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75" width="75">
+	</div>
+
+
+// THIS EXAMPLE IS COMPLICATED AND WILL CHANGE:
+	
+-->
+<fieldset class='labelsAsBreaks'  data-onfocus="(function(){
+	$('#KISS_SHIPPING_POLICY_TEXTAREA').val(kiss_inspect('KISS_SHIPPING_POLICY').html());
+	if (kiss_inspect('KISS_SHIPPING_FEDEXLOGO').data('enabled'))	{ jQuery('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked',true); }
+	if (kiss_inspect('KISS_SHIPPING_UPSLOGO').data('enabled'))		{ jQuery('#KISS_SHIPPING_UPSLOGO_CB').prop('checked',true);   }
+	if (kiss_inspect('KISS_SHIPPING_USPSLOGO').data('enabled'))		{ jQuery('#KISS_SHIPPING_USPSLOGO_CB').prop('checked',true);  }
+})()">
+	<legend>Shipping</legend>
+	<div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="kiss_inspect('KISS_SHIPPING_POLICY'); kiss_implement('set-value',{'id':'KISS_SHIPPING_POLICY','$input':$(this)});
+	" placeholder='Policy'></textarea></div>
+	<label><input type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_FEDEXLOGO'); if($(this).is(':checked')){
+		kiss_implement('show',{'id':'KISS_SHIPPING_FEDEXLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_FEDEXLOGO','type':'img','attribs':{'data-enabled':true,'height':'75',	'width':'75','src':'fedex_logo.jpg'}});
+		}
+	else {
+		kiss_implement('hide',{'id':'KISS_SHIPPING_FEDEXLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_FEDEXLOGO','type':'img','attribs':{'data-enabled':true}});
+		}" />Fedex Logo</label>
+
+	<label><input type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_UPSLOGO'); if($(this).is(':checked')){
+		kiss_implement('show',{'id':'KISS_SHIPPING_UPSLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_UPSLOGO','type':'img','attribs':{'data-enabled':true,'height':'75','width':'75','src':'ups_logo.jpg'}});
+		}
+	else {
+		kiss_implement('hide',{'id':'KISS_SHIPPING_UPSLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_UPSLOGO','type':'img','attribs':{'data-enabled':true}});
+		}" />UPS Logo</label>
+
+	<label><input type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_USPSLOGO'); if($(this).is(':checked')){
+		kiss_implement('show',{'id':'KISS_SHIPPING_USPSLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_USPSLOGO','type':'img','attribs':{'data-enabled':true,'height':'75','width':'75','src':'usps_logo.jpg'}});
+		}
+	else {
+		kiss_implement('hide',{'id':'KISS_SHIPPING_USPSLOGO'});
+		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_USPSLOGO','type':'img','attribs':{'data-enabled':true}});
+		}" />USPS Logo</label>
+	
+</fieldset>
+
+
+
+<!--
+something that isn't onfocus tho.
+http://www.htmlgoodies.com/beyond/javascript/creating-custom-events-with-jquery.html
+maybe data-onfocus
+alternatively, if that can't be executed w/ jquery, explore using a hidden input within the fieldset with an onfocus. 
+-->
+<fieldset class='labelsAsBreaks' >
+	<legend>Payment</legend>
+
+	<div><textarea id='KISS_PAYMENT_POLICY_TEXTAREA' onKeyUp="kiss_inspect('KISS_PAYMENT_POLICY'); kiss_implement('set-value',{'id':'KISS_PAYMENT_POLICY','$input':$(this)});" placeholder='Policy'></textarea></div>
+
+
+	<label><input type='checkbox' name='mastercard' id='KISS_PAYMENT_MCLOGO_CB' onChange="if($(this).is(':checked')){
+		kiss_implement('append',{'id':'KISS_PAYMENT_ICONS','html':'<img src=http://africanbrains.net/wp-content/uploads/2013/06/mastercard_logo.jpg id=PAYMENT_MASTERCARD_LOGO width=75 height=75>'});
+		}
+	else {
+		kiss_inspect('PAYMENT_MASTERCARD_LOGO').empty().remove();
+		}" />mastercard Logo</label>
+
+	
+</fieldset>
+
+
+

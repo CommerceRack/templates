@@ -1,0 +1,40 @@
+KISS Template Format
+
+Purpose: provide a kiss aka dwiw (do what I want) template format for displaying product data.
+
+tag img
+ the data-attrib value will be image formatted and set to the "src" attribute
+tag a 
+ the data-attrib value will be set in the "href" attribute
+tag div|span|p|q|h1|h2|h3|h4|h5|h6|figcaption|section|article|aside|li
+ the data-attrib value will replace the contents of the tag
+ 
+
+data-object="PRODUCT"
+data-attrib="zoovy:prod_desc"
+
+optional: data-img-height=""
+optional: data-img-width=""
+optional: data-img-bgcolor=""
+optional: data-img-minimal=""
+
+conditional: data-if="BLANK|NULL|NOTBLANK|NOTNULL|REGEX//|NOTREGEX//"
+conditional: data-then="REMOVE|IGNORE"
+conditional: data-else="REMOVE|IGNORE"
+
+optional: data-format="img"
+ used to override the base tag formatting, for example an "a" will normally set the "href" to the data-attrib value.
+ in order to link to an image (possibly at a different height/width for zoom) it is necessary to set data-format to "img" 
+ at that point the data-img-height and data-img-width will be read, along with data-img-bgcolor data-img-minimal and the data-attrib value will be converted to a link
+ which will then be set to the href. 
+
+optional: data-format="wiki"
+
+optional: data-input-type=""
+
+<li data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
+pretext
+<span data-object="PRODUCT" data-attrib="zoovy:prod_desc">this will be replaced, or removed.</span>
+posttext
+</span>
+
