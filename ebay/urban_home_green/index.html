@@ -59,8 +59,8 @@
 				<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image4" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE4" src="placeholder-2.png" width="200"></a>
 			</span>
 		</div>
-		<div class="prodInfoSection">
-			<div class="prodDescHeader">Product Description</div>
+		<div class="prodInfoSection" data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
+			<div class="prodDescHeader" >Product Description</div>
 				<div class="prodDesc">
 					<span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span>
 				</div>
@@ -86,6 +86,13 @@
 					<a href="#checkout" >Checkout</a>
 		</div>
 		<div class="bottomBarContent">
+			<h1>Shipping Information</h1>
+				<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">shipping lorem ipsum</span>
+				<div align="center">
+					<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
+					<img src="ups_logo.png" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75" width="75">
+					<img src="usps_logo.png" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75" width="75">
+				</div>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</p>
 			<p>Donec sed tempor odio. Cras in pulvinar mauris. Quisque sit amet laoreet nisl. In a laoreet arcu, sit amet elementum enim. Sed eu tempus turpis, et auctor orci. Cras aliquet, purus sit amet placerat volutpat, felis leo tristique metus, et pharetra justo ligula vel magna. Praesent odio urna, tempus at elementum id, commodo ac turpis. Proin ut mollis mi, id dictum diam. Sed ac auctor tellus. Morbi elementum, massa sed ultricies malesuada, turpis leo adipiscing tellus, ut laoreet lectus lectus quis mi. Mauris suscipit, lacus ac tempus egestas, arcu eros tincidunt eros, luctus egestas mi lacus eu felis. Praesent eleifend, sem eget viverra condimentum, felis risus tristique elit, at molestie mi tellus et neque.</p>
 		</div>

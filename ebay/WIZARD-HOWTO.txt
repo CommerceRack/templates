@@ -123,6 +123,7 @@ Functional Examples/Snippets:
 <!--
 	SHIPPING POLICY + OPTIONAL SHIPPING LOGOS:
 	
+	INDEX.HTML:
 	<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">shipping lorem ipsum</span>
 	<div align="center">
 		<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
