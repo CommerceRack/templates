@@ -115,9 +115,9 @@ The Magic functions are:
   VERBs are:
   *  hide { 'attrib':'value' }  	 -- sets the css class of an id to 'none' (making it invisible), also sets any 'attrib':'value' (optional)
   *  show { 'attrib':'value'}  		 -- sets the css class of an id to 'inline' (making it visible), also sets any 'attrib':'value' (optional)
-  *  set-value  { '$html':'value' } -- sets the inner html of an element, such as a div. 
   *  set-attribs  { 'attrib':'value' } -- sets the attributes of an id, such as the height="" and width="" of an image.
-  *  append  { '$html':'value' }	 -- appends content to the html inside the id specified. 
+  *  replace  { 'html':'value' } -- sets the inner html of an element, such as a div. 
+  *  append  { 'html':'value' }	 -- appends content to the html inside the id specified. 
   *  empty   {}		   				 -- empties the html inside the id specified.
 
 * function magic.conjure('something')
@@ -140,7 +140,7 @@ Functional Examples/Snippets:
 	$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('KISS_RETURN_POLICY').html());
 	">
 	<legend>Returns</legend>
-	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','set','$html':$(this)});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace','html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
 </fieldset>
 
 
@@ -178,7 +178,7 @@ Functional Examples/Snippets:
 	return(true);
 	})()">
 	<legend>Shipping</legend>
-	<div><textarea data-target="#KISS_SHIPPING_POLICY" id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','set-value',{'$html':$(this)});" placeholder='Policy'></textarea></div>
+	<div><textarea data-target="#KISS_SHIPPING_POLICY" id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','replace',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
 
 	<label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
 
@@ -190,6 +190,8 @@ Functional Examples/Snippets:
 <!--
 
 	COLOR/THEME CHOOSER
+	NOTE: in the example below - class themed is just a way to say "has a theme"
+	theme_xxx is the theme applied, both themed and theme_xxx should be applied
 	
 	INDEX.HTML:
 	<style>
@@ -227,7 +229,7 @@ Functional Examples/Snippets:
 
 <!-- 
 	(FUTURE) LINK TO AN EBAY STORE
-	first: magic.conjure('ebay-store-id')
+	first: var storeid = magic.conjure('ebay-store-id')
 	then link to: http://stores.ebay.com/STORE_ID
 -->
 
@@ -271,7 +273,7 @@ Functional Examples/Snippets:
 		$('.ebaycategory').each(function(in){
 			var catlink = 'http://stores.ebay.com/'+ebay_store_id'+?_sacat='+in.data('catid');
 			var catname = in.data('catname');
-			if (in.is(':checked')) { magic.modify('EBAY_CATEGORY_LINKS','append',{ '$html':'<li><a href=&quot;'+catlink+'&quot;>'+catname+'</li>' }); }
+			if (in.is(':checked')) { magic.modify('EBAY_CATEGORY_LINKS','append',{ 'html':'<li><a href=&quot;'+catlink+'&quot;>'+catname+'</li>' }); }
 			});">Configure Template</input>
 </fieldset>
 
