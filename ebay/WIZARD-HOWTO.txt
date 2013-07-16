@@ -72,6 +72,7 @@ The KISS Magic functions are:
 * function kiss_medialib('IMAGE_ID')
   prompts the user to select an image from their media library, copies the image into the template and selects it at the id specified.
 
+  
 CURRENT: * function kiss_implement('VERB',{'$id':'ELEMENT_ID'})
 FUTURE:  * function kiss_implement('ELEMENT_ID','VERB',{'otherparameter':'value'})
 
@@ -87,8 +88,23 @@ FUTURE:  * function kiss_implement('ELEMENT_ID','VERB',{'otherparameter':'value'
 CURRENT: hide/show do not suppor optional 'attrib':'value'
 CURRENT: set-value uses '$input' instead of '$html'
 CURRENT: append uses 'html' instead of '$html'
+
+-------------------------------------------------------------------------------------------------
+
   
 Functional Examples/Snippets:
+
+<!--
+	Return Policy:
+	
+	INDEX.HTML:
+	<span id="KISS_RETURN_POLICY">okay no problem!</span>
+-->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(kiss_inspect('KISS_RETURN_POLICY').html());">
+	<legend>Returns</legend>
+	<div><textarea onKeyUp="kiss_implement('set-value',{'id':'KISS_RETURN_POLICY','$input':$(this)});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
 
 <!-- 
 	Company Logo: The Company Logo ID will be selected, put into the template.
@@ -103,92 +119,124 @@ Functional Examples/Snippets:
 </fieldset>
 
 
-<!--
-	Return Policy: 
-	
-	<span id="KISS_RETURN_POLICY">okay no problem!</span>
--->
-<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(kiss_inspect('KISS_RETURN_POLICY').html());">
-	<legend>Returns</legend>
-	<div><textarea onKeyUp="kiss_implement('set-value',{'id':'KISS_RETURN_POLICY','$input':$(this)});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
-</fieldset>
 
 <!--
+	SHIPPING POLICY + OPTIONAL SHIPPING LOGOS:
 	
-	<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY" data-input-type="TEXTAREA">shipping lorem ipsum</span>
+	<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">shipping lorem ipsum</span>
 	<div align="center">
-		<img data-enabled="true" src="fedex_logo.jpg" class="unwizardificated" data-label="FedEx Logo" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
-
-		<img data-enabled="true" src="ups_logo.jpg" class="unwizardificated" data-label="UPS Logo" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75" width="75">
-
-		<img data-enabled="true" src="usps_logo.jpg" class="unwizardificated" data-label="USPS Logo" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75" width="75">
+		<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
+		<img src="ups_logo.png" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75" width="75">
+		<img src="usps_logo.png" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75" width="75">
 	</div>
 
-
-// THIS EXAMPLE IS COMPLICATED AND WILL CHANGE:
-	
 -->
 <fieldset class='labelsAsBreaks'  data-onfocus="(function(){
+	// check to make sure all fields actually exist:
+	if (!kiss_exists(["KISS_SHIPPING_FEDEXLOGO","KISS_SHIPPING_UPSLOGO","KISS_SHIPPING_USPSLOGO"])) { return(false); }
+	// initialize all fields to their default value:
 	$('#KISS_SHIPPING_POLICY_TEXTAREA').val(kiss_inspect('KISS_SHIPPING_POLICY').html());
-	if (kiss_inspect('KISS_SHIPPING_FEDEXLOGO').data('enabled'))	{ jQuery('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked',true); }
-	if (kiss_inspect('KISS_SHIPPING_UPSLOGO').data('enabled'))		{ jQuery('#KISS_SHIPPING_UPSLOGO_CB').prop('checked',true);   }
-	if (kiss_inspect('KISS_SHIPPING_USPSLOGO').data('enabled'))		{ jQuery('#KISS_SHIPPING_USPSLOGO_CB').prop('checked',true);  }
-})()">
+	$('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', kiss_inspect('KISS_SHIPPING_FEDEXLOGO').is(":visible") );
+	$('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', kiss_inspect('KISS_SHIPPING_UPSLOGO').is(":visible") );
+	$('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', kiss_inspect('KISS_SHIPPING_USPSLOGO').is(":visible") );
+	return(true);
+	})()">
 	<legend>Shipping</legend>
-	<div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="kiss_inspect('KISS_SHIPPING_POLICY'); kiss_implement('set-value',{'id':'KISS_SHIPPING_POLICY','$input':$(this)});
-	" placeholder='Policy'></textarea></div>
-	<label><input type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_FEDEXLOGO'); if($(this).is(':checked')){
-		kiss_implement('show',{'id':'KISS_SHIPPING_FEDEXLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_FEDEXLOGO','type':'img','attribs':{'data-enabled':true,'height':'75',	'width':'75','src':'fedex_logo.jpg'}});
-		}
-	else {
-		kiss_implement('hide',{'id':'KISS_SHIPPING_FEDEXLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_FEDEXLOGO','type':'img','attribs':{'data-enabled':true}});
-		}" />Fedex Logo</label>
+	<div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="kiss_inspect('KISS_SHIPPING_POLICY'); kiss_implement('KISS_SHIPPING_POLICY','set-value',{'$html':$(this)});" placeholder='Policy'></textarea></div>
 
-	<label><input type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_UPSLOGO'); if($(this).is(':checked')){
-		kiss_implement('show',{'id':'KISS_SHIPPING_UPSLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_UPSLOGO','type':'img','attribs':{'data-enabled':true,'height':'75','width':'75','src':'ups_logo.jpg'}});
-		}
-	else {
-		kiss_implement('hide',{'id':'KISS_SHIPPING_UPSLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_UPSLOGO','type':'img','attribs':{'data-enabled':true}});
-		}" />UPS Logo</label>
+	<label><input type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="kiss_implement('KISS_SHIPPING_FEDEXLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
 
-	<label><input type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="kiss_inspect('KISS_SHIPPING_USPSLOGO'); if($(this).is(':checked')){
-		kiss_implement('show',{'id':'KISS_SHIPPING_USPSLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_USPSLOGO','type':'img','attribs':{'data-enabled':true,'height':'75','width':'75','src':'usps_logo.jpg'}});
-		}
-	else {
-		kiss_implement('hide',{'id':'KISS_SHIPPING_USPSLOGO'});
-		kiss_implement('set-attribs',{'id':'KISS_SHIPPING_USPSLOGO','type':'img','attribs':{'data-enabled':true}});
-		}" />USPS Logo</label>
-	
+	<label><input type='checkbox' name='ups' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="kiss_implement('KISS_SHIPPING_UPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>UPS Logo</label>
+
+	<label><input type='checkbox' name='usps' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="kiss_implement('KISS_SHIPPING_USPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
 </fieldset>
+
+<!--
+
+	COLOR/THEME CHOOSER
+	
+	INDEX.HTML
+	<style>
+	div.themed { }
+	div.theme_red { background-color: #FF0000; }
+	div.theme_white { background-color: #FFFFF; }
+	div.theme_blue { background-color: #0000FF; }
+	</style>
+	
+	<!-- we use the hidden input type to store the selected theme in case the user runs the wizard again -->
+	<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
+	<div class="themed"></div>
+	<img id="SOME_THEME_IMAGE" src="title-white.png" class="themed"></img>
+	
+-->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+		$('#KISS_COLOR_SCHEME_SELECT').val( kiss_inspect('KISS_COLOR_SCHEME').val() );
+	})()">
+	<legend>Choose Color Palette</legend>
+	<label for="KISS_COLOR_SCHEME_SELECT"><select onChange="(function(){
+		var selectedTheme = $(this).val();
+		kiss_implement( '#SOME_THEME_IMAGE', 'set-attrib', { 'src':'title-'+selectedTheme'.png' });
+		// JT: not sure if this is the best way to accomplish select anything with themed then add appropriate class.
+		//     should we be using kiss_inspect here? or is this fine? (I feel strongly we ought to be using some type of kiss_selector)
+		$('.themed').removeClass('theme_red theme_white theme_blue');
+		$('.themed').addClass( "theme_"+selectedTheme );
+	})()" id="KISS_COLOR_SCHEME_SELECT" name="KISS_COLOR_SCHEME_SELECT">
+		<option value="blue">Blue</option>
+		<option value="white">White</option>
+		<option value="red">Red</option>
+	</select>
+	</label>
+</fieldset>
+
+
+<!-- 
+	LINK TO AN EBAY STORE
+	first: kiss_query('ebay-store-id')
+	then link to: http://stores.ebay.com/STORE_ID
+-->
 
 
 
 <!--
-something that isn't onfocus tho.
-http://www.htmlgoodies.com/beyond/javascript/creating-custom-events-with-jquery.html
-maybe data-onfocus
-alternatively, if that can't be executed w/ jquery, explore using a hidden input within the fieldset with an onfocus. 
--->
-<fieldset class='labelsAsBreaks' >
-	<legend>Payment</legend>
 
-	<div><textarea id='KISS_PAYMENT_POLICY_TEXTAREA' onKeyUp="kiss_inspect('KISS_PAYMENT_POLICY'); kiss_implement('set-value',{'id':'KISS_PAYMENT_POLICY','$input':$(this)});" placeholder='Policy'></textarea></div>
+	DYNAMIC EBAY CATEGORY LIST:
 
-
-	<label><input type='checkbox' name='mastercard' id='KISS_PAYMENT_MCLOGO_CB' onChange="if($(this).is(':checked')){
-		kiss_implement('append',{'id':'KISS_PAYMENT_ICONS','html':'<img src=http://africanbrains.net/wp-content/uploads/2013/06/mastercard_logo.jpg id=PAYMENT_MASTERCARD_LOGO width=75 height=75>'});
-		}
-	else {
-		kiss_inspect('PAYMENT_MASTERCARD_LOGO').empty().remove();
-		}" />mastercard Logo</label>
-
+	dynamically loads the store name + list of categories using kiss_query
+	populates the wizard panel dynamically with checkboxes to let users choose/exclude categories
+	at the bottom of the list has a "Configure Template" button that populates a <ul> with <li><a href="link_to_store">category name</a></li>
 	
+	<ul id="EBAY_CATEGORY_LINKS">
+	</ul>
+	
+-->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+	// get the ebay store id using kiss_query
+	$('#ebay-store-idspan').val( kiss_query('ebay-store-id') );
+	// empty the previewer (in case we've been here before)
+	$('EBAY_CATEGORIES_PREVIEW').empty();
+	kiss_query('ebay-store-categories').each(
+		function(ebaycat){
+			ebayCatId = ebaycat.categoryID;
+			ebayCatName = ebaycat.categoryName;
+			$('EBAY_CATEGORIES_PREVIEW').append('<li><input checked=&quot;true&quot; class=&quot;ebaycategory&quot; data-catname=&quot;'+ebaycatname+'&quot; data-catid=&quot;'+ebayCatId+'&quot;>'+ebayCatName+'</input></li>');
+			}
+		);
+	})()">
+	<legend>Choose eBay Store Categories</legend>
+	<div>eBay Store Id:<span id="ebay-store-idspan"></span></div>
+	<div><i>Included Categories:</i></div>
+	<ul id="EBAY_CATEGORIES_PREVIEW">
+		<!-- the data-onFocus will automatically update this, it might make sense to have a loading graphic here,
+			users will check boxes for which categories they want to link -->
+	</ul>
+	<input type="button" onClick="(function(){
+		var ebay_store_id = $('#ebay-store-idspan').val();
+		kiss_implement('EBAY_CATEGORY_LINKS','empty');
+		$('.ebaycategory').each(function(in){
+			var catlink = 'http://stores.ebay.com/'+ebay_store_id'+?_sacat='+in.data('catid');
+			var catname = in.data('catname');
+			if (in.is(':checked')) { kiss_implement('EBAY_CATEGORY_LINKS','append',{ '$html':'<li><a href=&quot;'+catlink+'&quot;>'+catname+'</li>' }); }
+			});">Configure Template</input>
 </fieldset>
-
 
 
