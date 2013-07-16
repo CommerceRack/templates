@@ -1,7 +1,7 @@
 <!-- Company Logo Select -->
 <fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('LOGO');">
 	<label>Company Logo</label>
-	<button onClick="magic.inspect('LOGO'); magic.medialib('LOGO');">Select Logo</button>
+	<button onClick="magic.inspect('#LOGO'); magic.medialib('#LOGO');">Select Logo</button>
 </fieldset>
 
 <!-- About company wizard-->
@@ -34,20 +34,20 @@
 
 <!-- Payment policy -->
 <fieldset class='labelsAsBreaks' data-onfocus="
-	$('#KISS_PAYMENT_POLICY_TEXTAREA').val(magic.inspect('KISS_PAYMENT_POLICY').html());
+	$('#KISS_PAYMENT_POLICY_TEXTAREA').val(magic.inspect('#KISS_PAYMENT_POLICY').html());
 	">
 	<legend>Payment Policy</legend>
 	<div><textarea data-target="#KISS_PAYMENT_POLICY" onKeyUp="magic.modify('#KISS_PAYMENT_POLICY','replace',{'html':$(this).val()});" id="KISS_PAYMENT_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
 </fieldset>
 
  <!-- Return policy wizard--->
-<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('KISS_RETURN_POLICY').html());">
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('#KISS_RETURN_POLICY').html());">
 	<legend>Returns</legend>
-	<div><textarea data-target="#KISS_PAYMENT_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace',{'html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace',{'html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Return Policy'></textarea></div>
 </fieldset>
 
 <!-- Contact Information wizard -->
-<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_CONTACT_INFO_TEXTAREA').val(magic.inspect('KISS_CONTACT_INFO').html());">
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_CONTACT_INFO_TEXTAREA').val(magic.inspect('#KISS_CONTACT_INFO').html());">
 	<legend>Contact Information</legend>
-	<div><textarea onKeyUp="magic.modify('#KISS_CONTACT_INFO",'replace',{'html':$(this).val()});" id="KISS_CONTACT_INFO_TEXTAREA" placeholder='Policy'></textarea></div>
+	<div><textarea data-target="#KISS_CONTACT_INFO"  onKeyUp="magic.modify('#KISS_CONTACT_INFO','replace',{'html':$(this).val()});" id="KISS_CONTACT_INFO_TEXTAREA" placeholder='Contact Info'></textarea></div>
 </fieldset>
