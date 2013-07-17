@@ -22,7 +22,7 @@
  })()">
  
  <legend>Shipping</legend>
- <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','set',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
+ <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY');  magic.modify('#KISS_SHIPPING_POLICY','replace',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
 
 
  <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO',  ($(this).is(':checked')?'show':'hide'), {});"/>Fedex Logo</label>

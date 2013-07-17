@@ -2,14 +2,28 @@
 
 <style type="text/css">
 <!-- 
+
+.colored { color:#000000; }
+.color_blue { color:#17149D; }
+.color_green { color:#0D9D25; }
+
 .war_text	{font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; color:#333333;}
 
-.background	{background-color:#17149D;}
+.background	{ background-color:#17149D; }
+.backcolor_blue { background-color:#17149D; }
+.backcolor_green { background-color:#0D9D25; }
+
 .war_head	{color:#17149D; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;}
+.war_head_blue	{color:#17149D; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;}
+.war_head_green	{color:#0D9D25; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;}
 
 .z_title1 {font-weight:bold; font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #17149D}
+.z_title1_blue {font-weight:bold; font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #17149D}
+.z_title1_green {font-weight:bold; font-size:14px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #0D9D25}
 .z_title2 {font-weight:bold; font-size:13px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #333333;}
 .z_title3 {font-weight:bold; font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #17149D}
+.z_title3_blue {font-weight:bold; font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #17149D}
+.z_title3_green {font-weight:bold; font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif; color: #0D9D25}
 
 .prod_divImage		{border:1px solid #CCCCCC;}
 -->
@@ -20,7 +34,7 @@
 <!-- sizing and bg image table -->
 <table cellspacing="0" cellpadding="10" border="0" width="100%">
 <tr>
-	<td valign="top" align="center" class="background" style="height:500px; background-color:#17149D; background-image:url(wl_background.jpg); background-repeat:repeat-x; background-position:top;">
+	<td valign="top" align="center" class="background" style="height:500px; background-image:url(wl_background.jpg); background-repeat:repeat-x; background-position:top;">
 
 
 <table cellspacing="0" cellpadding="0" border="0" width="740">
@@ -89,7 +103,7 @@
 
 	<td colspan="6" style="padding:4px; background-color:#FFFFFF;"><div class="war_text"><!-- Begin wizard layout -->
 	
-	<div id="LAYOUTS">
+	<div id="LAYOUT_CHOOSER">
 	[[ PLEASE SELECT A LAYOUT USING THE WIZARD ]]
 	</div>
 	
@@ -221,106 +235,4 @@
 <br>
 <!-- end sizing and bg table --></td>
 </tr></table>
-
-<!--
-
-                                '_OPTS' => [
-                                              {
-                                                'T' => 'Please Choose Color',
-                                                'V' => ''
-                                              },
-                                              {
-                                                'T' => 'Emerald Green',
-                                                'V' => '0D9D25'
-                                              },
-                                              {
-                                                'T' => 'Ocean Blue',
-                                                'V' => '17149D'
-                                              }
-                                            ],
-                                 'TYPE' => 'TEXT'
-
-
-                                             {
-                                                'T' => 'A: 3 big and 4 smaller images on left',
-                                                'IMG' => '',
-                                                'DIV' => 'A',
-                                                'V' => 'A',
-                                                'THUMB' => ''
-                                              },
-                                              {
-                                                'T' => 'B: 3 big on top with four smaller below',
-                                                'IMG' => '',
-                                                'DIV' => 'B',
-                                                'V' => 'B',
-                                                'THUMB' => ''
-                                              },
-                                              {
-                                                'T' => 'C: 1 wide image, followed by 2 big then 4 small',
-                                                'IMG' => '',
-                                                'DIV' => 'C',
-                                                'V' => 'C',
-                                                'THUMB' => ''
-                                              },
-                                              {
-                                                'T' => 'D: 1 Big and 5 smaller images',
-                                                'IMG' => '',
-                                                'DIV' => 'D',
-                                                'V' => 'D',
-                                                'THUMB' => ''
-                                              },
-                                              {
-                                                'T' => 'E: 1 Big and 4 smaller images',
-                                                'IMG' => '',
-                                                'DIV' => 'E',
-                                                'V' => 'E',
-                                                'THUMB' => ''
-                                              }
-
-											  
-
-                                  {
-                                    'ID' => 'CQHPMYS',
-                                    'TRUE' => '#checkout',
-                                    'SUB' => 'CHECKOUT_BTN',
-                                    'FALSE' => '%CHECKOUT_URL%',
-                                    'OPERATION' => 'NB',
-                                    'DATA' => 'merchant:zoovy:checkout',
-                                    'TYPE' => 'IF'
-                                  },
-                                  {
-                                    'ID' => 'CQHREYA',
-                                    'TRUE' => '<img src=\'//static.zoovy.com/graphics/general/fedex.gif\'>',
-                                    'PROMPT' => 'Fedex Logo',
-                                    'SUB' => 'FEDEX',
-                                    'ON' => '1',
-                                    'TYPE' => 'CHECKBOX',
-                                    'FALSE' => '',
-                                    'DATA' => 'merchant:zoovy:wiz_fedex',
-                                    'OFF' => '0'
-                                  },
-                                  {
-                                    'ID' => 'CQHREYB',
-                                    'TRUE' => '<img src=\'//static.zoovy.com/graphics/general/ups.gif\'>',
-                                    'PROMPT' => 'UPS Logo',
-                                    'SUB' => 'UPS',
-                                    'ON' => '1',
-                                    'TYPE' => 'CHECKBOX',
-                                    'FALSE' => '',
-                                    'DATA' => 'merchant:zoovy:wiz_ups',
-                                    'OFF' => '0'
-                                  },
-                                  {
-                                    'ID' => 'CQHREYC',
-                                    'TRUE' => '<img src=\'//static.zoovy.com/graphics/general/usps.gif\'>',
-                                    'PROMPT' => 'USPS Logo',
-                                    'SUB' => 'USPS',
-                                    'ON' => '1',
-                                    'TYPE' => 'CHECKBOX',
-                                    'FALSE' => '',
-                                    'DATA' => 'merchant:zoovy:wiz_usps',
-                                    'OFF' => '0'
-                                  },
-
--->
 
