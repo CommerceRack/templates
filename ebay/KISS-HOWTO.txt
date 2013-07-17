@@ -1,6 +1,10 @@
-KISS Template Format
+KISS Template Format 1.0
+
 
 Purpose: provide a kiss aka dwiw (do what I want) template format for displaying product data.
+
+Files must have a 
+<meta name="version" content="kiss/1.0">
 
 tag img
  the data-attrib value will be image formatted and set to the "src" attribute
