@@ -1,0 +1,233 @@
+
+<fieldset data-wizard-element-id="LAYOUT" data-onfocus="">
+	<legend>Layout</legend>
+
+<select name="layout_chooser" onChange="
+	if ($(this).val() != '') {
+		magic.modify('#LAYOUT_CHOOSER','replace',{ 'html':$('#LAYOUT_A').html() });
+		}
+">
+	<option selected="1" value="">Existing Layout</option>
+	<option value="LAYOUT_A">Layout A</option>
+	<option value="LAYOUT_B">Layout B</option>
+	<option value="LAYOUT_C">Layout C</option>
+</select>
+
+<div style="display: none" id="LAYOUT_A">
+<!-- LAYOUT A -->
+<table cellspacing="5" cellpadding="0" width="100%"><tr><td valign="top">
+<!-- images -->
+<table cellspacing="2"  cellpadding="0" width="100%" border="0"><tr>
+   <td colspan="2">
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image1" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE1_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE1" src="placeholder-2.png">
+	</a>
+</td>
+</tr><tr>
+   <td colspan="2">
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image2" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE2_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image2" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE2" src="placeholder-2.png">
+	</a>
+   </td>
+</tr><tr>
+   <td colspan="2">
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image3" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE3_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image3" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE3" src="placeholder-2.png">
+	</a>
+   </td>
+</tr><tr>
+   <td>
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image4" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE4_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image4" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE4" src="placeholder-2.png">
+	</a>
+</td>
+   <td>
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image5" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE5_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image5" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE5" src="placeholder-2.png">
+	</a>
+
+   </td>
+</tr><tr>
+   <td>
+   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image6" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE6_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image6" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE6" src="placeholder-2.png">
+	</a>
+</td>
+   <td>
+      <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image7" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE7_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image7" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE7" src="placeholder-2.png">
+	</a>
+
+   </td>
+</tr></table>
+<!-- /images -->
+</td><td valign="top" width="99%" align="left">
+<!-- product info -->
+<div style="color:#%COLOR1%; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;">
+<span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">PRODUCT TITLE WILL APPEAR HERE</span>
+
+</div>
+<div class="war_text">
+	<span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Lorem ipsum product descriptor dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span>
+<br><br>
+	<span class="actbProductAttribute" data-attrib="zoovy:prod_detail" data-input-cols="80" data-input-data="product:zoovy:prod_detail" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Detail (shared)" data-object="PRODUCT" id="PROD_DETAIL">Lorem ipsum product detail dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span>
+	
+</div>
+<!-- /product info -->
+</td></tr></table>
+<!-- /LAYOUT A -->
+</div>
+
+
+<div style="display: none" id="LAYOUT_B">
+<!-- LAYOUT B -->
+
+<div align="center">
+<div style="color:#%COLOR1%; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;"><span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">PRODUCT TITLE WILL APPEAR HERE</span>
+</div>
+<table cellspacing="5" cellpadding="0" border="0"><tr>
+   <td align="left">   <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image1" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE1_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE1" src="placeholder-2.png">
+	</a></td>
+   <td align="center"><a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image2" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE2_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image2" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE2" src="placeholder-2.png">
+	</a></td>
+   <td align="right"> <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image3" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE3_LINK">
+		<img class="actbProductAttribute mainImage" width="204" height="204" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image3" data-img-zoom="1" data-label="Image (204 by X)" data-object="PRODUCT" id="IMAGE3" src="placeholder-2.png">
+	</a></td>
+</tr></table>
+
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+   <td align="left" style="padding-right:5px;" valign="top" width="99%"><div class="war_text"><span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Lorem ipsum product descriptor dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span></div></td>
+   <td valign="top">
+
+   <table cellspacing="2"  cellpadding="0" width="100%" border="0"><tr>
+      <td>  <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image4" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE4_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image4" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE4" src="placeholder-2.png">
+	</a></td>
+      <td>  <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image5" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE5_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image5" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE5" src="placeholder-2.png">
+	</a></td>
+   </tr><tr>
+      <td>  <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image6" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE6_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image6" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE6" src="placeholder-2.png">
+	</a></td>
+      <td>     <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" 
+		data-img-data="product:zoovy:prod_image7" data-img-height="0" data-img-width="0" data-img-zoom="1" data-label="Image Zoom" data-object="PRODUCT" id="IMAGE7_LINK">
+		<img class="actbProductAttribute mainImage" width="100" height="100" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image7" data-img-zoom="1" data-label="Image (100 by 100)" data-object="PRODUCT" id="IMAGE7" src="placeholder-2.png">
+	</a></td>
+   </tr></table>
+
+   </td>
+</tr><tr>
+
+   <td colspan="2"><div class="war_text">	<span class="actbProductAttribute" data-attrib="zoovy:prod_detail" data-input-cols="80" data-input-data="product:zoovy:prod_detail" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Detail (shared)" data-object="PRODUCT" id="PROD_DETAIL">Lorem ipsum product detail dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span></div></td>
+
+</tr></table>
+</div>
+<!-- /LAYOUT B -->
+
+</div>
+
+<div style="display: none" id="LAYOUT_C">
+<!-- LAYOUT C -->
+
+<div align="center">
+<div style="color:#%COLOR1%; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold;"><span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">PRODUCT TITLE WILL APPEAR HERE</span>
+</div>
+%IMAGE1_WIDE%
+<div class="war_text" style="text-align:left;">%PROD_DESC%</div>
+
+<table cellspacing="5" cellpadding="0" border="0"><tr>
+   <td align="left">%IMAGE2%</td>
+   <td align="right">%IMAGE3%</td>
+</tr></table>
+
+<div class="war_text" style="text-align:left;">%PROD_DETAIL%</div>
+
+<table cellspacing="2"  cellpadding="0" border="0"><tr>
+   <td>%IMAGE4%</td>
+   <td>%IMAGE5%</td>
+   <td>%IMAGE6%</td>
+   <td>%IMAGE7%</td>
+</tr></table>
+
+</div>
+
+
+
+<!-- /LAYOUT C -->
+</div>
+</fieldset>
+
+
+<!-- Company Logo Select -->
+<fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('#LOGO');">
+	<label>Company Logo</label>
+	<button onClick="magic.inspect('#LOGO'); magic.medialib('#LOGO');">Select Logo</button>
+</fieldset>
+
+<!-- About company wizard-->
+<fieldset class='labelsAsBreaks' data-onfocus="
+	$('#KISS_ABOUT_TEXTAREA').val(magic.inspect('#KISS_ABOUT_COMPANY').html());
+	">
+	<legend>About</legend>
+	<div><textarea data-target="#KISS_ABOUT_COMPANY" onKeyUp="magic.modify('#KISS_ABOUT_COMPANY','replace',{'html':$(this).val()});" id="KISS_ABOUT_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
+<!-- SHIPPING POLICY wizard -->
+<fieldset  class='labelsAsBreaks'  data-onfocus="(function(){
+ $('#KISS_SHIPPING_POLICY_TEXTAREA').val(magic.inspect('#KISS_SHIPPING_POLICY').html());
+ $('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_FEDEXLOGO').is(':visible') );
+ $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible')  );
+ $('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_USPSLOGO').is(':visible') );
+ return(true);
+ })()">
+
+ <legend>Shipping</legend>
+ <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','set',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
+
+
+ <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO',  ($(this).is(':checked')?'show':'hide'), {});"/>Fedex Logo</label>
+
+ <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>UPS Logo</label>
+
+ <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>USPS Logo</label>
+</fieldset>
+
+
+<!-- Payment policy -->
+<fieldset class='labelsAsBreaks' data-onfocus="
+	$('#KISS_PAYMENT_POLICY_TEXTAREA').val(magic.inspect('#KISS_PAYMENT_POLICY').html());
+	">
+	<legend>Payment Policy</legend>
+	<div><textarea data-target="#KISS_PAYMENT_POLICY" onKeyUp="magic.modify('#KISS_PAYMENT_POLICY','replace',{'html':$(this).val()});" id="KISS_PAYMENT_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
+ <!-- Return policy wizard--->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('#KISS_RETURN_POLICY').html());">
+	<legend>Returns</legend>
+	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace',{'html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Return Policy'></textarea></div>
+</fieldset>
+
+<!-- Contact Information wizard -->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_CONTACT_INFO_TEXTAREA').val(magic.inspect('#KISS_CONTACT_INFO').html());">
+	<legend>Contact Information</legend>
+	<div><textarea data-target="#KISS_CONTACT_INFO"  onKeyUp="magic.modify('#KISS_CONTACT_INFO','replace',{'html':$(this).val()});" id="KISS_CONTACT_INFO_TEXTAREA" placeholder='Contact Info'></textarea></div>
+</fieldset>
+
+
+
