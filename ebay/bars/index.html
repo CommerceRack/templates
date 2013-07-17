@@ -1,10 +1,115 @@
 <style type="text/css">
+.body	{background-color:#ffffff; width:680px; border: 1px solid #424242; margin-left:auto; margin-right: auto; font-size: 16px; font-family: 'PT Sans', sans-serif;}
 
+#logo { margin-left: 15px; height: 85px; width: 250px;}
+
+.mainContentArea	{padding: 25px 30px;}
+.mainImage	{width: 275px; height:275px; float: left; margin-right: 30px;}
+.mainProdInfo	{width: 310px; float: right;}
+.prodName 	{font-size: 22px; color: #424242; margin: 2px; font-weight: bold;}
+.prodInfoList	{list-style: none; font-weight: bold; padding: 0px 25px; font-size: 16px; color:#4d4c4c;}
+.additionalProdImage	{ width: 95px; height: 95px; border: 2px solid #e1e1e1;}
+
+.infoSection{clear:both; padding-top: 20px; width: 680px;}
+.infoHeader {background-image:url(headerAlloyBG.jpg); height: 30px;}
+.infoContent{background-image:url(repeatAlloyBG.jpg); padding: 5px 60px 40px;}
+.infoContent h1{ font-size: 20px; color: #424242; margin:18px 0px 0px;}
+.infoContent span{ font-size: 14px; color: #4d4c4c;}
 </style>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
 <div class="body">
-	<img data-wizardificated="true" alt="3gss940817_royal_blue_backside.jpg" class="unwizardificated wizardificated" bgcolor="ffffff" data="merchant:zoovy:company_logo" data-attrib="zoovy:company_logo" data-label="Company Logo (200 x 150)" data-object="KISS" id="LOGO" src="https://www-sporks-zoovy-com.app-hosted.com/media/img/sporks/W300-H85-Bffffff/007/3gss940817_royal_blue_backside.jpg" type="IMAGE" height="85" border="0" width="300">
-	<div class="topBar"></div>
+	<div class="header">
+		<img data-wizardificated="true" alt="3gss940817_royal_blue_backside.jpg" class="unwizardificated wizardificated" bgcolor="ffffff" data="merchant:zoovy:company_logo" data-attrib="zoovy:company_logo" data-label="Company Logo (200 x 150)" data-object="KISS" id="LOGO" src="yourlogohere.png" type="IMAGE" height="85" border="0" width="250">
+		<div class="topBar">
+			<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
+			<img id="SOME_THEME_IMAGE" src="sapphireTop.jpg" class="themed"/>
+		</div>
+	</div>
 
+	<div class="mainContentArea">
+		<div class="actbProductAttribute" data-attrib="zoovy:prod_image1" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE1">
+			<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-height="" data-img-width="200" data-img-zoom="1" data-label="Image (200 by X)" data-object="PRODUCT" id="IMAGE1">
+			<img class="actbProductAttribute mainImage" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-zoom="1" data-label="Image (200 by X)" data-object="PRODUCT" id="IMAGE1" src="placeholder-2.png"></a>
+		</div>
+		<div class="mainProdInfo">
+			<span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">NEW Darice Rolling Scrap Book Tote Black</span>
+			<!-- Taking this out for time being
+			<ul class="prodInfoList">
+				<li>Condition: &nbsp; New(More Info)</li>
+				<li>Packaging: &nbsp; Retail Box</li>
+				<li>Model: &nbsp; LHL-12/4553</li>
+				<li>Weight: &nbsp; 0.25lbs</li>
+			</ul>
+			-->
+			<div class="prodImages">
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image2" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE2">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image2" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image2 (200 by X)" data-object="PRODUCT" id="IMAGE2" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image2" data-img-zoom="1" data-label="Image2 (200 by X)" data-object="PRODUCT" id="IMAGE2" src="placeholder-2.png" width="95"></a>
+				</span>
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image3" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE3">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image3" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image3 (200 by X)" data-object="PRODUCT" id="IMAGE3" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image3" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image3" data-img-zoom="1" data-label="Image3 (200 by X)" data-object="PRODUCT" id="IMAGE3" src="placeholder-2.png" width="95"></a>
+				</span>
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image4" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE4">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image4" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE4" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image4" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image4" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE4" src="placeholder-2.png" width="95"></a>
+				</span>			
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image5" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE4">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image5" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image5 (200 by X)" data-object="PRODUCT" id="IMAGE5" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image5" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image5" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE5" src="placeholder-2.png" width="95"></a>
+				</span>			
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image6" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE4">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image6" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image6 (200 by X)" data-object="PRODUCT" id="IMAGE6" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image6" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image6" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE6" src="placeholder-2.png" width="95"></a>
+				</span>			
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_image7" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" id="IMAGE4">
+					<a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image7" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image7 (200 by X)" data-object="PRODUCT" id="IMAGE7" width="95">
+					<img class="actbProductAttribute additionalProdImage" data-attrib="zoovy:prod_image7" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image7" data-img-zoom="1" data-label="Image4 (200 by X)" data-object="PRODUCT" id="IMAGE7" src="placeholder-2.png" width="95"></a>
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="infoSection">
+		<div class="infoHeader"></div>
+		<div class="infoContent">
+			<div data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
+				<h1>Product Desciption</h1>
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span>
+			</div>
+			
+			<div data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_features">
+				<h1>Product Details</h1>
+				<span class="actbProductAttribute" data-attrib="zoovy:prod_features" data-input-cols="80" data-input-data="product:zoovy:prod_features" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Features (shared)" data-object="PRODUCT" id="PROD_FEATURES">Donec sed tempor odio. Cras in pulvinar mauris. Quisque sit amet laoreet nisl. In a laoreet arcu, sit amet elementum enim. Sed eu tempus turpis, et auctor orci. Cras aliquet, purus sit amet placerat volutpat, felis leo tristique metus, et pharetra justo ligula vel magna. Praesent odio urna, tempus at elementum id, commodo ac turpis. Proin ut mollis mi, id dictum diam. Sed ac auctor tellus. Morbi elementum, massa sed ultricies malesuada, turpis leo adipiscing tellus, ut laoreet lectus lectus quis mi. Mauris suscipit, lacus ac tempus egestas, arcu eros tincidunt eros, luctus egestas mi lacus eu felis. Praesent eleifend, sem eget viverra condimentum, felis risus tristique elit, at molestie mi tellus et neque.</span>
+			</div>
+			
+			<div>
+				<h1>Shipping</h1>
+				<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">Enter shipping policy here.</span>
+				<div align="center">
+					<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75">
+					<img src="ups_logo.png" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75">
+					<img src="usps_logo.png" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75">
+				</div>
+			
+				<h1>Payment Information</h1>
+				<span id="KISS_PAYMENT_POLICY">Enter payment policy here.</span>
+				
+				<h1>Returns</h1>
+				<span id="KISS_RETURN_POLICY">Enter return policy here.</span>
+				
+				<h1>About Us</h1>
+				<span id="KISS_ABOUT_COMPANY">Enter company policy here.</span>
+				
+				<h1>Contact Us</h1>
+				<span id="KISS_CONTACT_INFO">Enter contact info here</span>
+				
+			</div>
+		</div>
+		<div class="bottomBar">
+			<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
+			<img id="SOME_THEME_IMAGE" src="sapphireBottom.jpg" class="themed"/>
+		</div>
+	</div>
 </div>
