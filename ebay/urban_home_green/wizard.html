@@ -16,7 +16,7 @@
 <fieldset  class='labelsAsBreaks'  data-onfocus="(function(){
  $('#KISS_SHIPPING_POLICY_TEXTAREA').val(magic.inspect('#KISS_SHIPPING_POLICY').html());
  $('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_FEDEXLOGO').is(':visible') );
- $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible') );
+ $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible')  );
  $('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_USPSLOGO').is(':visible') );
  return(true);
  })()">
@@ -25,11 +25,11 @@
  <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','set',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
 
 
- <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
+ <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO',  ($(this).is(':checked')?'show':'hide'), {});"/>Fedex Logo</label>
 
- <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>UPS Logo</label>
+ <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>UPS Logo</label>
 
- <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>USPS Logo</label>
+ <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>USPS Logo</label>
 </fieldset>
 
 <!-- Payment policy -->
