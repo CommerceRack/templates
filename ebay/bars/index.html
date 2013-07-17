@@ -1,5 +1,5 @@
 <style type="text/css">
-.body	{background-color:#ffffff; width:680px; border: 1px solid #424242; margin-left:auto; margin-right: auto; font-size: 16px; font-family: 'PT Sans', sans-serif;}
+.body	{background-color:#ffffff; width:680px; border: 1px solid #9b9b9b; margin-left:auto; margin-right: auto; font-size: 16px; font-family: 'PT Sans', sans-serif;}
 
 #logo { margin-left: 15px; height: 85px; width: 250px;}
 
@@ -10,9 +10,29 @@
 .prodInfoList	{list-style: none; font-weight: bold; padding: 0px 25px; font-size: 16px; color:#4d4c4c;}
 .additionalProdImage	{ width: 95px; height: 95px; border: 2px solid #e1e1e1;}
 
-.infoSection{clear:both; padding-top: 20px; width: 680px;}
+/* Color Scheme Options */
+.topBar .theme_sapphire{background-image: url(sapphireTop.jpg); height: 21px;}
+.topBar .theme_sapphire {background-image: url(maroonTop.jpg); height: 21px;}
+.topBar .theme_sapphire {background-image: url(mossTop.jpg); height: 21px;}
+.topBar .theme_sapphire{background-image: url(campTop.jpg); height: 21px;}
+.topBar .theme_sapphire{background-image: url(titaniumTop.jpg); height: 21px;}
+.bottomBar .theme_sapphire {background-image: url(sapphireBottom.jpg); height: 38px;}
+.bottomBar .theme_sapphire {background-image: url(maroonBottom.jpg); height: 38px;}
+.bottomBar .theme_sapphire {background-image: url(mossBottom.jpg); height: 38px;}
+.bottomBar .theme_sapphire {background-image: url(camoBottom.jpg); height: 38px;}
+.bottomBar .theme_sapphire {background-image: url(titaniumBottom.jpg); height: 38px;}
+
+/* Background color options */
 .infoHeader {background-image:url(headerAlloyBG.jpg); height: 30px;}
-.infoContent{background-image:url(repeatAlloyBG.jpg); padding: 5px 60px 40px;}
+.infoHeader .bg_algae {background-image:url(headerAlgaeBG.jpg); height: 30px;}
+.infoHeader .bg_fair {background-image:url(headerFairBG.jpg); height: 30px;}
+.infoHeader .bg_powder {background-image:url(headerPowderBG.jpg); height: 30px;}
+.infoContent {background-image:url(repeatAlloyBG.jpg); padding: 5px 60px 40px;}
+.infoContent .bg_algae{background-image:url(repeatAlgaeBG.jpg); padding: 5px 60px 40px;}
+.infoContent .bg_fair{background-image:url(repeatFairBG.jpg); padding: 5px 60px 40px;}
+.infoContent .bg_powder{background-image:url(repeatPowderBG.jpg); padding: 5px 60px 40px;}
+
+.infoSection{clear:both; padding-top: 20px; width: 680px;}
 .infoContent h1{ font-size: 20px; color: #424242; margin:18px 0px 0px;}
 .infoContent span{ font-size: 14px; color: #4d4c4c;}
 </style>
@@ -21,10 +41,7 @@
 <div class="body">
 	<div class="header">
 		<img data-wizardificated="true" alt="3gss940817_royal_blue_backside.jpg" class="unwizardificated wizardificated" bgcolor="ffffff" data="merchant:zoovy:company_logo" data-attrib="zoovy:company_logo" data-label="Company Logo (200 x 150)" data-object="KISS" id="LOGO" src="yourlogohere.png" type="IMAGE" height="85" border="0" width="250">
-		<div class="topBar">
-			<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
-			<img id="SOME_THEME_IMAGE" src="sapphireTop.jpg" class="themed"/>
-		</div>
+		<div class="topBar themed"></div>
 	</div>
 
 	<div class="mainContentArea">
@@ -33,7 +50,7 @@
 			<img class="actbProductAttribute mainImage" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-zoom="1" data-label="Image (200 by X)" data-object="PRODUCT" id="IMAGE1" src="placeholder-2.png"></a>
 		</div>
 		<div class="mainProdInfo">
-			<span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">NEW Darice Rolling Scrap Book Tote Black</span>
+			<span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">PRODUCT TITLE WILL GO HERE</span>
 			<!-- Taking this out for time being
 			<ul class="prodInfoList">
 				<li>Condition: &nbsp; New(More Info)</li>
@@ -72,8 +89,8 @@
 	</div>
 	
 	<div class="infoSection">
-		<div class="infoHeader"></div>
-		<div class="infoContent">
+		<div class="infoHeader themed"></div>
+		<div class="infoContent themed">
 			<div data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
 				<h1>Product Desciption</h1>
 				<span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae dapibus sapien, ut rutrum eros. Aenean et ante purus. Aliquam et dui odio. Vivamus vestibulum nisl et tempor venenatis. Quisque egestas justo dictum velit interdum, sed aliquet quam ornare. In urna erat, malesuada a enim quis, dignissim rutrum lectus. Pellentesque laoreet nulla est, non bibendum dolor interdum sit amet. Nulla eget scelerisque augue. Nullam vestibulum est pharetra turpis commodo, non laoreet turpis iaculis. Maecenas eu ornare sem. Phasellus dictum sapien dolor, et luctus mauris lacinia ut. Sed volutpat nisl at cursus vulputate. Curabitur adipiscing ornare pulvinar. Morbi sed risus ligula. Vivamus eleifend purus ullamcorper leo cursus condimentum.</span>
@@ -107,9 +124,6 @@
 				
 			</div>
 		</div>
-		<div class="bottomBar">
-			<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
-			<img id="SOME_THEME_IMAGE" src="sapphireBottom.jpg" class="themed"/>
-		</div>
+		<div class="bottomBar themed"></div>
 	</div>
 </div>

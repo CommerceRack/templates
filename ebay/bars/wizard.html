@@ -1,7 +1,48 @@
 <!-- Company Logo Select -->
-<fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('LOGO');">
+<fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('#LOGO');">
 	<label>Company Logo</label>
 	<button onClick="magic.inspect('#LOGO'); magic.medialib('#LOGO');">Select Logo</button>
+</fieldset>
+
+<!-- Color Scheme -->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+		$('#KISS_COLOR_SCHEME_SELECT').val( magic.inspect('KISS_COLOR_SCHEME').val() );
+	})()">
+	<legend>Choose Color Scheme</legend>
+	<label for="KISS_COLOR_SCHEME_SELECT"><select data-target="#KISS_COLOR_SCHEME" onChange="(function(){
+		var selectedTheme = $(this).val();
+		magic.modify( '#COLOR_TOP_IMAGE', 'set-attrib', { 'src':''+selectedTheme'Top.jpg' });
+		magic.modify( '#COLOR_BOTTOM_IMAGE', 'set-attrib', { 'src':''+selectedTheme'Bottom.jpg' });
+		$('.themed').removeClass('theme_sapphire theme_maroon theme_moss theme_camo theme_titanium');
+		$('.themed').addClass( 'theme_'+selectedTheme );
+	})()" id="KISS_COLOR_SCHEME_SELECT" name="KISS_COLOR_SCHEME_SELECT">
+		<option value="sapphire">Sapphire</option>
+		<option value="maroon">Maroon</option>
+		<option value="moss">Moss</option>
+		<option value="camo">Camo</option>
+		<option value="titanium">Titanium</option>
+	</select>
+	</label>
+</fieldset>
+
+<!-- Background Color-->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+		$('#KISS_BG_COLOR_SELECT').val( magic.inspect('KISS_BG_COLOR').val() );
+	})()">
+	<legend>Choose Background Color</legend>
+	<label for="KISS_BG_COLOR_SELECT"><select data-target="#KISS_BG_COLOR" onChange="(function(){
+		var selectedBG = $(this).val();
+		magic.modify( '#BG_HEADER_IMAGE', 'set-attrib', { 'src':''+selectedTheme'HeaderBG.jpg' });
+		magic.modify( '#BG_REPEAT_IMAGE', 'set-attrib', { 'src':''+selectedTheme'RepeatBG.jpg' });
+		$('.themed').removeClass(bg_alloy bg_algae bg_fair bg_powder');
+		$('.themed').addClass( 'bg_'+selectedBG );
+	})()" id="KISS_BG_COLOR_SELECT" name="KISS_BG_COLOR_SELECT">
+		<option value="alloy">Alloy</option>
+		<option value="algae">Algae</option>
+		<option value="fair">Fair</option>
+		<option value="powder">Powder</option>
+	</select>
+	</label>
 </fieldset>
 
 <!-- About company wizard-->
@@ -16,20 +57,20 @@
 <fieldset  class='labelsAsBreaks'  data-onfocus="(function(){
  $('#KISS_SHIPPING_POLICY_TEXTAREA').val(magic.inspect('#KISS_SHIPPING_POLICY').html());
  $('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_FEDEXLOGO').is(':visible') );
- $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible') );
+ $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible')  );
  $('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_USPSLOGO').is(':visible') );
  return(true);
  })()">
  
  <legend>Shipping</legend>
- <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','set',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
+ <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY');  magic.modify('#KISS_SHIPPING_POLICY','replace',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
 
 
- <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
+ <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO',  ($(this).is(':checked')?'show':'hide'), {});"/>Fedex Logo</label>
 
- <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>UPS Logo</label>
+ <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>UPS Logo</label>
 
- <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>USPS Logo</label>
+ <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>USPS Logo</label>
 </fieldset>
 
 <!-- Payment policy -->
