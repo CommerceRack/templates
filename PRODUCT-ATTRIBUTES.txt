@@ -1,0 +1,8940 @@
+
+================================================================================================
+Popular Fields
+
+== "amz:asin" Amazon ASIN for the product
+* Type: asin
+
+
+== "is:bestseller" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:colorful" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:discontinued" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:download" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:fresh" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:haserrors" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:needreview" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:newarrival" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:preorder" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:sale" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:shipfree" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:sizeable" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:specialorder" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "youtube:videoid" YouTube Embedded Video ID
+* Type: textbox
+* Input Size: 20
+
+
+== "zoovy:base_price" Base Price
+* Type: currency
+
+
+== "zoovy:base_weight" Shipping Weight
+* Type: textbox
+
+
+== "zoovy:grp_children" Group Children
+When populated indicates this is a parent item. The contents are a comma separated list of items in this container
+* Type: finder
+
+
+== "zoovy:grp_parent" Group Parent
+When populated indicates this child belongs to a group of items. This field must contain the parent product record
+* Type: finder
+
+
+== "zoovy:grp_type" Group Type
+When populated indicates group type (PARENT or CHILD)
+* Type: select
+* Valid values:
+* None = ""
+*  PARENT = "PARENT"
+*  CHILD = "CHILD"
+*  
+
+
+== "zoovy:keywords" Product Keywords
+* Type: textarea
+
+
+== "zoovy:prod_condition" Product Condition
+Defaults to "NEW"
+* Type: textbox
+
+
+== "zoovy:prod_desc" Product Description
+* Type: textarea
+
+
+== "zoovy:prod_detail" Product Detail Description
+* Type: textarea
+
+
+== "zoovy:prod_ean" Product EAN
+EAN (European Article Number is a barcoding standard which is a superset of the original 12-digit UPC system)
+* Type: textbox
+
+
+== "zoovy:prod_features" Product Features
+Used by Amazon - should contain a bulleted list
+* Type: textarea
+
+
+== "zoovy:prod_image1" Product Image 1
+image1 will also be used as a thumbnail by default
+* Type: image
+
+
+== "zoovy:prod_image2" Product Image 2
+* Type: image
+
+
+== "zoovy:prod_image3" Product Image 3
+* Type: image
+
+
+== "zoovy:prod_image4" Product Image 4
+* Type: image
+
+
+== "zoovy:prod_image5" Product Image 5
+* Type: image
+
+
+== "zoovy:prod_image6" Product Image 6
+* Type: image
+
+
+== "zoovy:prod_image7" Product Image 7
+* Type: image
+
+
+== "zoovy:prod_image8" Product Image 8
+* Type: image
+
+
+== "zoovy:prod_isbn" ISBN
+Used to describe Media.
+* Type: text
+* Max Length: 13
+
+
+== "zoovy:prod_keywords" 
+* Type: legacy
+
+
+== "zoovy:prod_mfg" Product Manufacturer
+* Type: textbox
+
+
+== "zoovy:prod_mfgid" Product Manufacturer ID
+* Type: textbox
+
+
+== "zoovy:prod_name" Product Title
+* Type: text
+* Max Length: 200
+
+
+== "zoovy:related_products" list of related product ids
+* Type: finder
+
+
+
+
+================================================================================================
+Less Common Fields
+
+== "addthis:html" AddThis HTML
+just the html portion, not the script tag
+* Type: textarea
+
+
+== "addthis:pubid" AddThis public ID
+* Type: textbox
+* Input Size: 20
+
+
+== "adwords:blocked" Adwords Blocked
+Should this product be blocked from Adwords.
+* Type: boolean
+
+
+== "adwords:grouping" Adwords Grouping
+http://www.google.com/support/merchants/bin/answer.py?answer=188479
+* Type: textbox
+
+
+== "adwords:labels" Adwords Labels
+One per line.
+* Type: textbox
+
+
+== "adwords:prefer_for_query" One tag/term per line
+* Type: textarea
+
+
+== "amz:catalog" Amazon Catalog
+* Type: chooser/amzcatalog
+
+
+== "amz:digest" 
+* Type: digest
+
+
+== "amz:fba" Fulfilled By Amazon (FBA)
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:grp_varkey" Group Variation Keyword
+This is the variation keyword that represents the group on Amazon. For example, "APPAREL: Color". This field should be set on both the parent and children.
+* Type: text
+
+
+== "amz:grp_varvalue" Group Variation Keyword Value
+This is the name of this option when displayed on Amazon. For example, you would not want to display the entire product name when the "Black Suede Boots" are on Amazon. You would simply show the choice "Black". This field should be set on the child products.
+* Type: text
+
+
+== "amz:key_features" Amazon Key Features
+Bulleted list sent to Amazon.
+* Type: textarea
+
+
+== "amz:prod_aa_aamisc_amperage" Amperage
+* Type: textbox
+
+
+== "amz:prod_aa_aamisc_clrmap" Color Map
+* Type: textbox
+
+
+== "amz:prod_aa_aamisc_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_aa_aamisc_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_aa_aamisc_matl" Material
+* Type: textbox
+
+
+== "amz:prod_aa_aamisc_viscosity" Viscosity
+* Type: textbox
+
+
+== "amz:prod_aa_aamisc_voltage" Voltage
+* Type: number
+
+
+== "amz:prod_aa_aamisc_volume" Volume
+* Type: textbox
+
+
+== "amz:prod_aa_aamisc_wattage" Wattage
+* Type: number
+
+
+== "amz:prod_base_systemreqs" System Requirements
+* Type: textbox
+
+
+== "amz:prod_ce_ces_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_ce_ces_color" Color
+* Type: textbox
+
+
+== "amz:prod_ce_ces_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_ce_ces_colorscreen" Color Screen
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_ce_ces_computermemorytype" Computer Memory Type
+* Type: textlist
+
+
+== "amz:prod_ce_ces_computermemorytype_10" Computer Memory Type_10
+* Type: textbox
+
+
+== "amz:prod_ce_ces_digitalaudiocapacity" Digital Audio Capacity
+* Type: textbox
+
+
+== "amz:prod_ce_ces_digitalmediaformat" Digital Media Format
+* Type: textbox
+
+
+== "amz:prod_ce_ces_harddriveinterface" Hard Drive Interface
+* Type: textlist
+
+
+== "amz:prod_ce_ces_harddrivesize" Hard Drive Size
+* Type: textlist
+
+
+== "amz:prod_ce_ces_holdercapacity" Holder Capacity
+* Type: textbox
+
+
+== "amz:prod_ce_ces_homeautomationcmtnsdv" Home Automation Communication Device
+* Type: textbox
+
+
+== "amz:prod_ce_ces_hwpt" Hardware Platform
+* Type: textbox
+
+
+== "amz:prod_ce_ces_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_ce_ces_memoryslotsavailable" Memory Slots Available
+* Type: textbox
+
+
+== "amz:prod_ce_ces_os" Operating System
+* Type: textlist
+
+
+== "amz:prod_ce_ces_pdabasemdl" P D A Base Model
+* Type: textlist
+
+
+== "amz:prod_ce_ces_powersource" Power Source
+* Type: textbox
+
+
+== "amz:prod_ce_ces_ramsize" R A M Size
+* Type: textbox
+
+
+== "amz:prod_ce_ces_screenresolution" Screen Resolution
+* Type: textbox
+
+
+== "amz:prod_ce_ces_screensize" ScreenSize
+* Type: number
+
+
+== "amz:prod_ce_ces_speakerdiameter" SpeakerDiameter
+* Type: number
+
+
+== "amz:prod_ce_ces_telephonetype" Telephone Type
+* Type: textlist
+
+
+== "amz:prod_ce_ces_vehiclespeakersize" Vehicle Speaker Size
+* Type: textbox
+
+
+== "amz:prod_ce_ces_voltage" Voltage
+* Type: textbox
+
+
+== "amz:prod_ce_ces_wattage" Wattage
+* Type: textbox
+
+
+== "amz:prod_ce_ces_wrlstype" Wireless Type
+* Type: textlist
+
+
+== "amz:prod_ce_gfxcard_gfxcarddscrpt" Graphics Card Description
+* Type: textbox
+
+
+== "amz:prod_ce_gfxcard_gfxcardinterface" Graphics Card Interface
+* Type: textbox
+
+
+== "amz:prod_ce_gfxcard_gfxcardramsize" Graphics Card Ram Size
+* Type: textbox
+
+
+== "amz:prod_ce_pc_addldrives" Additional Drives
+* Type: textlist
+
+
+== "amz:prod_ce_pc_addldrives_10" Additional Drives_10
+* Type: textbox
+
+
+== "amz:prod_ce_pc_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_ce_pc_computermemorytype" Computer Memory Type
+* Type: textlist
+
+
+== "amz:prod_ce_pc_computermemorytype_10" Computer Memory Type_10
+* Type: textbox
+
+
+== "amz:prod_ce_pc_harddriveinterface" Hard Drive Interface
+* Type: textlist
+
+
+== "amz:prod_ce_pc_harddrivesize" Hard Drive Size
+* Type: textlist
+
+
+== "amz:prod_ce_pc_hwpt" Hardware Platform
+* Type: textbox
+
+
+== "amz:prod_ce_pc_memoryslotsavailable" Memory Slots Available
+* Type: textbox
+
+
+== "amz:prod_ce_pc_os" Operating System
+* Type: textlist
+
+
+== "amz:prod_ce_pc_processorbrand" Processor Brand
+* Type: textbox
+
+
+== "amz:prod_ce_pc_processorcnt" ProcessorCount
+* Type: number
+
+
+== "amz:prod_ce_pc_processorspeed" Processor Speed
+* Type: textbox
+
+
+== "amz:prod_ce_pc_processortype" Processor Type
+* Type: textbox
+
+
+== "amz:prod_ce_pc_ramsize" R A M Size
+* Type: textbox
+
+
+== "amz:prod_ce_pc_screenresolution" Screen Resolution
+* Type: textbox
+
+
+== "amz:prod_ce_pc_screensize" ScreenSize
+* Type: number
+
+
+== "amz:prod_ce_pc_softwareincluded" Software Included
+* Type: textbox
+
+
+== "amz:prod_ce_pc_u-racksize" P C U - Rack Size
+* Type: select
+* Valid values:
+* "", "1", "2", "3", "4", 
+
+
+== "amz:prod_ce_pc_wrlstype" Wireless Type
+* Type: textlist
+
+
+== "amz:prod_ce_pda_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_ce_pda_colorscreen" Color Screen
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_ce_pda_computermemorytype" Computer Memory Type
+* Type: textlist
+
+
+== "amz:prod_ce_pda_computermemorytype_10" Computer Memory Type_10
+* Type: textbox
+
+
+== "amz:prod_ce_pda_harddrivesize" Hard Drive Size
+* Type: textbox
+
+
+== "amz:prod_ce_pda_memoryslotsavailable" Memory Slots Available
+* Type: textbox
+
+
+== "amz:prod_ce_pda_os" Operating System
+* Type: textlist
+
+
+== "amz:prod_ce_pda_pdabasemdl" P D A Base Model
+* Type: textlist
+
+
+== "amz:prod_ce_pda_processorspeed" Processor Speed
+* Type: textbox
+
+
+== "amz:prod_ce_pda_processortype" Processor Type
+* Type: textbox
+
+
+== "amz:prod_ce_pda_ramsize" R A M Size
+* Type: textbox
+
+
+== "amz:prod_ce_pda_romsize" R O M Size
+* Type: textbox
+
+
+== "amz:prod_ce_pda_screenresolution" Screen Resolution
+* Type: textbox
+
+
+== "amz:prod_ce_pda_screensize" ScreenSize
+* Type: number
+
+
+== "amz:prod_ce_pda_softwareincluded" Software Included
+* Type: textbox
+
+
+== "amz:prod_ce_pda_wrlstype" Wireless Type
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_apparel-closure-type" apparel closure type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_apparelclosuretype" apparel closure type
+* Type: select
+* Valid values:
+* "", "Round Classic Ring", "Square Classic Ring", "Flat Solid Buckle", "D Ring", "Double D Ring", "Hook & Eye", "Snaps", "Zipper", "Button Fly", "Pull On", "Drawstring", "Elastic", "Velcro", "Self Tie", "Velcro", "J-Clip", "Button-End", "Snap On", 
+
+
+== "amz:prod_cloth_cd_belt-style" belt style
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_beltlength" Belt Length
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_beltstyle" Belt Style
+* Type: select
+* Valid values:
+* "", "Chain", "Sash/Woven", "Skinny", "Medium ", "Wide", 
+
+
+== "amz:prod_cloth_cd_beltwidth" Belt Width
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_bottom-style" bottom style
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_bottomstyle" bottom style
+* Type: select
+* Valid values:
+* "", "Pant", "Short", "Bikini", "Thong", "G-String", "Boy Short", "Hipster", 
+
+
+== "amz:prod_cloth_cd_brabandsize" Bra Band Size
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_buttonqty" Button Quantity
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_chestsize" Chest Size
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_clothingtype" Clothing Clothing Type
+* Type: select
+* Valid values:
+* "", "SocksHosiery", "Underwear", "Bra", "Shoes", "Hat", "Bag", "Accessory", "Jewelry", "Sleepwear", "Swimwear", "PersonalBodyCare", "HomeAccessory", "NonApparelMisc", 
+
+
+== "amz:prod_cloth_cd_collar-type" collar type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_collartype" collar type
+* Type: select
+* Valid values:
+* "", "Mandarin Collar", "Spread", "Cutaway", "Point", "Button-Down", 
+
+
+== "amz:prod_cloth_cd_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "Beige", "Black", "Blue", "Bronze", "Brown", "Gold", "Green", "Grey", "Metallic", "Multi", "Off-White", "Orange", "Pink", "Purple", "Red", "Silver", "Transparent", "Turquoise", "White", "Yellow", 
+
+
+== "amz:prod_cloth_cd_ctrltype" Control Type
+* Type: select
+* Valid values:
+* "", "Light", "Medium", "Maximum", "Moderate", "Firm", "Extra Firm", 
+
+
+== "amz:prod_cloth_cd_ctryoforgn" Country of Origin
+* Type: textbox
+* Max Length: 2
+
+
+== "amz:prod_cloth_cd_cufftype" Cuff Type
+* Type: select
+* Valid values:
+* "", "French", "Barrel", "Single", "Cuffed", "Convertible", 
+
+
+== "amz:prod_cloth_cd_cupsize" Clothing Cup Size
+* Type: select
+* Valid values:
+* "", "A", "B", "C", "D", "DD", "DDD", "E", "F", "FF", "G", "H", "I", 
+
+
+== "amz:prod_cloth_cd_dpt" Department
+* Type: select
+* Valid values:
+* "", "mens", "womens", "boys", "girls", "baby-boys", "baby-girls", "unisex-adult", "unisex-child", "unisex-baby", 
+
+
+== "amz:prod_cloth_cd_eventkwords" Event Keywords
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_fabricwash" Fabric Wash
+* Type: select
+* Valid values:
+* "", "Light", "Medium", "Dark", 
+
+
+== "amz:prod_cloth_cd_fittype" Fit Type
+* Type: select
+* Valid values:
+* "", "Slim", "Regular", "Relaxed", "Stretch", "Skinny", "Loose", "Western", "Overall", 
+
+
+== "amz:prod_cloth_cd_frontpltype" Front Pleat Type
+* Type: select
+* Valid values:
+* "", "Pleated", "Flat Front", 
+
+
+== "amz:prod_cloth_cd_heelheight" Heel Height
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_heeltype" Heel Type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_innermaterial" Inner Material
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_inseamlength" Inseam Length
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_iscstmz" Is Customizable
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cloth_cd_itemrise" Item Rise
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_itemtype" Item Type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_legdiameter" Leg Diameter
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_legstyle" Leg Style
+* Type: select
+* Valid values:
+* "", "Skinny ", "Tapered", "Straight", "Boot Cut", "Flared", "Trouser ", "Cropped", "Ankle", "Wide", 
+
+
+== "amz:prod_cloth_cd_lenscolor" Lens Title
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_lenswidth" Lens Width
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_materialopacity" Material Opacity
+* Type: select
+* Valid values:
+* "", "Ultra Sheer", "Sheer", "Semi Opaque", "Opaque", 
+
+
+== "amz:prod_cloth_cd_matlandfabric" Material And Fabric
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_necksize" Neck Size
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_neckstyle" Neck Style
+* Type: select
+* Valid values:
+* "", "Boat Neck", "Cowl Neck", "Crewneck", "Halter", "Henley", "High Neck", "Hooded", "Mock Neck", "One Shoulder", "Racer Back", "Scoop Neck", "Strapless/Tube", "Turtleneck", "V-Neck", "Eyelet", 
+
+
+== "amz:prod_cloth_cd_occandlife" Occasion And Lifestyle
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_outermaterial" Outer Material
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_patternstyle" Pattern Style
+* Type: select
+* Valid values:
+* "", "Checkered", "Paisley", "Patterned", "Polka Dots", "Solid", "Stripes", "Plaid", "String", 
+
+
+== "amz:prod_cloth_cd_platinumkwords" Platinum Keywords
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_pocketdesc" Pocket Description
+* Type: select
+* Valid values:
+* "", "Basic 5 Pckt", "Pork Chop Pocket", "Slant Pocket", "Utility Pocket", "Cargo", "Carpenter", "Back Flap Pocket", "Slit Pocket", "No Back Pocket", 
+
+
+== "amz:prod_cloth_cd_risestyle" Rise Style
+* Type: select
+* Valid values:
+* "", "No Show", "Ankle", "Mid-Calf", "Knee High", "Thigh High", "Low", "Mid", "High", 
+
+
+== "amz:prod_cloth_cd_shaftheight" Shaft Height
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_shoeclstype" Shoe Closure Type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_shoewidth" Clothing Shoe Width
+* Type: select
+* Valid values:
+* "", "AAAA", "AAA", "AA", "A", "B", "C", "D", "E", "E", "EE", "EEE", "EEEE", "EEEEE", 
+
+
+== "amz:prod_cloth_cd_sizemap" Clothing Size Map
+* Type: select
+* Valid values:
+* "", "XXXXX-Small", "XXXX-Small", "XXX-Small", "XX-Small", "X-Small", "Small", "Medium", "Large", "X-Large", "XX-Large", "XXX-Large", "XXXX-Large", "XXXXX-Large", 
+
+
+== "amz:prod_cloth_cd_sleeve-type" sleeve type
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_sleevelength" Sleeve Length
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_sleevetype" sleeve type
+* Type: select
+* Valid values:
+* "", "Short Sleeve", "Long Sleeve", "Sleeveless", "3/4 Sleeve", "Cap Sleeve", "Tanks", 
+
+
+== "amz:prod_cloth_cd_solematerial" Sole Material
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_specialfeature" Special Feature
+* Type: select
+* Valid values:
+* "", "Carry-On", "Tsa Lock", "Tsa Ready", "Lightweight", "Checkpoint Friendly", "Built In Scale", "Reversible", "Adjustable", "Wrinkle-Free", "Elastic Band", "Sun Protection", 
+
+
+== "amz:prod_cloth_cd_specialsizetype" Special Size Type
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_straptype" Strap Type
+* Type: select
+* Valid values:
+* "", "Strapless", "Invisible", "Convertible", "Halter", "Racerback", "Backless", 
+
+
+== "amz:prod_cloth_cd_stylekwords" Style Keywords
+* Type: textlist
+
+
+== "amz:prod_cloth_cd_stylename" Style Name
+* Type: select
+* Valid values:
+* "", "Full Coverage", "Demi", "Balconette", "Plunge", "Push-Up", "Seamless", "Padded", "Molded", "Soft", "Double-Breasted", "Classic", "Modern/Fitted", 
+
+
+== "amz:prod_cloth_cd_theme" Theme
+* Type: select
+* Valid values:
+* "", "Animal", "Cartoon", "Classic Monster", "Fairytale", "Famous People", "Food & Beverage", "Historical & Period", "Horror", "Humorous", "Insects", "Mascots", "Occupational/Professional", "Religious", "Scary", "Science Fiction", "Sexy", "Sports", "Superhero", "Tv & Movies", "Western", 
+
+
+== "amz:prod_cloth_cd_topstyle" Top Style
+* Type: select
+* Valid values:
+* "", "Strapless/Tube", "Halter", "Tank", "Racerback", "Cami", "Button Down", "One Shoulder", "Bandeaux", "Triangle Tops", 
+
+
+== "amz:prod_cloth_cd_underwiretype" Underwire Type
+* Type: select
+* Valid values:
+* "", "Underwire", "Wire Free", 
+
+
+== "amz:prod_cloth_cd_waistsize" Waist Size
+* Type: textbox
+
+
+== "amz:prod_cloth_cd_waterreslevel" Water Resistance Level
+* Type: select
+* Valid values:
+* "", "not_water_resistant", "water_resistant", "waterproof", 
+
+
+== "amz:prod_color" Amazon Product Color
+Used when the product is only available in 1 color
+* Type: textbox
+
+
+== "amz:prod_condition" Amazon Condition
+* Type: select
+* Valid values:
+* "New", "Refurbished", "UsedLikeNew", "UsedVeryGood", "UsedGood", "UsedAcceptable", 
+
+
+== "amz:prod_cp_bagcase_bagcasetype" Bag Case Bag Case Type
+* Type: select
+* Valid values:
+* "", "binocular-cases", "camcorder-cases", "camera-cases", "combination-cases", "electronic-equipment-cases", "filter-cases", "lens-cases", "lighting-cases", "projection-cases", "scope-cases", "stand-cases", "system-cases", "telescope-cases", "tripod-cases", "light-meter-cases", "other-purpose-cases", 
+
+
+== "amz:prod_cp_bagcase_features" Bag Case Features
+* Type: select
+* Valid values:
+* "", "x-ray-protection", "weatherproof", 
+
+
+== "amz:prod_cp_bagcase_matltype" Bag Case Material Type
+* Type: select
+* Valid values:
+* "", "hard", "soft", "air", "plastic", "metal", "cloth", 
+
+
+== "amz:prod_cp_bagcase_specificuses" Bag Case Specific Uses
+* Type: select
+* Valid values:
+* "", "travel", "hiking-and-outdoors", "hunting-and-shooting", "sports", 
+
+
+== "amz:prod_cp_bagcase_style" Bag Case Style
+* Type: select
+* Valid values:
+* "", "backpacks", "beltpacks", "briefcases", "holster-style-cases", "portfolios", "print-cases", "roller-cases", "vests", "wraps", "waist-style-cases", "compact-cases", "pouches", 
+
+
+== "amz:prod_cp_binc_apparentangleofview" Apparent Angle Of View
+* Type: textbox
+
+
+== "amz:prod_cp_binc_binoculartype" Binocular Binocular Type
+* Type: select
+* Valid values:
+* "", "binoculars", "monoculars", "laser-rangefinders", "spotting-scopes", "night-vision", 
+
+
+== "amz:prod_cp_binc_coating" Coating
+* Type: textbox
+
+
+== "amz:prod_cp_binc_diopteradjustmentrange" Diopter Adjustment Range
+* Type: textbox
+
+
+== "amz:prod_cp_binc_exitpupildiameter" ExitPupilDiameter
+* Type: number
+
+
+== "amz:prod_cp_binc_eyepiecelensconstrc" Eyepiece Lens Construction
+* Type: textbox
+
+
+== "amz:prod_cp_binc_eyerelief" EyeRelief
+* Type: number
+
+
+== "amz:prod_cp_binc_features" Binocular Features
+* Type: select
+* Valid values:
+* "", "compact", "full-size", "image-stabilizing", "waterproof", "fogproof", "zoom", "uv-protection", 
+
+
+== "amz:prod_cp_binc_fieldofview" FieldOfView
+* Type: number
+
+
+== "amz:prod_cp_binc_focustype" Focus Type
+* Type: textbox
+
+
+== "amz:prod_cp_binc_magnification" Magnification
+* Type: textbox
+
+
+== "amz:prod_cp_binc_objectivelensconstrc" Objective Lens Construction
+* Type: textbox
+
+
+== "amz:prod_cp_binc_objectivelensdiameter" ObjectiveLensDiameter
+* Type: number
+
+
+== "amz:prod_cp_binc_prismtype" Prism Type
+* Type: textbox
+
+
+== "amz:prod_cp_binc_realangleofview" Real Angle Of View
+* Type: textbox
+
+
+== "amz:prod_cp_binc_specificuses" Binocular Specific Uses
+* Type: select
+* Valid values:
+* "", "tabletop", "travel", "hiking-and-outdoors", "hunting-and-shooting", "sports", 
+
+
+== "amz:prod_cp_binc_tripodready" Tripod Ready
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_blankmedia_analogformats" Blank Media Analog Formats
+* Type: select
+* Valid values:
+* "", "8mm-camcorder-tapes", "beta", "hi-8-cassettes", "s-vhs", "s-vhs-c", "vhs", "vhs-c", "reel-tapes", 
+
+
+== "amz:prod_cp_blankmedia_cnt" Count
+* Type: number
+
+
+== "amz:prod_cp_blankmedia_digitalformats" Blank Media Digital Formats
+* Type: select
+* Valid values:
+* "", "minidv-cassettes", "full-size-dv-cassettes", "micromv", "dvd", "digital-beta-cassettes", 
+
+
+== "amz:prod_cp_blankmedia_mediacolor" Blank Media Media Color
+* Type: select
+* Valid values:
+* "", "unknown_chromatism", "black-and-white", "color", "tinted", "colorized", "color/black_and_white", 
+
+
+== "amz:prod_cp_blankmedia_motionfilmformats" Blank Media Motion Film Formats
+* Type: select
+* Valid values:
+* "", "8mm-film", "super-8mm-film", "16mm-film", "super-16mm-film", "35mm-film", "65mm-film", "70mm-film", "other-film-formats", 
+
+
+== "amz:prod_cp_camcorder_acadapterincluded" A C Adapter Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_analogformats" Camcorder Analog Formats
+* Type: select
+* Valid values:
+* "", "general", "8mm", "betacam-sp", "hi-8", "s-vhs", "s-vhs-c", "vhs", "vhs-c", "other", 
+
+
+== "amz:prod_cp_camcorder_audio" Camcorder Audio
+* Type: select
+* Valid values:
+* "", "stereo", "mono", 
+
+
+== "amz:prod_cp_camcorder_autolight" Autolight
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_avoutput" A V Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_batterytype" Battery Type
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_computerplatform" Computer Platform Type
+* Type: select
+* Valid values:
+* "", "windows", "mac", "linux", 
+
+
+== "amz:prod_cp_camcorder_digitalformats" Camcorder Digital Formats
+* Type: select
+* Valid values:
+* "", "general", "digital-betacam", "dv", "dvcam", "dvcpro", "minidv", "micromv", "digital8", "dvd", "minidisc", "other", 
+
+
+== "amz:prod_cp_camcorder_digitalstillcapability" Digital Still Capability
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_digitalstillresolution" Digital Still Resolution
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_digitalzoom" Digital Zoom
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_externalmemoryincluded" External Memory Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_externalmemorysize" External Memory Size
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_externalmemorytype" Camcorder External Memory Type
+* Type: select
+* Valid values:
+* "", "memory-stick", "secure-digital", "mmc", "other", 
+
+
+== "amz:prod_cp_camcorder_features" Camcorder Features
+* Type: select
+* Valid values:
+* "", "lcd-screen", "mpeg", "digital-still", "memory-card-compatible", "image-stabilization", "insert-edit", "underwater", 
+
+
+== "amz:prod_cp_camcorder_filmformats" Camcorder Film Formats
+* Type: select
+* Valid values:
+* "", "general", "8mm", "16mm", "35mm", "65mm", "70mm", "other", 
+
+
+== "amz:prod_cp_camcorder_firewireoutput" Firewire Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_flyingeraseheads" Flying Erase Heads
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_headphonejack" Headphone Jack
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_hotshoe" Hot Shoe
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_imagestabilization" Image Stabilization
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_infraredcapability" Infrared Capability
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_lcdscreensize" LCDScreenSize
+* Type: number
+
+
+== "amz:prod_cp_camcorder_lcdswivel" L C D Swivel
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_lenstype" Camcorder Lens Type
+* Type: select
+* Valid values:
+* "", "fixed-non-zoom", "fixed-zoom", "interchangeable", 
+
+
+== "amz:prod_cp_camcorder_maxaperture" Max Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_minaperture" Min Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_mpegmoviemode" Camcorder M P E G Movie Mode
+* Type: select
+* Valid values:
+* "", "mpeg", "mpeg2", "mpeg4", 
+
+
+== "amz:prod_cp_camcorder_opticalzoom" Optical Zoom
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_playbackformat" Camcorder Playback Format
+* Type: select
+* Valid values:
+* "", "pal", "ntsc", "multisystem", "secam", 
+
+
+== "amz:prod_cp_camcorder_rechargeablebincld" Rechargeable Battery Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_remoteincluded" Remote Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_s-videooutput" S - Video Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_sensortype" Camcorder Sensor Type
+* Type: select
+* Valid values:
+* "", "ccd", "3-chip-ccd", "cmos", "progressive-scan-ccd", "fixed-zoom-lens", "interchangeable-lens", "other-lens", 
+
+
+== "amz:prod_cp_camcorder_softwareincluded" Software Included
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_usboutput" Camcorder U S B Output
+* Type: select
+* Valid values:
+* "", "usb1.1", "usb2.0", 
+
+
+== "amz:prod_cp_camcorder_usbstreaming" U S B Streaming
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_camcorder_videoresolution" Video Resolution
+* Type: textbox
+
+
+== "amz:prod_cp_camcorder_viewfinder" Camcorder Viewfinder
+* Type: select
+* Valid values:
+* "", "black-and-white", "color", 
+
+
+== "amz:prod_cp_cleaner_cleanertype" Cleaner Cleaner Type
+* Type: select
+* Valid values:
+* "", "brushes", "cloths", "cleaning-kits", "compressed-air", "liquid-cleaners", "refills", 
+
+
+== "amz:prod_cp_color" Color
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_acadapterincluded" A C Adapter Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_audiorecording" Audio Recording
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_autolight" Autolight
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_avoutput" A V Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_batterytype" Battery Type
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_cameratype" Digital Camera Camera Type
+* Type: select
+* Valid values:
+* "", "point-and-shoot", "slr", "3-d", "macro", "passport-and-id", "underwater", "other", 
+
+
+== "amz:prod_cp_dgc_computerplatform" Computer Platform Type
+* Type: select
+* Valid values:
+* "", "windows", "mac", "linux", 
+
+
+== "amz:prod_cp_dgc_connectivity" Digital Camera Connectivity
+* Type: select
+* Valid values:
+* "", "usb", "usb1.1", "usb2.0", "firewire", "firewire2.0", "serial", "parallel", "ieee1394", 
+
+
+== "amz:prod_cp_dgc_continuousshooting" Continuous Shooting
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_digitalstillcapability" Digital Still Capability
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_digitalstillresolution" Digital Still Resolution
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_digitalzoom" Digital Zoom
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_externalmemoryincluded" External Memory Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_externalmemorysize" External Memory Size
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_externalmemorytype" Digital Camera External Memory Type
+* Type: select
+* Valid values:
+* "", "compact-flash", "smart-media", "secure-digital", "mmc", "xd-picture-card", "memory-stick", "micro-drive", "cd-r", "cd-rw", "dvd-r", "dvd-rw", 
+
+
+== "amz:prod_cp_dgc_features" Digital Camera Features
+* Type: select
+* Valid values:
+* "", "lcd-screen", "mpeg-movie-mode", "interchangeable-lens", "image-stabilization", "waterproof", 
+
+
+== "amz:prod_cp_dgc_firewireoutput" Firewire Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_flyingeraseheads" Flying Erase Heads
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_focustype" Digital Camera Focus Type
+* Type: select
+* Valid values:
+* "", "automatic", "manual", "manual-and-auto", "focus-free", 
+
+
+== "amz:prod_cp_dgc_headphonejack" Headphone Jack
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_hotshoe" Hot Shoe
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_imagestabilization" Image Stabilization
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_infraredcapability" Infrared Capability
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_internalmemorysize" Internal Memory Size
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_internalmemorytype" Digital Camera Internal Memory Type
+* Type: select
+* Valid values:
+* "", "compact-flash", "compact-flash-ii", "pcmcia", "pcmcia-ii", "pcmcia-iii", "smartmedia", "memory-sticks", "sd-multi-media", "xd-picture-card", 
+
+
+== "amz:prod_cp_dgc_isoequivalency" I S O Equivalency
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_lcdscreensize" LCDScreenSize
+* Type: number
+
+
+== "amz:prod_cp_dgc_lcdswivel" L C D Swivel
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_lensthread" LensThread
+* Type: number
+
+
+== "amz:prod_cp_dgc_macrofocus" MacroFocus
+* Type: number
+
+
+== "amz:prod_cp_dgc_manualexposuremode" Manual Exposure Mode
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_maxaperture" Max Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_maximageresolution" Max Image Resolution
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_maxmovielength" Max Movie Length
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_maxshutterspeed" Max Shutter Speed
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_megapixels" Megapixels
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_minaperture" Min Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_minshutterspeed" Min Shutter Speed
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_moviemode" Movie Mode
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_opticalzoom" Optical Zoom
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_rechargeablebincld" Rechargeable Battery Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_remoteincluded" Remote Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_s-videooutput" S - Video Output
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_selftimer" Self Timer
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_sensortype" Digital Camera Sensor Type
+* Type: select
+* Valid values:
+* "", "ccd", "super-ccd", "cmos", 
+
+
+== "amz:prod_cp_dgc_softwareincluded" Software Included
+* Type: textbox
+
+
+== "amz:prod_cp_dgc_uncompressedmode" Digital Camera Uncompressed Mode
+* Type: select
+* Valid values:
+* "", "tiff", "raw", 
+
+
+== "amz:prod_cp_dgc_usboutput" Digital Camera U S B Output
+* Type: select
+* Valid values:
+* "", "usb1.1", "usb2.0", 
+
+
+== "amz:prod_cp_dgc_usbstreaming" U S B Streaming
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_dgc_viewfinder" Digital Camera Viewfinder
+* Type: select
+* Valid values:
+* "", "optical", "electronic", 
+
+
+== "amz:prod_cp_dkrm_airregulators" Darkroom Air Regulators
+* Type: select
+* Valid values:
+* "", "air-cleaners", "fans", "louvers", 
+
+
+== "amz:prod_cp_dkrm_analyzersandexposuremeters" Darkroom Analyzers And Exposure Meters
+* Type: select
+* Valid values:
+* "", "analyzers-and-accessories", "darkroom-exposure-meters", "densitometers-and-accessories", "grey-cards-and-exposure-guides", 
+
+
+== "amz:prod_cp_dkrm_chemicals" Darkroom Chemicals
+* Type: select
+* Valid values:
+* "", "black-and-white-film-developer", "black-and-white-fixer", "black-and-white-paper-developer", "black-and-white-stop-baths", "color-negative-film-chemicals", "color-slide-film-chemicals", "chemicals-for-prints-from-color-negatives", "chemicals-for-prints-from-color-slides", "processing-aids", "retouching-chemicals", "wash-aids", "alternative-chemicals", "other-chemicals", 
+
+
+== "amz:prod_cp_dkrm_easels" Darkroom Easels
+* Type: select
+* Valid values:
+* "", "easels-general", "adjustable-easels", "fixed-size-easels", "borderless-easels", "contact-printers", "other-easels", 
+
+
+== "amz:prod_cp_dkrm_enlargers" Darkroom Enlargers
+* Type: select
+* Valid values:
+* "", "enlargers-general", "black-and-white-enlargers", "color-enlargers", "variable-contrast-enlargers", 
+
+
+== "amz:prod_cp_dkrm_enlargingheadandaccs" Darkroom Enlarging Head And Accessories
+* Type: select
+* Valid values:
+* "", "enlarging-heads-general", "black-and-white-condenser-heads", "color-dichronic-heads", "variable-contrast-diffusion-heads", "cold-light-heads", "enlarging-head-accessories", 
+
+
+== "amz:prod_cp_dkrm_filmprocessingsupplies" Darkroom Film Processing Supplies
+* Type: select
+* Valid values:
+* "", "film-dryers", "film-reels", "tanks", "film-washers", "developing-racks", "film-hangers", "film-squeegees", "film-cleaning-brushes-and-cloths", "film-cleaning-solutions", "other-film-processing-accessories", 
+
+
+== "amz:prod_cp_dkrm_generaldevnprocsupplies" Darkroom General Developing And Processing Supplies
+* Type: select
+* Valid values:
+* "", "aprons", "blotter-books", "changing-bags", "control-strips", "darkroom-pens", "darkroom-pencils", "darkroom-tapes", "gloves", "paper-safes", "scales", "storage-bottles-and-tanks", "tray-siphons", 
+
+
+== "amz:prod_cp_dkrm_mixingeqpt" Darkroom Mixing Equipment
+* Type: select
+* Valid values:
+* "", "funnels", "graduates", "stirring-devices", 
+
+
+== "amz:prod_cp_dkrm_otherenlargeraccs" Darkroom Other Enlarger Accessories
+* Type: select
+* Valid values:
+* "", "enlarger-lamps", "enlarging-lens-accessories", "focusing-aids", "lens-boards", "general-negative-carriers", "below-35mm-negative-carriers", "35mm-negative-carriers", "medium-format-negative-carriers", "large-format-negative-carriers", "other-format-negative-carriers", "printing-filters", "timers", "other-enlarger-accessories", 
+
+
+== "amz:prod_cp_dkrm_paperprocessingsupplies" Darkroom Paper Processing Supplies
+* Type: select
+* Valid values:
+* "", "print-drums", "print-dryers", "roller-bases", "vertical-slot-processors", "washers", "trays-general", "5x7-trays", "8x10-trays", "11x14-trays", "12x16-trays", "16x20-trays", "20x24-trays", "30x40-trays", "other-paper-processing-accessories", 
+
+
+== "amz:prod_cp_dkrm_safelightsandaccs" Darkroom Safelights And Accessories
+* Type: select
+* Valid values:
+* "", "black-and-white-safelights", "color-safelights", "safelight-filters", "other-safelight-accessories", 
+
+
+== "amz:prod_cp_dkrm_sinksandaccs" Darkroom Sinks And Accessories
+* Type: select
+* Valid values:
+* "", "sinks-general", "plastic-sinks", "fiberglass-sinks", "stainless-steel-sinks", "sink-accessories", 
+
+
+== "amz:prod_cp_dkrm_tabletopprocessingsupplies" Darkroom Tabletop Processing Supplies
+* Type: select
+* Valid values:
+* "", "film-drums", "paper-drums", "processors", "reels", "wash-dry-modules", "other-tabletop-processing-accessories", 
+
+
+== "amz:prod_cp_dkrm_watercontrolsandfilters" Darkroom Water Controls And Filters
+* Type: select
+* Valid values:
+* "", "flowmeters", "thermometers", "temperature-regulators", "tempered-water-heaters", "water-panels", "water-control-accessories", "water-filters", 
+
+
+== "amz:prod_cp_film_asa-iso" Film A S A - I S O
+* Type: select
+* Valid values:
+* "", "up-to-99", "100", "125", "160", "200", "320", "400", "above-401", 
+
+
+== "amz:prod_cp_film_exposurecnt" Film Exposure Count
+* Type: select
+* Valid values:
+* "", "12-exposure", "24-exposure", "36-exposure", "other-exposure-count", 
+
+
+== "amz:prod_cp_film_filmcolor" Film Film Color
+* Type: select
+* Valid values:
+* "", "black-and-white", "color", 
+
+
+== "amz:prod_cp_film_filmtype" Film Film Type
+* Type: select
+* Valid values:
+* "", "print", "slide", 
+
+
+== "amz:prod_cp_film_format" Film Format
+* Type: select
+* Valid values:
+* "", "35mm", "70mm", "110", "120", "220", "2x3", "4x5", "5x7", "8x10", "11x14", "aps", "micro", "instant", "other", 
+
+
+== "amz:prod_cp_film_lightingtype" Film Lighting Type
+* Type: select
+* Valid values:
+* "", "daylight", "infrared", "tungsten", 
+
+
+== "amz:prod_cp_filmcamera_autofilmadvance" Auto Film Advance
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_autofilmload" Auto Film Load
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_autorewind" Auto Rewind
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_batterytype" Battery Type
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_bincld" Battery Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_cameratype" Film Camera Camera Type
+* Type: select
+* Valid values:
+* "", "point-and-shoot", "slr", "instant", "single-use", "large-format", "medium-format", "rangefinder", "field", "monorail", "kids", "3-d", "micro", "panorama", "passport-and-id", "underwater", "other", 
+
+
+== "amz:prod_cp_filmcamera_continuousshooting" Continuous Shooting
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_dateimprint" Date Imprint
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_diopteradjustment" Diopter Adjustment
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_exposurecontrol" Film Camera Exposure Control
+* Type: select
+* Valid values:
+* "", "manual", "automatic", "manual-and-automatic", "aperture-priority", "shutter-speed-priority", 
+
+
+== "amz:prod_cp_filmcamera_filmformat" Film Camera Film Format
+* Type: select
+* Valid values:
+* "", "aps", "16mm", "35mm", "110", "120", "2x3", "4x5", "5x7", "6x8", "8x10", "8x20", "10x12", "11x14", "12x20", "14x17", "16x20", 
+
+
+== "amz:prod_cp_filmcamera_flashmodes" Flash Modes
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_flashsynchronization" Flash Synchronization
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_flashtype" Film Camera Flash Type
+* Type: select
+* Valid values:
+* "", "automatic", "forced", "fill", "none", "flash-override", 
+
+
+== "amz:prod_cp_filmcamera_focustype" Film Camera Focus Type
+* Type: select
+* Valid values:
+* "", "auto-focus", "manual-focus", "manual-and-auto-focus", "focus-free", 
+
+
+== "amz:prod_cp_filmcamera_hotshoe" Hot Shoe
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_isorange" I S O Range
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_lcd" L C D
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_lenstype" Film Camera Lens Type
+* Type: select
+* Valid values:
+* "", "fixed", "interchangeable", 
+
+
+== "amz:prod_cp_filmcamera_maxaperture" Max Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_maxfocallength" MaxFocalLength
+* Type: number
+
+
+== "amz:prod_cp_filmcamera_maxshutterspeed" Max Shutter Speed
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_meteringmethods" Metering Methods
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_midrollchange" Midroll Change
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_midrollrewind" Midroll Rewind
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_minaperture" Min Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_minfocallength" MinFocalLength
+* Type: number
+
+
+== "amz:prod_cp_filmcamera_minshutterspeed" Min Shutter Speed
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_opticalzoomrange" OpticalZoomRange
+* Type: number
+
+
+== "amz:prod_cp_filmcamera_pkgtype" Film Camera Package Type
+* Type: select
+* Valid values:
+* "", "body-only", "multiple-lenses", 
+
+
+== "amz:prod_cp_filmcamera_red-eyereduction" Red - Eye Reduction
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_remoteincluded" Remote Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_filmcamera_selftimer" Self Timer
+* Type: textbox
+
+
+== "amz:prod_cp_filmcamera_size" Film Camera Size
+* Type: select
+* Valid values:
+* "", "compact", "ultra-compact", 
+
+
+== "amz:prod_cp_filmcamera_viewfinder" Film Camera Viewfinder
+* Type: select
+* Valid values:
+* "", "optical", "electronic", 
+
+
+== "amz:prod_cp_filter_bayonetsize" Filter Bayonet Size
+* Type: select
+* Valid values:
+* "", "b-3", "b-39", "b-50", "b-6", "b-60", "b-70", "b-93", 
+
+
+== "amz:prod_cp_filter_dropinsize" Filter Drop In Size
+* Type: select
+* Valid values:
+* "", "6-inch-wratten", "cokin-a", "cokin-p", "lee-type", "pro-optic-a", "pro-optic-p", "other", 
+
+
+== "amz:prod_cp_filter_filtercolor" Filter Filter Color
+* Type: select
+* Valid values:
+* "", "blue", "brown", "cyan", "green", "magenta", "orange", "red", "red-orange", "violet", "yellow", "yellow-green", "yellow-orange", 
+
+
+== "amz:prod_cp_filter_filtertype" Filter Filter Type
+* Type: select
+* Valid values:
+* "", "graduated", "black-and-white-contrast", "close-up", "image-softening", "neutral-density", "general-polarizer", "circular-polarizer", "linear-polarizer", "underwater", "uv-and-protective", "viewing-filters", "lighting-and-compensation", "cooling", "flourescent", "indoor", "outdoor", "warming", 
+
+
+== "amz:prod_cp_filter_forusewith" Filter For Use With
+* Type: select
+* Valid values:
+* "", "camcorders", "digital-cameras", "film-cameras", "telescopes", "binoculars", 
+
+
+== "amz:prod_cp_filter_mounttype" Filter Mount Type
+* Type: select
+* Valid values:
+* "", "round", "square", "bayonet", "other", 
+
+
+== "amz:prod_cp_filter_pkgtype" Filter Package Type
+* Type: select
+* Valid values:
+* "", "single-filter", "filter-sets", 
+
+
+== "amz:prod_cp_filter_specialeffect" Filter Special Effect
+* Type: select
+* Valid values:
+* "", "center-spot", "cross-screen", "diffraction", "double-exposure", "enhancing", "fog", "hot-mirror", "infrared", "masks", "multi-image", "prism", "sepia", "special-contrast", "speed", "split-field", "star-filters", "other", 
+
+
+== "amz:prod_cp_filter_specificuses" Filter Specific Uses
+* Type: select
+* Valid values:
+* "", "travel", "hiking-and-outdoors", "hunting-and-shooting", "sports", 
+
+
+== "amz:prod_cp_filter_threadsize" ThreadSize
+* Type: number
+
+
+== "amz:prod_cp_flash_dedication" Flash Dedication
+* Type: select
+* Valid values:
+* "", "dedicated", "non-dedicated", 
+
+
+== "amz:prod_cp_flash_flashtype" Flash Flash Type
+* Type: select
+* Valid values:
+* "", "handle-mount", "macro", "ring-light", "shoe-mount", "other", 
+
+
+== "amz:prod_cp_flash_slaveflashes" Flash Slave Flashes
+* Type: select
+* Valid values:
+* "", "slave-flashed-general", "slave-transmitters-and-receivers", "optical-slaves", "slave-accessories", 
+
+
+== "amz:prod_cp_itemsincluded" Items Included
+* Type: textbox
+
+
+== "amz:prod_cp_kwords" Keywords
+* Type: textlist
+
+
+== "amz:prod_cp_lens_cameratype" Lens Camera Type
+* Type: select
+* Valid values:
+* "", "camcorder", "digital-camera", "35mm-rangefinder", "35mm-slr", "aps", "large-format", "medium-format", "underwater", 
+
+
+== "amz:prod_cp_lens_features" Lens Features
+* Type: select
+* Valid values:
+* "", "all-glass-optical", "apochromatic", "aspheric", 
+
+
+== "amz:prod_cp_lens_focustype" Lens Focus Type
+* Type: select
+* Valid values:
+* "", "manual-focus", "auto-focus", 
+
+
+== "amz:prod_cp_lens_lenstype" Lens Lens Type
+* Type: select
+* Valid values:
+* "", "wide-angle", "telephoto", "zoom", "macro", "tilt-shift", "fisheye", "teleconverter", "normal", 
+
+
+== "amz:prod_cp_lens_maxfocallength" MaxFocalLength
+* Type: number
+
+
+== "amz:prod_cp_lens_minfocallength" MinFocalLength
+* Type: number
+
+
+== "amz:prod_cp_lensaccessory_accessorytype" Lens Accessory Accessory Type
+* Type: select
+* Valid values:
+* "", "c-mounts", "lens-scope-converters", "lens-to-camera-adapters", "remote-lens-controllers", "extenders", "series-vii-adapters", "t-mounts", "tripod-adapters", "lens-boards", "bayonets", "lens-hoods", "lens-supports", "rapid-focusing-levers", "shutters", "diopters", "mirror-scopes", "lens-caps-general", "lens-caps-up-to-48mm", "lens-caps-49mm", "lens-caps-52mm", "lens-caps-55mm", "lens-caps-58mm", "lens-caps-62mm", "lens-caps-67mm", "lens-caps-72mm", "lens-caps-77mm", "lens-caps-82mm", "lens-caps-86mm", "lens-caps-95mm", "lens-caps-other-sizes", 
+
+
+== "amz:prod_cp_lensaccessory_forusewith" Lens Accessory For Use With
+* Type: select
+* Valid values:
+* "", "film-cameras", "digital-cameras", "camcorders", "telescopes", "microscopes", 
+
+
+== "amz:prod_cp_lighting_forusewith" Lighting For Use With
+* Type: select
+* Valid values:
+* "", "floodlights", "spotlights", "monolights", "flashlights", "ballasts", "cables-and-connectors", "flash-tubes", "head-accessories", "modeling-lamps", "mounting-hardware", "pack-accessories", "special-bulbs", "general-power-packs", "1-head-outfits-power-packs", "2-head-outfits-power-packs", "3-head-outfits-power-packs", "4-head-outfits-power-packs", "slaves-general", "flash-activated-slaves", "infrared-slaves", "radio-slaves", "adapters", "barndoors", "cucoloris", "diffusers", "filters", "flags", "gobos", "grids", "inserts", "liners", "louvers", "panel-systems", "reflectors", "snoots", "soft-boxes", "umbrellas", 
+
+
+== "amz:prod_cp_lighting_lightingsourcetype" Lighting Lighting Source Type
+* Type: select
+* Valid values:
+* "", "flourescent", "hmi", "tungsten", 
+
+
+== "amz:prod_cp_lighting_lightingtype" Lighting Lighting Type
+* Type: select
+* Valid values:
+* "", "continuous-output", "strobe", 
+
+
+== "amz:prod_cp_lighting_power" Power
+* Type: textbox
+
+
+== "amz:prod_cp_lighting_powertype" Lighting Power Type
+* Type: select
+* Valid values:
+* "", "ac", "dc", 
+
+
+== "amz:prod_cp_lighting_specialtyuse" Lighting Specialty Use
+* Type: select
+* Valid values:
+* "", "underwater", 
+
+
+== "amz:prod_cp_lightmeter_cameratype" Light Meter Camera Type
+* Type: select
+* Valid values:
+* "", "film-camera", "digital-camera", "camcorder", "universal", 
+
+
+== "amz:prod_cp_lightmeter_meterdisplay" Light Meter Meter Display
+* Type: select
+* Valid values:
+* "", "analog", "digital", "led", "match-needle", 
+
+
+== "amz:prod_cp_lightmeter_metertype" Light Meter Meter Type
+* Type: select
+* Valid values:
+* "", "ambient", "flash", "ambient-and-flash", "spot", "color", 
+
+
+== "amz:prod_cp_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_cp_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_cp_mfrpartnbr" Mfr Part Number
+* Type: textbox
+
+
+== "amz:prod_cp_microscope_features" Microscope Features
+* Type: select
+* Valid values:
+* "", "binocular", "monocular", "trinocular", "fixed-optics", "zoom-magnification", 
+
+
+== "amz:prod_cp_microscope_microscopetype" Microscope Microscope Type
+* Type: select
+* Valid values:
+* "", "digital-and-film-systems", "educational-and-hobby", "laboratory", "stereo", "other", 
+
+
+== "amz:prod_cp_mnfg" Manufacturer
+* Type: textbox
+
+
+== "amz:prod_cp_oa_bagcaseaccs" Other Accessory Bag Case Accessories
+* Type: select
+* Valid values:
+* "", "liners", "rain-covers", "replacement-parts", "straps", "belts", "harnesses", "inserts", "other-bag-and-case-accessories", 
+
+
+== "amz:prod_cp_oa_binocularaccs" Other Accessory Binocular Accessories
+* Type: select
+* Valid values:
+* "", "straps", "caps", "other-binocular-accessories", 
+
+
+== "amz:prod_cp_oa_camcorderaccs" Other Accessory Camcorder Accessories
+* Type: select
+* Valid values:
+* "", "straps", "remote-controls", "cables-and-cords", "other-camcorder-accessories", 
+
+
+== "amz:prod_cp_oa_cameraaccs" Other Accessory Camera Accessories
+* Type: select
+* Valid values:
+* "", "close-up-accessories", "viewfinders", "motor-drives", "eye-cups", "winders", "straps", "remote-controls", "cables-and-cords", "other-camera-accessories", 
+
+
+== "amz:prod_cp_oa_filmaccs" Other Accessory Film Accessories
+* Type: select
+* Valid values:
+* "", "mounting-equipment-and-cutters", "slide-mounts", "film-mailers", "film-loaders", "other-film-accessories", 
+
+
+== "amz:prod_cp_oa_filteraccs" Other Accessory Filter Accessories
+* Type: select
+* Valid values:
+* "", "adapter-rings", "filter-caps", "filter-holders", "filter-hoods", "gel-holder", "step-down-ring", "step-up-ring", 
+
+
+== "amz:prod_cp_oa_flashaccs" Other Accessory Flash Accessories
+* Type: select
+* Valid values:
+* "", "adapter-rings", "battery-packs", "camera-brackets", "flash-bouncers", "flash-diffusers", "flash-filters", "flash-pouches", "flash-shoe-mounts", "synch-and-pc-cords", "other-flash-accessories", 
+
+
+== "amz:prod_cp_oa_lightmeteraccs" Other Accessory Light Meter Accessories
+* Type: select
+* Valid values:
+* "", "caps", "gray-cards", "probes", "straps", "other-light-meter-accessories", 
+
+
+== "amz:prod_cp_oa_microscopeaccs" Other Accessory Microscope Accessories
+* Type: select
+* Valid values:
+* "", "boom-stands", "bulbs", "camera-adapters-and-mounts", "eyepieces", "inspection-systems", "light-stands", "microscope-cases", "slides-and-slide-kits", "other-microscope-accessories", 
+
+
+== "amz:prod_cp_oa_specificuses" Other Accessory Specific Uses
+* Type: select
+* Valid values:
+* "", "travel", "hiking-and-outdoors", "hunting-and-shooting", "sports", 
+
+
+== "amz:prod_cp_oa_telescopeaccs" Other Accessory Telescope Accessories
+* Type: select
+* Valid values:
+* "", "barlow-lenses", "collimators", "remote-controls", "electronic-drives", "photo-adapters", "finderscopes", "diagonal-mirrors", "erecting-prisms", "motor-drives", "illuminators", "guiders", "binocular-viewers", "wedges", "mounts", "viewfinders", "sky-maps", "filters", "dew-caps", "other-telescope-accessories", 
+
+
+== "amz:prod_cp_oa_telescopeeyepiece" Other Accessory Telescope Eyepiece
+* Type: select
+* Valid values:
+* "", "telescope-eyepieces-general", "orthoscopic", "kellner-and-rke", "erfle", "plossl", "nagler", "zoom", "ultra-wide", "sma", "other-eyepieces", 
+
+
+== "amz:prod_cp_oa_tripodstandaccs" Other Accessory Tripod Stand Accessories
+* Type: select
+* Valid values:
+* "", "monopad-accessories", "camera-stand-accessories", "tripod-head-accessories", "tripod-leg-accessories", "center-columns", "tripod-adapters", "tripod-straps", "camera-mounts-and-clamps", "plates", "other-tripod-accessories", 
+
+
+== "amz:prod_cp_oa_underwaterphotographyaccs" Other Accessory Underwater Photography Accessories
+* Type: select
+* Valid values:
+* "", "housings", "rainguards", "other-underwater-accessories", 
+
+
+== "amz:prod_cp_photopaper_paperbase" Photo Paper Paper Base
+* Type: select
+* Valid values:
+* "", "polyester-based", "fiber-based", "resin-coated", "other", 
+
+
+== "amz:prod_cp_photopaper_papergrade" Photo Paper Paper Grade
+* Type: select
+* Valid values:
+* "", "grade-0", "grade-1", "grade-2", "grade-3", "grade-4", "multigrade", 
+
+
+== "amz:prod_cp_photopaper_papersize" Photo Paper Paper Size
+* Type: select
+* Valid values:
+* "", "10x10", "10x12", "10x20", "11x14", "12x17", "16x20", "20x24", "20x30", "24x30", "3.5x5", "30x40", "4x5", "4x6", "5x7", "8.5x11", "8x10", "roll", "other", 
+
+
+== "amz:prod_cp_photopaper_papersurface" Photo Paper Paper Surface
+* Type: select
+* Valid values:
+* "", "glossy", "semi-glossy", "matt", "semi-matt", "pearl", "luster", "satin", "other", 
+
+
+== "amz:prod_cp_photopaper_papertype" Photo Paper Paper Type
+* Type: select
+* Valid values:
+* "", "black-and-white", "color-negative", "color-reversal", "ra-chemistry", "other", 
+
+
+== "amz:prod_cp_platinumkwords" Platinum Keywords
+* Type: textlist
+
+
+== "amz:prod_cp_platinumkwords_10" Platinum Keywords_10
+* Type: textbox
+
+
+== "amz:prod_cp_powersupply_batterychemicaltype" Power Supply Battery Chemical Type
+* Type: select
+* Valid values:
+* "", "lead-acid", "lithium", "lithium-ion", "nickel-metal-hydride", "nicd", "silver-oxide", "alkaline", "other-battery-types", 
+
+
+== "amz:prod_cp_powersupply_camerapowersupplytype" Power Supply Camera Power Supply Type
+* Type: select
+* Valid values:
+* "", "batteries-general", "disposable-batteries", "rechargeable-Batteries", "external-batteries", "battery-packs-general", "shoulder-battery-packs", "belt-battery-packs", "dedicated-battery-packs", "other-batteries-and-packs", "adapters-general", "ac-adapters", "dc-adapters", "battery-chargers", "ac-power-supply", "dc-power-supply", "other-power-supplies", 
+
+
+== "amz:prod_cp_powersupply_forusewith" Power Supply For Use With
+* Type: select
+* Valid values:
+* "", "film-cameras", "digital-cameras", "analog-camcorders-general", "8mm-camcorders", "betacam-sp-camcorders", "hi-8-camcorders", "s-vhs-camcorders", "s-vhs-c-camcorders", "vhs-camcorders", "vhs-c-camcorders", "other-analog-formats-camcorders", "digital-camcorders-general", "digital-betacam-camcorders", "dv-camcorders", "dvcam-camcorders", "dvcpro-camcorders", "minidv-camcorders", "micromv-camcorders", "digital8-camcorders", "dvd-camcorders", "minidisc-camcorders", "other-digital-formats-camcorders", "flashes", "lighting", "surveillence-products", "other-products", 
+
+
+== "amz:prod_cp_powersupply_powersupplyaccs" Power Supply Power Supply Accessories
+* Type: select
+* Valid values:
+* "", "battery-holders", "battery-testers", "mounting-plates", "cables-general", "battery-power-cables", "power-supply-cables", "charger-cables", "adapter-cables", "other-cables", "cigarette-connectors", "xlr-connectors", "dc-couplers", 
+
+
+== "amz:prod_cp_projection_audiovisualproductaccs" Projection Audio Visual Product Accessories
+* Type: select
+* Valid values:
+* "", "dissolve-and-control-units", "lamps", "stands", "mounting-equipment", "other-accessories", "projector-trays-general", "35mm-slide-projector-trays", "medium-format-slide-projector-trays", 
+
+
+== "amz:prod_cp_projection_loupemagnification" Projection Loupe Magnification
+* Type: select
+* Valid values:
+* "", "up-to-4x", "5x-9x", "10x-15x", "above-15x", "zoom", 
+
+
+== "amz:prod_cp_projection_projectionscreens" Projection Projection Screens
+* Type: select
+* Valid values:
+* "", "fast-fold-screens", "free-standing-floor-screens", "rear-projection-screens", "tabletop-screens", "tripod-mounted-screens", "wall-and-ceiling-electric-screens", "wall-and-ceiling-screens", "other-projection-screens", 
+
+
+== "amz:prod_cp_projection_projectiontype" Projection Projection Type
+* Type: select
+* Valid values:
+* "", "slide-projectors", "video-projectors", "large-format-projectors", "medium-format-projectors", "multimedia-projectors", "opaque-projectors", "lightboxes", "viewers", "loupes", 
+
+
+== "amz:prod_cp_projection_projectorlenses" Projection Projector Lenses
+* Type: select
+* Valid values:
+* "", "35mm", "large-format", "medium-format", "normal", "telephoto", "wide-angle", "zoom", "other-projector-lenses", 
+
+
+== "amz:prod_cp_ps_photobackgroundaccs" Photo Studio Photo Background Accessories
+* Type: select
+* Valid values:
+* "", "posing-props", "shooting-tables", "shooting-tents", "studio-accessories", "support-equipment", "other-background-accessories", 
+
+
+== "amz:prod_cp_ps_photobackgroundfabrics" Photo Studio Photo Background Fabrics
+* Type: select
+* Valid values:
+* "", "canvas", "muslins", "seamless-paper", "velour", "other-background-fabrics", 
+
+
+== "amz:prod_cp_ps_photobackgrounds" Photo Studio Photo Backgrounds
+* Type: select
+* Valid values:
+* "", "ceiling-to-floor", "collapsible-discs", "free-standing", "graduated", "wall-mounted", "other-background-styles", 
+
+
+== "amz:prod_cp_ps_photostudioaccs" Photo Studio Photo Studio Accessories
+* Type: select
+* Valid values:
+* "", "mounting-corners", "mounting-squares", "photographic-tapes", "wire", "picture-hangers", "mats", "mat-cutters", "trimmers", "replacement-blades", "other-framing-accessories", "mounts-general", "slide-mounts", "other-mounts", "dry-mount-press-accessories", "mounting-adhesives-general", "dry-mount-tissue", "laminating-film", "print-finishing-lacquers", 
+
+
+== "amz:prod_cp_ps_storageandpresentationmatls" Photo Studio Storage And Presentation Materials
+* Type: select
+* Valid values:
+* "", "hanging-bars", "pages-general", "negative-and-unmounted-slides-pages", "mounted-slides-pages", "prints-pages", "other-media-pages", "sleeves-general", "negative-and-unmounted-slides-sleeves", "mounted-slides-sleeves", "prints-sleeves", "other-media-sleeves", "storage-binders-general", "storage-binders-with-rings", "storage-binders-without-rings", "negatives-boxes", "slides-boxes", "prints-boxes", "other-boxes", "portfolios", "presentation-boards", "glassine-envelopes", "kraft-envelopes", "mailers", "professional-photo-albums", "other-professional-albums", "sectional-frames", "digital-frames", "other-professional-frames", 
+
+
+== "amz:prod_cp_ps_studiosupplies" Photo Studio Studio Supplies
+* Type: select
+* Valid values:
+* "", "laminating-machines", "mounting-press", "mat-boards-general", "pre-cut-mat-boards", "heat-activated-boards", "pressure-sensitive-boards", "slide-mounters", "copystands-general", "tabletop-copystands", "instant-copystands", "other-copystands", 
+
+
+== "amz:prod_cp_ss_cameraaccs" Surveillance System Camera Accessories
+* Type: select
+* Valid values:
+* "", "mounting-brackets", "power-adapter", "cable", "sun-shield", "camera-controller", "transmitters", "zoom-lens", "pinhole-lens", 
+
+
+== "amz:prod_cp_ss_cameratype" Surveillance System Camera Type
+* Type: select
+* Valid values:
+* "", "security-cameras", "dummy-cameras", "bullet-cameras", "web-cameras", "mirror-image-cameras", "dome-cameras", "spy-cameras", "pinhole-cameras", "miniature-cameras", "nanny-cameras", "pen-cameras", 
+
+
+== "amz:prod_cp_ss_features" Surveillance System Features
+* Type: select
+* Valid values:
+* "", "weatherproof", "motion-detection", "real-time", "indoor", "outdoor", "black-and-white", "color", "night-vision", "day-and-night-camera", "adjustable-panning", "submersible", "wireless", "ptz-system", "digital-spy-camera", 
+
+
+== "amz:prod_cp_ss_surveillancesystemtype" Surveillance System Surveillance System Type
+* Type: select
+* Valid values:
+* "", "cameras", "complete-systems", "monitors", "network-systems", "multiplexer", 
+
+
+== "amz:prod_cp_tripodstand_forusewith" Tripod Stand For Use With
+* Type: select
+* Valid values:
+* "", "still-cameras", "camcorders", "still-camera-and-camcorders", "telescopes", 
+
+
+== "amz:prod_cp_tripodstand_headtype" Tripod Stand Head Type
+* Type: select
+* Valid values:
+* "", "geared-heads", "ball-heads", "camera-rotator-heads", "pan-and-tilt-heads", "video-heads", "3-way-heads", "panoramic-heads", 
+
+
+== "amz:prod_cp_tripodstand_matl" Tripod Stand Material
+* Type: select
+* Valid values:
+* "", "aluminum", "carbon-fiber", 
+
+
+== "amz:prod_cp_tripodstand_pkgtype" Tripod Stand Package Type
+* Type: select
+* Valid values:
+* "", "head-only", "legs-only", "head-and-leg-units", 
+
+
+== "amz:prod_cp_tripodstand_specificuses" Tripod Stand Specific Uses
+* Type: select
+* Valid values:
+* "", "tabletop", "travel", "hiking-and-outdoors", "hunting-and-shooting", "sports", 
+
+
+== "amz:prod_cp_tripodstand_standtype" Tripod Stand Stand Type
+* Type: select
+* Valid values:
+* "", "camera-stands", "monopods", "tripods", "car-window-mounts", 
+
+
+== "amz:prod_cp_ts_batterytype" Battery Type
+* Type: textbox
+
+
+== "amz:prod_cp_ts_bincld" Battery Included
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_cp_ts_computerplatform" Computer Platform Type
+* Type: select
+* Valid values:
+* "", "windows", "mac", "linux", 
+
+
+== "amz:prod_cp_ts_daweslimit" Dawes Limit
+* Type: textbox
+
+
+== "amz:prod_cp_ts_eyepiecetype" Eyepiece Type
+* Type: textbox
+
+
+== "amz:prod_cp_ts_focallength" FocalLength
+* Type: number
+
+
+== "amz:prod_cp_ts_highestusefulmagnification" Highest Useful Magnification
+* Type: textbox
+
+
+== "amz:prod_cp_ts_lowestusefulmagnification" Lowest Useful Magnification
+* Type: textbox
+
+
+== "amz:prod_cp_ts_maxaperture" Max Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_ts_minaperture" Min Aperture
+* Type: textbox
+
+
+== "amz:prod_cp_ts_motorizedcontrols" Motorized Controls
+* Type: textbox
+
+
+== "amz:prod_cp_ts_mount" Mount
+* Type: textbox
+
+
+== "amz:prod_cp_ts_opticalcoatings" Optical Coatings
+* Type: textbox
+
+
+== "amz:prod_cp_ts_opticaltubediameter" OpticalTubeDiameter
+* Type: number
+
+
+== "amz:prod_cp_ts_opticaltubelength" OpticalTubeLength
+* Type: number
+
+
+== "amz:prod_cp_ts_photographicresolution" Photographic Resolution
+* Type: textbox
+
+
+== "amz:prod_cp_ts_primaryaperture" Telescope Primary Aperture
+* Type: select
+* Valid values:
+* "", "under-80mm", "80mm-90mm", "100mm-150mm", "150mm-200mm", "over-200mm", 
+
+
+== "amz:prod_cp_ts_resolvingpower" Resolving Power
+* Type: textbox
+
+
+== "amz:prod_cp_ts_telescopetype" Telescope Telescope Type
+* Type: select
+* Valid values:
+* "", "general", "mirror-lens", "schmidt-cassegrain", "maksutov-cassegrain", "reflecting", "newtonian-reflector", "rich-field-reflector", "dobsonian-reflector", "refracting", "achromatic-refractor", "apochromatic-refractor", 
+
+
+== "amz:prod_cp_ts_viewfinder" Viewfinder
+* Type: textbox
+
+
+== "amz:prod_desc" Amazon Product Description
+Used instead of Zoovy defined product description.
+* Type: textarea
+
+
+== "amz:prod_grmt_grmtmisc_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_grmt_grmtmisc_ingrdts" Ingredients
+* Type: textbox
+
+
+== "amz:prod_home_bnb_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_home_bnb_matl" Material
+* Type: textbox
+
+
+== "amz:prod_home_bnb_nbrofsets" NumberOfSets
+* Type: number
+
+
+== "amz:prod_home_bnb_threadcnt" ThreadCount
+* Type: number
+
+
+== "amz:prod_home_bnb_wattage" Wattage
+* Type: number
+
+
+== "amz:prod_home_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_home_displaydepth" DisplayDepth
+* Type: number
+
+
+== "amz:prod_home_displaydiameter" DisplayDiameter
+* Type: number
+
+
+== "amz:prod_home_displayheight" DisplayHeight
+* Type: number
+
+
+== "amz:prod_home_displaylength" DisplayLength
+* Type: number
+
+
+== "amz:prod_home_displaywidth" DisplayWidth
+* Type: number
+
+
+== "amz:prod_home_displaywt" DisplayWeight
+* Type: number
+
+
+== "amz:prod_home_fdecor_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_home_fdecor_matl" Material
+* Type: textbox
+
+
+== "amz:prod_home_fdecor_nbrofsets" NumberOfSets
+* Type: number
+
+
+== "amz:prod_home_fdecor_threadcnt" ThreadCount
+* Type: number
+
+
+== "amz:prod_home_fdecor_wattage" Wattage
+* Type: number
+
+
+== "amz:prod_home_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_home_kitchen_matl" Material
+* Type: textbox
+
+
+== "amz:prod_home_kitchen_nbrofsets" NumberOfSets
+* Type: number
+
+
+== "amz:prod_home_kitchen_threadcnt" ThreadCount
+* Type: number
+
+
+== "amz:prod_home_mnfgwarrantydscrpt" Home Manufacturer Warranty Description
+* Type: select
+* Valid values:
+
+
+== "amz:prod_home_outdoorliving_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_home_outdoorliving_isstainresistant" Is Stain Resistant
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_home_outdoorliving_matl" Material
+* Type: textbox
+
+
+== "amz:prod_home_outdoorliving_wattage" Wattage
+* Type: number
+
+
+== "amz:prod_home_snp_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_home_snp_moistureneeds" Seeds And Plants Moisture Needs
+* Type: select
+* Valid values:
+* "", "little-to-no-watering", "moderate-watering", "regular-watering", "constant-watering", 
+
+
+== "amz:prod_home_snp_spread" Spread
+* Type: number
+
+
+== "amz:prod_home_snp_sunlightexposure" Seeds And Plants Sunlight Exposure
+* Type: select
+* Valid values:
+* "", "shade", "partial-shade", "partial-sun", "full-sun", 
+
+
+== "amz:prod_home_snp_sunsetclimatezone" Seeds And Plants Sunset Climate Zone
+* Type: select
+* Valid values:
+* "", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", 
+
+
+== "amz:prod_home_snp_usdahardinesszone" Seeds And Plants U S D A Hardiness Zone
+* Type: select
+* Valid values:
+* "", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", 
+
+
+== "amz:prod_home_volumecapacity" Volume Capacity
+* Type: textbox
+
+
+== "amz:prod_hth_hthmisc_directions" Directions
+* Type: textbox
+
+
+== "amz:prod_hth_hthmisc_indications" Indications
+* Type: textbox
+
+
+== "amz:prod_hth_hthmisc_ingrdts" Ingredients
+* Type: textlist
+
+
+== "amz:prod_hth_hthmisc_isadultproduct" Is Adult Product
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_hth_hthmisc_warnings" Warnings
+* Type: textbox
+
+
+== "amz:prod_image1" Amazon Product Image 1
+Used instead of Zoovy product image1
+* Type: image
+
+
+== "amz:prod_image2" Amazon Product Image 2
+Used instead of Zoovy product image2
+* Type: image
+
+
+== "amz:prod_image3" Amazon Product Image 3
+Used instead of Zoovy product image3
+* Type: image
+
+
+== "amz:prod_image4" Amazon Product Image 4
+Used instead of Zoovy product image4
+* Type: image
+
+
+== "amz:prod_image5" Amazon Product Image 5
+Used instead of Zoovy product image5
+* Type: image
+
+
+== "amz:prod_image6" Amazon Product Image 6
+Used instead of Zoovy product image6
+* Type: image
+
+
+== "amz:prod_image7" Amazon Product Image 7
+Used instead of Zoovy product image7
+* Type: image
+
+
+== "amz:prod_image8" Amazon Product Image 8
+Used instead of Zoovy product image8
+* Type: image
+
+
+== "amz:prod_image9" Amazon Product Image 9
+Used instead of Zoovy product image9
+* Type: image
+
+
+== "amz:prod_jly_fnearring_backfinding" Back Finding
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fnearring_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fnearring_length" Length
+* Type: number
+
+
+== "amz:prod_jly_fnearring_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fnearring_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_nbrofprls" NumberOfPearls
+* Type: number
+
+
+== "amz:prod_jly_fnearring_nbrofstones" NumberOfStones
+* Type: number
+
+
+== "amz:prod_jly_fnearring_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_totalgemwt" Total Gem Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_totalmetalwt" Total Metal Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnearring_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fnnba_chaintype" Chain Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_clasptype" Clasp Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fnnba_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fnnba_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fnnba_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_nbrofprls" NumberOfPearls
+* Type: number
+
+
+== "amz:prod_jly_fnnba_nbrofstones" NumberOfStones
+* Type: number
+
+
+== "amz:prod_jly_fnnba_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_totalgemwt" Total Gem Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_totalmetalwt" Total Metal Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnnba_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fnother_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fnother_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fnother_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fnother_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_nbrofprls" NumberOfPearls
+* Type: number
+
+
+== "amz:prod_jly_fnother_nbrofstones" NumberOfStones
+* Type: number
+
+
+== "amz:prod_jly_fnother_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_totalgemwt" Total Gem Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_totalmetalwt" Total Metal Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnother_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fnring_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fnring_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fnring_length" Length
+* Type: number
+
+
+== "amz:prod_jly_fnring_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fnring_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_nbrofprls" NumberOfPearls
+* Type: number
+
+
+== "amz:prod_jly_fnring_nbrofstones" NumberOfStones
+* Type: number
+
+
+== "amz:prod_jly_fnring_resizable" Re Sizable
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_jly_fnring_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_sizinglowerrange" SizingLowerRange
+* Type: number
+
+
+== "amz:prod_jly_fnring_sizingupperrange" SizingUpperRange
+* Type: number
+
+
+== "amz:prod_jly_fnring_totalgemwt" Total Gem Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_totalmetalwt" Total Metal Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fnring_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fsnearring_backfinding" Back Finding
+* Type: textbox
+
+
+== "amz:prod_jly_fsnearring_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fsnearring_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fsnearring_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fsnearring_length" Length
+* Type: number
+
+
+== "amz:prod_jly_fsnearring_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fsnearring_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fsnearring_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnearring_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnearring_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fsnnba_chaintype" Chain Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_clasptype" Clasp Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fsnnba_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fsnnba_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fsnnba_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_metalype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnnba_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fsnother_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fsnother_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fsnother_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fsnother_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fsnother_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fsnother_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnother_totalmetalwt" Total Metal Weight
+* Type: textbox
+
+
+== "amz:prod_jly_fsnother_width" Width
+* Type: number
+
+
+== "amz:prod_jly_fsnring_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_jly_fsnring_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_fsnring_height" Height
+* Type: number
+
+
+== "amz:prod_jly_fsnring_length" Length
+* Type: number
+
+
+== "amz:prod_jly_fsnring_matl" Material
+* Type: textlist
+
+
+== "amz:prod_jly_fsnring_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_fsnring_metaltype" Metal Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnring_settingtype" Setting Type
+* Type: textbox
+
+
+== "amz:prod_jly_fsnring_width" Width
+* Type: number
+
+
+== "amz:prod_jly_prl_prllustre" Pearl Lustre
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prlminmcolor" Pearl Minimum Color
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prlsfcmblms" Pearl Surface Markings And Blemishes
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prlshape" Pearl Shape
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prlstringingmethod" Pearl Stringing Method
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prltype" Pearl Type
+* Type: textbox
+
+
+== "amz:prod_jly_prl_prluniformity" Pearl Uniformity
+* Type: textbox
+
+
+== "amz:prod_jly_prl_sizeperprl" Size Per Pearl
+* Type: textbox
+
+
+== "amz:prod_jly_watch_bandlength" Band Length
+* Type: textbox
+
+
+== "amz:prod_jly_watch_bandmatl" Band Material
+* Type: textbox
+
+
+== "amz:prod_jly_watch_bandwidth" BandWidth
+* Type: number
+
+
+== "amz:prod_jly_watch_bezelfunction" Bezel Function
+* Type: textbox
+
+
+== "amz:prod_jly_watch_bezelmatl" Bezel Material
+* Type: textbox
+
+
+== "amz:prod_jly_watch_calendartype" Calendar Type
+* Type: textbox
+
+
+== "amz:prod_jly_watch_casematl" Case Material
+* Type: textlist
+
+
+== "amz:prod_jly_watch_casesizediameter" CaseSizeDiameter
+* Type: number
+
+
+== "amz:prod_jly_watch_casesizethickness" CaseSizeThickness
+* Type: number
+
+
+== "amz:prod_jly_watch_clasptype" Clasp Type
+* Type: textbox
+
+
+== "amz:prod_jly_watch_crystal" Crystal
+* Type: textbox
+
+
+== "amz:prod_jly_watch_dialcolor" Dial Color
+* Type: textbox
+
+
+== "amz:prod_jly_watch_estateperiod" Estate Period
+* Type: textbox
+
+
+== "amz:prod_jly_watch_metalstamp" Metal Stamp
+* Type: textbox
+
+
+== "amz:prod_jly_watch_movementtype" Movement Type
+* Type: textbox
+
+
+== "amz:prod_jly_watch_resaletype" Resale Type
+* Type: textbox
+
+
+== "amz:prod_jly_watch_warrantytype" Warranty Type
+* Type: textbox
+
+
+== "amz:prod_jly_watch_waterresistantdepth" WaterResistantDepth
+* Type: number
+
+
+== "amz:prod_misc_color" Color
+* Type: textbox
+
+
+== "amz:prod_misc_eventdate" Event Date
+* Type: textbox
+
+
+== "amz:prod_misc_kwords" Keywords
+* Type: textlist
+
+
+== "amz:prod_misc_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_misc_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_misc_mfrpartnbr" Mfr Part Number
+* Type: textbox
+
+
+== "amz:prod_misc_mnfg" Manufacturer
+* Type: textbox
+
+
+== "amz:prod_misc_productcategory" Product Category
+* Type: select
+* Valid values:
+* "", "Antiques", "Art", "Car_Parts_and_Accessories", "Coins", "Collectibles", "Crafts", "Event_Tickets", "Flowers", "Gifts_and_Occasions", "Gourmet_Food_and_Wine", "Hobbies", "Home_Furniture_and_Decor", "Home_Lighting_and_Lamps", "Home_Organizers_and_Storage", "Jewelry_and_Gems", "Luggage", "Major_Home_Appliances", "Medical_Supplies", "Motorcycles", "Musical_Instruments", "Pet_Supplies", "Pottery_and_Glass", "Prints_and_Posters", "Scientific_Supplies", "Sporting_and_Outdoor_Goods", "Sports_Memorabilia", "Stamps", "Teaching_and_School_Supplies", "Watches", "Wholesale_and_Industrial", "Misc_Other", 
+
+
+== "amz:prod_misc_productsubcategory" Product Subcategory
+* Type: select
+* Valid values:
+* "", "Decorative_Arts", "Furniture", "Rugs_Carpets", "Silver", "Textiles_Linens", "Drawings", "Mixed_Media", "Paintings", "Sculptures_Carvings", "Car_Accessories", "Car_Parts", "Car_Performance", "Truck_Accessories", "Truck_Parts", "Truck_Performance", "Coins_US", "Coins_World", "Paper_Money_US", "Paper_Money_World", "Scripophily", "Autographs", "Comics", "Holiday_Seasonal", "Militaria", "Trading_Cards", "Corsages", "Exotics", "Flowering_Plants", "Green_Plants", "Mixed_Arrangements", "Single_Flower", "Anniversary", "Birthday", "Holiday", "Wedding", "Cheese", "Wine", "Furniture", "Decor", "Lighting", "Lamps", "Indoor", "Outdoor", "Jewelry", "Gems", "Garment_Bags", "Duffle_Bags", "Kitchen", "Laundry", "Hospital_Supplies", "Home_Health", "Motorcyles", "Motorcycle_Parts", "Motorcycle_Protective_Gear", "Pet_Care", "Pet_Food", "Pet_Toys", "Glass", "Pottery", "Posters", "Prints", "Lab_Supplies", "Sporting_Goods", "Outdoor_Gear", "Autographs", "Trading_Cards", "Stamps_US", "Stamps_World", "Preschool", "K-12", "Special_Needs", "Men", "Women", "Kids", "Agriculture", "Architecture", "Construction", "Marine", "Metalworking", "Other", 
+
+
+== "amz:prod_misc_producttype" Product Type
+* Type: select
+* Valid values:
+* "", "Antiques", "Art", "Car_Parts_and_Accessories", "Coins", "Collectibles", "Crafts", "Event_Tickets", "Flowers", "Gifts_and_Occasions", "Gourmet_Food_and_Wine", "Hobbies", "Home_Furniture_and_Decor", "Home_Lighting_and_Lamps", "Home_Organizers_and_Storage", "Jewelry_and_Gems", "Luggage", "Major_Home_Appliances", "Medical_Supplies", "Motorcycles", "Musical_Instruments", "Pet_Supplies", "Pottery_and_Glass", "Prints_and_Posters", "Scientific_Supplies", "Sporting_and_Outdoor_Goods", "Sports_Memorabilia", "Stamps", "Teaching_and_School_Supplies", "Watch", "Wholesale_and_Industrial", "Misc_Other", 
+
+
+== "amz:prod_misc_size" Size
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_inmtkey" Instrument Key
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_bawwinmts_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_bawwinmts_proficiencylevel" Brass And Woodwind Instruments Proficiency Level
+* Type: select
+* Valid values:
+* "", "Intermediate", "Professional", "Student", 
+
+
+== "amz:prod_mus_gtrs_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_gtrattribute" Guitars Guitar Attribute
+* Type: select
+* Valid values:
+* "", "dreadnought", "fretless", "grand-auditorium", "grand-concert", "jumbo", "mini", "nex", "shallow-body", "short-scale", "travel", 
+
+
+== "amz:prod_mus_gtrs_gtrbridgesystem" Guitars Guitar Bridge System
+* Type: select
+* Valid values:
+* "", "fixed", "tremolo", 
+
+
+== "amz:prod_mus_gtrs_gtrpickupconfiguration" Guitars Guitar Pickup Configuration
+* Type: select
+* Valid values:
+* "", "humbucker", "magnetic-combination", "magnetic-double-coil", "magnetic-single-coil", "piezoelectric", 
+
+
+== "amz:prod_mus_gtrs_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_gtrs_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_gtrs_nbrofstrings" NumberOfStrings
+* Type: number
+
+
+== "amz:prod_mus_inmtpartsacc_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_cablelength" CableLength
+* Type: number
+
+
+== "amz:prod_mus_inmtpartsacc_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_drumstickssize" Drum Sticks Size
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_gtrpickthickness" Instrument Parts And Accessories Guitar Pick Thickness
+* Type: select
+* Valid values:
+* "", "extra-thick", "medium", "thick", "thin", 
+
+
+== "amz:prod_mus_inmtpartsacc_inmtkey" Instrument Key
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_inmtpartsacc_mallethardness" Instrument Parts And Accessories Mallet Hardness
+* Type: select
+* Valid values:
+* "", "extra-hard", "hard", "medium", "soft", 
+
+
+== "amz:prod_mus_inmtpartsacc_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_inmtpartsacc_nbrofkeybrdkeys" NumberOfKeybrdKeys
+* Type: number
+
+
+== "amz:prod_mus_inmtpartsacc_percndiameter" Percussion Diameter
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_inmtkey" Instrument Key
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_keybrdinmts_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_keybrdinmts_nbrofkeybrdkeys" NumberOfKeybrdKeys
+* Type: number
+
+
+== "amz:prod_mus_miscwrldinmts_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_miscwrldinmts_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_miscwrldinmts_regionoforgn" Region Of Origin
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_drumsetpieceqty" DrumSetPieceQty
+* Type: number
+
+
+== "amz:prod_mus_percninmts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_percninmts_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_percninmts_nbrofkeybrdkeys" NumberOfKeybrdKeys
+* Type: number
+
+
+== "amz:prod_mus_percninmts_percndiameter" Percussion Diameter
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_mixerchannelqty" MixerChannelQty
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_sndeqpt_outputwattage" OutputWattage
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_recordertrackcnt" RecorderTrackCount
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_speakercnt" SpeakerCount
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_speakersize" SpeakerSize
+* Type: number
+
+
+== "amz:prod_mus_sndeqpt_wrlsmicrophonefqcy" Wireless Microphone Frequency
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_addlspecs" Additional Specifications
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_ctryprdin" Country Produced In
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_inmtkey" Instrument Key
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_inmtsize" Instrument Size
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_mus_strgdinmts_matltype" Material Type
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_mdlname" Model Name
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_mdlnbr" Model Number
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_mdlyear" Model Year
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_musicalstyle" Musical Style
+* Type: textbox
+
+
+== "amz:prod_mus_strgdinmts_nbrofstrings" NumberOfStrings
+* Type: number
+
+
+== "amz:prod_name" Amazon Product Title
+Used instead of Zoovy defined product name.
+* Type: text
+* Max Length: 200
+
+
+== "amz:prod_ofc_artsupplies_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_ofc_artsupplies_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_ofc_artsupplies_matltype" Material Type
+* Type: textlist
+
+
+== "amz:prod_ofc_artsupplies_painttype" Paint Type
+* Type: textlist
+
+
+== "amz:prod_ofc_edlsupplies_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_ofc_ofcproducts_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_ofc_ofcproducts_matltype" Material Type
+* Type: textlist
+
+
+== "amz:prod_petsps_petspsmisc_clrspec" Color
+* Type: textbox
+
+
+== "amz:prod_petsps_petspsmisc_ingrdts" Ingredients
+* Type: textbox
+
+
+== "amz:prod_petsps_petspsmisc_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_petsps_petspsmisc_matl" Material
+* Type: textbox
+
+
+== "amz:prod_petsps_petspsmisc_size" Size
+* Type: textbox
+
+
+== "amz:prod_petsps_petspsmisc_volume" Volume
+* Type: textbox
+
+
+== "amz:prod_shoe_cd_framematerialtype" Frame Material Type
+* Type: select
+* Valid values:
+
+
+== "amz:prod_shoe_cd_itemshape" Item Shape
+* Type: select
+* Valid values:
+
+
+== "amz:prod_shoe_cd_lenscolormap" Lens Color Map
+* Type: select
+* Valid values:
+
+
+== "amz:prod_shoe_cd_lensmaterialtype" Lens Material Type
+* Type: select
+* Valid values:
+
+
+== "amz:prod_shoe_cd_polarizationtype" Polarization Type
+* Type: select
+* Valid values:
+
+
+== "amz:prod_size" Amazon Product Size
+Used when the product is only available in 1 size
+* Type: textbox
+
+
+== "amz:prod_sports_cstmztemplatename" Customizable Template Name
+* Type: textbox
+
+
+== "amz:prod_sports_dpt" Department
+* Type: select
+* Valid values:
+* "", "mens", "womens", "boys", "girls", "baby", "youth", "unisex", 
+
+
+== "amz:prod_sports_iscstmz" Is Customizable
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_sports_leaguename" League Name
+* Type: textbox
+
+
+== "amz:prod_sports_packaging" Packaging
+* Type: textbox
+
+
+== "amz:prod_sports_playername" Player Name
+* Type: textbox
+
+
+== "amz:prod_sports_teamname" Team Name
+* Type: textbox
+
+
+== "amz:prod_swvg_hhswdls_applnvrsn" Application Version
+* Type: textbox
+
+
+== "amz:prod_swvg_hhswdls_nbroflicenses" NumberOfLicenses
+* Type: number
+
+
+== "amz:prod_swvg_hhswdls_os" Operating System
+* Type: textlist
+
+
+== "amz:prod_swvg_hhswdls_systemreqs" System Requirements
+* Type: textbox
+
+
+== "amz:prod_swvg_swg_bundles" Bundles
+* Type: textbox
+
+
+== "amz:prod_swvg_swg_esrbdescriptors" E S R B Descriptors
+* Type: textlist
+
+
+== "amz:prod_swvg_swg_esrbrating" E S R B Rating
+* Type: textbox
+
+
+== "amz:prod_swvg_swg_maxnbrofplayers" MaxNumberOfPlayers
+* Type: number
+
+
+== "amz:prod_swvg_swg_mediaformat" Media Format
+* Type: textlist
+
+
+== "amz:prod_swvg_swg_mfgsuggestedagemax" MFGSuggestedAgeMax
+* Type: number
+
+
+== "amz:prod_swvg_swg_mfgsuggestedagemin" MFGSuggestedAgeMin
+* Type: number
+
+
+== "amz:prod_swvg_swg_onlineplay" Online Play
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_swvg_swg_os" Operating System
+* Type: textlist
+
+
+== "amz:prod_swvg_swg_software_platform" Software Platform
+* Type: textbox
+
+
+== "amz:prod_swvg_swg_swvggenre" Software Video Games Genre
+* Type: textlist
+
+
+== "amz:prod_swvg_swpt_dofi" Downloadable File
+* Type: textbox
+
+
+== "amz:prod_swvg_swpt_systemreqs" System Requirements
+* Type: textbox
+
+
+== "amz:prod_swvg_vg_bundles" Bundles
+* Type: textbox
+
+
+== "amz:prod_swvg_vg_consolevggenre" Console Video Games Genre
+* Type: textlist
+
+
+== "amz:prod_swvg_vg_esrbdescriptors" E S R B Descriptors
+* Type: textlist
+
+
+== "amz:prod_swvg_vg_esrbrating" E S R B Rating
+* Type: textbox
+
+
+== "amz:prod_swvg_vg_hwpt" Hardware Platform
+* Type: textbox
+
+
+== "amz:prod_swvg_vg_maxnbrofplayers" MaxNumberOfPlayers
+* Type: number
+
+
+== "amz:prod_swvg_vgaccs_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_swvg_vgaccs_bundles" Bundles
+* Type: textbox
+
+
+== "amz:prod_swvg_vgaccs_color" Color
+* Type: textbox
+
+
+== "amz:prod_swvg_vgaccs_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_swvg_vgaccs_hwpt" Hardware Platform
+* Type: textlist
+
+
+== "amz:prod_swvg_vgaccs_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_swvg_vghardware_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_swvg_vghardware_bundles" Bundles
+* Type: textbox
+
+
+== "amz:prod_swvg_vghardware_color" Color
+* Type: textbox
+
+
+== "amz:prod_swvg_vghardware_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_swvg_vghardware_hwpt" Hardware Platform
+* Type: textbox
+
+
+== "amz:prod_swvg_vghardware_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_tools_diameter" Diameter
+* Type: number
+
+
+== "amz:prod_tools_gritrating" GritRating
+* Type: number
+
+
+== "amz:prod_tools_height" Height
+* Type: number
+
+
+== "amz:prod_tools_horsepower" Horsepower
+* Type: textbox
+
+
+== "amz:prod_tools_length" Length
+* Type: number
+
+
+== "amz:prod_tools_nbrofitemsinpkg" NumberOfItemsInPackage
+* Type: number
+
+
+== "amz:prod_tools_powersource" Tools Power Source
+* Type: select
+* Valid values:
+* "", "battery-powered", "gas-powered", "hydraulic-powered", "air-powered", "corded-electric", 
+
+
+== "amz:prod_tools_voltage" Voltage
+* Type: number
+
+
+== "amz:prod_tools_wattage" Wattage
+* Type: number
+
+
+== "amz:prod_tools_width" Width
+* Type: number
+
+
+== "amz:prod_tools_wt" Weight
+* Type: number
+
+
+== "amz:prod_toysbaby_assemblyinstrts" Assembly Instructions
+* Type: textbox
+
+
+== "amz:prod_toysbaby_assemblytime" Assembly Time
+* Type: textbox
+
+
+== "amz:prod_toysbaby_isassemblyrequired" Is Assembly Required
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_toysbaby_maxmmerchantagerecd" Maximum Merchant Age Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_maxmmnfgagerecd" Maximum Manufacturer Age Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_maxmmnfgwtrecd" Maximum Manufacturer Weight Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_minmmerchantagerecd" Minimum Merchant Age Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_minmmnfgagerecd" Minimum Manufacturer Age Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_minmmnfgwtrecd" Minimum Manufacturer Weight Recommended
+* Type: textbox
+
+
+== "amz:prod_toysbaby_mnfgsafetywarning" Manufacturer Safety Warning
+* Type: textbox
+
+
+== "amz:prod_toysbaby_mnfgwarrantydscrpt" Manufacturer Warranty Description
+* Type: textbox
+
+
+== "amz:prod_toysbaby_nbrofpieces" NumberOfPieces
+* Type: number
+
+
+== "amz:prod_toysbaby_nbrofplayers" NumberOfPlayers
+* Type: number
+
+
+== "amz:prod_toysbaby_toyawardname" Toys Baby Toy Award Name
+* Type: select
+* Valid values:
+* "", "child_magazine", "dr_toys_100_best_child_products", "family_fun_toy_of_the_year_seal", "games_magazine", "lion_mark", "national_parenting_approval_award", "oppenheim_toys", "parents_choice_portfolio", "parents_magazine", "toy_wishes", "unknown", 
+
+
+== "amz:prod_wrls_wrlsaccs_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_antennatype" Antenna Type
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_auxiliary" Auxiliary
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_wrls_wrlsaccs_batterypower" Battery Power
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_batterytype" Battery Type
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_chargingtime" Charging Time
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls" Compatible Phone Models
+* Type: textlist
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_10" Compatible Phone Models_10
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_11" Compatible Phone Models_11
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_12" Compatible Phone Models_12
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_13" Compatible Phone Models_13
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_14" Compatible Phone Models_14
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_15" Compatible Phone Models_15
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_16" Compatible Phone Models_16
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_17" Compatible Phone Models_17
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_cmpphnmdls_18" Compatible Phone Models_18
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_color" Color
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_colormap" Color Map
+* Type: select
+* Valid values:
+* "", "black", "blue", "bronze", "brown", "gold", "gray", "green", "metallic", "off-white", "orange", "pink", "purple", "red", "silver", "white", "yellow", 
+
+
+== "amz:prod_wrls_wrlsaccs_extended" Extended
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_wrls_wrlsaccs_itempkgqnty" ItemPackageQuantity
+* Type: number
+
+
+== "amz:prod_wrls_wrlsaccs_kwords" Keywords
+* Type: textlist
+
+
+== "amz:prod_wrls_wrlsaccs_mnfgname" Manufacturer Name
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_refillable" Refillable
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_wrls_wrlsaccs_slim" Slim
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_wrls_wrlsaccs_solar" Solar
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amz:prod_wrls_wrlsaccs_standbytime" Standby Time
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsaccs_talktime" Talk Time
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_addlfeatures" Additional Features
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_applnvrsn" Application Version
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls" Compatible Phone Models
+* Type: textlist
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_10" Compatible Phone Models_10
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_11" Compatible Phone Models_11
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_12" Compatible Phone Models_12
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_13" Compatible Phone Models_13
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_14" Compatible Phone Models_14
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_15" Compatible Phone Models_15
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_16" Compatible Phone Models_16
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_17" Compatible Phone Models_17
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_cmpphnmdls_18" Compatible Phone Models_18
+* Type: textbox
+
+
+== "amz:prod_wrls_wrlsdwnlds_kwords" Keywords
+* Type: textlist
+
+
+== "amz:prod_wrls_wrlsdwnlds_mnfgname" Manufacturer Name
+* Type: textbox
+
+
+== "amz:prts" Amazon Syndication Restrict to Partitions
+Select the partitions which this product will be allowed to syndicate from (note: you must select at least one partition for this field to work).
+* Type: prtchooser
+
+
+== "amz:qty" Amazon Max Inventory
+The maximum quantity to send/reserve to inventory. Set to -1 to send all inventory without reserving any.
+* Type: number
+
+
+== "amz:restock_date" Amazon Restock Date (YYYYMMDD)
+Date that the product will be restocked to Amazon (YYYYMMDD)
+* Type: date
+
+
+== "amz:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amzpa:category" Amazon Product Ads Category
+* Type: text
+* Max Length: 128
+
+
+== "amzpa:note" Amazon Product Ads Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "amzpa:prod_desc" Amazon Product Ads Description
+* Type: textarea
+
+
+== "amzpa:prod_name" Amazon Product Ads Title
+* Type: text
+* Max Length: 100
+
+
+== "amzpa:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "amzrp:max_price" Amazon Repricing Max Price
+* Type: currency
+
+
+== "amzrp:min_price" Amazon Repricing Minimum Sell Price
+* Type: currency
+
+
+== "amzrp:min_ship" Amazon Repricing Minimum Ship Price
+* Type: currency
+
+
+== "amzrp:state" 
+* Type: rpstate
+
+
+== "amzrp:strategy" Amazon Repricing Strategy
+* Type: strategy
+
+
+== "become:is_hot" Become.com "Is Hot"
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "become:note" Become.com Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "become:ts" Become.com syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "bestbuy:ts" BestBuy Syndication
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "bing:category" Bing Category #
+* Type: number
+
+
+== "bing:categorypath" Bing Category Path
+This will override bing:category
+* Type: textbox
+
+
+== "bing:note" Bing Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "bing:prod_desc" Bing Product Description
+* Type: textarea
+
+
+== "bing:prod_name" Bing Product Title
+Used instead of Zoovy defined product name.
+* Type: text
+* Max Length: 200
+
+
+== "bing:ship_cost1" Bing.com Flat Shipping Cost (first item)
+* Type: currency
+
+
+== "bing:ts" Bing syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "bizrate:note" Bizrate Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "bizrate:ts" Bizrate syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "buy:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "buycom:categoryid" Buy.com CategoryID
+* Type: textbox
+
+
+== "buycom:prod_shipleadtime" Buycom Shipping Lead Time
+* Type: textbox
+
+
+== "buycom:ship_cost1" Buycom Shipping Price
+* Type: textbox
+
+
+== "buycom:shipexp_cost1" Buycom Expedited Shipping Price
+* Type: textbox
+
+
+== "buycom:sku" 
+* Type: textbox
+
+
+== "buycom:ts" Buy.com Syndication
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "buyrp:max_price" Buy.com Repricing Max Price
+* Type: currency
+
+
+== "buyrp:min_price" Buy.com Repricing Minimum Sell Price
+* Type: currency
+
+
+== "buyrp:min_ship" Buy.com Repricing Minimum Ship Price
+* Type: currency
+
+
+== "buyrp:state" 
+* Type: rpstate
+
+
+== "buyrp:strategy" Buy.com Repricing Strategy
+* Type: strategy
+
+
+== "buysafe:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "cj:category" Commission Junction Advertiser Category
+* Type: text
+* Max Length: 75
+
+
+== "cj:merchandisetype" Commission Junction Merchandise Type
+* Type: text
+* Max Length: 75
+
+
+== "cj:ts" Commission Junction syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "db:id" 
+* Type: constant
+
+
+== "dijipop:ts" DijiPop syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "ebay:attributeset" 
+* Type: ebay/attributes
+
+
+== "ebay:base_weight" 
+eBay Specific Weight
+* Type: weight
+
+
+== "ebay:category" 
+eBay.com Primary Category
+* Type: ebay/category
+
+
+== "ebay:category2" 
+eBay Market Place Category Two
+* Type: ebay/category
+
+
+== "ebay:conditionid" eBay's unified site-wide condition id
+not all values are applicable for all categories, however ebay began transitioning all categories to this unified notation in July 2010
+* Type: select
+* Valid values:
+* New/BrandNew/withBox = "1000"
+*  *New/Other/noBox = "1500"
+*  *New/withDefects = "1750"
+*  Refurbished/by Mfg = "2000"
+*  Refurbished/by Seller = "2500"
+*  Used/LikeNew/PreOwned = "3000"
+*  Very Good = "4000"
+*  Good = "5000"
+*  Acceptable = "6000"
+*  Not Working/For Parts = "7000"
+*  
+
+
+== "ebay:ext_pid_type" 
+* Type: hidden
+
+
+== "ebay:ext_pid_value" 
+* Type: hidden
+
+
+== "ebay:fixed_qty" 
+eBay Fixed Quantity
+* Type: number
+
+
+== "ebay:itemspecifics" 
+* Type: hidden
+
+
+== "ebay:launch_immediate" 
+Ignore launch window and launch immediately
+* Type: boolean
+
+
+== "ebay:launch_window" 
+Custom launch window
+* Type: boolean
+
+
+== "ebay:list_private" 
+* Type: boolean
+
+
+== "ebay:motors_problems" 
+eBay Motors Known Problem Field
+* Type: textbox
+
+
+== "ebay:power_dow" Allowed Launch Days
+* Type: select
+* Valid values:
+* Any Day [Mon/Tue/Wed/Thu/Fri/Sat/Sun] = ""
+*  Early Week [Mon/Tue/Wed] = "7"
+*  Late Week [Wed/Thur/Fri] = "28"
+*  Long Weekend [Fri/Sat/Sun/Mon] = "113"
+*  Mid Week [Tue/Wed/Thur] = "14"
+*  No Saturdays [Mon/Tue/Wed/Thur/Fri/Sun] = "95"
+*  No Weekends [Mon/Tue/Wed/Thur/Sun] = "79"
+*  Weekdays [Mon/Tue/Wed/Thu/Fri] = "31"
+*  Weekends [Sat/Sun] = "96"
+*  
+
+
+== "ebay:power_endtime" Ending Hour
+Hour to stop auction launching (must be 3+ hours from starting hour)
+* Type: select
+* Valid values:
+* 12:00am (Midnight) PST = "24"
+*  Afternoon (12:00pm - 6:00pm PST) = "12"
+*  Anytime - As soon as possible = "0"
+*  Early Morning (12:00am - 6:00am PST) = "3"
+*  Evening (6:00pm - 12:00am PST) = "18"
+*  Morning (6:00 AM - 12:00pm PST) = "6"
+*  Optimal (3:00pm - 9:00 pm PST) = "15"
+*  
+
+
+== "ebay:power_fields" Managed Fields
+Managed fields are copied from the product into the powerlister when it is created. 
+The powerlister that was created will retain it's own separate copy of each managed field. 
+To change a managed field you will need to edit each powerlisters individually.
+* Type: select
+* Valid values:
+* none = ""
+*  eBay title only = "ebay:title"
+*  eBay title and duration = "ebay:title|ebay:duration"
+*  eBay title, duration, qty = "ebay:title|ebay:duration|ebay:qty"
+*  eBay title, duration, category = "ebay:title|ebay:duration|ebay:category"
+*  eBay title, duration, qty, category = "ebay:title|ebay:duration|ebay:qty|ebay:category"
+*  
+
+
+== "ebay:power_interval" Auction Spacing
+* Type: select
+* Valid values:
+* 1 Day = "1440"
+*  1 hours = "60"
+*  2 hours = "120"
+*  3 hours = "180"
+*  30 minutes = "30"
+*  5 minutes = "5"
+*  9 hours = "540"
+*  Immediately = ""
+*  
+
+
+== "ebay:power_maxauction" Total Auctions to Run
+Enter the total number of auction listings you want us to create or simply use -1 for infinity
+* Type: number
+
+
+== "ebay:power_quantity" Total Quantity to Sell
+Enter the total quantity of the product you wish to sell. (-1 for all available in inventory)
+* Type: number
+
+
+== "ebay:power_starttime" Starting Hour
+* Type: select
+* Valid values:
+* 10:00am PDT = "10"
+*  10:00pm PDT = "22"
+*  11:00am PDT = "11"
+*  11:00pm PDT = "23"
+*  12:00am PDT (Midnight) = "24"
+*  12:00pm PDT (Noon) = "12"
+*  1:00pm PDT = "13"
+*  2:00pm PDT = "14"
+*  3:00am PDT = "3"
+*  3:00pm PDT = "15"
+*  4:00am PDT = "4"
+*  4:00pm PDT = "16"
+*  5:00am PDT = "5"
+*  5:00pm PDT = "17"
+*  6:00am PDT = "6"
+*  6:00pm PDT = "18"
+*  7:00am PDT = "7"
+*  7:00pm PDT = "19"
+*  8:00am PDT = "8"
+*  8:00pm PDT = "20"
+*  9:00am PDT = "9"
+*  9:00pm PDT = "21"
+*  
+
+
+== "ebay:powerinv" powerlister inventory settings
+* Type: select
+* Valid values:
+* Reserve actual quantity on eBay (leaves qty sold at zero) = "1"
+*  Reserve total quantity to sell (tracks qty sold) = "0"
+*  
+
+
+== "ebay:powerlister" 
+an internal field for referencing a powerlister
+* Type: hidden
+
+
+== "ebay:prod_desc" eBay Product Description
+separate description specific for eBay (most templates will require updates to use this)
+* Type: textarea
+
+
+== "ebay:prod_height" eBay Packaged Shipping Height
+* Type: number
+
+
+== "ebay:prod_image1" 
+First eBay Product Image
+* Type: image
+
+
+== "ebay:prod_image1_dim" 
+a string which specifies ebay image dimensions (otherwise original will be sent), format:##x##
+* Type: textbox
+
+
+== "ebay:prod_image2" Image Collage 1
+Please enter a picture for your product.
+* Type: image
+
+
+== "ebay:prod_image3" Image Collage 2
+Please enter a picture for your product.
+* Type: image
+
+
+== "ebay:prod_image4" 
+* Type: image
+
+
+== "ebay:prod_image5" 
+* Type: image
+
+
+== "ebay:prod_image6" 
+* Type: image
+
+
+== "ebay:prod_image7" 
+* Type: image
+
+
+== "ebay:prod_image8" 
+* Type: image
+
+
+== "ebay:prod_length" eBay Packaged Shipping Length
+* Type: number
+
+
+== "ebay:prod_thumb" eBay Thumbnail Image
+* Type: image
+
+
+== "ebay:prod_width" eBay Packaged Shipping Width
+* Type: number
+
+
+== "ebay:productid" 
+* Type: hidden
+
+
+== "ebay:profile" 
+* Type: special
+
+
+== "ebay:qty" 
+eBay Auction Quantity
+* Type: number
+
+
+== "ebay:ship_can_cost1" eBay Fixed Shipping Cost to Canada
+* Type: currency
+
+
+== "ebay:ship_can_cost2" eBay Fixed Shipping Cost (add. items) to Canada
+* Type: currency
+
+
+== "ebay:ship_cost1" Defaults to zoovy:ship_cost1. To simply markup the shipping for eBay use ebay:ship_markup instead.
+* Type: currency
+
+
+== "ebay:ship_cost2" eBay Fixed Shipping Cost (Additional Item)
+defaults to zoovy:ship_cost2 (additional fixed price item)
+* Type: currency
+
+
+== "ebay:ship_int_cost1" eBay Fixed Shipping Cost to International
+* Type: currency
+
+
+== "ebay:ship_int_cost2" eBay Fixed Shipping Cost (add. items) to International
+* Type: currency
+
+
+== "ebay:ship_irregular" 
+Irregular Shipping Package
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "ebay:sku" eBay SKU
+SKU that will be sent to eBay and used on the inbound order/inventory. Use this if you have multiple products that act as separate ebay templates.
+* Type: text
+
+
+== "ebay:storecat" 
+eBay Store Category One
+* Type: ebay/storecat
+
+
+== "ebay:storecat2" 
+eBay Store Category Two
+* Type: ebay/storecat
+
+
+== "ebay:subtitle" 
+eBay Subtitle
+* Type: textbox
+
+
+== "ebay:title" 
+Default eBay Listing Title
+* Type: textbox
+
+
+== "ebay:title1" eBay Powerlister Alt Title 1
+* Type: textbox
+* Max Length: 80
+
+
+== "ebay:title2" eBay Powerlister Alt Title 2
+* Type: textbox
+* Max Length: 80
+
+
+== "ebay:title3" eBay Powerlister Alt Title 3
+* Type: textbox
+* Max Length: 80
+
+
+== "ebay:title4" eBay Powerlister Alt Title 4
+* Type: textbox
+* Max Length: 80
+
+
+== "ebay:title5" eBay Powerlister Alt Title 5
+* Type: textbox
+* Max Length: 80
+
+
+== "ebay:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "ebayrp:max_price" eBay Repricing Max Price
+* Type: currency
+
+
+== "ebayrp:min_price" eBay Repricing Minimum Sell Price
+* Type: currency
+
+
+== "ebayrp:min_ship" eBay Repricing Minimum Ship Price
+* Type: currency
+
+
+== "ebayrp:state" 
+* Type: rpstate
+
+
+== "ebayrp:strategy" eBay Repricing Strategy
+* Type: strategy
+
+
+== "gbase:base_price" GoogleBase Override Price
+Putting an amount in this field will override the GoogleBase Price
+* Type: number
+
+
+== "gbase:note" GoogleBase Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "gbase:prod_desc" GoogleBase Product Title Description
+* Type: text
+* Max Length: 100
+
+
+== "gbase:prod_name" GoogleBase Product Title
+* Type: text
+* Max Length: 75
+
+
+== "gbase:prod_name_before_options" GoogleBase Product Title (Before Options)
+* Type: text
+* Max Length: 75
+
+
+== "gbase:prod_upc" 
+UPC sent to Googlebase (if different than zoovy:prod_upc)
+* Type: textbox
+
+
+== "gbase:product_type" GoogleBase Product Type
+* Type: text
+* Max Length: 125
+
+
+== "gbase:product_type2" GoogleBase Product Type (Secondary)
+* Type: text
+* Max Length: 75
+
+
+== "gbase:product_type3" GoogleBase Product Type (Trietary)
+* Type: text
+* Max Length: 75
+
+
+== "gbase:product_type4" GoogleBase Product Type (Quadrinary)
+* Type: text
+* Max Length: 75
+
+
+== "gbase:sku_name" GoogleBase SKU Title
+* Type: text
+* Max Length: 75
+
+
+== "gbase:ts" GoogleBase syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "gc:blocked" Google Checkout Blocked
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "goorp:max_price" Google Marketplace Repricing Max Price
+* Type: currency
+
+
+== "goorp:min_price" Google Marketplace Repricing Minimum Sell Price
+* Type: currency
+
+
+== "goorp:min_ship" Google Marketplace Repricing Minimum Ship Price
+* Type: currency
+
+
+== "goorp:state" 
+* Type: rpstate
+
+
+== "goorp:strategy" Google Marketplace Repricing Strategy
+* Type: strategy
+
+
+== "hsn:base_cost" HSN Product Cost
+* Type: currency
+
+
+== "hsn:mfg_certificate" HSN Manufacturer Certificate
+Certificate stored on HSN server
+* Type: textbox
+* Input Size: 25
+
+
+== "hsn:prod_desc" Home Shopping Network Description
+* Type: textarea
+
+
+== "hsn:ts" Home Shopping Network Syndication Enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user1" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user10" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user11" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user12" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user14" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user15" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user16" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user2" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user3" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user4" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user5" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user6" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user7" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user8" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "is:user9" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "linkshare:ts" Linkshare syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "navcat:meta" 
+This field is dynamically populated by the syndication engine and contains the category linked to the product by the navigation category
+* Type: generated
+
+
+== "newegg:prod_desc" Newegg Product Description
+* Type: textarea
+
+
+== "newegg:shipping_type" Newegg Shipping Type
+* Type: select
+* Valid values:
+* "Free", "Other", 
+
+
+== "newegg:ts" Newegg Syndication Enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "nextag:note" Nextag Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "nextag:prod_name" NexTag Product Name
+* Type: text
+* Max Length: 200
+
+
+== "nextag:ts" NexTag syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "paypalec:blocked" Block Paypal Express Checkout
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "pid:assembly" Assembly/Kit skus
+* Type: text
+* Max Length: 255
+
+
+== "pricegrabber:note" PriceGrabber Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "pricegrabber:ts" Pricegrabber syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "pronto:category" Pronto Category ID
+* Type: textbox
+
+
+== "pronto:note" Pronto Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "pronto:prod_name" Pronto Title
+* Type: text
+* Max Length: 100
+
+
+== "pronto:ts" Pronto syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "sears:freeship_date" Sears Freeship Start Date (YYYYMMDD)
+Date free shipping will commence on Sears (YYYYMMDD)
+* Type: date
+
+
+== "sears:note" Sears Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "sears:prod_desc" Sears Description
+* Type: textarea
+
+
+== "sears:ship_cost" Sears Shipping Price
+* Type: textbox
+
+
+== "sears:shipexp_cost" Sears Expedited Shipping Price
+* Type: textbox
+
+
+== "sears:ts" Sears Syndication Enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "shopping:note" Shopping.com Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "shopping:ts" Shopping.com syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "shopzilla:promo_text" Shopzilla Promo Text
+* Type: text
+
+
+== "sku:amz_asin" 
+* Type: text
+
+
+== "sku:amz_todo" 
+* Type: text
+
+
+== "sku:assembly" Assembly/Kit skus
+* Type: text
+* Max Length: 255
+
+
+== "sku:dss_amzprice" 
+* Type: text
+
+
+== "sku:dss_amzship" 
+* Type: text
+
+
+== "sku:dss_minprice" 
+* Type: icurrency
+
+
+== "sku:dss_minship" 
+* Type: icurrency
+
+
+== "sku:dss_status" 
+* Type: text
+
+
+== "sku:dss_strategy" 
+* Type: text
+
+
+== "sku:inv_reorder" 
+* Type: text
+
+
+== "sku:price" SKU Price
+* Type: currency
+
+
+== "sku:title" SKU Title (Computed)
+* Type: readonly
+
+
+== "sku:variation_detail" SKU Variation Detail (Computed)
+* Type: readonly
+
+
+== "sku:weight" SKU Weight
+* Type: weight
+
+
+== "thefind:note" TheFind Syndication Note
+* Type: text
+* Max Length: 100
+
+
+== "thefind:ts" TheFind syndication enabled
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "tntserve:vendor" Vendor
+Warning Message
+* Type: text
+
+
+== "toynk:prod_dimensions" 
+* Type: textbox
+
+
+== "toynk:prod_material" 
+* Type: textbox
+
+
+== "toynk:prod_packaging" 
+* Type: textbox
+
+
+== "toynk:prod_production_run" 
+* Type: textbox
+
+
+== "toynk:prod_production_year" 
+* Type: textbox
+
+
+== "toynk:prod_theme" 
+* Type: textbox
+
+
+== "toynk:prod_type" 
+* Type: textbox
+
+
+== "us1:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "us2:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "us3:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "us4:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "us5:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "us6:ts" 
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "usr1rp:max_price" User Repricing Max Price
+* Type: currency
+
+
+== "usr1rp:min_price" User Repricing Minimum Sell Price
+* Type: currency
+
+
+== "usr1rp:min_ship" User Repricing Minimum Ship Price
+* Type: currency
+
+
+== "usr1rp:state" 
+* Type: rpstate
+
+
+== "usr1rp:strategy" User Repricing Strategy
+* Type: strategy
+
+
+== "variation:color" 
+* Type: hidden
+
+
+== "variation:size" 
+* Type: hidden
+
+
+== "web:prod_domain" Product Domain
+A domain name. Any attempt to access this product from a different domain will result in a redirect.
+* Type: text
+
+
+== "web:prod_domains_allowed" Allowed Domains
+List of domains this product is allowed for
+* Type: textlist
+
+
+== "web:prod_domains_blocked" Blocked Domains
+List of domains this product is blocked for
+* Type: textlist
+
+
+== "wishpot:ts" Wishpot Syndication
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:accessory_products" list of product accessories
+* Type: finder
+
+
+== "zoovy:asm_bundle_products" Product Bundles (comma separated list of SKUs)
+* Type: textbox
+
+
+== "zoovy:banner_01" banner
+* Type: image
+
+
+== "zoovy:base_cost" Cost
+* Type: currency
+
+
+== "zoovy:color" 
+* Type: hidden
+
+
+== "zoovy:condition" product:zoovy:condition S
+* Type: textbox
+
+
+== "zoovy:designer" Designer
+Designer
+* Type: textbox
+
+
+== "zoovy:digest" 
+* Type: constant
+
+
+== "zoovy:domestic_carrier" Carrier for 1st Domestic Shipping
+* Type: textbox
+
+
+== "zoovy:fl" DO NOT USE ME
+* Type: text
+
+
+== "zoovy:footer_desc" Second Description
+* Type: textarea
+
+
+== "zoovy:header1" Header for Related Products
+* Type: text
+
+
+== "zoovy:header2" Header for Accessories
+* Type: text
+
+
+== "zoovy:heading1" Related Prod Heading
+Heading for Related Products
+* Type: text
+
+
+== "zoovy:image3" Image number 3
+* Type: image
+
+
+== "zoovy:inv_enable" 
+* Type: special
+
+
+== "zoovy:linkto" 
+This field is dynamically populated by the syndication engine and contains the link with tracking code to the product
+* Type: generated
+
+
+== "zoovy:message1" Top Rt Message 
+* Type: text
+
+
+== "zoovy:message2" Top Rt Column 
+* Type: text
+
+
+== "zoovy:message3" Text Under Main Section
+Text Under Main Section.
+* Type: text
+
+
+== "zoovy:message4" Mid Rt Column 
+* Type: text
+
+
+== "zoovy:message5" Text under picture 1
+* Type: text
+
+
+== "zoovy:message6" Text under picture 2
+* Type: text
+
+
+== "zoovy:meta_desc" 
+If not set then zoovy:prod_desc will be used
+* Type: textbox
+
+
+== "zoovy:mfgsku" SKU
+This is the product sku that will appear on your website
+* Type: text
+
+
+== "zoovy:minitext" Short text for the top of the page
+This is the custom text block for the top of the page. It should be short so customers can see the product.
+* Type: text
+
+
+== "zoovy:msrp" Retail Price
+* Type: textbox
+
+
+== "zoovy:msrp_price" Cover Price of Book
+This is the cover price that will appear on your website.
+* Type: text
+
+
+== "zoovy:other_information" HTML
+* Type: html
+
+
+== "zoovy:other_links" TEXT
+* Type: text
+
+
+== "zoovy:other_products" HTML
+* Type: html
+
+
+== "zoovy:othermodels" TEXT
+* Type: text
+
+
+== "zoovy:photo_desc1" Description for photo 1
+* Type: text
+
+
+== "zoovy:photo_desc2" Description for photo 2
+* Type: text
+
+
+== "zoovy:pkg_depth" Depth
+* Type: textbox
+
+
+== "zoovy:pkg_exclusive" Ships Exclusively
+Use this field to configure rules
+* Type: boolean
+
+
+== "zoovy:pkg_height" Height
+* Type: textbox
+
+
+== "zoovy:pkg_multibox_ignore" Ignore this item in multibox shipping
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:pkg_width" Width
+* Type: textbox
+
+
+== "zoovy:pogs_desc" Description of options (internal use only)
+* Type: hidden
+
+
+== "zoovy:power_maxlist" Maximum CONCURRENT listings
+* Type: number
+
+
+== "zoovy:power_minlist" Minimum CONCURRENT listings
+* Type: number
+
+
+== "zoovy:power_trigger" Trigger Price to Relaunch
+This is the target price at which another auction will be launched. Use 0 to disable. (NOTE: be sure to read the documentation on how this feature works!)
+* Type: currency
+
+
+== "zoovy:power_ttl" Time to Live
+This is the maximum time the powerlister will run before it expires.
+* Type: select
+* Valid values:
+* 1 Week = "7"
+*  2 Weeks = "14"
+*  1 Month = "30"
+*  2 Months = "60"
+*  3 Months = "90"
+*  4 Months = "120"
+*  6 months = "180"
+*  1 Year = "365"
+*  10 Years = "3650"
+*  
+
+
+== "zoovy:prod_arrival_date" Expected Arrival Date
+* Type: textbox
+
+
+== "zoovy:prod_artist" Artist
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_asm" Product Assembly/Kit skus
+* Type: text
+* Max Length: 255
+
+
+== "zoovy:prod_author" Author
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_available" Availability
+* Type: textbox
+
+
+== "zoovy:prod_available_date" Product Availability Date
+Original Date the product arrived in Stock, ie available
+* Type: textbox
+
+
+== "zoovy:prod_banner1" Top Banner (767x40)
+* Type: image
+
+
+== "zoovy:prod_banner1_link" Link for top banner
+* Type: textbox
+
+
+== "zoovy:prod_book_author" Authors Name
+This is the authors name that will appear on your website.
+* Type: text
+
+
+== "zoovy:prod_book_format" Format
+This is the product format that will appear on your website - hardcover, paperback, etc.
+* Type: text
+
+
+== "zoovy:prod_book_pages" Number of Pages in the book
+This is the products number of pages that will appear on your website.
+* Type: text
+
+
+== "zoovy:prod_book_price_guide" Price Guide
+* Type: textbox
+
+
+== "zoovy:prod_book_publisher" Publisher
+* Type: textbox
+
+
+== "zoovy:prod_bottom" Bottom
+* Type: textbox
+
+
+== "zoovy:prod_brand" 
+Use only if the brand is different than the manufacturer
+* Type: textbox
+
+
+== "zoovy:prod_cast" Cast
+* Type: text
+
+
+== "zoovy:prod_ccg" CCG
+* Type: textbox
+
+
+== "zoovy:prod_ccg_color" Card Color
+* Type: textbox
+
+
+== "zoovy:prod_ccg_condition" Card Condition
+* Type: textbox
+
+
+== "zoovy:prod_chaintype" Chain Type
+* Type: hidden
+
+
+== "zoovy:prod_chapters" Chapters 
+This is the list of chapters.
+* Type: text
+
+
+== "zoovy:prod_class" Product Classification
+* Type: textbox
+
+
+== "zoovy:prod_clothing_waist" Product Waist Size
+Please enter the waist size of this item (optional).
+* Type: textbox
+
+
+== "zoovy:prod_color" Product Primary Color
+Defines product's primary color
+* Type: textbox
+
+
+== "zoovy:prod_colors" 
+* Type: image
+
+
+== "zoovy:prod_comment" Comment
+* Type: textbox
+
+
+== "zoovy:prod_contents" HTML
+* Type: html
+
+
+== "zoovy:prod_cover" Cover Artist
+* Type: textbox
+
+
+== "zoovy:prod_cpsiawarning" CPSIA Warning
+* Type: select
+* Valid values:
+* - Please Select - = ""
+*  Choking Hazard Balloon = "choking_hazard_balloon"
+*  Choking Hazard contains a marble = "choking_hazard_contains_a_marble"
+*  Choking Hazard contains a small ball = "choking_hazard_contains_small_ball"
+*  Choking Hazard is a marble = "choking_hazard_is_a_marble"
+*  Choking Hazard is a small ball = "choking_hazard_is_a_small_ball"
+*  Choking Hazard small parts = "choking_hazard_small_parts"
+*  No Warning Applicable = "no_warning_applicable"
+*  
+
+
+== "zoovy:prod_created_gmt" 
+* Type: constant
+
+
+== "zoovy:prod_curtainlength" Curtain Length (optional)
+This is the length of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_curtaintop" Top (optional)
+This is the Top Style of the curtain(optional)
+* Type: textbox
+
+
+== "zoovy:prod_curtainwidth" Curtain Width (optional)
+This is the width of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_date_ordered" Product Date Ordered
+Date Product was reordered (from Supplier).
+* Type: textbox
+
+
+== "zoovy:prod_desc2" Courtesy Credit line
+* Type: text
+
+
+== "zoovy:prod_designid" Product Design #
+* Type: textbox
+
+
+== "zoovy:prod_detail2" 
+* Type: text
+
+
+== "zoovy:prod_details" Product Detailed Description (optional)
+* Type: text
+
+
+== "zoovy:prod_dimensions" Dimensions
+* Type: textbox
+
+
+== "zoovy:prod_director" Director
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_disableprice" Do not show the price
+Can be used in cases where MAP is defined
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_disableprice_text" Show this text instead of the price
+Can be used in cases where MAP is defined
+* Type: text
+* Input Size: 30
+
+
+== "zoovy:prod_esrb_rating" ESRB Rating
+* Type: select
+* Valid values:
+* "RP", "ED", "E", "E10", "T", "M", "AO", 
+
+
+== "zoovy:prod_estateperiod" Estate Period
+* Type: hidden
+
+
+== "zoovy:prod_extra" Product Extra Description (not used in all layouts)
+* Type: text
+
+
+== "zoovy:prod_eyeglass_frametype" Eyeglass Frame Type
+* Type: select
+* Valid values:
+* "full", "semi", "rimless", 
+
+
+== "zoovy:prod_eyeglass_type" Eyeglass Type
+* Type: select
+* Valid values:
+* "sunglasses", "eyeglasses", 
+
+
+== "zoovy:prod_fabric" Fabric (optional)
+This is the fabric of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_fakeupc" Fake UPC #
+Creating Fake UPC's is probably a bad idea, let us know if you've got another one.
+* Type: upc
+
+
+== "zoovy:prod_folder" Product Management Category
+* Type: management-category
+
+
+== "zoovy:prod_format" Format (DVD, VHS, Hardbound, Paperback, CD, Tape, Etc.)
+Please enter a the format of this product
+* Type: textbox
+
+
+== "zoovy:prod_game_platform" Platform
+* Type: select
+* Valid values:
+
+
+== "zoovy:prod_golf_manufacturer" Product Manufacturer (Optional)
+* Type: textbox
+
+
+== "zoovy:prod_height" Product Height
+Height of just the product (not the package it's shipped in). Used for fulfillment.
+* Type: textbox
+
+
+== "zoovy:prod_id" 
+Product ID (internal field)
+* Type: hidden
+
+
+== "zoovy:prod_image10" Product Image 10
+* Type: image
+
+
+== "zoovy:prod_image11" Product Image 11
+* Type: image
+
+
+== "zoovy:prod_image12" Product Image 12
+* Type: image
+
+
+== "zoovy:prod_image13" Product Image 13
+* Type: image
+
+
+== "zoovy:prod_image14" Product Image 14
+* Type: image
+
+
+== "zoovy:prod_image15" Product Image 15
+* Type: image
+
+
+== "zoovy:prod_image16" Product Image 16
+* Type: image
+
+
+== "zoovy:prod_image17" Product Image 17
+* Type: image
+
+
+== "zoovy:prod_image18" Product Image 18
+* Type: image
+
+
+== "zoovy:prod_image19" Product Image 19
+* Type: image
+
+
+== "zoovy:prod_image20" Product Image 20
+* Type: image
+
+
+== "zoovy:prod_image21" Product Image 21
+* Type: image
+
+
+== "zoovy:prod_image22" Product Image 22
+* Type: image
+
+
+== "zoovy:prod_image23" Image 23
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image24" Image 24
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image25" Image 25
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image26" Image 26
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image27" Image 27
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image28" Image 28
+Please enter a picture for your product.
+* Type: image
+
+
+== "zoovy:prod_image9" Product Image 9
+* Type: image
+
+
+== "zoovy:prod_image95" Product Image 95
+* Type: image
+
+
+== "zoovy:prod_image96" Product Image 96
+* Type: image
+
+
+== "zoovy:prod_image97" Product Image 97
+* Type: image
+
+
+== "zoovy:prod_image98" Product Image 98
+* Type: image
+
+
+== "zoovy:prod_image99" Product Image 99
+* Type: image
+
+
+== "zoovy:prod_install_docs" link for INstallation doc
+Paste in the link for the specifications doc and the system will generate the button and link to that doc in a new window.
+* Type: textbox
+
+
+== "zoovy:prod_instructions" Care Instructions
+* Type: textbox
+
+
+== "zoovy:prod_inv_availability" Availability
+* Type: textbox
+
+
+== "zoovy:prod_inv_message" Inventory Message
+* Type: textbox
+
+
+== "zoovy:prod_invmessage" Invetory Display Message
+Please enter a inventory display message
+* Type: textbox
+
+
+== "zoovy:prod_is" 
+* Type: constant
+
+
+== "zoovy:prod_is_tags" 
+* Type: hidden
+
+
+== "zoovy:prod_itemno" Item #
+* Type: textbox
+
+
+== "zoovy:prod_label" Label
+Please enter a the label of this album
+* Type: textbox
+
+
+== "zoovy:prod_leadtime" Product Lead Time (optional)
+This is the lead time of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_length" Product Length
+length of just the product (not the package it's shipped in). Used for fulfillment.
+* Type: textbox
+
+
+== "zoovy:prod_limited_availability" Show retired banner
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_lining" Product Lining (optional)
+This is the lining of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_link1" Product Link URL 1
+url to another page about the product e.g. PDF manual
+* Type: textbox
+* Max Length: 200
+
+
+== "zoovy:prod_link2" Product Link URL 2
+url to another page about the product e.g. PDF manual
+* Type: textbox
+* Max Length: 200
+
+
+== "zoovy:prod_link3" Product Link URL 3
+url to another page about the product e.g. PDF manual
+* Type: textbox
+* Max Length: 200
+
+
+== "zoovy:prod_link4" Product Link URL 4
+url to another page about the product e.g. PDF manual
+* Type: textbox
+* Max Length: 200
+
+
+== "zoovy:prod_link5" Product Link URL 5
+url to another page about the product e.g. PDF manual
+* Type: textbox
+* Max Length: 200
+
+
+== "zoovy:prod_link6" Banner 1 link
+* Type: textbox
+
+
+== "zoovy:prod_link7" Banner 2 link
+* Type: textbox
+
+
+== "zoovy:prod_list1" Custom Product List 1
+Used by Design Team
+* Type: finder
+
+
+== "zoovy:prod_list1_style" Product List: related items (colors)
+* Type: prodlist
+
+
+== "zoovy:prod_list1_title" Title for Product List 1
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_list2" Custom Product List 2
+Used by Design Team
+* Type: finder
+
+
+== "zoovy:prod_list2_title" Title for Product List 2
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_list3" Custom Product List 3
+Used by Design Team
+* Type: finder
+
+
+== "zoovy:prod_list3_title" Title for Product List 3
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_list4" Custom Product List 4
+Used by Design Team
+* Type: finder
+
+
+== "zoovy:prod_list4_title" Title for Product List 4
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_list5" Custom Product List 5
+Used by Design Team
+* Type: finder
+
+
+== "zoovy:prod_list5_title" Title for Product List 5
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_listhead1" Product List 1 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead2" Product List 2 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead3" Product List 3 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead4" Product List 4 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead5" Product List 5 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead6" Product List 6 Header
+* Type: textbox
+
+
+== "zoovy:prod_listhead7" Product List 7 Header
+* Type: textbox
+
+
+== "zoovy:prod_map" MAP Enable/Disable
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_map_hideprice" MAP: Hide Price
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_mapprice" MAP Price
+Defines the "Minimum Advertised Price" as necessary
+* Type: number
+
+
+== "zoovy:prod_measurements" Product Measurements
+Please enter the measurements of this item (optional).
+* Type: textbox
+
+
+== "zoovy:prod_meta_desc1" Alt Meta Description #1
+* Type: textarea
+
+
+== "zoovy:prod_meta_desc2" Alt Meta Description #2
+* Type: textarea
+
+
+== "zoovy:prod_meta_desc3" Alt Meta Description #3
+* Type: textarea
+
+
+== "zoovy:prod_meta_desc4" Alt Meta Description #4
+* Type: textarea
+
+
+== "zoovy:prod_meta_desc5" Alt Meta Description #5
+* Type: textarea
+
+
+== "zoovy:prod_mfg_link" Manufacturer cat safe id (ex: dolls_by_maker.adora_limited_edition_dolls)
+* Type: textbox
+
+
+== "zoovy:prod_model" Model
+* Type: textbox
+
+
+== "zoovy:prod_modelid" Product Model #
+* Type: textbox
+
+
+== "zoovy:prod_modified_gmt" Computed field used to store the last time the product was modified.
+* Type: hidden
+
+
+== "zoovy:prod_mpa_rating" MPA Rating
+* Type: select
+* Valid values:
+* "-", "G", "PG", "PG-13", "R", "NC-17", 
+
+
+== "zoovy:prod_msrp"  MSRP
+This is the msrp that will appear crossed out on your website. Saved to product:zoovy:prod_msrp
+* Type: text
+
+
+== "zoovy:prod_notes" Product Notes
+Internal Product Notes (re: inventory/shipping/ordering).
+* Type: textarea
+
+
+== "zoovy:prod_num_units" Number of units per pack
+Enter the total units shipped within a given product (pack).
+* Type: number
+
+
+== "zoovy:prod_number" Number of disks/tapes
+Please enter a the screen format of this movie
+* Type: textbox
+
+
+== "zoovy:prod_oem" OEM Replacement Part #
+* Type: textbox
+
+
+== "zoovy:prod_offer" Extra offer information (shared)
+Add additional product information here, such as Free Shipping or 10% Off.
+* Type: textbox
+
+
+== "zoovy:prod_optionsku" Product Option Buy Buttons
+This is the product description that will appear on your website.
+* Type: text
+
+
+== "zoovy:prod_originalyear" Year Released
+Please enter a the year the movie was released
+* Type: textbox
+
+
+== "zoovy:prod_oz"  Size (oz)
+This is the product Size (oz) that will appear on your website.
+* Type: textbox
+
+
+== "zoovy:prod_packagedeal" Product List: Package Deal
+* Type: prodlist
+
+
+== "zoovy:prod_packagedeal_list" Package Deal Skus - max 3 (Comma Separated List)
+* Type: textbox
+
+
+== "zoovy:prod_pages" Pages
+Used to describe Media (this attribute should be a number!)
+* Type: text
+* Max Length: 5
+
+
+== "zoovy:prod_partnum" 
+Use only if there is an additional part number which is different than the manufacturers product id.
+* Type: textbox
+
+
+== "zoovy:prod_primary_category" Primary Category
+* Type: textbox
+
+
+== "zoovy:prod_private_note" Private Notes about this product (not displayed on site)
+* Type: textarea
+
+
+== "zoovy:prod_prodlist" Product List
+* Type: finder
+
+
+== "zoovy:prod_prodlist2" Product List #2
+* Type: finder
+
+
+== "zoovy:prod_prodlist2_style" Product List: More Matching Pieces
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist6_style" Product List: Recently Viewed Items
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist7_style" Product List: Items from same categories
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style1" Product List 1
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style2" Product List - Accessories
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style3" Product List 3
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style4" Product List 4
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style5" Product List 5
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style6" Product List 6
+* Type: prodlist
+
+
+== "zoovy:prod_prodlist_style7" Product List 7
+* Type: prodlist
+
+
+== "zoovy:prod_producer" Producer
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_profile" Product Shipping Profile
+If the item ships via ground, second day and next day, then you should check this box. Otherwise, leave it unchecked for big ticket item shipping. (info for import: 0 - big item, 1 = small item. Field = product:zoovy:prod_profile. Any value besides 0 or 1 may break shipping)
+* Type: select
+* Valid values:
+
+
+== "zoovy:prod_promoclass" Product Promotion Class
+* Type: text
+
+
+== "zoovy:prod_publisher" Publisher
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_publishyear" Year Released
+Please enter a the year the movie was released
+* Type: textbox
+
+
+== "zoovy:prod_qty_ordered" Product Quantity Ordered
+Quantity of Product that was reordered (from Supplier)
+* Type: textbox
+
+
+== "zoovy:prod_rank" Product Rank
+a merchant set number that represents how popular a product is (more is better)
+* Type: textbox
+
+
+== "zoovy:prod_rating" MPAA Rating
+This is the Rating the movie was given by the MPAA.
+* Type: text
+
+
+== "zoovy:prod_rec_ages" Recommended Ages: 
+* Type: textbox
+
+
+== "zoovy:prod_release" Release Date
+* Type: textbox
+
+
+== "zoovy:prod_release year" Year Released on Video/DVD
+Please enter a the year the movie was released
+* Type: textbox
+
+
+== "zoovy:prod_release_date" Release Date (Format: MM/DD/YYYY)
+* Type: textbox
+
+
+== "zoovy:prod_releasedate" Date the movie was released
+This is the date upon which the movie was released
+* Type: text
+
+
+== "zoovy:prod_rev" Zoovy Internal Version # for Product Data Storage - DO NOT UPDATE
+* Type: hidden
+
+
+== "zoovy:prod_reviews" 
+* Type: reviews
+
+
+== "zoovy:prod_runtime" Approx. running time
+Please enter the approximate running time of this movie.
+* Type: textbox
+
+
+== "zoovy:prod_sale_ends" Sale Expiration (should be formatted as YYYY/MM/DD)
+* Type: textbox
+
+
+== "zoovy:prod_salesrank" Sales Rank (uses zoovy:prod_salesrank)
+a user defined field, typically used for date (formatted as YYYYMMDD) for sorting purposes on the storefront. value MUST be a number.
+* Type: textbox
+
+
+== "zoovy:prod_sariwidth" Sari Width (optional)
+This is the width of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_sdesc" Synopsis (shared)
+This is the synopsis of the movie.
+* Type: text
+
+
+== "zoovy:prod_seo_priority" Sitemap Priority
+A two digit precision number between 0.01 and 1.00
+* Type: number
+
+
+== "zoovy:prod_seo_title" SEO Meta Title
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_seo_title1" Alt SEO Meta Title #1
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_seo_title2" Alt SEO Meta Title #2
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_seo_title3" Alt SEO Meta Title #3
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_seo_title4" Alt SEO Meta Title #4
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_seo_title5" Alt SEO Meta Title #5
+* Type: text
+* Max Length: 1024
+
+
+== "zoovy:prod_ship_message" Shipping Message
+Please enter the shipping message
+* Type: textbox
+
+
+== "zoovy:prod_shipgraphic" Shipping Graphic
+* Type: select
+* Valid values:
+
+
+== "zoovy:prod_shiptext" Shipping Text (will ship in X days)
+* Type: textbox
+
+
+== "zoovy:prod_shortdesc" Short Product Description (for use in lists and at top of product page)
+* Type: text
+
+
+== "zoovy:prod_show_msrp" Show MSRP/Savings
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_show_no_price" Dont show price Text
+* Type: textbox
+
+
+== "zoovy:prod_showquantity_prompt" Prompt for the quantity box
+* Type: textbox
+
+
+== "zoovy:prod_sizecolor" Product Size and Color
+Please enter the size/color of this item (optional - Do NOT use this if you have specified the stand alone color and/or size for this product).
+* Type: textbox
+
+
+== "zoovy:prod_sizing" Sizing
+* Type: textbox
+
+
+== "zoovy:prod_sizingchart_link" Link to Sizing Chart
+paste in the link to the sizing chart
+* Type: textbox
+
+
+== "zoovy:prod_skintype" Skin Type
+* Type: textbox
+
+
+== "zoovy:prod_solutions" Solutions
+* Type: textbox
+
+
+== "zoovy:prod_sound_stereo" Sound: Stereo Encoding
+* Type: checkbox
+* True: "1"
+* False: "0"
+
+
+== "zoovy:prod_specs" link for specifications doc
+Paste in the link for the specifications doc and the system will generate the button and link to that doc in a new window.
+* Type: textbox
+
+
+== "zoovy:prod_starring" Starring
+* Type: text
+
+
+== "zoovy:prod_stars" Stars in the movie
+This is a comma seperated list of the stars in the movie
+* Type: text
+
+
+== "zoovy:prod_studio" Studio: 
+Please enter a the writer of this product
+* Type: textbox
+
+
+== "zoovy:prod_styles" Styles:
+* Type: textbox
+
+
+== "zoovy:prod_subhead" Subheading.
+This is the optional subheading. This should be very short. 1 line max.
+* Type: textbox
+
+
+== "zoovy:prod_supplier" Product Supplier (must be a valid SUPPLY CHAIN code)
+* Type: text
+* Input Size: 10
+
+
+== "zoovy:prod_supplierid" Product Supplier ID/SKU
+* Type: text
+* Input Size: 20
+
+
+== "zoovy:prod_synopsis" Synopsis (shared)
+This is the synopsis of the movie.
+* Type: text
+
+
+== "zoovy:prod_tags" Product Tags
+a space or comma separated list of words which will be used to search for this product
+* Type: textarea
+
+
+== "zoovy:prod_text3" 
+* Type: text
+
+
+== "zoovy:prod_text4" 
+* Type: text
+
+
+== "zoovy:prod_text5" 
+* Type: text
+
+
+== "zoovy:prod_thumb" Product Image Thumbnail
+only set this if you plan to use a different image for your product thumbnail
+* Type: image
+
+
+== "zoovy:prod_tiebacks" Product Tiebacks (optional)
+This is the tiebacks of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_top" Top (optional)
+* Type: textbox
+
+
+== "zoovy:prod_tracks" Tracks
+Please enter a the number of tracks on this album
+* Type: textbox
+
+
+== "zoovy:prod_type" Type
+* Type: textbox
+
+
+== "zoovy:prod_ugenre" Unstructured Genre
+Used in the old media package. prod_genre was left alone so we could add something more structured later.
+* Type: text
+
+
+== "zoovy:prod_unit" Unit (optional)
+This is the Unit of the product (optional)
+* Type: textbox
+
+
+== "zoovy:prod_upc" Product UPC
+UPC (Universal Product Code)
+* Type: textbox
+
+
+== "zoovy:prod_url_pdf" Download PDF URL (just the url)
+* Type: textbox
+
+
+== "zoovy:prod_url_redir" URL of page that is linked to
+* Type: textbox
+
+
+== "zoovy:prod_url_sizechart" Sizing Chart url (will open link in popup window) [ zoovy:prod_url_sizechart ]
+* Type: textbox
+
+
+== "zoovy:prod_utype" Clothing Type
+* Type: textbox
+
+
+== "zoovy:prod_video_utube" YouTube Video ID (ex: 6QAE9crPHOY )
+* Type: textbox
+
+
+== "zoovy:prod_warning" Product Warning
+Used to describe any warning associated with the Product
+* Type: text
+* Input Size: 45
+
+
+== "zoovy:prod_warranties" Product List: Warranties
+* Type: finder
+
+
+== "zoovy:prod_warranties_list" Extended Warranties (Comma Separated List)
+* Type: textbox
+
+
+== "zoovy:prod_warranty" Warranty
+This is the product warranty that will appear on your website.
+* Type: textbox
+
+
+== "zoovy:prod_weight" Product Weight
+Weight of just the product (not the package it's shipped in). Used for fulfillment.
+* Type: textbox
+
+
+== "zoovy:prod_width" Product Width
+Width of just the product (not the package it's shipped in). Used for fulfillment.
+* Type: textbox
+
+
+== "zoovy:prod_writer" Writer
+Used to describe Media.
+* Type: text
+
+
+== "zoovy:prod_year" Year Released
+Please enter a the year the movie was released
+* Type: textbox
+
+
+== "zoovy:prodlist" Product Listing
+* Type: prodlist
+
+
+== "zoovy:prodlist1_style" Product List
+* Type: prodlist
+
+
+== "zoovy:prodlist_custom" Product List: Deal of the Day
+* Type: prodlist
+
+
+== "zoovy:prodlist_featured" Related Items
+* Type: prodlist
+
+
+== "zoovy:prodlist_related" Related Items
+* Type: prodlist
+
+
+== "zoovy:profile" 
+* Type: profile
+
+
+== "zoovy:qty_price" Quantity Discount
+* Type: qtyprice
+
+
+== "zoovy:qty_price_txt" Quantity Pricing Text (appears in tab)
+* Type: text
+
+
+== "zoovy:redir_url" Redirect URL
+the url this product will redirect to (requires API2 bundle)
+* Type: textbox
+* Max Length: 128
+
+
+== "zoovy:relatedheading" Product List Heading
+This test appears above the product list
+* Type: text
+
+
+== "zoovy:ship2_cost" Shipping Cost 2 (second day/front door)
+* Type: textbox
+
+
+== "zoovy:ship_can_cost1" Canada Shipping 1st Item
+* Type: textbox
+
+
+== "zoovy:ship_can_cost2" Canada Shipping (additional item)
+* Type: readonly
+
+
+== "zoovy:ship_cost" Shipping Costs
+* Type: textbox
+
+
+== "zoovy:ship_cost1" Flat Shipping Cost (first item)
+* Type: currency
+
+
+== "zoovy:ship_cost2" Flat Shipping Cost (additional item)
+* Type: currency
+
+
+== "zoovy:ship_cutoff" Shipping Cutoff Time hh:mm
+* Type: time
+
+
+== "zoovy:ship_expcost1" Flat Expedited Shipping Cost (first item)
+* Type: currency
+
+
+== "zoovy:ship_expcost2" Flat Expedited Shipping Cost (additional item)
+* Type: currency
+
+
+== "zoovy:ship_int_cost1" International Shipping
+* Type: currency
+
+
+== "zoovy:ship_int_cost2" International Shipping (addt. item)
+* Type: currency
+
+
+== "zoovy:ship_latency" Shipping Latency in days
+* Type: number
+
+
+== "zoovy:ship_mfgcountry" Country of Manufacturer
+* Type: country
+
+
+== "zoovy:ship_nmfccode" National Motor Freight Classification code
+* Type: textbox
+
+
+== "zoovy:ship_origin" Shipping Country|State|Zip ex:US|CA|92008
+* Type: origin
+
+
+== "zoovy:ship_sortclass" shipping sort classification
+* Type: textbox
+
+
+== "zoovy:ship_weight" 
+Shipping Weight (typically only necessary if base weight does not include packaging)
+* Type: textbox
+
+
+== "zoovy:shipping_info" Shipping and Tax
+* Type: textarea
+
+
+== "zoovy:shorttitle" product:zoovy:shorttitle E
+* Type: textbox
+
+
+== "zoovy:sku_pogdesc" SKU Specific Product Description (appended to product title)
+* Type: textbox
+
+
+== "zoovy:szchart" 
+* Type: if
+
+
+== "zoovy:taxable" 
+* Type: boolean
+
+
+== "zoovy:test" Text Test
+* Type: text
+* Max Length: 45
+
+
+== "zoovy:text55" Other Text
+A URL you paste in here will be linked to on the corresponding image. You need only to put the destination URL and use the proper Zoovy linking syntax. (%SESSION%/category/category.safe.name)<br><br>Go to webdoc #50355 for more information on how to properly set up your links.<br>
+* Type: text
+
+
+== "zoovy:type" TYPE
+This is the TYPE OF BUTTON that will appear on your website.
+* Type: text
+
+
+== "zoovy:virtual" Supply Chain Shipping Config
+Tells Zoovy to enable supply chain, and provides hints about supply chain configuration.
+* Type: text
+* Input Size: 20
+
+
+
+
+================================================================================================
+Profile (Inherited) Fields
+
+== "authnet:html" Authorize.net Seal Code
+* Type: textarea
+
+
+== "bbbonline:id" BBB ID
+* Type: textbox
+
+
+== "blog:url" Blog URL
+* Type: textbox
+* Max Length: 200
+
+
+== "ebay:autopay" 
+* Type: boolean
+
+
+== "ebay:buyreq_linkedpaypal" 
+* Type: boolean
+
+
+== "ebay:buyreq_maxitemcount" 
+* Type: boolean
+
+
+== "ebay:buyreq_maxupistrikes" 
+* Type: boolean
+
+
+== "ebay:buyreq_minfeedback" 
+* Type: boolean
+
+
+== "ebay:counter" 
+eBay Visitor Counter
+* Type: chooser/counter
+
+
+== "ebay:dispatchmaxtime" 
+maximum business-days before the item ships
+* Type: boolean
+
+
+== "ebay:duration" 
+Default eBay Listing Duration
+* Type: selectreset
+
+
+== "ebay:fixed_duration" 
+Default eBay Fixed Listing Duration
+* Type: selectreset
+
+
+== "ebay:getitfast" 
+see ebay "get it fast" terms
+* Type: boolean
+
+
+== "ebay:location" 
+Location text describing where the item ships from
+* Type: textbox
+
+
+== "ebay:lotsize" 
+How many units are included in the listing
+* Type: textbox
+
+
+== "ebay:minsellprice" 
+* Type: currency
+
+
+== "ebay:motor_buyer_does_shipping" 
+* Type: boolean
+
+
+== "ebay:motor_limited_warranty" 
+* Type: boolean
+
+
+== "ebay:now_and_new" 
+see ebay "now and new" terms
+* Type: boolean
+
+
+== "ebay:pay_amex" 
+* Type: 
+
+
+== "ebay:pay_cashonpickup" 
+* Type: 
+
+
+== "ebay:pay_check" 
+* Type: 
+
+
+== "ebay:pay_cod" 
+* Type: 
+
+
+== "ebay:pay_codprepay" 
+* Type: 
+
+
+== "ebay:pay_discover" 
+* Type: 
+
+
+== "ebay:pay_escrow" 
+* Type: 
+
+
+== "ebay:pay_mocc" 
+* Type: 
+
+
+== "ebay:pay_moneyxfer" 
+* Type: 
+
+
+== "ebay:pay_moneyxfercheckout" 
+* Type: 
+
+
+== "ebay:pay_motor_cash" 
+* Type: 
+
+
+== "ebay:pay_motor_loancheck" 
+* Type: 
+
+
+== "ebay:pay_none" 
+* Type: 
+
+
+== "ebay:pay_other" 
+* Type: 
+
+
+== "ebay:pay_otheronline" 
+* Type: 
+
+
+== "ebay:pay_paisapay" 
+* Type: 
+
+
+== "ebay:pay_paypal" 
+* Type: 
+
+
+== "ebay:pay_postaltransfer" 
+* Type: 
+
+
+== "ebay:pay_seeitem" 
+* Type: 
+
+
+== "ebay:pay_visamc" 
+* Type: 
+
+
+== "ebay:refund_policy" 
+* Type: 
+
+
+== "ebay:return_acceptpolicy" 
+* Type: 
+
+
+== "ebay:return_desc" 
+* Type: 
+
+
+== "ebay:return_refundpolicy" 
+* Type: 
+
+
+== "ebay:return_shipcostpolicy" 
+* Type: 
+
+
+== "ebay:return_withinpolicy" 
+* Type: 
+
+
+== "ebay:salestaxpercent" 
+* Type: number
+
+
+== "ebay:salestaxstate" 
+* Type: 
+
+
+== "ebay:ship_dominsfee" eBay Domestic Insurance Fee
+* Type: currency
+
+
+== "ebay:ship_dominstype" eBay Domestic Insurance Setting
+* Type: text
+
+
+== "ebay:ship_dompkghndcosts" eBay Domestic Packaging and Handling Costs
+* Type: currency
+
+
+== "ebay:ship_domservices" 
+contains a uri encoded string which specifies various ebay shipping options
+* Type: textarea
+
+
+== "ebay:ship_intinsfee" eBay International Insurance Fee
+* Type: currency
+
+
+== "ebay:ship_intinstype" eBay International Insurance Setting
+* Type: text
+
+
+== "ebay:ship_intlocations" 
+* Type: textarea
+
+
+== "ebay:ship_intpkghndcosts" eBay International Packaging and Handling Costs
+* Type: currency
+
+
+== "ebay:ship_intservices" 
+* Type: textarea
+
+
+== "ebay:ship_markup" eBay Fixed Shipping Markup
+An additional amount in dollars that will be added to fixed price shipping cost for both first and second items. Particularly useful when ebay:ship_cost1, and ebay:ship_cost2 are left blank, so zoovy:ship_cost1, and zoovy:ship_cost2 are used. For eBay calculated shipping methods this field is ignored - however ebay:base_weight can be used to send an alternate (higher) weight for eBay thus accomplishing the same result.
+* Type: currency
+
+
+== "ebay:ship_originzip" 
+Shipping Origin (zip code) for the product
+* Type: textbox
+
+
+== "ebay:ship_packagetype" eBay Package Type
+see eBay documentation for CalculatedShippingRate.ShippingPackage
+* Type: 
+
+
+== "ebay:ship_tax" 
+* Type: 
+
+
+== "ebay:skypeid" 
+* Type: textbox
+* Max Length: 50
+
+
+== "ebay:use_bestoffer" BestOffer Enabled
+should we allow best offers from buyers
+* Type: boolean
+
+
+== "ebay:use_taxtable" 
+* Type: boolean
+
+
+== "ebay:zip" 
+* Type: 
+
+
+== "googlets:badge_code" Google Trusted Stores Decal/Badge Code
+* Type: textarea
+
+
+== "googlets:chkout_code" Google Trusted Stores Checkout Code
+* Type: textarea
+
+
+== "googlets:search_account_id" Google Trusted Stores Search Account ID
+* Type: textbox
+
+
+== "zoovy:paypalemail" 
+Paypal Email Address
+* Type: 
+
+
+== "zoovy:prod_gender" Product Gender
+Indicates the gender the product is marketed towards
+* Type: textbox
+
+
+== "zoovy:prod_size" Product Size
+Used with grouped products or where products are only avail in one size.
+* Type: textbox
+
+
+== "zoovy:prod_sizetip" Product Size Tip
+Used when more information is needed about a product size.
+* Type: textbox
+
+
+
+
+================================================================================================
+Deprecated/Obsolete Fields
+
+== "amz:grp_varkey_value" 
+* Type: legacy
+
+
+== "amz:item_type" 
+* Type: legacy
+
+
+== "amz:key_feature" 
+* Type: legacy
+
+
+== "amz:product_type" 
+* Type: legacy
+
+
+== "amz:quantity" 
+* Type: legacy
+
+
+== "amz:search_terms" 
+* Type: legacy
+
+
+== "amz:so_amount1" 
+* Type: legacy
+
+
+== "amz:so_donotship1" 
+* Type: legacy
+
+
+== "amz:so_donotship2" 
+* Type: legacy
+
+
+== "amz:so_locale1" 
+* Type: legacy
+
+
+== "amz:so_locale2" 
+* Type: legacy
+
+
+== "amz:so_service_level1" 
+* Type: legacy
+
+
+== "amz:so_service_level2" 
+* Type: legacy
+
+
+== "amz:so_ship_option1" 
+* Type: legacy
+
+
+== "amz:so_ship_option2" 
+* Type: legacy
+
+
+== "amz:so_shipoption1" 
+* Type: legacy
+
+
+== "amz:so_shipoption2" 
+* Type: legacy
+
+
+== "amz:so_type" 
+* Type: legacy
+
+
+== "amz:thesaurus" 
+* Type: legacy
+
+
+== "amzsearch_terms2" 
+* Type: legacy
+
+
+== "audiovideo:prod_included" 
+* Type: legacy
+
+
+== "audiovideo:prod_rebates" 
+* Type: legacy
+
+
+== "babology:brandlogo" 
+* Type: legacy
+
+
+== "babology:brandpage" 
+* Type: legacy
+
+
+== "babology:shipimage" 
+* Type: legacy
+
+
+== "beachmart:prod_bundles" 
+* Type: legacy
+
+
+== "beachmart:prod_colors" 
+* Type: legacy
+
+
+== "beachmart:prod_enable_colors" 
+* Type: legacy
+
+
+== "beachmart:prod_promo" 
+* Type: legacy
+
+
+== "beachmart:prod_shipping" 
+* Type: legacy
+
+
+== "beachmart:prod_shipping_msg" 
+* Type: legacy
+
+
+== "beachmart:prod_sizing" 
+* Type: legacy
+
+
+== "beachmart:prod_sizing_img" 
+* Type: legacy
+
+
+== "beautymart:prod_directions" 
+* Type: legacy
+
+
+== "become:category" 
+* Type: legacy
+
+
+== "beltsandmore:prod_original_price" 
+* Type: legacy
+
+
+== "bestseller" 
+* Type: legacy
+
+
+== "bizrate:bid" 
+* Type: legacy
+
+
+== "bizrate:category" 
+* Type: legacy
+
+
+== "buy:category" 
+* Type: legacy
+
+
+== "buy:dbmap" 
+* Type: legacy
+
+
+== "buy:listingid" 
+* Type: legacy
+
+
+== "buy:store_code" 
+* Type: legacy
+
+
+== "buycom:age_range" 
+* Type: legacy
+
+
+== "buycom:agesegment" 
+* Type: legacy
+
+
+== "buycom:apparel_material" 
+* Type: legacy
+
+
+== "buycom:apparelmaterial" 
+* Type: legacy
+
+
+== "buycom:assembled_dimension_height_in" 
+* Type: legacy
+
+
+== "buycom:assembled_dimension_length_in" 
+* Type: legacy
+
+
+== "buycom:assembled_dimension_width_in" 
+* Type: legacy
+
+
+== "buycom:assembly_level" 
+* Type: legacy
+
+
+== "buycom:assembly_required" 
+* Type: legacy
+
+
+== "buycom:batteries_required" 
+* Type: legacy
+
+
+== "buycom:battery_quantity" 
+* Type: legacy
+
+
+== "buycom:battery_type_required" 
+* Type: legacy
+
+
+== "buycom:bowl_type" 
+* Type: legacy
+
+
+== "buycom:category" 
+* Type: legacy
+
+
+== "buycom:chair_type" 
+* Type: legacy
+
+
+== "buycom:character_name" 
+* Type: legacy
+
+
+== "buycom:character_series" 
+* Type: legacy
+
+
+== "buycom:character_series_type" 
+* Type: legacy
+
+
+== "buycom:color" 
+* Type: legacy
+
+
+== "buycom:color_class" 
+* Type: legacy
+
+
+== "buycom:colorclass" 
+* Type: legacy
+
+
+== "buycom:costumes_age_segment" 
+* Type: legacy
+
+
+== "buycom:costumes_color" 
+* Type: legacy
+
+
+== "buycom:costumes_color_class" 
+* Type: legacy
+
+
+== "buycom:costumes_costume_theme" 
+* Type: legacy
+
+
+== "buycom:costumes_gender" 
+* Type: legacy
+
+
+== "buycom:costumes_material" 
+* Type: legacy
+
+
+== "buycom:costumes_occasion" 
+* Type: legacy
+
+
+== "buycom:costumes_size" 
+* Type: legacy
+
+
+== "buycom:costumes_size_Women" 
+* Type: legacy
+
+
+== "buycom:costumes_size_boys" 
+* Type: legacy
+
+
+== "buycom:costumes_size_children" 
+* Type: legacy
+
+
+== "buycom:costumes_size_girls" 
+* Type: legacy
+
+
+== "buycom:costumes_size_infant" 
+* Type: legacy
+
+
+== "buycom:costumes_size_infants" 
+* Type: legacy
+
+
+== "buycom:costumes_size_junior" 
+* Type: legacy
+
+
+== "buycom:costumes_size_men" 
+* Type: legacy
+
+
+== "buycom:costumes_size_misses" 
+* Type: legacy
+
+
+== "buycom:costumes_size_toddler" 
+* Type: legacy
+
+
+== "buycom:costumes_sizecode_child" 
+* Type: legacy
+
+
+== "buycom:dbmap" 
+* Type: legacy
+
+
+== "buycom:error" 
+* Type: legacy
+
+
+== "buycom:eyeweartype" 
+* Type: legacy
+
+
+== "buycom:furniture_material" 
+* Type: legacy
+
+
+== "buycom:furniture_style" 
+* Type: legacy
+
+
+== "buycom:game_type" 
+* Type: legacy
+
+
+== "buycom:gender" 
+* Type: legacy
+
+
+== "buycom:glass_type" 
+* Type: legacy
+
+
+== "buycom:listingid" 
+* Type: legacy
+
+
+== "buycom:material" 
+* Type: legacy
+
+
+== "buycom:plate_type" 
+* Type: legacy
+
+
+== "buycom:prod_age_segment" 
+* Type: legacy
+
+
+== "buycom:prod_color" 
+* Type: legacy
+
+
+== "buycom:prod_color_class" 
+* Type: legacy
+
+
+== "buycom:prod_desc" 
+* Type: legacy
+
+
+== "buycom:prod_gender" 
+* Type: legacy
+
+
+== "buycom:prod_hat_type" 
+* Type: legacy
+
+
+== "buycom:prod_jacket_buttons" 
+* Type: legacy
+
+
+== "buycom:prod_mlb_team" 
+* Type: legacy
+
+
+== "buycom:prod_neck_type" 
+* Type: legacy
+
+
+== "buycom:prod_nfl_team" 
+* Type: legacy
+
+
+== "buycom:prod_size" 
+* Type: legacy
+
+
+== "buycom:safety_warning" 
+* Type: legacy
+
+
+== "buycom:ship_cost1if" 
+* Type: legacy
+
+
+== "buycom:ships_in_original_container" 
+* Type: legacy
+
+
+== "buycom:shirttype" 
+* Type: legacy
+
+
+== "buycom:size" 
+* Type: legacy
+
+
+== "buycom:size_boys" 
+* Type: legacy
+
+
+== "buycom:size_men" 
+* Type: legacy
+
+
+== "buycom:size_mens" 
+* Type: legacy
+
+
+== "buycom:sizecode_men" 
+* Type: legacy
+
+
+== "buycom:sizecode_women" 
+* Type: legacy
+
+
+== "buycom:sleevetype" 
+* Type: legacy
+
+
+== "buycom:toplength" 
+* Type: legacy
+
+
+== "buycom:vehicle_type" 
+* Type: legacy
+
+
+== "caboots:prodmfgtype" 
+* Type: legacy
+
+
+== "creative:ebay_desc" 
+* Type: legacy
+
+
+== "cubworld:featured" 
+* Type: legacy
+
+
+== "cubworld:hidden" 
+* Type: legacy
+
+
+== "cubworld:order_num" 
+* Type: legacy
+
+
+== "cubworld:page_ids" 
+* Type: legacy
+
+
+== "cubworld:price_colors" 
+* Type: legacy
+
+
+== "cubworld:price_sizes" 
+* Type: legacy
+
+
+== "cubworld:product_option_ids" 
+* Type: legacy
+
+
+== "cubworld:select_colors" 
+* Type: legacy
+
+
+== "cubworld:select_sizes" 
+* Type: legacy
+
+
+== "cubworld:updated" 
+* Type: legacy
+
+
+== "cypherstyles:prod_cruxy_link" 
+* Type: legacy
+
+
+== "cypherstyles:youtube_embed" 
+* Type: legacy
+
+
+== "cypherstyles:youtube_url" 
+* Type: legacy
+
+
+== "d2bs:actual_upc" 
+* Type: legacy
+
+
+== "discountgunmart:catid" 
+* Type: legacy
+
+
+== "eaglelight:prod_savingstext" 
+* Type: legacy
+
+
+== "ebates:ts" 
+* Type: legacy
+
+
+== "ebay:buyitnow_price" 
+eBay Auction Buy-It-Now Price
+* Type: currency
+
+
+== "ebay:buytinow_price" 
+* Type: legacy
+
+
+== "ebay:fixed_price" 
+eBay Item Fixed Price
+* Type: currency
+
+
+== "ebay:instant_paypal" 
+Enable Paypal Instant Payment Upon eBay Checkout
+* Type: boolean
+
+
+== "ebay:motors_terms" 
+eBay Motors Terms and Conditions
+* Type: textbox
+
+
+== "ebay:power_maxlist" 
+* Type: legacy
+
+
+== "ebay:power_ttl" 
+* Type: legacy
+
+
+== "ebay:prod_ebay_promo_text" 
+* Type: legacy
+
+
+== "ebay:reserve_price" 
+eBay Auction Reserve Price
+* Type: currency
+
+
+== "ebay:secondchance" 
+Enable Second Chance Offers
+* Type: 
+
+
+== "ebay:start_price" 
+eBay Auction Start Price
+* Type: currency
+
+
+== "ebay:startprice" 
+* Type: legacy
+
+
+== "etilize:category" 
+* Type: legacy
+
+
+== "etilize:mfgpartno" 
+* Type: legacy
+
+
+== "etilize:product_id" 
+* Type: legacy
+
+
+== "etilize:tech_specs" 
+* Type: legacy
+
+
+== "g:brand" 
+* Type: legacy
+
+
+== "g:product_type" 
+* Type: legacy
+
+
+== "gbase:product_name" 
+* Type: legacy
+
+
+== "gbase:product_type5" 
+* Type: legacy
+
+
+== "gbase:product_type6" 
+* Type: legacy
+
+
+== "gkworld:prod_condition" 
+* Type: legacy
+
+
+== "gkworld:prod_esrb" 
+* Type: legacy
+
+
+== "gkworld:prod_genre" 
+* Type: legacy
+
+
+== "gkworld:prod_manufacturer" 
+* Type: legacy
+
+
+== "gkworld:prod_mpn" 
+* Type: legacy
+
+
+== "gkworld:prod_note" 
+* Type: legacy
+
+
+== "gkworld:prod_platform" 
+* Type: legacy
+
+
+== "gkworld:prod_publisher" 
+* Type: legacy
+
+
+== "gkworld:prod_release" 
+* Type: legacy
+
+
+== "gogoods:availability" 
+* Type: legacy
+
+
+== "gogoods:availability_date" 
+* Type: legacy
+
+
+== "gogoods:base_weight" 
+* Type: legacy
+
+
+== "gogoods:category" 
+* Type: legacy
+
+
+== "gogoods:color" 
+* Type: legacy
+
+
+== "gogoods:country_of_origin" 
+* Type: legacy
+
+
+== "gogoods:cubed_weight" 
+* Type: legacy
+
+
+== "gogoods:dimensions" 
+* Type: legacy
+
+
+== "gogoods:ean" 
+* Type: legacy
+
+
+== "gogoods:embed" 
+* Type: legacy
+
+
+== "gogoods:features" 
+* Type: legacy
+
+
+== "gogoods:includes" 
+* Type: legacy
+
+
+== "gogoods:is_recyclable" 
+* Type: legacy
+
+
+== "gogoods:links" 
+* Type: legacy
+
+
+== "gogoods:location_zip" 
+* Type: legacy
+
+
+== "gogoods:map" 
+* Type: legacy
+
+
+== "gogoods:material" 
+* Type: legacy
+
+
+== "gogoods:msrp" 
+* Type: legacy
+
+
+== "gogoods:pricetext" 
+* Type: legacy
+
+
+== "gogoods:prod_origin" 
+* Type: legacy
+
+
+== "gogoods:prod_weight" 
+* Type: legacy
+
+
+== "gogoods:review" 
+* Type: legacy
+
+
+== "gogoods:ship_2day" 
+* Type: legacy
+
+
+== "gogoods:ship_3day" 
+* Type: legacy
+
+
+== "gogoods:ship_airmail" 
+* Type: legacy
+
+
+== "gogoods:ship_method" 
+* Type: legacy
+
+
+== "gogoods:ship_nextday" 
+* Type: legacy
+
+
+== "gogoods:ship_saturday" 
+* Type: legacy
+
+
+== "gogoods:size" 
+* Type: legacy
+
+
+== "gogoods:subcategory" 
+* Type: legacy
+
+
+== "gogoods:updated" 
+* Type: legacy
+
+
+== "gogoods:warning" 
+* Type: legacy
+
+
+== "greatlookz:prod_sizechart" 
+* Type: legacy
+
+
+== "hsn:category" 
+* Type: legacy
+
+
+== "ibuystores:prod_url_pdf_specs" 
+* Type: legacy
+
+
+== "is:refurb" 
+* Type: legacy
+
+
+== "jellyfish:commission" 
+* Type: legacy
+
+
+== "jellyfish:ts" 
+* Type: legacy
+
+
+== "ledinsider:prod_usermanual_url" 
+* Type: legacy
+
+
+== "media:ts" 
+* Type: legacy
+
+
+== "nextag:cpc_rate" 
+* Type: legacy
+
+
+== "nextag:max_cpc" 
+* Type: legacy
+
+
+== "nextag:muze_id" 
+* Type: legacy
+
+
+== "pricegrabber:category" 
+* Type: legacy
+
+
+== "pricegrabber:condition" 
+* Type: legacy
+
+
+== "pricegrabber:masterid" 
+* Type: legacy
+
+
+== "pricegrabber:ship_fixedamt" 
+* Type: legacy
+
+
+== "product:user:prod_store_desc" 
+* Type: legacy
+
+
+== "pronto:category_id" 
+* Type: legacy
+
+
+== "racewax:product_use" 
+* Type: legacy
+
+
+== "replaceyourcell:prod_carrier" 
+* Type: legacy
+
+
+== "sas:cat" 
+* Type: legacy
+
+
+== "sas:merc_id" 
+* Type: legacy
+
+
+== "sas:product_url" 
+* Type: legacy
+
+
+== "sas:sub_cat" 
+* Type: legacy
+
+
+== "sas:ts" 
+* Type: legacy
+
+
+== "sfplanet:prod_clearance" 
+* Type: legacy
+
+
+== "shopcom:ts" 
+* Type: legacy
+
+
+== "shopping:category" 
+* Type: legacy
+
+
+== "shopping:inventory" 
+* Type: legacy
+
+
+== "shopping:prodtype" 
+* Type: legacy
+
+
+== "shopping:ship_2day" 
+* Type: legacy
+
+
+== "shopping:ship_ground" 
+* Type: legacy
+
+
+== "shopzilla:category" 
+* Type: legacy
+
+
+== "smarter:ts" 
+* Type: legacy
+
+
+== "speedaddictcycles:prod_grpchildren_title" 
+* Type: legacy
+
+
+== "thechessstore:prod_caption" 
+* Type: legacy
+
+
+== "thechessstore:prod_imagedesc" 
+* Type: legacy
+
+
+== "thechessstore:prod_imagedesc2" 
+* Type: legacy
+
+
+== "thechessstore:prod_minitext" 
+* Type: legacy
+
+
+== "thechessstore:prod_specialtext" 
+* Type: legacy
+
+
+== "thechessstore:specifications" 
+* Type: legacy
+
+
+== "thegoodtimber:fl_p_header_detail" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_caption" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_clearance" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_desc2" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_dimensions" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_disclaimer" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_ebaydesc" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_url_addon" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_url_collection" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_url_constr" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_url_shipping" 
+* Type: legacy
+
+
+== "thegoodtimber:prod_url_swatches" 
+* Type: legacy
+
+
+== "toolprice:shipping" 
+* Type: legacy
+
+
+== "usfreight:prod_seo1" 
+* Type: legacy
+
+
+== "usfreight:prod_seo2" 
+* Type: legacy
+
+
+== "usfreight:shipping" 
+* Type: legacy
+
+
+== "zephyrsports:prod_children_title" 
+* Type: legacy
+
+
+== "zoovy:catalog" 
+* Type: legacy
+
+
+== "zoovy:category" 
+* Type: legacy
+
+
+== "zoovy:cost" 
+* Type: legacy
+
+
+== "zoovy:dbmap" 
+* Type: legacy
+
+
+== "zoovy:depth" 
+* Type: legacy
+
+
+== "zoovy:footer_text" 
+* Type: legacy
+
+
+== "zoovy:gallery" 
+* Type: legacy
+
+
+== "zoovy:gender" 
+* Type: legacy
+
+
+== "zoovy:image1" 
+* Type: legacy
+
+
+== "zoovy:image1cfg" 
+* Type: legacy
+
+
+== "zoovy:image2" 
+* Type: legacy
+
+
+== "zoovy:image6" 
+* Type: legacy
+
+
+== "zoovy:image7" 
+* Type: legacy
+
+
+== "zoovy:image8" 
+* Type: legacy
+
+
+== "zoovy:image9" 
+* Type: legacy
+
+
+== "zoovy:insurance" 
+* Type: legacy
+
+
+== "zoovy:lotnum" 
+* Type: legacy
+
+
+== "zoovy:meta_desc1" 
+* Type: legacy
+
+
+== "zoovy:meta_description" 
+* Type: legacy
+
+
+== "zoovy:meta_keywords" 
+* Type: legacy
+
+
+== "zoovy:mfg" 
+* Type: legacy
+
+
+== "zoovy:mfg_basecost" 
+* Type: legacy
+
+
+== "zoovy:mfg_id" 
+* Type: legacy
+
+
+== "zoovy:mfg_prodname" 
+* Type: legacy
+
+
+== "zoovy:mfg_sku" 
+* Type: legacy
+
+
+== "zoovy:mfgid" 
+* Type: legacy
+
+
+== "zoovy:mfgurl" 
+* Type: legacy
+
+
+== "zoovy:model_list" 
+* Type: legacy
+
+
+== "zoovy:notes" 
+* Type: legacy
+
+
+== "zoovy:notes_default" 
+* Type: legacy
+
+
+== "zoovy:notes_display" 
+* Type: legacy
+
+
+== "zoovy:notes_prompt" 
+* Type: legacy
+
+
+== "zoovy:on_shelf_qty" 
+* Type: legacy
+
+
+== "zoovy:order_apiurl" 
+* Type: legacy
+
+
+== "zoovy:orig_price" 
+* Type: legacy
+
+
+== "zoovy:partnum" 
+* Type: legacy
+
+
+== "zoovy:pkg_length" 
+* Type: legacy
+
+
+== "zoovy:pkg_weight" 
+* Type: legacy
+
+
+== "zoovy:pogcheckout" 
+* Type: legacy
+
+
+== "zoovy:post_desc" 
+* Type: legacy
+
+
+== "zoovy:power_dow" 
+* Type: legacy
+
+
+== "zoovy:power_endtime" 
+* Type: legacy
+
+
+== "zoovy:power_startime" 
+* Type: legacy
+
+
+== "zoovy:prod_accessories" use zoovy:accessory_products
+* Type: legacy
+
+
+== "zoovy:prod_advisory" 
+* Type: legacy
+
+
+== "zoovy:prod_band" 
+* Type: legacy
+
+
+== "zoovy:prod_bandlength" 
+* Type: legacy
+
+
+== "zoovy:prod_bandwidth" 
+* Type: legacy
+
+
+== "zoovy:prod_bgimage1" 
+* Type: legacy
+
+
+== "zoovy:prod_blouse" 
+* Type: legacy
+
+
+== "zoovy:prod_book_condition" 
+* Type: legacy
+
+
+== "zoovy:prod_book_edition" 
+* Type: legacy
+
+
+== "zoovy:prod_book_isbn" 
+* Type: legacy
+
+
+== "zoovy:prod_book_jacket" 
+* Type: legacy
+
+
+== "zoovy:prod_button_addons" 
+* Type: legacy
+
+
+== "zoovy:prod_button_assembly" 
+* Type: legacy
+
+
+== "zoovy:prod_button_collection" 
+* Type: legacy
+
+
+== "zoovy:prod_button_coninfo" 
+* Type: legacy
+
+
+== "zoovy:prod_button_shipping" 
+* Type: legacy
+
+
+== "zoovy:prod_button_swatch" 
+* Type: legacy
+
+
+== "zoovy:prod_calendar" 
+* Type: legacy
+
+
+== "zoovy:prod_casepack" 
+* Type: legacy
+
+
+== "zoovy:prod_ccg_action" 
+* Type: legacy
+
+
+== "zoovy:prod_ccg_border" 
+* Type: legacy
+
+
+== "zoovy:prod_ccg_series" 
+* Type: legacy
+
+
+== "zoovy:prod_clasp" 
+* Type: legacy
+
+
+== "zoovy:prod_condition_note" 
+* Type: legacy
+
+
+== "zoovy:prod_cost" 
+* Type: legacy
+
+
+== "zoovy:prod_cost1" 
+* Type: legacy
+
+
+== "zoovy:prod_country" 
+* Type: legacy
+
+
+== "zoovy:prod_curtainlining" 
+* Type: legacy
+
+
+== "zoovy:prod_curtaintieback" 
+* Type: legacy
+
+
+== "zoovy:prod_curtaintiebackk" 
+* Type: legacy
+
+
+== "zoovy:prod_def" 
+* Type: legacy
+
+
+== "zoovy:prod_depth" 
+* Type: legacy
+
+
+== "zoovy:prod_desc_detailed" 
+* Type: legacy
+
+
+== "zoovy:prod_desc_short" 
+* Type: legacy
+
+
+== "zoovy:prod_description" 
+* Type: legacy
+
+
+== "zoovy:prod_detailed" 
+* Type: legacy
+
+
+== "zoovy:prod_dialcolor" 
+* Type: legacy
+
+
+== "zoovy:prod_diameter" 
+* Type: legacy
+
+
+== "zoovy:prod_disclaimer" 
+* Type: legacy
+
+
+== "zoovy:prod_e_blouse" 
+* Type: legacy
+
+
+== "zoovy:prod_esize" 
+* Type: legacy
+
+
+== "zoovy:prod_ext_warranty" 
+* Type: legacy
+
+
+== "zoovy:prod_fgid" 
+* Type: legacy
+
+
+== "zoovy:prod_frame_material" 
+* Type: legacy
+
+
+== "zoovy:prod_game_console" 
+* Type: legacy
+
+
+== "zoovy:prod_genre" 
+* Type: legacy
+
+
+== "zoovy:prod_hassoftware" 
+* Type: legacy
+
+
+== "zoovy:prod_included" 
+* Type: legacy
+
+
+== "zoovy:prod_inv" 
+* Type: legacy
+
+
+== "zoovy:prod_language" 
+* Type: legacy
+
+
+== "zoovy:prod_lccn" 
+* Type: legacy
+
+
+== "zoovy:prod_lead_time" 
+* Type: legacy
+
+
+== "zoovy:prod_list_style" 
+* Type: legacy
+
+
+== "zoovy:prod_location" 
+* Type: legacy
+
+
+== "zoovy:prod_material" 
+* Type: legacy
+
+
+== "zoovy:prod_meta_desc" 
+* Type: legacy
+
+
+== "zoovy:prod_metal" 
+* Type: legacy
+
+
+== "zoovy:prod_movement" 
+* Type: legacy
+
+
+== "zoovy:prod_mpn" 
+* Type: legacy
+
+
+== "zoovy:prod_mrsp" 
+* Type: legacy
+
+
+== "zoovy:prod_music_artist" 
+* Type: legacy
+
+
+== "zoovy:prod_music_format" 
+* Type: legacy
+
+
+== "zoovy:prod_music_releasedate" 
+* Type: legacy
+
+
+== "zoovy:prod_num" 
+* Type: legacy
+
+
+== "zoovy:prod_oversized" 
+* Type: legacy
+
+
+== "zoovy:prod_price" 
+* Type: legacy
+
+
+== "zoovy:prod_prodlist_style" 
+* Type: legacy
+
+
+== "zoovy:prod_promotxt" 
+* Type: legacy
+
+
+== "zoovy:prod_qty" 
+* Type: legacy
+
+
+== "zoovy:prod_redir" 
+* Type: legacy
+
+
+== "zoovy:prod_redirect" 
+* Type: legacy
+
+
+== "zoovy:prod_region" 
+* Type: legacy
+
+
+== "zoovy:prod_related" 
+* Type: legacy
+
+
+== "zoovy:prod_releaseyear" 
+* Type: legacy
+
+
+== "zoovy:prod_requirements" 
+* Type: legacy
+
+
+== "zoovy:prod_review" 
+* Type: legacy
+
+
+== "zoovy:prod_rss_title" 
+* Type: legacy
+
+
+== "zoovy:prod_sarilength" 
+* Type: legacy
+
+
+== "zoovy:prod_screen" 
+* Type: legacy
+
+
+== "zoovy:prod_sell" 
+* Type: legacy
+
+
+== "zoovy:prod_seo" 
+* Type: legacy
+
+
+== "zoovy:prod_ship_cost" 
+* Type: legacy
+
+
+== "zoovy:prod_ship_note" 
+* Type: legacy
+
+
+== "zoovy:prod_shipcontents" 
+* Type: legacy
+
+
+== "zoovy:prod_short_desc" 
+* Type: legacy
+
+
+== "zoovy:prod_sku" 
+* Type: legacy
+
+
+== "zoovy:prod_sound" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_ac3" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_cx" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_dolby" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_dts" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_summary" 
+* Type: legacy
+
+
+== "zoovy:prod_sound_thx" 
+* Type: legacy
+
+
+== "zoovy:prod_specifications" 
+* Type: legacy
+
+
+== "zoovy:prod_src" 
+* Type: legacy
+
+
+== "zoovy:prod_stamp" 
+* Type: legacy
+
+
+== "zoovy:prod_taxable" 
+* Type: legacy
+
+
+== "zoovy:prod_text2" 
+* Type: legacy
+
+
+== "zoovy:prod_text6" 
+* Type: legacy
+
+
+== "zoovy:prod_textcolor1" 
+* Type: legacy
+
+
+== "zoovy:prod_theme" 
+* Type: legacy
+
+
+== "zoovy:prod_thickness" 
+* Type: legacy
+
+
+== "zoovy:prod_thumb_alt" 
+* Type: legacy
+
+
+== "zoovy:prod_tieback" 
+* Type: legacy
+
+
+== "zoovy:prod_title" 
+* Type: legacy
+
+
+== "zoovy:prod_tracklist" 
+* Type: legacy
+
+
+== "zoovy:prod_ups" 
+* Type: legacy
+
+
+== "zoovy:prod_url_mfg_rebate" 
+* Type: legacy
+
+
+== "zoovy:prod_url_video" 
+* Type: legacy
+
+
+== "zoovy:prod_visa" 
+* Type: legacy
+
+
+== "zoovy:prod_w_lining" 
+* Type: legacy
+
+
+== "zoovy:prod_w_top" 
+* Type: legacy
+
+
+== "zoovy:proddesc" 
+* Type: legacy
+
+
+== "zoovy:prodlist_style" 
+* Type: legacy
+
+
+== "zoovy:product_accessories" 
+* Type: legacy
+
+
+== "zoovy:product_condition" 
+* Type: legacy
+
+
+== "zoovy:product_desc" 
+* Type: legacy
+
+
+== "zoovy:product_line" 
+* Type: legacy
+
+
+== "zoovy:product_msrp" 
+* Type: legacy
+
+
+== "zoovy:product_name" 
+* Type: legacy
+
+
+== "zoovy:product_seo" 
+* Type: legacy
+
+
+== "zoovy:product_seo_title" 
+* Type: legacy
+
+
+== "zoovy:product_url" 
+* Type: legacy
+
+
+== "zoovy:producttheme" 
+* Type: legacy
+
+
+== "zoovy:prpd_features" 
+* Type: legacy
+
+
+== "zoovy:qty" 
+* Type: legacy
+
+
+== "zoovy:real_cost" 
+* Type: legacy
+
+
+== "zoovy:redir" 
+* Type: legacy
+
+
+== "zoovy:redirect" 
+* Type: legacy
+
+
+== "zoovy:related-products" 
+* Type: legacy
+
+
+== "zoovy:related_prod" 
+* Type: legacy
+
+
+== "zoovy:related_products1" 
+* Type: legacy
+
+
+== "zoovy:related_products2" 
+* Type: legacy
+
+
+== "zoovy:related_products3" 
+* Type: legacy
+
+
+== "zoovy:related_products4" 
+* Type: legacy
+
+
+== "zoovy:related_products5" 
+* Type: legacy
+
+
+== "zoovy:related_products6" 
+* Type: legacy
+
+
+== "zoovy:related_products7" 
+* Type: legacy
+
+
+== "zoovy:related_products_orig" 
+* Type: legacy
+
+
+== "zoovy:relatedproducts" 
+* Type: legacy
+
+
+== "zoovy:relatedroducts" 
+* Type: legacy
+
+
+== "zoovy:reserve" 
+* Type: legacy
+
+
+== "zoovy:reserved_qty" 
+* Type: legacy
+
+
+== "zoovy:retail" 
+* Type: legacy
+
+
+== "zoovy:retail_price" 
+* Type: legacy
+
+
+== "zoovy:rod_link2" 
+* Type: legacy
+
+
+== "zoovy:rod_mfgid" 
+* Type: legacy
+
+
+== "zoovy:rss_title" 
+* Type: legacy
+
+
+== "zoovy:search_link1" 
+* Type: legacy
+
+
+== "zoovy:search_link2" 
+* Type: legacy
+
+
+== "zoovy:search_link3" 
+* Type: legacy
+
+
+== "zoovy:search_link4" 
+* Type: legacy
+
+
+== "zoovy:search_terms5" 
+* Type: legacy
+
+
+== "zoovy:search_word1" 
+* Type: legacy
+
+
+== "zoovy:search_word2" 
+* Type: legacy
+
+
+== "zoovy:search_word3" 
+* Type: legacy
+
+
+== "zoovy:search_word4" 
+* Type: legacy
+
+
+== "zoovy:seo_title" 
+* Type: legacy
+
+
+== "zoovy:serialnum" 
+* Type: legacy
+
+
+== "zoovy:ship3_cost" 
+* Type: legacy
+
+
+== "zoovy:ship_cost3" 
+* Type: legacy
+
+
+== "zoovy:ship_exclusive" 
+* Type: legacy
+
+
+== "zoovy:ship_handling" 
+* Type: legacy
+
+
+== "zoovy:ship_harmoncode" 
+* Type: legacy
+
+
+== "zoovy:ship_height" 
+* Type: legacy
+
+
+== "zoovy:ship_info" 
+* Type: legacy
+
+
+== "zoovy:ship_ins" 
+* Type: legacy
+
+
+== "zoovy:ship_insurance" 
+* Type: legacy
+
+
+== "zoovy:ship_length" 
+* Type: legacy
+
+
+== "zoovy:ship_markup" 
+* Type: legacy
+
+
+== "zoovy:ship_width" 
+* Type: legacy
+
+
+== "zoovy:shipcost" 
+* Type: legacy
+
+
+== "zoovy:shipcost2" 
+* Type: legacy
+
+
+== "zoovy:shipping" 
+* Type: legacy
+
+
+== "zoovy:shipping_amount" 
+* Type: legacy
+
+
+== "zoovy:shipping_apiurl" 
+* Type: legacy
+
+
+== "zoovy:shipping_cost" 
+* Type: legacy
+
+
+== "zoovy:size" 
+* Type: legacy
+
+
+== "zoovy:sku" 
+* Type: legacy
+
+
+== "zoovy:store_item_address" 
+* Type: legacy
+
+
+== "zoovy:subtitle1" 
+* Type: legacy
+
+
+== "zoovy:subtitle2" 
+* Type: legacy
+
+
+== "zoovy:supplier" 
+* Type: legacy
+
+
+== "zoovy:supplier_id" 
+* Type: legacy
+
+
+== "zoovy:supplier_ship" 
+* Type: legacy
+
+
+== "zoovy:supplierid" 
+* Type: legacy
+
+
+== "zoovy:taxible" 
+* Type: legacy
+
+
+== "zoovy:testattrib" 
+* Type: legacy
+
+
+== "zoovy:text2" 
+* Type: legacy
+
+
+== "zoovy:thumbnail" 
+* Type: legacy
+
+
+== "zoovy:title" 
+* Type: legacy
+
+
+== "zoovy:ugenre" 
+* Type: legacy
+
+
+== "zoovy:unlimited" 
+* Type: legacy
+
+
+== "zoovy:upc" 
+* Type: legacy
+
+
+== "zoovy:virtual_ship" 
+* Type: legacy
+
+
+== "zoovy:warranty" 
+* Type: legacy
+
+
+
