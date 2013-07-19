@@ -1,0 +1,280 @@
+WIZARD HOWTO
+
+UNDERSTANDING KISS & WIZARD MAGIC
+The purpose of KISS templates is to have a simple (HTML) editable rested data format with inline formatting
+instructions using data- extensions to do simple formatting/conditional logic.  
+KISS templates are intentionally SIMPLE STUPID (kiSS).
+
+Wizards compliment the KISS syntax by guiding non-HTML proficient users (we call "muggles") through a series of 
+choices which will add/remove/modify the HTML KISS template using javascript/jQuery (we call this "magic").
+
+Even for HTML proficient muggles who can use the KISS template editor, using the wizards magic can be a powerful
+way to easily insert graphics, and configure defaults before embarking on more extensive customizations.
+Any muggle who is opting to use a template (versus start from scratch) will always appreciate convenience even
+if the wizard's magic doesn't get them exactly where they want to be. 
+
+GOOD vs. EVIL MAGIC:
+The goal of an HTML template should always be to provide a simple, straightforward step-by-step approach to 
+let muggles who are not proficient in HTML, and/or who are uncomfortable/unwilling to use the HTML editor 
+to tweak their template. As such keep logic/choices out of the KISS template and provide a rested/previewable
+format which has only the minimum amount of conditional logic required for the template to do it's job at 
+rendertime.  
+
+Attributes of Good magic:
+	1. it should be easy/fast/simple, and require as little thought as possible. 
+	2. limit the number of choices to only what actually looks good together (eg: choose color scheme instead of choose each color)
+	3. avoid trying to solve all problems with magic, especially edge cases! optimize for the majority. the minority can learn HTML. 
+	4. muggles love feedback, try and instantly give feedback, and make changes reversable, always use the actual template to load defaults.
+	5. ASSUME A MUGGLE HAS MODIFIED THE TEMPLATE BEFORE DOING MAGIC -- ALWAYS USE data-targets= (explained later)
+
+A good magic experience offers a limited number of highly cohesive choices.  If a muggle wants to customize 
+a template beyond what the magic allows they will need to either learn HTML or employ somebody who is fluent in it.  
+
+The template is stored in index.html, it should use KISS markup which will interpolated with object data 
+at render time.  This document assumes the wizard author is already familiar with KISS markup, and
+also a moderate level of javascript/jQuery.   For the most part the examples/snippets below should be easily retrofitted.
+
+Throughout this document a wizard making changes to document is referred to as "magic".
+Users who are performing magic via a wizard are referred to as "muggles". 
+
+The word "template" refers to the index.html file and any/all required graphics, along with the wizard.html
+which is optional.  The wizard.html file is intentionally tightly coupled to the index.html file, and provide
+a simple step-by-step approach to customizing the index.html using javascript.  The wizard.html file is stored
+separately so the resulting index.html is free from extraneous code and javascript (making the wizard result
+easier to edit for an HTML novice). 
+
+LETS DIVE INTO THE WEEDS: 
+
+The wizard file should always be named wizard.html, and it MUST be referenced in the index.html using:
+<meta name="wizard" content="wizard.html">
+
+(if a muggle modifies an html file by removing elements in such a way that a wizard can't perform magic 
+they can remove the wizard meta link, effectively dispelling the wizard.)
+
+Internally a wizard is a series of steps, each step is contained inside an HTML <fieldset>.  The steps are
+processed sequentially based on the order they appear in the file.
+
+Sample:
+
+<fieldset data-wizard-element-id="STEP1" data-onfocus="">
+<legend>Step 1</legend>
+<label for="step1_checkbox">step1 checkbox</label>
+<input data-target="#WHAT_YOU_WILL_MODIFY" id="step1_checkbox" />
+</fieldset>
+
+<fieldset data-wizard-element-id="STEP2">
+<legend>Step 2</legend>
+<label for="step2_txt">step2 textarea</label>
+<textarea data-target="#WHAT_YOU_WILL_MODIFY"  id="step2_txt"></textarea>
+</fieldset>
+
+
+FIELDSET BEST PRACTICES:
+Fieldsets can include more than one input, such as multiple checkboxes.  Best practices dictate that fields on
+a step should be related to one another.  For example grouping shipping icons and shipping policy is okay, 
+but don't group all policies together.   
+
+If a fieldset includes more than one input, include a legend.  Buttons in the fieldset will have jconjureui button()
+applied to them.  Apply the CSS class="labelsAsBreaks" to the fieldset to have labels treated as block elements 
+(and appear on each line)
+
+It is a good idea to include HTML comments in the wizard.html explaining what/where in the index.html is looking
+for, and also in the index.html to identify fields linked/controlled by the wizard. 
+
+the data-onfocus in the <fieldset> tag is javascript which should inspect the index.html and pre-set all the wizard
+fields to the appropriate states.
+
+Inside the fieldset each input element which has a data-target="" it is used for validation before the onfocus runs.
+Before displaying a panel/fieldset a wizard will automatically iterate through each input/button element in a fieldset 
+and look for data-target="#SOMEID" to ensure an element with that ID does in fact exist in the index.html (and was
+not accidentally/intentionally removed by a muggle while editing outside the wizard).
+If the data-target="#ID" does not exist the muggle will receive a friendly error message and the entire panel/fieldset 
+of the wizard will be disabled.
+** To avoid corruption ANY missing data-target="" will cause the entire wizard panel/fieldset to disable itself.
+Wizard authors can assist mog by always setting data-target since the wizard will automatically validate all data-targets on the fieldset before running.  However authors MUST NEVER
+reference a field that will be removed since when a data-target="#ID" cannot be found. 
+
+LEARNING MAGIC:
+Each fieldset will use javascript/jQuery to interact with the index.html using a series of "magic.xxxx" functions 
+associated with onClick actions within buttons or other input types.  Developers should take care to only interact
+with the index.html via the magic methods since they will provide excellent error handling/diagnostics to handle
+likely situations where a muggle has edited the index.html that will disabled/break the associated 
+wizard (such as removing a div that would contain wizard configurable html).  
+
+The Magic functions are:
+	
+* function magic.inspect('#ELEMENT_ID') 
+  sets the focus of the object inspector and also returns a jQuery reference to the object if found (or null if not found)
+  
+* function magic.medialib('#ELEMENT_IMAGE_ID')
+  prompts the muggle to select an image from their media library, copies the image into the template and selects it at the id specified.
+
+* function magic.modify('#ELEMENT_ID','VERB',{'otherparameter':'value'})
+
+  this implements an action (VERB) on the index.html document
+  VERBs are:
+  *  hide { 'attrib':'value' }  	 -- sets the css class of an id to 'none' (making it invisible), also sets any 'attrib':'value' (optional)
+  *  show { 'attrib':'value'}  		 -- sets the css class of an id to 'inline' (making it visible), also sets any 'attrib':'value' (optional)
+  *  set-attribs  { 'attrib':'value' } -- sets the attributes of an id, such as the height="" and width="" of an image.
+  *  replace  { 'html':'value' } -- sets the inner html of an element, such as a div. 
+  *  append  { 'html':'value' }	 -- appends content to the html inside the id specified. 
+  *  empty   {}		   				 -- empties the html inside the id specified.
+
+* function magic.conjure('something')
+  not currently implemented (planned for future)
+  brings external data into existance (such as ebay store id, or ebay store categories, or something external from a mashup)
+
+  
+-------------------------------------------------------------------------------------------------
+
+  
+Functional Examples/Snippets:
+
+<!--
+	Return Policy:
+	
+	INDEX.HTML:
+	<span id="KISS_RETURN_POLICY">okay no problem!</span>
+-->
+<fieldset class='labelsAsBreaks' data-onfocus="
+	$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('KISS_RETURN_POLICY').html());
+	">
+	<legend>Returns</legend>
+	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace','html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
+
+<!-- 
+	Company Logo: The Company Logo ID will be selected, put into the template.
+		
+	INDEX.HTML: 
+	<img alt="3gss940817_royal_blue_backside.jpg" bgcolor="ffffff" data-label="Company Logo (200 x 150)" data-object="KISS" id="LOGO" src="https://www-sporks-zoovy-com.app-hosted.com/media/img/sporks/W300-H85-Bffffff/007/3gss940817_royal_blue_backside.jpg" type="IMAGE" height="85" border="0" width="300">
+	
+-->
+<fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('#LOGO');">
+	<label>Company Logo</label>
+	<button data-target="#LOGO" onClick="magic.inspect('#LOGO'); magic.medialib('#LOGO');">Select Image</button>
+</fieldset>
+
+
+<!--
+	SHIPPING POLICY + OPTIONAL SHIPPING LOGOS:
+	
+	INDEX.HTML:
+	<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">shipping lorem ipsum</span>
+	<div align="center">
+		<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="75" width="75">
+		<img src="ups_logo.png" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="75" width="75">
+		<img src="usps_logo.png" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="75" width="75">
+	</div>
+
+-->
+<fieldset class='labelsAsBreaks'  data-onfocus="(function(){
+	// initialize all fields to their default value:
+	$('#KISS_SHIPPING_POLICY_TEXTAREA').val(magic.inspect('KISS_SHIPPING_POLICY').html());
+	$('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', magic.inspect('KISS_SHIPPING_FEDEXLOGO').is(':visible') );
+	$('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('KISS_SHIPPING_UPSLOGO').is(':visible') );
+	$('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', magic.inspect('KISS_SHIPPING_USPSLOGO').is(':visible') );
+	return(true);
+	})()">
+	<legend>Shipping</legend>
+	<div><textarea data-target="#KISS_SHIPPING_POLICY" id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY'); magic.modify('#KISS_SHIPPING_POLICY','replace',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
+
+	<label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO', ($(this).is(':checked'))?'show':'hide') );"/>Fedex Logo</label>
+
+	<label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>UPS Logo</label>
+
+	<label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked'))?'show':'hide') );"/>USPS Logo</label>
+</fieldset>
+
+<!--
+
+	COLOR/THEME CHOOSER
+	NOTE: in the example below - class themed is just a way to say "has a theme"
+	theme_xxx is the theme applied, both themed and theme_xxx should be applied
+	
+	INDEX.HTML:
+	<style>
+	div.themed { }
+	div.theme_red { background-color: #FF0000; }
+	div.theme_white { background-color: #FFFFF; }
+	div.theme_blue { background-color: #0000FF; }
+	</style>
+	
+	<!-- we use the hidden input type to store the selected theme in case the muggle runs the wizard again -->
+	<input type="hidden" id="KISS_COLOR_SCHEME" name="KISS_COLOR_SCHEME" value="" />  
+	<div class="themed"></div>
+	<img id="SOME_THEME_IMAGE" src="title-white.png" class="themed"></img>
+	
+-->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+		$('#KISS_COLOR_SCHEME_SELECT').val( magic.inspect('KISS_COLOR_SCHEME').val() );
+	})()">
+	<legend>Choose Color Palette</legend>
+	<label for="KISS_COLOR_SCHEME_SELECT"><select data-target="#KISS_COLOR_SCHEME" onChange="(function(){
+		var selectedTheme = $(this).val();
+		magic.modify( '#SOME_THEME_IMAGE', 'set-attrib', { 'src':'title-'+selectedTheme'.png' });
+		// JT: not sure if this is the best way to accomplish select anything with themed then add appropriate class.
+		//     should we be using magic.inspect here? or is this fine? (I feel strongly we ought to be using some type of magic.selector)
+		$('.themed').removeClass('theme_red theme_white theme_blue');
+		$('.themed').addClass( "theme_"+selectedTheme );
+	})()" id="KISS_COLOR_SCHEME_SELECT" name="KISS_COLOR_SCHEME_SELECT">
+		<option value="blue">Blue</option>
+		<option value="white">White</option>
+		<option value="red">Red</option>
+	</select>
+	</label>
+</fieldset>
+
+
+<!-- 
+	(FUTURE) LINK TO AN EBAY STORE
+	first: var storeid = magic.conjure('ebay-store-id')
+	then link to: http://stores.ebay.com/STORE_ID
+-->
+
+
+
+<!--
+
+	(FUTURE) DYNAMIC EBAY CATEGORY LIST:
+
+	dynamically loads the store name + list of categories using magic.conjure
+	populates the wizard panel dynamically with checkboxes to let a muggle choose/exclude categories
+	at the bottom of the list has a "Configure Template" button that populates a <ul> with <li><a href="link_to_store">category name</a></li>
+	
+	<ul id="EBAY_CATEGORY_LINKS">
+	</ul>
+	
+-->
+<fieldset class='labelsAsBreaks' data-onFocus="(function(){
+	// get the ebay store id using magic.conjure
+	$('#ebay-store-idspan').val( magic.conjure('ebay-store-id') );
+	// empty the previewer (in case we've been here before)
+	$('EBAY_CATEGORIES_PREVIEW').empty();
+	magic.conjure('ebay-store-categories').each(
+		function(ebaycat){
+			ebayCatId = ebaycat.categoryID;
+			ebayCatName = ebaycat.categoryName;
+			$('EBAY_CATEGORIES_PREVIEW').append('<li><input checked=&quot;true&quot; class=&quot;ebaycategory&quot; data-catname=&quot;'+ebaycatname+'&quot; data-catid=&quot;'+ebayCatId+'&quot;>'+ebayCatName+'</input></li>');
+			}
+		);
+	})()">
+	<legend>Choose eBay Store Categories</legend>
+	<div>eBay Store Id:<span id="ebay-store-idspan"></span></div>
+	<div><i>Included Categories:</i></div>
+	<ul id="EBAY_CATEGORIES_PREVIEW">
+		<!-- the data-onFocus will automatically update this, it might make sense to have a loading graphic here,
+			a muggle will check boxes for which categories they want to link -->
+	</ul>
+	<input type="button" onClick="(function(){
+		var ebay_store_id = $('#ebay-store-idspan').val();
+		magic.modify('EBAY_CATEGORY_LINKS','empty');
+		$('.ebaycategory').each(function(in){
+			var catlink = 'http://stores.ebay.com/'+ebay_store_id'+?_sacat='+in.data('catid');
+			var catname = in.data('catname');
+			if (in.is(':checked')) { magic.modify('EBAY_CATEGORY_LINKS','append',{ 'html':'<li><a href=&quot;'+catlink+'&quot;>'+catname+'</li>' }); }
+			});">Configure Template</input>
+</fieldset>
+
+

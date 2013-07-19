@@ -1,0 +1,129 @@
+=================================================================================================================
+KISS Template Format 1.0	
+=================================================================================================================
+
+== OVERVIEW
+
+kiss is html with embedded processing instructions inside appropriate <tags>. 
+Examples of processing instructions could be:
+	1. load display data about a product, customer, etc.
+	2. hide/remove part of the html document if data in a product, customer, etc. isn't set.
+
+As the name implies it is very easy to learn KISS, especially if you already know HTML.
+KISS includes a variety of simple "dwiw" (Do What I Want) functions to properly handle data, encoding, etc.
+When KISS is done properly it's also easy to view/visualize approximately what the output will look while
+editing the template.
+
+KISS is suitable for eBay listings, Newsletter/Email content, and other places where it is useful to let 
+end users create HTML formatting that will later be populated with data from a product/customer ("rendering").
+Unlike all other template languages KISS is pure valid previewable HTML5 with a few hidden instructions/hints
+sprinkled in using data- attributes (which are valid in HTML5).
+
+== GETTING STARTED
+
+kiss templates are USUALLY stored in a container with the filename index.html
+It's easy to know you're looking at a KISS template because the index.html will have the following <meta> tag:
+	<meta name="version" content="kiss/1.0"> 
+
+Kiss is embedded inside HTML by hiding custom data- attributes such as:
+	<tag data-object="PRODUCT" data-attrib="zoovy:prod_name" data-if="BLANK" data-then="REMOVE">sample data</tag>
+
+== UNDERSTANDING THE LOGIC
+	*	the data-object MUST be supported by the container type
+		-	EBAY PROFILES will use data-object="PRODUCT"
+		-	CAMPAIGNS will use data-object="CUSTOMER"
+	*	the data-attrib MUST match with the data-object type
+		- data-object="PRODUCT" :  any valid product attribute (ex: zoovy:prod_name)
+		- data-object="CUSTOMER":	any valid customer attribute (ex: email)
+
+Each type of HTML <tag> processing attempts to do a slight variation based on the tag type. For example
+a <div> or <span> tag will replace it's inner contents (ex: <div>inner</div>) with the data retrieved
+from the data-object/data-attribute. We'll discuss more on this later.
+
+	**********************************************************************************************
+	IMPORTANT CONCEPT: USING LOREM IPSUM
+	since data-object/data-attribute will *REPLACE* the inner contents it is recommended authors
+	embed lorem ipsum (http://www.lipsum.com/) text to assist users visualize the template in preview 
+	mode before the data-object/data-attrib data is processed
+	Example Template Preview:
+		<div data-object="PRODUCT" data-attribute="zoovy:prod_desc">
+		Lorem Ipsum for Sample Product Description 
+		</div>
+	Example Rendered View:
+		<div>
+		Actual Product Description
+		</div>
+	***********************************************************************************************
+
+== KISS HTML <tag> Processing:
+
+<div>|<span>|<p>|<q>|<h1>|<h2>|<h3>|<h4>|<h5>|<h6>|<figcaption>|<section>|<article>|<aside>|<li>	
+	*	replaces the inner contents of the tag with the data-object/data-attrib.
+	*	supports conditional statements with or without data-object/data-attrib.
+
+<img>
+	*  modifies the src="" property.
+	*	the data-object/data-attrib value WILL be formatted as an image link and set to the "src" attribute. 
+	* 	data-object/data-attrib MUST refer to valid image fields (failure to do so could generate an error)
+		If the field is not set, a blank 1x1 pixel will be inserted.  
+	*	the image will (if possible) be auto-sized to the height= and width= specified in the image tag
+	*	optional: <img data-img-height="">	override the <img height="">
+		-	set this to zero to disable vertical scaling. 
+	*	optional: <img data-img-width="">	override the <img width="">
+		-	set this to zero to disable horizontal scaling. 
+	* 	set both <img data-img-width="0" data-img-height="0"> to refernce the full image.
+	* 	optional: <img data-img-bgcolor="RGBRGB">	applies a #RGBRGB background color to the image (when resized)
+	*	optional: <img data-img-minimal="1">	turns on minimal image resizing to maintain aspect ratio 
+		-	minimal resizing never adds a background to an image even when height= and width= are both specified.
+
+<a>
+	*	the data-object/data-attrib value will be set in the "href" attribute
+	*	optional: <a data-format="img"> follows the same rules as the <img src=""> handling
+		-	to create a link to a fullsized image use: <a data-format="img" data-img-height="" data-img-width="">
+
+	**********************************************************************************************
+	IMPORTANT CONCEPT: PLACEHOLDER LINKS/GRAPHICS
+	since <img src=""> tags will be *REPLACED* during render, it is recommend that KISS template authors 
+	include sample images as placeholders for template previews.
+	***********************************************************************************************
+
+== HTML Conditional Processing:
+	* data-if="BLANK|NULL|NOTBLANK|NOTNULL|REGEX//|NOTREGEX//"
+	* data-then="REMOVE|IGNORE"
+	* data-else="REMOVE|IGNORE"
+
+HTML Conditional Example:
+<li data-if="BLANK" data-then="REMOVE" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
+pretext
+<span data-object="PRODUCT" data-attrib="zoovy:prod_desc">this will be replaced, or removed.</span>
+posttext
+</span>
+
+	**********************************************************************************************
+	IMPORTANT CONCEPT: Pretext and Posttext
+	Since conditionals remove themselves any HTML contained within a conditional will be removed/displayed
+	based on the conditional result.  This makes it possible to have headers, footers, titles, etc. which are
+	all conditionally displayed based on the presence,absense, or content of a data-object/data-attribute
+	**********************************************************************************************
+
+== HTML Formatting:
+	*	data-format="img"		will attempt to convert data into an image link
+	*	data-format="wiki"	will attempt to wiki-format the content and insert as html
+	*	data-format="html"	will not escape html in the content and insert it raw into the document
+	*	data-format="dwiw"	will attempt to auto detect wiki/html (based on <tag> prescence) and do-what-i-want
+
+== Trick #1: Make a click to zoom image reference
+Used to override the base tag formatting, for example an "a" will normally set the "href" 
+to the data-attrib value.
+In order to link to an image (possibly at a different height/width for zoom) it is necessary 
+to set data-format to "img" 
+At that point the data-img-height and data-img-width will be read, along with 
+data-img-bgcolor data-img-minimal and the data-attrib value will be converted to a link
+which will then be set to the href. 
+
+== Trick #2: Using Wizards & Magic
+Wizards work within the default KISS editor and provie an easy to add/remove blocks of html within a 
+template using jQuery (before runtime). If you are building a template that many users will work with
+then we recommend reading WIZARD-HOWTO.txt
+
+
