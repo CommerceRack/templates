@@ -30,8 +30,8 @@ Kiss is embedded inside HTML by hiding custom data- attributes such as:
 
 == UNDERSTANDING THE LOGIC
 	*	the data-object MUST be supported by the container type
-		-	EBAY PROFILES will use data-object="PRODUCT"
-		-	CAMPAIGNS will use data-object="CUSTOMER"
+		-	container type 'EBAY PROFILE' will use data-object="PRODUCT"
+		-	container type 'CAMPAIGN' will use data-object="CUSTOMER"
 	*	the data-attrib MUST match with the data-object type
 		- data-object="PRODUCT" :  any valid product attribute (ex: zoovy:prod_name)
 		- data-object="CUSTOMER":	any valid customer attribute (ex: email)
@@ -43,8 +43,9 @@ from the data-object/data-attribute. We'll discuss more on this later.
 	**********************************************************************************************
 	IMPORTANT CONCEPT: USING LOREM IPSUM
 	since data-object/data-attribute will *REPLACE* the inner contents it is recommended authors
-	embed lorem ipsum (http://www.lipsum.com/) text to assist users visualize the template in preview 
-	mode before the data-object/data-attrib data is processed
+	embed lorem ipsum (http://www.lipsum.com/) text to assist users with visualize the template 
+	while in preview mode before the data-object/data-attrib data is rendered:
+
 	Example Template Preview:
 		<div data-object="PRODUCT" data-attribute="zoovy:prod_desc">
 		Lorem Ipsum for Sample Product Description 
@@ -71,7 +72,7 @@ from the data-object/data-attribute. We'll discuss more on this later.
 		-	set this to zero to disable vertical scaling. 
 	*	optional: <img data-img-width="">	override the <img width="">
 		-	set this to zero to disable horizontal scaling. 
-	* 	set both <img data-img-width="0" data-img-height="0"> to refernce the full image.
+	* 	set both <img data-img-width="0" data-img-height="0"> to reference the original (not resized) image.
 	* 	optional: <img data-img-bgcolor="RGBRGB">	applies a #RGBRGB background color to the image (when resized)
 	*	optional: <img data-img-minimal="1">	turns on minimal image resizing to maintain aspect ratio 
 		-	minimal resizing never adds a background to an image even when height= and width= are both specified.
