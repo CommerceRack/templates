@@ -10,6 +10,7 @@ Examples of processing instructions could be:
 	2. hide/remove part of the html document if data in a product, customer, etc. isn't set.
 
 As the name implies it is very easy to learn KISS, especially if you already know HTML.
+
 KISS includes a variety of simple "dwiw" (Do What I Want) functions to properly handle data, encoding, etc.
 When KISS is done properly it's also easy to view/visualize approximately what the output will look while
 editing the template.
@@ -18,6 +19,8 @@ KISS is suitable for eBay listings, Newsletter/Email content, and other places w
 end users create HTML formatting that will later be populated with data from a product/customer ("rendering").
 Unlike all other template languages KISS is pure valid previewable HTML5 with a few hidden instructions/hints
 sprinkled in using data- attributes (which are valid in HTML5).
+
+
 
 == GETTING STARTED
 
@@ -89,7 +92,24 @@ from the data-object/data-attribute. We'll discuss more on this later.
 	***********************************************************************************************
 
 == HTML Conditional Processing:
-	* data-if="BLANK|NULL|NOTBLANK|NOTNULL|REGEX//|NOTREGEX//"
+
+	* data-if="BLANK|NULL|NOTBLANK|NOTNULL|TRUE|FALSE|GT(#)|LT(#)|EQ(#)|NE(#)|REGEX//|NOTREGEX//"
+		-	BLANK matches NULL, but also matches an empty string (a value of "" is set)
+		-	NOTBLANK is the opposite of BLANK, any non-zero length string will match	
+			* If you are confused by the subtle difference between BLANK and NULL then *ALWAYS* use BLANK (it'll dwyw)
+		-	NULL is an undefined (not set) value -- NOT the same as BLANK (which is set to an empty string)
+		-	NOTNULL is the opposite of NULL
+		-
+		- TRUE matches any positive number, "T", "TRUE", "YES", "Y" or "ON"
+		- FALSE matches zero, "F", "FALSE", "NO", "N", or "OFF"
+		-
+		- GT(#) matches any number greater than #	(precise up to 3 decimal points)
+		- LT(#) matches any number greater than #	(precise up to 3 decimal points)
+		- EQ(#) matches any number equal to #		(precise up to 3 decimal points)
+		- NE(#) matches any number not equal to #	(precise up to 3 decimal points)
+		-
+		- REGEX matches the pattern inside // (see perl regular expressions)
+		- NOTREGEX is the opposite of REGEX
 	* data-then="REMOVE|IGNORE"
 	* data-else="REMOVE|IGNORE"
 
@@ -107,11 +127,13 @@ posttext
 	all conditionally displayed based on the presence,absense, or content of a data-object/data-attribute
 	**********************************************************************************************
 
+
+
 == HTML Formatting:
 	*	data-format="img"		will attempt to convert data into an image link
 	*	data-format="wiki"	will attempt to wiki-format the content and insert as html
 	*	data-format="html"	will not escape html in the content and insert it raw into the document
-	*	data-format="dwiw"	will attempt to auto detect wiki/html (based on <tag> prescence) and do-what-i-want
+	*	data-format="dwiw"	will attempt to auto detect wiki/html (based on <tag> presence) and do-what-i-want
 
 == Trick #1: Make a click to zoom image reference
 Used to override the base tag formatting, for example an "a" will normally set the "href" 
@@ -127,4 +149,12 @@ Wizards work within the default KISS editor and provie an easy to add/remove blo
 template using jQuery (before runtime). If you are building a template that many users will work with
 then we recommend reading WIZARD-HOWTO.txt
 
+
+== KISS Q&A
+- Why not simply use javascript.
+KISS is not intended to replace javascript, or css for that matter. KISS is for situations where Javascript 
+isn't available or the content maintainer may not be a javascript developer.
+CSS regrettably lacks the simplicity of conditional logic, and the W3C recommended way to format HTML with
+conditional logic is XSL, which is frankly mind-numbingly difficult.
+In many cases KISS will actually be rendered by Javascript. 
 
