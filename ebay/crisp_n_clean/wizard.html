@@ -1,0 +1,65 @@
+<!-- Company Logo Select -->
+<fieldset data-wizard-element-id="LOGO" data-onfocus="magic.inspect('#LOGO');">
+	<label>Company Logo</label>
+	<button onClick="magic.inspect('#LOGO'); magic.medialib('#LOGO');">Select Logo</button>
+</fieldset>
+
+<!-- About company wizard-->
+<fieldset class='labelsAsBreaks' data-onfocus="
+	$('#KISS_ABOUT_TEXTAREA').val(magic.inspect('#KISS_ABOUT_COMPANY').html());
+	">
+	<legend>About</legend>
+	<div><textarea data-target="#KISS_ABOUT_COMPANY" onKeyUp="magic.modify('#KISS_ABOUT_COMPANY','replace',{'html':$(this).val()});" id="KISS_ABOUT_TEXTAREA" placeholder='Policy'></textarea></div>
+</fieldset>
+
+<!-- SHIPPING POLICY wizard -->
+<fieldset  class='labelsAsBreaks'  data-onfocus="(function(){
+ $('#KISS_SHIPPING_POLICY_TEXTAREA').val(magic.inspect('#KISS_SHIPPING_POLICY').html());
+ $('#KISS_SHIPPING_FEDEXLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_FEDEXLOGO').is(':visible') );
+ $('#KISS_SHIPPING_UPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_UPSLOGO').is(':visible')  );
+ $('#KISS_SHIPPING_USPSLOGO_CB').prop('checked', magic.inspect('#KISS_SHIPPING_USPSLOGO').is(':visible') );
+ return(true);
+ })()">
+ 
+ <legend>Shipping</legend>
+ <div><textarea id='KISS_SHIPPING_POLICY_TEXTAREA' onKeyUp="magic.inspect('#KISS_SHIPPING_POLICY');  magic.modify('#KISS_SHIPPING_POLICY','replace',{'html':$(this).val()});" placeholder='Policy'></textarea></div>
+
+
+ <label><input data-target="#KISS_SHIPPING_FEDEXLOGO" type='checkbox' name='fedex' id='KISS_SHIPPING_FEDEXLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_FEDEXLOGO',  ($(this).is(':checked')?'show':'hide'), {});"/>Fedex Logo</label>
+
+ <label><input data-target="#KISS_SHIPPING_UPSLOGO" type='checkbox' name='ups' id='KISS_SHIPPING_UPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_UPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>UPS Logo</label>
+
+ <label><input data-target="#KISS_SHIPPING_USPSLOGO" type='checkbox' name='usps' id='KISS_SHIPPING_USPSLOGO_CB' onChange="magic.modify('#KISS_SHIPPING_USPSLOGO', ($(this).is(':checked')?'show':'hide'), {} );"/>USPS Logo</label>
+</fieldset>
+
+<!-- Payment policy -->
+<fieldset class='labelsAsBreaks' data-onfocus="
+	$('#KISS_PAYMENT_POLICY_TEXTAREA').val(magic.inspect('#KISS_PAYMENT_POLICY').html());
+$('#MAGIC_PAYMENT_AMEX_CB').prop('checked', magic.inspect('#KISS_PAYMENT_AMEX').is(':visible') );
+$('#MAGIC_PAYMENT_VISA_CB').prop('checked', magic.inspect('#KISS_PAYMENT_VISA').is(':visible') );
+$('#MAGIC_PAYMENT_MC_CB').prop('checked', magic.inspect('#KISS_PAYMENT_MC').is(':visible') );
+$('#MAGIC_PAYMENT_NOVUS_CB').prop('checked', magic.inspect('#KISS_PAYMENT_NOVUS').is(':visible') );
+$('#MAGIC_PAYMENT_PAYPAL_CB').prop('checked', magic.inspect('#KISS_PAYMENT_PAYPAL').is(':visible') ); 
+	">
+	<legend>Payment Policy</legend>
+	<div><textarea data-target="#KISS_PAYMENT_POLICY" onKeyUp="magic.modify('#KISS_PAYMENT_POLICY','replace',{'html':$(this).val()});" id="KISS_PAYMENT_POLICY_TEXTAREA" placeholder='Policy'></textarea></div>
+
+	<label><input id="MAGIC_PAYMENT_AMEX_CB" data-target="#KISS_PAYMENT_AMEX" type='checkbox' name='amex' onChange="magic.modify($(this).data('target'),  ($(this).is(':checked')?'show':'hide'), {});"/>Amex Logo</label>
+	<label><input id="MAGIC_PAYMENT_VISA_CB" data-target="#KISS_PAYMENT_VISA" type='checkbox' name='visa' onChange="magic.modify($(this).data('target'),  ($(this).is(':checked')?'show':'hide'), {});"/>Visa Logo</label>
+	<label><input id="MAGIC_PAYMENT_MC_CB" data-target="#KISS_PAYMENT_MC" type='checkbox' name='mc' onChange="magic.modify($(this).data('target'),  ($(this).is(':checked')?'show':'hide'), {});"/>Mastercard Logo</label>
+	<label><input id="MAGIC_PAYMENT_NOVUS_CB" data-target="#KISS_PAYMENT_NOVUS" type='checkbox' name='novus' onChange="magic.modify($(this).data('target'),  ($(this).is(':checked')?'show':'hide'), {});"/>Novus Logo</label>
+	<label><input id="MAGIC_PAYMENT_PAYPAL_CB" data-target="#KISS_PAYMENT_PAYPAL" type='checkbox' name='paypal' onChange="magic.modify($(this).data('target'),  ($(this).is(':checked')?'show':'hide'), {});"/>Paypal Logo</label>
+
+</fieldset>
+
+ <!-- Return policy wizard--->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_RETURN_POLICY_TEXTAREA').val(magic.inspect('#KISS_RETURN_POLICY').html());">
+	<legend>Returns</legend>
+	<div><textarea data-target="#KISS_RETURN_POLICY" onKeyUp="magic.modify('#KISS_RETURN_POLICY','replace',{'html':$(this).val()});" id="KISS_RETURN_POLICY_TEXTAREA" placeholder='Return Policy'></textarea></div>
+</fieldset>
+
+<!-- Contact Information wizard -->
+<fieldset class='labelsAsBreaks' data-onfocus="$('#KISS_CONTACT_INFO_TEXTAREA').val(magic.inspect('#KISS_CONTACT_INFO').html());">
+	<legend>Contact Information</legend>
+	<div><textarea data-target="#KISS_CONTACT_INFO"  onKeyUp="magic.modify('#KISS_CONTACT_INFO','replace',{'html':$(this).val()});" id="KISS_CONTACT_INFO_TEXTAREA" placeholder='Contact Info'></textarea></div>
+</fieldset>
