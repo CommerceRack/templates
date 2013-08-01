@@ -1,11 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+
 <head>
 <meta name="version" content="kiss/1.0" />
+<meta name="wizard" content="wizard.html">
+
+
 <style type="text/css">
-.body 	{background-color:#efe6d1; width:680px; margin-left:auto; margin-right: auto; font-size: 16px; font-family: 'Abel', sans-serif; text-align: center;}
+
+html,body	{font-size:100%; background-color:#efe6d1;}
+body	{padding:0; margin:0;}
+
+h1 	{color: #054438; margin-bottom: 0px;}
+
+.displayNone	{display:none;}
+.container 	{background-color:#efe6d1; font-size: 1.2em; font-family: 'Abel', sans-serif; text-align: center;} /* set background color again here in case email reader strips body tag */
 .clear 	{clear:both;}
 
-.topBar 	{background-image:url(header.jpg); width:100%; height:129;}
-.logo 	{float:left;}
+.topBar 	{position:relative; width:100%; height:129px; overflow:hidden;}
+
+#KISS_LOGO	{float:left; margin:20px 0 0 20px; position:relative; z-index:10;}
+#KISS_HEADER_PIC		{position:absolute; top:-70px; right:0; z-index:8;} /* zindex to put pic behind logo on small screens */
+
 
 a 	{text-decoration: none;}
 ul 	{padding:0px;}
@@ -14,111 +31,90 @@ ul 	{padding:0px;}
 .appStore 	{margin-right: 35px;}
 .googlePlay 	{margin-left: 35px;}
 
-.bannerLeft 	{float: left; margin-left: 70px;}
-.bannerRight 	{float: right; margin-right: 70px;}
+#SECTION1	{margin: 0 auto;}
+.bannerLeft 	{float: left; margin-right:15px;}
+.bannerRight 	{float: left;}
 
-.contentArea h1 	{color: #054438; margin-bottom: 0px;}
-.contentArea p 	{margin-top: 5px; padding: 0px 70px;}
+
+.contentContainer	{margin:0 20px;} /* applies a min amount of padding on the left and right of contentSections */
+.contentSection	{margin: 0 auto 40px auto; max-width:545px;} /* applied to each content area. max-width aligns content edges */
+.contentSection p	{margin: 0 0 20px 0;}
+
+
 
 .productArea li 	{ background-color: #ffffff; border: 1px solid #c2c2c2; margin: 8px 4px; width: 130px; min-height: 170px; _height: 170px; *display: inline; display: -moz-inline-stack; display: inline-block; vertical-align: top; zoom: 1;}
 .productArea h4,h5		{margin:5px;}
 
 .browserLink 	{padding: 10px 0px;}
 .unsubscribeLink 	{padding: 0px 0px 15px 0px;}
+
+/*
+narrow columns of text are easier to read. centering big blocks of text makes them hard to read.
+*/
+#SECTION2 p	{text-align:justify;}
+
+#SECTION2 .productList	{
+	list-style:none;
+	}
+#SECTION2 .productList li	{float:left; margin:10px; padding:0; height:210px; width:150px;}
+.productList .prodName	{font-size:.85em;}
+.productList .prodPrice	{font-size:.95em; font-weight:bold;}
+
 </style>
+
+
 </head>
 <body>
 
-
+<!-- strip this protocol before template is live !!! -->
 <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
-<div class="body">
+<div class="container">
 	<div class="topBar">
-		<img class="logo" src="logo.png" />
+		<img class="logo" src="logo.png" id='KISS_LOGO' width='287' height='99' data-object='KISS' />
+		<img src='coffee_grounds.png' id='KISS_HEADER_PIC' width="670" height="626" alt='' data-object='KISS' />
 	</div>
 	
 	<div class="browserLink"><a href="http://www.leekspin.com/" target="_blank">Click here</a> to view in browser</div>
 	
 	<ul class="icons">
-		<li class="appStore">
-			<img src="app_store.png" />
-		</li>
-		<li>
-			<img src="facebook.png" />
-		</li>
-		<li>
-			<img src="google.png" />
-		</li>
-		<li>
-			<img src="twitter.png" />
-		</li>
-		<li>
-			<img src="pintrest.png" />
-		</li>
-		<li>
-			<img src="youtube.png" />
-		</li>
-		<li class="googlePlay">
-			<img src="google_play_store.png" />
-		</li>
+		
+		<li class="appStore"><a href='#' id='KISS_APP_URL_IOS' data-object='KISS' class='displayNone'><img src="app_store.png" width='81' height='28' alt='' id='KISS_APP_ICON_IOS' data-object='KISS' /></a></li>
+		<li><a href='#' id='KISS_SOCIAL_URL_FACEBOOK' data-object='KISS' class='displayNone'><img src="facebook.png" width='22' height='22' alt='' id='KISS_SOCIAL_ICON_FACEBOOK' data-object='KISS' /></a></li>
+		<li><a href='#' id='KISS_SOCIAL_URL_GOOGLE' data-object='KISS' class='displayNone'><img src="google.png" width='22' height='22' alt='' id='KISS_SOCIAL_ICON_GOOGLE' data-object='KISS' /></a></li>
+		<li><a href='#' id='KISS_SOCIAL_URL_TWITTER' data-object='KISS' class='displayNone'><img src="twitter.png" width='22' height='22' alt='' id='KISS_SOCIAL_ICON_TWITTER' data-object='KISS' /></a></li>
+		<li><a href='#' id='KISS_SOCIAL_URL_PINTEREST' data-object='KISS' class='displayNone'><img src="pintrest.png" width='22' height='22' alt=''  id='KISS_SOCIAL_ICON_PINTEREST' data-object='KISS' /></a></li>
+		<li><a href='#' id='KISS_SOCIAL_URL_YOUTUBE' data-object='KISS' class='displayNone'><img src="youtube.png" width='22' height='22' alt='' id='KISS_SOCIAL_ICON_YOUTUBE' data-object='KISS' /></a></li>
+		<li class="googlePlay"><a href='#' id='KISS_ANDROID_URL_IOS' data-object='KISS' class='displayNone'><img src="google_play_store.png" width='82' height='26' alt='' id='KISS_APP_ICON_ANDROID' data-object='KISS' /></a></li>
+
 	</ul>
 	
-	<div class="bannerArea">
-		<img class="bannerLeft" src="banner1.jpg" />
-		<img class="bannerRight" src="banner2.jpg" />
-	</div>
+	<section class='contentContainer clear'>
 	
-	<div class="clear"></div>
+		<div class="contentSection clear" id='SECTION1'>
+			<a href='#' id='KISS_URL_BANNER1' data-object='KISS'><img class="bannerLeft" src="banner1.jpg" width='267' height='202' alt='' id='KISS_BANNER1' data-object='KISS' /></a>
+			<a href='#' id='KISS_URL_BANNER2' data-object='KISS'><img class="bannerRight" src="banner2.jpg" width='263' height='202' alt='' id='KISS_BANNER2' data-object='KISS' /></a>
+		</div>
 	
-	<div class="contentArea">
-		<h1>New Arrivals for Fall!</h1>
-		<p>Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae. Nequia dolor accum harit qibus.</p>
-		<ul class="productArea">
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			<li>
-				<img src="placeholder.jpg" alt="lobster" width="115" height="125"/>
-				<h4>Product Title</h4>
-				<h5>$9001.99</h5>
-			</li>
-			
-		</ul>
-		<p>Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae. Nequia dolor accum harit qibus.</p>
-	</div>
+		<div class="clear"></div>
+		
+		<div class="contentSection clear" id='SECTION2'>
+		
+			<h1 id='KISS_SECTION2_HEADER' data-object='KISS'>New Arrivals for Fall!</h1>
+		
+			<p id='KISS_SECTION2_TEXTBLOB1' data-object='KISS' class='clear'>Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae. Nequia dolor accum harit qibus.</p>
+		
+			<div id='KISS_SECTION2_PRODLIST1' data-object='KISS' class='clear'></div>
+		
+			<p id='KISS_SECTION2_TEXTBLOB2' data-object='KISS' class='clear'>Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae. Nequia dolor accum harit qibus.</p>
+		
+		</div>
+	
+	</section>
+	
 	<div class="browserLink"><a href="http://www.leekspin.com/" target="_blank">Click here</a> to view in browser</div>
 	<div class="unsubscribeLink">If you no longer wish to recieve this newsletter, please unsubscribe <a href="http://www.leekspin.com/" target="_blank">here</a></div>
 </div>
 </body>
+
+</html>

@@ -1,0 +1,33 @@
+
+Creating good marketing campaigns for email can be difficult and frustrating.
+First and most notably CSS does not display well.
+Functionality such as javascript will not work.
+
+The sites below explain some of the basic challenges of creating HTML Email:
+* http://www.campaignmonitor.com/css/
+* http://www.email-standards.org/
+* http://kb.mailchimp.com/article/how-to-code-html-emails/
+
+http://www.campaignmonitor.com/css/
+
+
+Options:
+	Remove classes 
+	Remove unused IDs Remove comments
+	Don't remove <style> and <link> elements
+
+	For the best HTML e-mail delivery results, CSS should be inline. 
+	This is a huge pain and a simple newsletter becomes un-managable very quickly. This script is our solution.
+
+	CSS styles are converted to inline style attributes
+	Checks style and link[rel=stylesheet] tags and preserves existing inline attributes
+	Relative paths are converted to absolute paths
+	Checks links in href, src and CSS url('')
+	CSS properties are checked against e-mail client capabilities
+	Based on the Email Standards Project's guides
+	A plain text version is created
+	A few things to note:
+
+	Things can get messy very quickly with the * selector.be careful
+	Only the screen, handheld and all media types are processed
+
