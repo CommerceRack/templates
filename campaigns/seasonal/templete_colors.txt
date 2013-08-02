@@ -1,0 +1,65 @@
+Spring-
+Newsletter headline: #FFFFFF
+Subhead: #0066b1
+Overall background: #007510
+Content Background: #e9e5c0
+
+Sunny Field-
+Newsletter headline: #FFFFFF
+Subhead: #0066b1
+Overall background: #b7cf3f
+Content Background: #FFFFFF
+
+Winter-
+Newsletter headline: #595959
+Subhead: #595959
+Overall background: #95c6d5
+Content Background: #FFFFFF
+
+Winter2-
+Newsletter headline: #feffd5
+Subhead: #3a5759
+Overall background: #3a5759
+Content Background: #cccdb9
+
+Spooky-
+Newsletter headline: #ffe401
+Subhead: #edbc15
+Overall background: #000000
+Content Background: #d26533
+
+Spooky2-
+Newsletter headline: #fadf02
+Subhead: #fadf02
+Overall background: #e26100
+Content Background: #e26100
+
+Summer-
+Newsletter headline: #006ba9
+Subhead: #006ba9
+Overall background: #007510
+Content Background: #fceed7
+
+Summer2-
+Newsletter headline: #006ba9
+Subhead: #6eb6f4
+Overall background: #1551ff
+Content Background: #fceed7
+
+School-
+Newsletter headline: #ffffff
+Subhead: #ff0020
+Overall background: #ffa51f
+Content Background: #fef1d5
+
+Fall-
+Newsletter headline: #ffffff
+Subhead: #7a3428
+Overall background: #7a3428
+Content Background: #fef1d5
+
+Fall2-
+Newsletter headline: #ffffff
+Subhead: #553b22
+Overall background: #1551ff
+Content Background: #fef1d5
