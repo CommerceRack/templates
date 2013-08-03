@@ -1,0 +1,155 @@
+<!--
+
+note:
+	all elements in the wizard w/ an ID have a prefix of WIZ_
+	all elements in the template that are editable have a prefix of KISS_
+	The purpose of this is two-fold.  
+	1. it allows anyone going through the template html to easily identify editable elements.
+	2. when editing this file, it makes it easier to distinguish between wizard and template elements.
+
+title
+text
+product list
+text
+
+
+how is 'click here to view in browser' going to work?
+how is 'unsubscribe' going to work?
+
+
+PING LARRY!
+-->
+
+
+<!-- Company Logo Select -->
+<!-- the onfocus on the fieldset brings the first editable element into the object inspector -->
+<fieldset data-onfocus="magic.inspect('#KISS_LOGO');">
+
+	<legend>Header</legend>
+
+	<div>
+	<label>Company logo</label>
+	<button onClick="magic.inspect('#KISS_LOGO'); magic.medialib('#KISS_LOGO');"  data-target='#KISS_LOGO'>Select Logo</button>
+	</div>
+
+	<div>
+	<label>Header image</label>
+	<button onClick="magic.inspect('#KISS_HEADER_PIC'); magic.medialib('#KISS_HEADER_PIC');" data-target='#KISS_HEADER_PIC'>Select Image</button>
+	</div>
+
+</fieldset>
+
+
+<fieldset data-onfocus="magic.inspect('#KISS_SOCIAL_URL_FACEBOOK');">
+	
+	<legend>App and Social Links</legend>
+	
+	<div>
+	<label>Facebook url</label>
+	<input type='url' name='facebookURL' value='' id='WIZ_SOCIAL_URL_FACEBOOK' onkeyup="$(this).val() ? magic.inspect('#KISS_SOCIAL_URL_FACEBOOK').show().attr('href',$(this).val()) : magic.inspect('#KISS_SOCIAL_URL_FACEBOOK').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Google+ url</label>
+	<input type='url' name='googleURL' value='' id='WIZ_SOCIAL_URL_GOOGLE' data-target='#KISS_SOCIAL_URL_GOOGLE' onkeyup="$(this).val() ? magic.inspect('#KISS_SOCIAL_URL_GOOGLE').show().attr('href',$(this).val()) : magic.inspect('#KISS_SOCIAL_URL_GOOGLE').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Twitter url</label>
+	<input type='url' name='twitterURL' value='' id='WIZ_SOCIAL_URL_TWITTER'  data-target='#KISS_SOCIAL_URL_TWITTER' onkeyup="$(this).val() ? magic.inspect('#KISS_SOCIAL_URL_TWITTER').show().attr('href',$(this).val()) : magic.inspect('#KISS_SOCIAL_URL_TWITTER').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Pinterest url</label>
+	<input type='url' name='twitterURL' value='' id='WIZ_SOCIAL_URL_PINTEREST' data-target='#KISS_SOCIAL_URL_PINTEREST' onkeyup="$(this).val() ? magic.inspect('#KISS_SOCIAL_URL_PINTEREST').show().attr('href',$(this).val()) : magic.inspect('#KISS_SOCIAL_URL_PINTEREST').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Youtube url</label>
+	<input type='url' name='twitterURL' value='' id='WIZ_SOCIAL_URL_YOUTUBE'  data-target='#KISS_SOCIAL_URL_YOUTUBE' onkeyup="$(this).val() ? magic.inspect('#KISS_SOCIAL_URL_YOUTUBE').show().attr('href',$(this).val()) : magic.inspect('#KISS_SOCIAL_URL_YOUTUBE').hide().attr('href','#');" />
+	</div>
+	<br />
+	<div>
+	<label>iOS app url</label>
+	<input type='url' name='iosURL' value='' id='WIZ_APP_URL_IOS' data-target='#KISS_APP_URL_IOS' onkeyup="$(this).val() ? magic.inspect('#KISS_APP_URL_IOS').show().attr('href',$(this).val()) : magic.inspect('#KISS_APP_URL_IOS').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Android app url</label>
+	<input type='url' name='androidURL' value='' id='WIZ_APP_URL_ANDROID' data-target='#KISS_APP_URL_ANDROID' onkeyup="$(this).val() ? magic.inspect('#KISS_APP_URL_ANDROID').show().attr('href',$(this).val()) : magic.inspect('#KISS_APP_URL_ANDROID').hide().attr('href','#');" />
+	</div>
+	
+	
+</fieldset>
+
+
+
+<fieldset data-onfocus="(function(){
+	magic.inspect('#KISS_URL_BANNER1');
+	$('#WIZ_URL_BANNER1').trigger('keyup');
+	$('#WIZ_URL_BANNER2').trigger('keyup');
+	return(true);
+	})()">
+	
+	<legend>Section 1: Banners</legend>
+	
+	<div>
+	<label>Left banner url</label>
+	<input type='url' name='url_banner1' value='' id='WIZ_URL_BANNER1' data-target='#KISS_URL_BANNER1' onkeyup="$(this).val() ? magic.inspect('#KISS_URL_BANNER1').show().attr('href',$(this).val()) : magic.inspect('#KISS_URL_BANNER1').hide().attr('href','#');" />
+	</div>
+	
+	<div>
+	<label>Left banner Image</label>
+	<button onClick="magic.inspect('#KISS_BANNER1'); magic.medialib('#KISS_BANNER1');" data-target='#KISS_BANNER1'>Select Banner</button>
+	</div>
+
+	<div>
+	<label>Right banner url</label>
+	<input type='url' name='url_banner2' value='' id='WIZ_URL_BANNER2' data-target='#KISS_URL_BANNER2' onkeyup="$(this).val() ? magic.inspect('#KISS_URL_BANNER2').show().attr('href',$(this).val()) : magic.inspect('#KISS_URL_BANNER2').hide().attr('href','#');" />
+	</div>
+	<div>
+	<label>Right banner Image</label>
+	<button onClick="magic.inspect('#KISS_BANNER2'); magic.medialib('#KISS_BANNER2');" data-target='#KISS_BANNER2'>Select Banner</button>
+	</div>
+
+	
+</fieldset>
+
+
+
+
+<fieldset data-onfocus="magic.inspect('#KISS_SECTION2_HEADER');">
+	
+	<legend>Section 2: Content</legend>
+	
+	<div><input type='text' data-target='#KISS_SECTION2_HEADER' onKeyUp="magic.modify('#KISS_SECTION2_HEADER','replace',{'html':$(this).val()});" id="WIZ_SECTION2_HEADER" placeholder='Section Header' /></div>
+	<div><textarea  data-target='#KISS_SECTION2_TEXTBLOB1' onKeyUp="magic.modify('#KISS_SECTION2_TEXTBLOB1','replace',{'html':$(this).val()});" id="WIZ_SECTION2_TEXTBLOB1" placeholder='Text block (above product list)'></textarea></div>
+	
+	<div>
+	<label>Product list</label>
+	<button data-target='#KISS_SECTION2_PRODLIST1' onClick="magic.inspect('#KISS_SECTION2_PRODLIST1'); magic.conjureProduct('WIZ_SECTION2_PRODLIST1_SRC');">Select Product</button>
+	<input type='hidden' id='WIZ_SECTION2_PRODLIST1_SRC' onChange="magic.inspect('#KISS_SECTION2_PRODLIST1').empty(); magic.prodlist('#KISS_SECTION2_PRODLIST1',this.value,{'templateID':'wizardProdlistTemplate'})" />
+	</div>
+	
+	<div><textarea data-target='#KISS_SECTION2_TEXTBLOB2' onKeyUp="magic.modify('#KISS_SECTION2_TEXTBLOB2','replace',{'html':$(this).val()});" id="WIZ_SECTION2_TEXTBLOB2" placeholder='Text block (below product list)'></textarea></div>
+
+</fieldset>
+
+
+
+<!--
+note that pagination or any other advanced javascript should not be used in an email based campaign, email readers don't support JS.
+supported prodlist data-bind vars:  withReviews:1; withInventory:1; withVariations:1;
+-->
+<div class='displayNone'>
+
+<ul id='wizardProdlistTemplate' data-bind="var: prodlist(@products); format: productList; useChildAsTemplate:true; extension: store_prodlist; hide_summary:true; hide_pagination:true; isWizard:true;" class='clearfix productList'>
+	<li data-object='PRODUCT'>
+	<div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+		<div class='prodThumbContainer'>
+		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); bgcolor:efe6d1; format:imageURL;' width='150' height='150' />
+		</div>
+
+		<div class='prodName' data-bind='var: product(zoovy:prod_name); format:text;'></div>
+		<div class='prodPrice' data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></div>
+
+	</div>
+	</li>
+</ul>
+
+</div>
