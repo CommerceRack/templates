@@ -60,6 +60,6 @@ Content Background: #fef1d5
 
 Fall2-
 Newsletter headline: #ffffff
-Subhead: #553b22
-Overall background: #1551ff
+Subhead: #7a3428
+Overall background: #553b22
 Content Background: #fef1d5
