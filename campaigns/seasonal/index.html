@@ -15,36 +15,36 @@ body	{padding:0; margin:0;}
 h1 	{color: #ffffff; margin-bottom: 0px;}
 h2	{color: #7a3428; margin-bottom: 0px;}
 
-.displayNone	{display:none;}
+.displayNone	{}
 .container 	{background-color:#7a3428; font-size: 1.2em; font-family: 'Abel', sans-serif; text-align: center;} /* set background color again here in case email reader strips body tag */
 .clear 	{clear:both;}
 
-.topBar 	{background-color: #ffffff; position:relative; width:100%; height:129px; overflow:hidden;}
+.topBar 	{background-color: #ffffff; position:relative; width:100%; height:45px; overflow:hidden;}
+#KISS_LOGO	{float:left; margin:3px 0 0 70px; position:relative; z-index:10;}
 
-#KISS_LOGO	{float:left; margin:20px 0 0 20px; position:relative; z-index:10;}
-#KISS_HEADER_PIC		{ z-index:8;} /* zindex to put pic behind logo on small screens */
+.headerBar	{margin: auto; height:136px; max-width: 540px; position: relative; overflow: hidden;}
+.headerBar img	{position: absolute; right: 0px;}
+.headerBar h1	{position: absolute; left: 0px; width: 60%;}
+
 
 
 a 	{text-decoration: none;}
-ul 	{padding:0px;}
+ul 	{padding:0px; margin: 0px;}
 
+.icons 	{float:right; margin: 10px 70px 10px 40px;}
 .icons li 	{display: inline-block; vertical-align: top;}
-.appStore 	{margin-right: 35px;}
-.googlePlay 	{margin-left: 35px;}
+.appButtons li 	{display: inline-block; vertical-align: top;}
+
 
 #SECTION1	{margin: 0 auto;}
-.bannerLeft 	{float: left; margin-right:15px;}
-.bannerRight 	{float: left;}
+#SECTION1 a {float:left; margin-top:15px;}
+#SECTION1 a.marginRight {margin-right:10px;}
 
 
-.contentContainer	{margin:0 70px; background-color:#fef1d5; } /* applies a min amount of padding on the left and right of contentSections */
-.contentSection	{margin: 0 auto 40px auto; max-width:545px;} /* applied to each content area. max-width aligns content edges */
+.contentContainer	{max-width: 540px; margin:auto; background-color:#fef1d5; } /* applies a min amount of padding on the left and right of contentSections */
+.contentSection	{margin: 0 auto 25px auto; padding: 0px 15px; max-width:515px;} /* applied to each content area. max-width aligns content edges */
 .contentSection p	{margin: 0 0 20px 0;}
 
-
-
-.productArea li 	{ background-color: #ffffff; border: 1px solid #c2c2c2; margin: 8px 4px; width: 130px; min-height: 170px; _height: 170px; *display: inline; display: -moz-inline-stack; display: inline-block; vertical-align: top; zoom: 1;}
-.productArea h4,h5		{margin:5px;}
 
 .browserLink 	{padding: 10px 0px;}
 .unsubscribeLink 	{padding: 0px 0px 15px 0px;}
@@ -57,7 +57,7 @@ narrow columns of text are easier to read. centering big blocks of text makes th
 #SECTION2 .productList	{
 	list-style:none;
 	}
-#SECTION2 .productList li	{float:left; margin:10px; padding:0; height:210px; width:150px;}
+#SECTION2 .productList li	{float:left; margin:10px; padding:0; min-height:210px; width:150px;}
 .productList .prodName	{font-size:.85em;}
 .productList .prodPrice	{font-size:.95em; font-weight:bold;}
 
@@ -78,10 +78,11 @@ narrow columns of text are easier to read. centering big blocks of text makes th
 			<li><a href='#' id='KISS_SOCIAL_URL_FACEBOOK' data-object='KISS' class='displayNone'><img src="facebook_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_FACEBOOK' data-object='KISS' /></a></li>
 			<li><a href='#' id='KISS_SOCIAL_URL_GOOGLE' data-object='KISS' class='displayNone'><img src="google_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_GOOGLE' data-object='KISS' /></a></li>
 			<li><a href='#' id='KISS_SOCIAL_URL_TWITTER' data-object='KISS' class='displayNone'><img src="twitter_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_TWITTER' data-object='KISS' /></a></li>
+			<li><a href='#' id='KISS_SOCIAL_URL_PINTEREST' data-object='KISS' class='displayNone'><img src="pinterest_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_PINTEREST' data-object='KISS' /></a></li>
 			<li><a href='#' id='KISS_SOCIAL_URL_YOUTUBE' data-object='KISS' class='displayNone'><img src="youtube_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_YOUTUBE' data-object='KISS' /></a></li>
-			<li><a href='#' id='KISS_SOCIAL_URL_AMAZON' data-object='KISS' class='displayNone'><img src="amazon_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_YOUTUBE' data-object='KISS' /></a></li>
-			<li><a href='#' id='KISS_SOCIAL_URL_SKYPE' data-object='KISS' class='displayNone'><img src="skype_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_YOUTUBE' data-object='KISS' /></a></li>
-			<li><a href='#' id='KISS_SOCIAL_URL_FLICKR' data-object='KISS' class='displayNone'><img src="flickr_active.png" width='25' height='25' alt=''  id='KISS_SOCIAL_ICON_PINTEREST' data-object='KISS' /></a></li>
+			<li><a href='#' id='KISS_SOCIAL_URL_AMAZON' data-object='KISS' class='displayNone'><img src="amazon_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_AMAZON' data-object='KISS' /></a></li>
+			<li><a href='#' id='KISS_SOCIAL_URL_SKYPE' data-object='KISS' class='displayNone'><img src="skype_active.png" width='25' height='25' alt='' id='KISS_SOCIAL_ICON_SKYPE' data-object='KISS' /></a></li>
+			<li><a href='#' id='KISS_SOCIAL_URL_FLICKR' data-object='KISS' class='displayNone'><img src="flickr_active.png" width='25' height='25' alt=''  id='KISS_SOCIAL_ICON_FLICKR' data-object='KISS' /></a></li>
 
 		</ul>
 	
@@ -89,6 +90,7 @@ narrow columns of text are easier to read. centering big blocks of text makes th
 	
 	<div class="headerBar">
 		<img src='fall.jpg' id='KISS_HEADER_PIC' width="540" height="136" alt='' data-object='KISS' />
+		<h1>Newsletter Headline</h1>
 	</div>
 	
 	
@@ -98,8 +100,8 @@ narrow columns of text are easier to read. centering big blocks of text makes th
 		<div class="browserLink"><a href="#" target="_blank">Click here</a> to view in browser</div>
 	
 		<div class="contentSection clear" id='SECTION1'>
-			<a href='#' id='KISS_URL_BANNER1' data-object='KISS'><img class="bannerLeft" src="placeholder_banner.jpg" width='267' height='202' alt='' id='KISS_BANNER1' data-object='KISS' /></a>
-			<a href='#' id='KISS_URL_BANNER2' data-object='KISS'><img class="bannerRight" src="placeholder_banner.jpg" width='263' height='202' alt='' id='KISS_BANNER2' data-object='KISS' /></a>
+			<a href='#' class="marginRight" id='KISS_URL_BANNER1' data-object='KISS'><img class="bannerLeft" src="placeholder_banner.jpg" width='250' height='200' alt='' id='KISS_BANNER1' data-object='KISS' /></a>
+			<a href='#' id='KISS_URL_BANNER2' data-object='KISS'><img class="bannerRight" src="placeholder_banner.jpg" width='250' height='200' alt='' id='KISS_BANNER2' data-object='KISS' /></a>
 		</div>
 	
 		<div class="clear"></div>
@@ -115,9 +117,11 @@ narrow columns of text are easier to read. centering big blocks of text makes th
 			<p id='KISS_SECTION2_TEXTBLOB2' data-object='KISS' class='clear'>Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae. Nequia dolor accum harit qibus.</p>
 		
 		</div>
-		
-			<li class="appStore"><a href='#' id='KISS_APP_URL_IOS' data-object='KISS' class='displayNone'><img src="app_store.png" width='81' height='28' alt='' id='KISS_APP_ICON_IOS' data-object='KISS' /></a></li>
-			<li class="googlePlay"><a href='#' id='KISS_APP_URL_ANDROID' data-object='KISS' class='displayNone'><img src="google_play_store.png" width='82' height='26' alt='' id='KISS_APP_ICON_ANDROID' data-object='KISS' /></a></li>
+
+		<ul class="appButtons">
+			<li class="appStore"><a href='#' id='KISS_APP_URL_IOS' data-object='KISS' class='displayNone'><img src="app_store.png" width='81' height='26' alt='' id='KISS_APP_ICON_IOS' data-object='KISS' /></a></li>
+			<li class="googlePlay"><a href='#' id='KISS_APP_URL_ANDROID' data-object='KISS' class='displayNone'><img src="google_play.png" width='82' height='26' alt='' id='KISS_APP_ICON_ANDROID' data-object='KISS' /></a></li>
+		</ul>
 	
 	<div class="browserLink"><a href="#" target="_blank">Click here</a> to view in browser</div>
 	<div class="unsubscribeLink">If you no longer wish to receive this newsletter, please unsubscribe 
