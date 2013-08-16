@@ -1,65 +1,65 @@
 Spring-
-Newsletter headline: #FFFFFF
-Subhead: #0066b1
-Overall background: #007510
-Content Background: #e9e5c0
+.h1 { background-color: #FFFFFF; }
+.h2 { background-color: #0066b1; }
+.container { background-color: #007510; }
+.contentContainer { background-color: #e9e5c0; }
 
 Sunny Field-
-Newsletter headline: #FFFFFF
-Subhead: #0066b1
-Overall background: #b7cf3f
-Content Background: #FFFFFF
+.h1 { background-color: #FFFFFF; }
+.h2 { background-color: #0066b1; }
+.container { background-color: #b7cf3f; }
+.contentContainer { background-color: #FFFFFF; }
 
 Winter-
-Newsletter headline: #595959
-Subhead: #595959
-Overall background: #95c6d5
-Content Background: #FFFFFF
+.h1 { background-color: #595959; }
+.h2 { background-color: #595959; }
+.container { background-color: #95c6d5; }
+.contentContainer { background-color: #FFFFFF; }
 
 Winter2-
-Newsletter headline: #feffd5
-Subhead: #3a5759
-Overall background: #3a5759
-Content Background: #cccdb9
+.h1 { background-color: #feffd5; }
+.h2 { background-color: #3a5759; }
+.container { background-color: #3a5759; }
+.contentContainer { background-color: #cccdb9; }
 
 Spooky-
-Newsletter headline: #ffe401
-Subhead: #edbc15
-Overall background: #000000
-Content Background: #d26533
+.h1 { background-color: #ffe401; }
+.h2 { background-color: #edbc15; }
+.container { background-color: #000000; }
+.contentContainer { background-color: #d26533; }
 
 Spooky2-
-Newsletter headline: #fadf02
-Subhead: #fadf02
-Overall background: #e26100
-Content Background: #e26100
+.h1 { background-color: #fadf02; }
+.h2 { background-color: #fadf02; }
+.container { background-color: #e26100; }
+.contentContainer { background-color: #e26100; }
 
 Summer-
-Newsletter headline: #006ba9
-Subhead: #006ba9
-Overall background: #007510
-Content Background: #fceed7
+.h1 { background-color: #006ba9; }
+.h2 { background-color: #006ba9; }
+.container { background-color: #007510; }
+.contentContainer { background-color: #fceed7; }
 
 Summer2-
-Newsletter headline: #006ba9
-Subhead: #6eb6f4
-Overall background: #1551ff
-Content Background: #fceed7
+.h1 { background-color: #006ba9; }
+.h2 { background-color: #6eb6f4; }
+.container { background-color: #1551ff; }
+.contentContainer { background-color: #fceed7; }
 
 School-
-Newsletter headline: #ffffff
-Subhead: #ff0020
-Overall background: #ffa51f
-Content Background: #fef1d5
+.h1 { background-color: #ffffff; }
+.h2 { background-color: #ff0020; }
+.container { background-color: #ffa51f; }
+.contentContainer { background-color: #fef1d5; }
 
 Fall-
-Newsletter headline: #ffffff
-Subhead: #7a3428
-Overall background: #7a3428
-Content Background: #fef1d5
+.h1 { background-color: #ffffff; }
+.h2 { background-color: #7a3428; }
+.container { background-color: #7a3428; }
+.contentContainer { background-color: #fef1d5; }
 
 Fall2-
-Newsletter headline: #ffffff
-Subhead: #7a3428
-Overall background: #553b22
-Content Background: #fef1d5
+.h1 { background-color: #ffffff; }
+.h2 { background-color: #7a3428; }
+.container { background-color: #553b22; }
+.contentContainer { background-color: #fef1d5; }

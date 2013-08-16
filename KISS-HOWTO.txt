@@ -35,9 +35,12 @@ Kiss is embedded inside HTML by hiding custom data- attributes such as:
 	*	the data-object MUST be supported by the container type
 		-	container type 'EBAY PROFILE' will use data-object="PRODUCT"
 		-	container type 'CAMPAIGN' will use data-object="CUSTOMER"
+		-	container type 'ORDER' will use data-object="ORDER"
+
 	*	the data-attrib MUST match with the data-object type
 		- data-object="PRODUCT" :  any valid product attribute (ex: zoovy:prod_name)
 		- data-object="CUSTOMER":	any valid customer attribute (ex: email)
+		- data-object="ORDER"	:	any valid order attirbute (ex: our/orderid)
 
 Each type of HTML <tag> processing attempts to do a slight variation based on the tag type. For example
 a <div> or <span> tag will replace it's inner contents (ex: <div>inner</div>) with the data retrieved
@@ -84,6 +87,9 @@ from the data-object/data-attribute. We'll discuss more on this later.
 	*	the data-object/data-attrib value will be set in the "href" attribute
 	*	optional: <a data-format="img"> follows the same rules as the <img src=""> handling
 		-	to create a link to a fullsized image use: <a data-format="img" data-img-height="" data-img-width="">
+
+<ul>
+	*	will default to a list processor
 
 	**********************************************************************************************
 	IMPORTANT CONCEPT: PLACEHOLDER LINKS/GRAPHICS
@@ -134,6 +140,8 @@ posttext
 	*	data-format="wiki"	will attempt to wiki-format the content and insert as html
 	*	data-format="html"	will not escape html in the content and insert it raw into the document
 	*	data-format="dwiw"	will attempt to auto detect wiki/html (based on <tag> presence) and do-what-i-want
+	*	data-format="date"	will format a timestamp or date into MM/DD/YYYY 
+	*	data-format="date(strftime)"	will format a timestamp or date into a POSIX strftime date format string ex: %Y%m%d %H:%M:%S
 
 == Trick #1: Make a click to zoom image reference
 Used to override the base tag formatting, for example an "a" will normally set the "href" 

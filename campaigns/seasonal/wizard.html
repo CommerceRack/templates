@@ -37,6 +37,62 @@ PING LARRY!
 	<button onClick="magic.inspect('#KISS_HEADER_PIC'); magic.medialib('#KISS_HEADER_PIC');" data-target='#KISS_HEADER_PIC'>Select Image</button>
 	</div>
 
+	<div>
+	<label>Theme</label>
+	<select onChange="
+	var themes =  new Array('spring','sunnyfield','winter','winter2','spooky','spooky2','summer','summer2','school','fall','fall2');
+	themes.forEach(function(theme){
+		magic.inspect('h1').removeClass(theme+'_h1');
+		magic.inspect('h2').removeClass(theme+'_h2');
+		magic.inspect('.container').removeClass(theme+'_container');
+		magic.inspect('.contentContainer').removeClass(theme+'_contentContainer');
+		});
+	if ($(this).val() != '') {
+		// magic.modify('h1','replace',{ 'html':$('#'+$(this).val()).html() });
+		// alert( $(this).val() );
+		var theme = $(this).val();
+		magic.inspect('h1').addClass(theme+'_h1');
+		magic.inspect('h2').addClass(theme+'_h2');
+		magic.inspect('.container').addClass(theme+'_container');
+		magic.inspect('.contentContainer').addClass(theme+'_contentContainer');
+		magic.inspect('#KISS_HEADER_PIC').attr('src',theme+'.jpg');
+		}
+		">
+		<option value="spring">spring</option>
+		<option value="sunnyfield">sunnyfield</option>
+		<option value="winter">winter</option>
+		<option value="winter2">winter2</option>
+		<option value="spooky">spooky</option>
+		<option value="spooky2">spooky2</option>
+		<option value="summer">summer</option>
+		<option value="summer2">summer2</option>
+		<option value="school">school</option>
+		<option value="fall">fall</option>
+		<option value="fall2">fall2</option>
+	</select>		
+	</div>
+	
+<!--
+	NOTE: not sure how to preview with files in wizard mode!?!
+	<table>
+		<tr>
+		<td><a href="#" onClick="setTheme('spring');"><img src="spring.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('sunnyfield');"><img src="sunnyfield.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('winter');"><img src="winter.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('winter2');"><img src="winter2.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('spooky');"><img src="spooky.jpg" width="10%" height="10%"></a></td>
+		</tr>
+		<tr>
+		<td><a href="#" onClick="setTheme('spooky2');"><img src="spooky2.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('summer');"><img src="summer.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('summer2');"><img src="summer2.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('school');"><img src="school.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('fall');"><img src="fall.jpg" width="10%" height="10%"></a></td>
+		<td><a href="#" onClick="setTheme('fall2');"><img src="fall2.jpg" width="10%" height="10%"></a></td>
+		</tr>
+	</table>
+-->
+
 </fieldset>
 
 
