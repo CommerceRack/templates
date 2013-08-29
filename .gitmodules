@@ -1,0 +1,3 @@
+[submodule "sites/site-fashion"]
+	path = sites/site-fashion
+	url = git@github.com:CommerceRack/site-fashion.git

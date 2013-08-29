@@ -204,11 +204,13 @@ PING LARRY!
 <!--
 note that pagination or any other advanced javascript should not be used in an email based campaign, email readers don't support JS.
 supported prodlist data-bind vars:  withReviews:1; withInventory:1; withVariations:1;
+
+SANITY -> do NOT use a data-object on an element that is not dynamically generated at the time the campaign is sent.
 -->
 <div class='displayNone'>
 
 <ul id='wizardProdlistTemplate' data-bind="var: prodlist(@products); format: productList; useChildAsTemplate:true; extension: store_prodlist; hide_summary:true; hide_pagination:true; isWizard:true;" class='clearfix productList'>
-	<li data-object='PRODUCT'>
+	<li data-wizard-object='PRODUCT'>
 	<div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
 		<div class='prodThumbContainer'>
 		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); bgcolor:efe6d1; format:imageURL;' width='150' height='150' />
