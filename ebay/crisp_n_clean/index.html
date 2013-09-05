@@ -10,7 +10,7 @@
 .mainImage	{float: left; margin-right: 30px;}
 .mainProdInfo	{width: 310px; float: right;}
 .prodName 	{font-size: 22px; color: #000000; font-weight: bold; margin: 15px 2px;}
-.additionalProdImage	{ border: 2px solid #ffffff; margin: 3px;}
+.additionalProdImage	{ margin: 3px;}
 
 .infoSection{clear:both; padding-top: 20px; width: 680px;}
 .infoContent {padding: 5px 60px 40px;}
@@ -74,8 +74,13 @@
 			</div>
 
 			<div data-if="BLANK" data-then="REMOVE" data-else="INNER" data-object="PRODUCT" data-attrib="zoovy:prod_features">
-				<h1>Product Details</h1>
+				<h1>Product Features</h1>
 				<span class="actbProductAttribute" data-format="dwiw" data-attrib="zoovy:prod_features" data-input-cols="80" data-input-data="product:zoovy:prod_features" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Features (shared)" data-object="PRODUCT" id="PROD_FEATURES">Donec sed tempor odio. Cras in pulvinar mauris. Quisque sit amet laoreet nisl. In a laoreet arcu, sit amet elementum enim. Sed eu tempus turpis, et auctor orci. Cras aliquet, purus sit amet placerat volutpat, felis leo tristique metus, et pharetra justo ligula vel magna. Praesent odio urna, tempus at elementum id, commodo ac turpis. Proin ut mollis mi, id dictum diam. Sed ac auctor tellus. Morbi elementum, massa sed ultricies malesuada, turpis leo adipiscing tellus, ut laoreet lectus lectus quis mi. Mauris suscipit, lacus ac tempus egestas, arcu eros tincidunt eros, luctus egestas mi lacus eu felis. Praesent eleifend, sem eget viverra condimentum, felis risus tristique elit, at molestie mi tellus et neque.</span>
+			</div>			
+			
+			<div data-if="BLANK" data-then="REMOVE" data-else="INNER" data-object="PRODUCT" data-attrib="zoovy:prod_detail">
+				<h1>Product Details</h1>
+				<span class="actbProductAttribute" data-format="dwiw" data-attrib="zoovy:prod_detail" data-input-cols="80" data-input-data="product:zoovy:prod_detail" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Detail (shared)" data-object="PRODUCT" id="PROD_DETAIL">Donec sed tempor odio. Cras in pulvinar mauris. Quisque sit amet laoreet nisl. In a laoreet arcu, sit amet elementum enim. Sed eu tempus turpis, et auctor orci. Cras aliquet, purus sit amet placerat volutpat, felis leo tristique metus, et pharetra justo ligula vel magna. Praesent odio urna, tempus at elementum id, commodo ac turpis. Proin ut mollis mi, id dictum diam. Sed ac auctor tellus. Morbi elementum, massa sed ultricies malesuada, turpis leo adipiscing tellus, ut laoreet lectus lectus quis mi. Mauris suscipit, lacus ac tempus egestas, arcu eros tincidunt eros, luctus egestas mi lacus eu felis. Praesent eleifend, sem eget viverra condimentum, felis risus tristique elit, at molestie mi tellus et neque.</span>
 			</div>
 
 			<div>
