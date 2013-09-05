@@ -10,37 +10,18 @@
 .mainImage {width:224px; height:266px; float:left; margin-right:30px;}
 .mainProdInfo {margin:0px; padding:0px;}
 .prodName {font-size:22px; color:#000000; margin:0px; font-weight:bold;}
-.prodInfoList {list-style:none; font-weight:bold; padding:0px 25px; font-size:16px; color:#4d4c4c;}
+.prodImages {padding-top: 20px;}
 .additionalProdImage {width:73px; height:73px; border:1px solid #e1e1e1; margin-right:10px; margin-bottom:8px;}
 .modelbox {margin:17px 0 21px; padding:0px; font-size:12.8px; width:300px; float:left; color:#000000;}
 .model {margin:0px; padding:0px; float:left; width:300px;} 
 .modelL {margin:0px; padding:0px; float:left; width:75px;}
 .modelR {margin:0px; padding:0px; float:left; width:225px;}
-
-/* Color Scheme Options */
-.topBar .theme_sapphire {background-image:url(sapphireTop.jpg); height:21px;}
-.topBar .theme_sapphire {background-image:url(maroonTop.jpg); height:21px;}
-.topBar .theme_sapphire {background-image:url(mossTop.jpg); height:21px;}
-.topBar .theme_sapphire {background-image:url(campTop.jpg); height:21px;}
-.topBar .theme_sapphire {background-image:url(titaniumTop.jpg); height:21px;}
-.bottomBar .theme_sapphire {background-image:url(sapphireBottom.jpg); height:38px;}
-.bottomBar .theme_sapphire {background-image:url(maroonBottom.jpg); height:38px;}
-.bottomBar .theme_sapphire {background-image:url(mossBottom.jpg); height:38px;}
-.bottomBar .theme_sapphire {background-image:url(camoBottom.jpg); height:38px;}
-.bottomBar .theme_sapphire {background-image:url(titaniumBottom.jpg); height:38px;}
-
-/* Background color options */
-.infoHeader {background-image:url(headerAlloyBG.jpg); height:30px;}
-.infoHeader .bg_algae {background-image:url(headerAlgaeBG.jpg); height:30px;}
-.infoHeader .bg_fair {background-image:url(headerFairBG.jpg); height:30px;}
-.infoHeader .bg_powder {background-image:url(headerPowderBG.jpg); height:30px;}
-.infoContent {background-image:url(repeatAlloyBG.jpg); padding:0px 61px 40px;}
-.infoContent .bg_algae {background-image:url(repeatAlgaeBG.jpg); padding:5px 60px 40px;}
-.infoContent .bg_fair {background-image:url(repeatFairBG.jpg); padding:5px 60px 40px;}
-.infoContent .bg_powder {background-image:url(repeatPowderBG.jpg); padding:5px 60px 40px;}
+.infoHeader {height:30px;}
+.infoContent { padding:0px 61px 40px;}
 .infoSection {clear:both; padding-top:0px; width:680px; float:left;}
 .infoContent h1 {font-size:19px; color:#136192; margin:29px 0 0 0; font-weight:bold;}
 .infoContent span {font-size:16px; color:#000000; line-height:22px; padding-right:24px;}
+.bottomBar {background-image:url(bottombar_block.jpg); height:36px;}
 </style>
 
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
@@ -52,7 +33,7 @@
             <div class="topBar themed"></div>
         </div>
     
-       <div class="mainContentArea">
+		<div class="mainContentArea">
            <div class="mainContentL">
              <div class="actbProductAttribute" data-attrib="zoovy:prod_image1" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" data-else="INNER" id="IMAGE1">
                 <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image1" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image1" data-img-height="" data-img-width="200" data-img-zoom="1" data-label="Image (200 by X)" data-object="PRODUCT" id="IMAGE1">
@@ -60,27 +41,9 @@
             </div>
          </div>
          
-           <div class="mainContentR">
+			<div class="mainContentR">
                 <div class="mainProdInfo">
-                      <span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">NEW Darice Rolling Scrap Book Tote Black</span>
-                      <div class="modelbox">
-                        <div class="model">
-                            <span class="modelL">Condition:</span>
-                            <span class="modelR">New (More Info)</span>
-                        </div>
-                        <div class="model">
-                            <span class="modelL">Packaging:</span>
-                            <span class="modelR">Retail Box</span>
-                        </div>
-                        <div class="model">
-                            <span class="modelL">Model:</span>
-                            <span class="modelR">LHL-12/4553</span>
-                        </div>
-                        <div class="model">
-                            <span class="modelL">Weight:</span>
-                            <span class="modelR">0.25 lbs</span>
-                        </div>
-                     </div>
+					<span class="actbProductAttribute prodName" data-attrib="zoovy:prod_name" data-input-cols="100" data-input-data="product:zoovy:prod_name" data-input-type="TEXTBOX" data-label="Product Name" data-object="PRODUCT" id="PROD_NAME">NEW Darice Rolling Scrap Book Tote Black</span>
                   <div class="prodImages">
                     <span class="actbProductAttribute" data-attrib="zoovy:prod_image2" data-if="BLANK" data-object="PRODUCT" data-then="REMOVE" data-else="INNER" id="IMAGE2">
                         <a class="actbProductAttribute actbHref" data-attrib="zoovy:prod_image2" data-format="img" data-img-bgcolor="ffffff" data-img-border="0" data-img-data="product:zoovy:prod_image2" data-img-height="95" data-img-width="95" data-img-zoom="1" data-label="Image2 (200 by X)" data-object="PRODUCT" id="IMAGE2" width="95">
@@ -108,12 +71,12 @@
                     </span>
                		</div>
              	</div>
-            </div>
-       </div>
-   </div>	
+			</div>
+		</div>
+	</div>	
   
 	<div class="infoSection">
- 		<div class="infoContent themed">
+ 		<div class="infoContent">
 			<div data-if="BLANK" data-then="REMOVE" data-else="INNER" data-object="PRODUCT" data-attrib="zoovy:prod_desc">
 				<h1>Product Description</h1>
 				<span class="actbProductAttribute" data-attrib="zoovy:prod_desc" data-input-cols="80" data-input-data="product:zoovy:prod_desc" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Description (shared)" data-object="PRODUCT" id="PROD_DESC">Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae.</span>
@@ -123,8 +86,37 @@
 				<h1>Product Description</h1>
 				<span class="actbProductAttribute" data-attrib="zoovy:prod_features" data-input-cols="80" data-input-data="product:zoovy:prod_features" data-input-rows="5" data-input-type="TEXTAREA" data-label="Product Features (shared)" data-object="PRODUCT" id="PROD_FEATURES">Ehendae dolupta quossimet ut iur aliciet facepudipis etur rem aceptatias unt lab ipsum et quaepelitas prehendia pa estrum aute plab ipita nossi nulparum abo. Rae. Nequiat emporum rest quis autatet quias nihicim incipsandae.</span>
 			</div>
+			
+			<div>
+				<h1>Shipping</h1>
+				<span data-label="Shipping Policy" data-object="KISS" id="KISS_SHIPPING_POLICY">Enter shipping policy here.</span>
+				<div align="center" style="margin-top:4px;">
+					<img src="fedex_logo.png" data-object="KISS" id="KISS_SHIPPING_FEDEXLOGO" alt="fedex logo(tm)" height="40">
+					<img src="ups_logo.png" data-object="KISS" id="KISS_SHIPPING_UPSLOGO" alt="ups(tm) logo" height="45">
+					<img src="usps_logo.png" data-object="KISS" id="KISS_SHIPPING_USPSLOGO" alt="usps(tm) logo" height="45">
+				</div>
+			
+				<h1>Payment Information</h1>
+				<span id="KISS_PAYMENT_POLICY">Enter payment policy here.</span>
+				<div align="center" style="margin-top:4px;">
+					<img src="AMEX.gif" data-object="KISS" id="KISS_PAYMENT_AMEX" alt="amex logo(tm)" >
+					<img src="VISA.gif" data-object="KISS" id="KISS_PAYMENT_VISA" alt="visa logo(tm)" >
+					<img src="MC.gif" data-object="KISS" id="KISS_PAYMENT_MC" alt="mastercard logo(tm)" >
+					<img src="NOVUS.gif" data-object="KISS" id="KISS_PAYMENT_NOVUS" alt="novus logo(tm)" >
+					<img src="paypal-small.gif" data-object="KISS" id="KISS_PAYMENT_PAYPAL" alt="paypal logo(tm)" >
+				</div>
+				
+				<h1>Returns</h1>
+				<span id="KISS_RETURN_POLICY">Enter return policy here.</span>
+				
+				<h1>About Us</h1>
+				<span id="KISS_ABOUT_COMPANY">Enter company policy here.</span>
+				
+				<h1>Contact Us</h1>
+				<span id="KISS_CONTACT_INFO">Enter contact info here</span>
+			</div>
  		</div>
-		<div class="bottomBar themed"></div>
+		<div class="bottomBar"></div>
 	</div>
     <div style="clear:both;"></div>
 </div>
