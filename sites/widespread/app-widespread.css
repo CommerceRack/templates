@@ -1,0 +1,267 @@
+/*
+CSS defaults for a small screen, then uses media queries to support larger.
+This optimizes the load experience for mobile devices, which are more bandwidth-sensitive
+*/
+
+/* throw away classes. here only for testing */
+.contrastUI	{background-color: #9eca37;}
+a	{color: #9eca37;}
+a:hover	{color:#FF0;}
+
+body {
+	font-family: 'Voltaire', sans-serif;
+	font-size:90%;
+	background-color: #ececec;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	}
+
+/* wraps around everything */
+.container {
+	width: 90%;
+	background-color: #FFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+	}
+
+h2, h3, h4, h5, h6	{font-weight:normal;}
+
+.hideForMobile	{display:none;}
+
+/*
+//////////			HEADER			\\\\\\\\\\\
+*/
+
+#mastHead {
+	height:80px;
+	}
+
+#mastHead .logo	{width:50%; height:80px; background:#fff; text-align:center;  float:left; overflow:hidden;} /* will need media query to preserve a certain width here AND make menu behave */
+#mastHead .menuAndSearch	{width:50%; height:80px; float:left;}
+#mastHead .mainMenu	{height:40px; background:#333; display:block; margin:0; padding:0; list-style:none;}
+#mastHead .mainMenu li	{width:50%; float:left; text-align:center; height:100%; line-height:35px;}
+
+#mastHead .menuItem2,#mastHead .menuItem5	{display:none;}
+
+/* used in the header and footer */
+.menuitems	{font-size:.95em; cursor:pointer;}
+.menuItem1	{background:#fff;}
+.menuItem2	{background:#f0f0f0;}
+.menuItem3	{background:#e4e4e4;}
+.menuItem4	{background:#dedede;}
+.menuItem5	{background:#d8d8d8;}
+
+
+#mastHeadSearchFrm	{position:relative; margin-top:8px; text-align:center;}
+#mastHeadKeywordsInput	{width:98%; margin:0; padding:.3em 0; border:0; font-size:.8em;}
+#mastHeadSearchButton	{position:absolute; top:3px; right:1%; border:0; background-color:#fff; padding:0;}
+
+
+/*
+//////////			CONTENT AREA			\\\\\\\\\\\
+*/
+
+#contentContainer	{padding:1%; position:relative;}
+#catsAndTitle	{position:relative;}
+#shopNowLink, #catsAndTitle .breadcrumb	{height:30px; line-height:30px; text-indent:1%;}
+.breadcrumb	{font-size:.85em;}
+#shopNowLink	{width:18%; float:left; margin:1% 1% 0 1%; cursor:pointer; color:#fff; font-weight:bold; font-size:1.2em;}
+#catsAndTitle .breadcrumb	{width:79%; float:left; margin:1% 1% 0 0; background:#e4e4e4;}
+
+#tier1categories	{width:240px; background:#efefef; color:#333; display:none; position:absolute; top:35px; left:1%; list-style:none; margin:0; padding:0; border:2px solid #9eca37; z-index:600;}
+#tier1categories li	{padding:.2em .3em; margin:0; border-bottom:1px dotted #cccccc;}
+#tier1categories li:hover	{background:#9eca37; color:#FF0;}
+#tier1categories .thumbContainer	{float:left; margin:0 0 .2em .2em;}
+
+/*
+//////////			FOOTER			\\\\\\\\\\\
+*/
+
+#mastFoot	{list-style:none; margin:0; padding:0;}
+#mastFoot li	{float:none; width:100%; line-height:30px; text-align:center;}
+
+
+
+.labelsAsBreaks label, .labelsAsBreaks .label	{display:block; margin-bottom:.2em;}
+
+
+/*
+//////////			HOMEPAGE			\\\\\\\\\\\
+*/
+.bannerContainer	{position:relative; height:240px;}
+.bannerContainer .mainBanner	{display:none; position:absolute; z-index:10; top:0; left:0; height:240px; width:100%; background:#efefef; }
+.productSlideshowContainer	{ margin:0 auto; z-index:110; text-align:center;}
+.slide	{width:100%; overflow:hidden; height:240px;}
+
+
+/* set border-box so that percents can be used for width, padding, etc (personal preference) */
+.cycle-slideshow, .cycle-slideshow * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+
+.cycle-slideshow { width: 45%; min-width: 200px; max-width: 500px; margin: 10px auto; padding: 0; position: relative;
+	background: url(http://malsup.github.com/images/spinner.gif) 50% 50% no-repeat;
+	}
+
+/* slideshow images (for most of the demos, these are the actual "slides") */
+.cycle-slideshow img { 
+    /* 
+    some of these styles will be set by the plugin (by default) but setting them here
+    helps avoid flash-of-unstyled-content
+    */
+    position: absolute; top: 0; left: 0;
+    width: 100%; padding: 0; display: block;
+}
+
+/* in case script does not load */
+.cycle-slideshow img:first-child {
+    position: static; z-index: 100;
+}
+
+/* pager */
+.cycle-pager { 
+    z-index: 500; position: absolute; top: 2px; right:2px; overflow: hidden;
+	margin:0; padding:0;
+	}
+.cycle-pager span {
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+    font-size: 1px; line-height:16px; width: 6px; height: 6px; background:#ffffff; margin-right:6px; border:1px solid #9eca37;
+    color: #fff; cursor: pointer; display:inline-block;
+	}
+.cycle-pager span.cycle-pager-active {background:#9eca37; color: #9eca37;}
+
+
+/* caption */
+.cycle-caption { position: absolute; color: white; bottom: 15px; right: 15px; z-index: 700; }
+
+
+/* overlay */
+.cycle-overlay { 
+    position: absolute; bottom: 0; width: 100%; z-index: 600;
+	font-size:.85em;
+    background: #fff; color: #222; padding: 5px; opacity: .7;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	webkit-box-sizing:border-box;
+	}
+
+
+/* display paused text on top of paused slideshow */
+.cycle-paused:after {
+    content: 'Paused'; color: white; background: black; padding: 5px 10px;
+    z-index: 500; position: absolute; top: 10px; left: 10px;
+    opacity: .5; filter: alpha(opacity=50);
+	}
+
+
+
+
+/*
+//////////			PRODUCT LISTS			\\\\\\\\\\\
+*/
+
+
+
+.quickView	{left:-5px;}
+.responsiveProdlist li	{
+	height: 180px; width:48%;
+	display:block; float:left;
+	overflow:hidden;
+	position:relative;
+	margin:1%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	webkit-box-sizing:border-box;
+	}
+
+.responsiveProdlist .prodThumbContainer	{margin-bottom:.3em; overflow:hidden; width:100%;}
+
+.price	{color:#000;}
+
+
+
+
+
+
+/*
+//////////			PRODUCT DETAIL			\\\\\\\\\\\
+*/
+
+.prodDetailImagesContainer	{display:block; position:relative; margin:0 auto; width:260px;}
+.ui-tabs-nav	{font-size:.85em;}
+
+.ui-tabs .ui-tabs-nav li a {
+    float: left;
+    padding: 0.2em .4em;
+    text-decoration: none;
+	}
+.tabContent	{
+	width:100%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	webkit-box-sizing:border-box;
+	}
+
+form.prodViewerAddToCartForm	{display:inline;}
+.ui-tabs .ui-tabs-panel	{padding:.5em .7em;}
+
+.lineItemProdlistItem	{margin:.4em 0; padding:0;}
+.reviewLineItem blockquote	{margin:0;}
+
+
+
+/* 
+    media queries 
+    some style overrides to make things more pleasant on mobile devices
+*/
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    .cycle-slideshow { width: 200px;}
+    .cycle-overlay { padding: 4px }
+    .cycle-caption { bottom: 4px; right: 4px }
+	}
+	
+	
+	
+
+
+@media only screen and (min-width: 640px) {
+	body	{font-size:1em;}
+	#mastHead .logo {width:20%;}
+	#mastHead .menuAndSearch	{width:80%;}
+	#mastHead .mainMenu li	{width:25%;}
+	#mastFoot li	{float:left; width:20%;}
+	#mastHead .menuItem2,#mastHead .menuItem5	{display:block;}
+	#mastHead .menuitems li	{width:25%;}
+	#mastHeadKeywordsInput	{font-size:1em; padding:.2em 0;}
+	#mastHeadSearchButton	{padding:.2em; top:0px}
+	
+	.productSlideshowContainer	{float:right; width:40%; margin:0; z-index:20; position:relative; text-align:right;}
+	.bannerContainer .mainBanner	{display:inline-block;}
+
+	.responsiveProdlist li	{
+		margin:0 .5% .5em .5%;
+		width:19%;
+		height: 180px;
+		}
+	.cycle-overlay { text-align:right;}
+
+	.ui-tabs .ui-tabs-nav li a {
+		padding: 0.5em 1em;
+		}
+
+
+
+	.prodDetailImagesContainer	{display:block; position:relative; margin:0; width:39%; float:left;}
+	.prodDetailSummaryATC	{float:right; margin:0; float:right; width:60%;}
+	.ui-tabs-nav	{font-size:1em;}
+
+	}
+
+
+
+
+@media only screen and (min-width: 1040px) {
+	.productSlideshowContainer	{width:20%;}
+	.responsiveProdlist li {height:270px;}
+	}
