@@ -17,18 +17,35 @@
 <link href='https://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="jquery-ui-1.10.3.custom.min.css">
 <link rel="stylesheet" type="text/css" href="app-quickstart.css">
-<link rel="stylesheet" type="text/css" href="widespread.css">
+<link rel="stylesheet" type="text/css" href="app-widespread.css">
 
-
+<script >
+console.log("first script tag reached.");
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="loadscript.js"></script>
+<script src="controller.js"></script>
+<script src="model.js"></script>
 
 
+
+
+<!-- here to see how much this impacts app load time. -->
+<script src="app-widespread.js"></script>
+<script src="extensions/store_search.js"></script>
+<script src="extensions/store_product.js"></script>
+<script src="extensions/store_prodlist.js"></script>
+<script src="extensions/store_navcats.js"></script>
+<script src="extensions/store_crm.js"></script>
+<script src="extensions/store_cart.js"></script>
+<script src="extensions/cart_checkout_order.js"></script>
+<script src="extensions/checkout/extension.js"></script>
+<!-- checkout intentionally left out for now. -->
 
 <script type="text/javascript">
-
+console.log("scripts have been loaded");
+var _gaq = _gaq || {'push':function(){}}  //remove this prior to going live. ### TODO ###
 var myCreole;
 
 var app = {vars:{
@@ -36,7 +53,18 @@ var app = {vars:{
 	"_clientid":"zmvc", //zmvc for store app, 1pc for one page checkout.
 	"baseURL":"", //used in non-local mode.
 	"checkoutAuthMode" : "active",//can be passive, active or required
-	"testURL":"http://www.ylh.zoovy.com/" //used ONLY if protocol is file: (for testing)
+	"testURL":"http://www.sporks.zoovy.com/", //used ONLY if protocol is file: (for testing)
+	"extensions" : [
+		{"namespace":"widespread","filename":"extensions/app-widespread.js"},
+		{"namespace":"store_navcats","filename":"extensions/store_navcats.js"},
+		{"namespace":"store_search","filename":"extensions/store_search.js"},
+		{"namespace":"store_product","filename":"extensions/store_product.js"},
+		{"namespace":"store_prodlist","filename":"extensions/store_prodlist.js"},
+		{"namespace":"store_crm","filename":"extensions/store_crm.js"},
+		{"namespace":"store_cart","filename":"extensions/store_cart.js"},
+		{"namespace":"cco","filename":"extensions/cart_checkout_order.js"},
+		{"namespace":"orderCreate","filename":"extensions/checkout/extension.js"}
+		]
 	},u:{},rq:[]};
 
 //set base url so images, css, js, etc all load from appropriate location once deployed.
@@ -48,12 +76,14 @@ else	{
 	app.vars.baseURL = document.location.protocol+"//"+document.domain+"/";
 	}
 document.getElementsByTagName('base')[0].href = app.vars.baseURL;
-
-app.u.loadScript(app.vars.baseURL+"app-quickstart-init.js");
-
+	
 </script>
-
-
+<!-- needs to be after the 'app' declaration above. -->
+<script type="text/javascript" src="loadscript.js"></script>
+<script>
+console.log("now load the init file");
+app.u.loadScript(app.vars.baseURL+'app-widespread-init.js');
+</script>
 </head>
 
 <body>
@@ -61,19 +91,19 @@ app.u.loadScript(app.vars.baseURL+"app-quickstart-init.js");
 <div class="container" id='appView'>
 
 	<div id='mastHead' class='clearfix contrastUI'>
-		<div class='logo'><img src="" alt="Insert Logo Here" name="Insert_logo" width="20%" height="90" /></div>
+		<div class='logo pointer' onClick="return showContent('homepage',{});"><img src="" alt="Insert Logo Here" name="Insert_logo" width="20%" height="90" /></div>
 		<div class='menuAndSearch'>
 			<ul class='mainMenu menuitems'>
-				<li class='menuItem2'>contact</li>
+				<li class='menuItem2' onClick="return showContent('company',{'show':'contact'});">contact</li>
 <!--				<li class='menuItem3'>you</li> only show if logged in -->
-				<li class='menuItem3'>login</li><!-- show if logged out -->
-				<li class='menuItem4'>cart</li>
-				<li class='menuItem5'>checkout</li>
+				<li class='menuItem3' onClick="return showContent('customer',{'show':'login'});">login</li><!-- show if logged out -->
+				<li class='menuItem4' onClick="return showContent('cart',{'show':'cart'});">cart</li>
+				<li class='menuItem5' onClick="return showContent('checkout',{'show':'checkout'});">checkout</li>
 			</ul>
 			<div class='searchContainer'>
 <form name='headerSearchFrm' id='mastHeadSearchFrm' action='#' class='productSearchForm' method="get">
 	<input type='search' name='KEYWORDS' placeholder='product search' class="productSearchKeyword handleDefault" id='mastHeadKeywordsInput' />
-	<button id='mastHeadSearchButton'>Search</button>
+	<button id='mastHeadSearchButton' title='Product Search'><span class='ui-icon ui-icon-search'></span></button>
 </form>
 			</div>
 		</div>
@@ -82,7 +112,7 @@ app.u.loadScript(app.vars.baseURL+"app-quickstart-init.js");
 		<div class='categoryContainer contrastUI' id='shopNowLink'>Shop</div><!-- hidden by default. on click, shows tier 1 categories -->
 		<ul id='tier1categories'>
 		</ul>
-		<div class='breadcrumb'>Bread &#187; Crumb &#187; Goes &#187; Here</div>
+		<div class='breadcrumb'><a href='#' onClick="return showContent('homepage',{});">home</a></div>
 	</div>
 
 	<div id='contentContainer' class='clearfix'>
@@ -93,7 +123,6 @@ app.u.loadScript(app.vars.baseURL+"app-quickstart-init.js");
 		</div>
 		<div id='globalMessaging' class='appMessaging'></div>
 		<div id='mainContentArea'></div>
-		<div class='alignRight'>back to top</div>	
 	</div>
 
 	<div class='clearfix'>
@@ -168,30 +197,28 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 <div id='homepageTemplate' class='homeTemplate'>
 
 
-	<div class='bannerContainer clearfix'>
+	<div class='bannerContainer clearfix marginBottom'>
 		<div class='mainBanner'>Banner will go here.</div>
-		<div id='productSlideshow'
-			data-bind="var: category(@products); format: productList; extension: store_prodlist; loadsTemplate: productListCycleTemplate; hide_summary:1;" 
-			data-cycle-fx="scrollHorz" 
-			data-cycle-timeout="5000" 
-			data-cycle-slides="div.slide" 
-			data-cycle-swipe="true" 
-			data-cycle-prev=".prev" 
-			data-cycle-next=".next" 
-			data-cycle-pause-on-hover="true">
-
-			<nav class="cycle-pager"></nav>
-			<!-- slides will get added for product list here -->
+		<div class='productSlideshowContainer'>
+			<div class='productSlideshow'
+				data-bind="var: category(@products); format: productList; extension: store_prodlist; loadsTemplate: productListCycleTemplate; hide_summary:1; items_per_page:5;" 
+				data-cycle-log=false
+				data-cycle-fx="scrollHorz" 
+				data-cycle-timeout="5000" 
+				data-cycle-slides="div.slide" 
+				data-cycle-swipe="true" 
+				data-cycle-prev=".prev" 
+				data-cycle-next=".next" 
+				data-cycle-pause-on-hover="true">
+	
+				<nav class="cycle-pager"></nav>
+				<!-- slides will get added for product list here -->
+			</div>
 		</div>
-
 	</div>
 
-	<div class='categoryCarouselContainer'>
-	Category Carousel.<!-- a 75px tall carousel that does not auto-start and rotates through the tier1 cats -->
-	<ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul>
-	</div>
+<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResultsNoPreview; before:<h2>Best Sellers</h2>;' class='listStyleNone clearfix noPadOrMargin responsiveProdlist'></ul>
 
-	<ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"4","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResultsNoPreview; before:<h2>Best Sellers</h2>;' class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul>
 
 	
 
@@ -223,7 +250,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 	<ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul><!-- outputs a list of subcategories -->
 
-	<ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone fluidList clearfix noPadOrMargin productList'></ul><!-- outputs the product list -->
+	<ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone responsiveProdlist clearfix noPadOrMargin'></ul><!-- outputs the product list -->
 
 	<p data-bind="var: category(%page.description2); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
 
@@ -234,6 +261,11 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 
 
+
+	<div id='categoryListCycleTemplate' onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='slide pointer'>
+		<img src='blank.gif' class='catThumb' alt='' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='75' height='75' />
+		<div class="cycle-overlay"><span data-bind='var: category(pretty); format:catText; extension: myRIA;'></span></div>
+	</div>
 
 
 <!-- used to display a category within a 'list', usually in the body of a category or the homepage. -->
@@ -246,9 +278,9 @@ don't modify the 'data-templateid' unless you are changing template names and up
 </li>
 
 
-<li id='categoryListTemplateRootCats'>
+<li id='categoryListTemplateRootCats' class='clearfix'>
 	<div onClick="showContent('category',{'navcat':$(this).parent().attr('data-catsafeid')});" class='pointer'>
-		<div class='thumbContainer'><img src='blank.gif' class='catThumb' alt='' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div>
+		<div class='thumbContainer marginRight'><img src='blank.gif' class='catThumb' alt='' data-bind='var: category(%meta.CAT_THUMB); format:imageURL;' width='35' height='35' /></div>
 		<div class='catName'><span data-bind='var: category(pretty); format:catText; extension: myRIA;'></span></div>
 	</div>
 </li>
@@ -256,14 +288,16 @@ don't modify the 'data-templateid' unless you are changing template names and up
 </ul>
 
 
+<div class='slide' id='productListCycleTemplate' >
+	<div class='thumbContainer' >
+	<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='280' height='280' />
+	</div>
+	<div class="cycle-overlay" data-bind='var: product(zoovy:prod_name); format:text;'></div>
+</div>
 
 <ul>
 
 
-<li id='productListCycleTemplate'>
-	<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='200' height='200' />
-	<div class="cycle-overlay" data-bind='var: product(zoovy:prod_name); format:text;'></div>
-</li>
 
 
 <!--
@@ -276,23 +310,15 @@ remember to NOT put the button inside the 'onclick' container or two events will
 	<button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
 
 	<div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
-		<div class='prodThumbContainer' data-bind='var:product(pid); format:addPicSlider; extension:myRIA;'>
-		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='120' height='120' />
+		<div class='prodThumbContainer'>
+		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset;extension:widespread; bgcolor:ffffff;range:homeSearchResults;' />
 		</div>
 
 		<h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
-
+		<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite floatRight'></span>
 		<h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
-		
-		<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
-<!-- 	<span data-bind='var: reviews(reviews.total); format:text; pretext: from ;posttext: reviews; className:numReviews;'></span> -->
 	</div>
-	
-	<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.addItemToCart($(this),{'action':'modal'}); return false;">
-		<input type='hidden' name='qty' value='1' />
-		<button data-bind='format:addToCartButton; extension:myRIA; useParentData:true;'>more details</button>
-	</form>
-	
+
 </li>
 
 
@@ -300,11 +326,11 @@ remember to NOT put the button inside the 'onclick' container or two events will
 for product lists with addToCart feature (accessories, for example)
 container ul should have lineItemProdlist class on it instead of productList
 -->
-<li id='productListTemplateATC' class='loadingBG  ' >
+<li id='productListTemplateATC' class='lineItemProdlistItem loadingBG  ' >
 	<div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
 
-		<div class='prodThumbContainer floatLeft'>
-		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='120' height='120' />
+		<div class='prodThumbContainer floatLeft marginRight'>
+		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset; extension:widespread; range:lineItemProdlist;'  />
 		</div>
 
 		<h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
@@ -393,14 +419,12 @@ SANITY -> if you change the height and width of this image, change the .minimalM
 <li id='productListTemplateResultsNoPreview' class='loadingBG searchResultsProduct ' >
 	<div onClick="return showContent('product', {'pid' : $(this).parent().attr('data-pid')});" class='pointer'>
 		<div class='prodThumbContainer'>
-		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(images); format:imageURL;isElastic:1;bgcolor:ffffff;' width='120' height='120' />
+		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(images); format:srcset;extension:widespread;isElastic:1;bgcolor:ffffff;range:homeSearchResults;' />
 		</div>
 
-		<h5 class='hideInMinimalMode' data-bind='var: product(prod_name); format:text;'></h5>
-
-		<h6 class='hideInMinimalMode' data-bind='var: product(base_price); format:money; isElastic:1; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+		<h5 data-bind='var: product(prod_name); format:text;'></h5>
+		<h6 data-bind='var: product(base_price); format:money; isElastic:1; currencySign: $;  hideZero:true;'></h6>
 	</div>
-	<div class='hideInMinimalMode pointer moreDetails' onClick="showContent('product',{'pid':$(this).parent().attr('data-pid')});">more details</div>
 </li>
 </ul>
 
@@ -433,91 +457,85 @@ this will likely become more flexible in the future. ###
 
 <ul class='clearfix noPadOrMargin fluidList breadcrumb' data-bind='var: session(session.recentCategories.0); format:breadcrumb; extension:store_navcats; loadsTemplate: breadcrumbTemplate;'></ul>
 
-<table class='prodViewerContainer'>
-<tr>
-	<td class='imageContainer'>
 
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).attr("data-pid")});' class='pointer clearfix'  data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>
+<div class='clearfix marginBottom'>
 
-	<div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
-	<img src='blank.gif' class='prodBigImage' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL;' width='340' height='340' />
+
+	<div class='prodDetailImagesContainer'>
+	
+		<div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
+		<a href='blank.gif' data-bind='var: product(zoovy:prod_image1); format:imageURL2Href; h:; w:;' data-gallery="gallery"  ><img src='blank.gif' class='prodBigImage' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset; extension:widespread; bgcolor:ffffff; range:prodDetailMainPic;'  /></a>
+	
+		<div class='marginTop' data-bind="useParentData:true; format:prodThumbs; extension:widespread;"></div>
+	</div>
+
+	
+	<div class='prodDetailSummaryATC'>
+	
+		<h1 data-bind='var: product(zoovy:prod_name); format:text;'></h1>
+	
+		<hgroup class='marginBottom'>
+			<h5 class='stid' data-bind='var: product(pid); format:text; pretext: Sku: ;'></h5>
+			<h5 data-bind='var: product(zoovy:prod_mfg); format:searchLink; extension:myRIA; pretext: Mfg: ;'></h5>
+			<h5 data-bind='var: product(zoovy:prod_mfgid); format:text; pretext: Mfg ID: ;'></h5>
+		</hgroup>
+	
+		<div class='priceContainer marginBottom'>
+			<h4 class='basePrice' data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; pretext: Our Price: ;'></h4>
+			<h5 class='prodMSRP' data-bind='var: product(zoovy:prod_msrp); format:money; currencySign: $;  hideZero:true; pretext: MSRP: ;'></h5>
+			<span class='savings'>
+				<span class='savingsDifference' data-bind='var: product(pid); format:priceRetailSavingsDifference; extension:myRIA; pretext: You save: ;'></span>
+				<span class='savingsPercentage' data-bind='var: product(pid); format:priceRetailSavingsPercentage; extension:myRIA; pretext: (; posttext:);'></span>
+			</span>
+		</div>
+		
+		<div class="socialLinks marginBottom"></div>
+	
+		<h2 data-bind="var:product(amz:grp_varvalue); format:text;"></h2>
+		<table class='marginBottom fullWidth gridTable' data-app-role='childrenSiblingsContainer'>
+			<tbody data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true; withInventory:1; withVariations:1;"></tbody>
+		</table>
+	
+	
+		<div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency marginBottom'></div>
+		<div data-app-role='timeInTransit' class='displayNone'></div>
+	
+		<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.addItemToCart($(this), {'action':'modal'}); return false;">
+	
+			<fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
+			<fieldset data-bind='useParentData:true; format:atcQuantityInput; extension:store_product; pretext:Quantity: ; defaultValue:1;' class='borderNone'></fieldset>
+	
+			<input type='submit' value='Add to Cart' class='ui-button ui-button-text ui-corner-all ui-state-default addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;'  />
+		</form>
+	
+		<div data-bind='var:product(zoovy:prod_cpsiawarning); format:cpsiaWarning; extension:myRIA;'></div>
+		<div data-bind='var:product(zoovy:qty_price);format:quantityDiscounts; extension:store_product; pretext:Quantity Discounts:; className:marginBottom;'></div>
+	
+		<section class='marginBottom'>
+			<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
+			<span data-bind='var: reviews(reviews.total); format:text;posttext: from ;posttext: reviews; className:numReviews;'></span>
+		</section>
+	
+		<menu data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='CRMButtonMenu'>
+	
+		<a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write Review</a>	|
+	
+		<a href='#' onClick="app.ext.myRIA.a.add2BuyerList({sku:$(this).parent().attr('data-pid'),'listid':'wishlist'}); return false;">Add to Wishlist</a>
+	
+		</menu>
+	
+	</div>
 
 </div>
 
-	<div data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='prodThumbs'>
-
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"2"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL;' alt='' width='100' height='100' /></div>
-
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"3"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image3); format:imageURL;' alt=''  width='100' height='100' /></div>
-
-<div onClick='app.ext.store_product.u.showPicsInModal({"pid":$(this).parent().attr("data-pid"),"int":"4"});' class='pointer'><img src='blank.gif' data-bind='var: product(zoovy:prod_image4); format:imageURL;' alt='' width='100' height='100' /></div>
-
-	</div>
-
-	</td>
-
-	<td class='prodSummaryContainer marginBottom no_underline'>
-	<h1 data-bind='var: product(zoovy:prod_name); format:text;'></h1>
-
-	<hgroup class='marginBottom'>
-		<h5 class='stid' data-bind='var: product(pid); format:text; pretext: Sku: ;'></h5>
-		<h5 data-bind='var: product(zoovy:prod_mfg); format:searchLink; extension:myRIA; pretext: Mfg: ;'></h5>
-		<h5 data-bind='var: product(zoovy:prod_mfgid); format:text; pretext: Mfg ID: ;'></h5>
-	</hgroup>
-
-	<div class='priceContainer marginBottom'>
-		<h4 class='basePrice' data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; pretext: Our Price: ;'></h4>
-		<h5 class='prodMSRP' data-bind='var: product(zoovy:prod_msrp); format:money; currencySign: $;  hideZero:true; pretext: MSRP: ;'></h5>
-		<span class='savings'>
-			<span class='savingsDifference' data-bind='var: product(pid); format:priceRetailSavingsDifference; extension:myRIA; pretext: You save: ;'></span>
-			<span class='savingsPercentage' data-bind='var: product(pid); format:priceRetailSavingsPercentage; extension:myRIA; pretext: (; posttext:);'></span>
-		</span>
-	</div>
-	<div class="socialLinks"></div>
 
 
-	<table class='marginBottom fullWidth gridTable' data-app-role='childrenSiblingsContainer'>
-		<tbody data-bind="var: product(zoovy:grp_children); format:productList; extension:store_prodlist; loadsTemplate:productListTemplateChildren;hide_summary:true; withInventory:1; withVariations:1;"></tbody>
-	</table>
-
-
-	<div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency marginBottom'></div>
-	<div data-app-role='timeInTransit' class='displayNone'></div>
-
-	<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.addItemToCart($(this), {'action':'modal'}); return false;">
-
-		<fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
-		<fieldset data-bind='useParentData:true; format:atcQuantityInput; extension:store_product; pretext:Quantity: ; defaultValue:1;' class='borderNone'></fieldset>
-
-		<input type='submit' value='Add to Cart' class='ui-button ui-button-text ui-corner-all ui-state-default addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;'  />
-	</form>
-
-	<div data-bind='var:product(zoovy:prod_cpsiawarning); format:cpsiaWarning; extension:myRIA;'></div>
-	<div data-bind='var:product(zoovy:qty_price);format:quantityDiscounts; extension:store_product; pretext:Quantity Discounts:; className:marginBottom;'></div>
-
-	<section class='marginBottom'>
-		<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite'></span>
-		<span data-bind='var: reviews(reviews.total); format:text;posttext: from ;posttext: reviews; className:numReviews;'></span>
-	</section>
-
-	<menu data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='CRMButtonMenu'>
-
-	<a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write Review</a>	|
-
-	<a href='#' onClick="app.ext.myRIA.a.add2BuyerList({sku:$(this).parent().attr('data-pid'),'listid':'wishlist'}); return false;">Add to Wishlist</a>
-
-	</menu>
-
-	</td>
-</tr>
-<tr>
-	<td colspan='2' class="tabbedProductContentTD">
 <!--
 the tabs are built in an onComplete.  ID's are added based on sku AND index, so the index (order) of the tabs MUST match the order of the tabContent divs
 or the tab clicked won't open the right content.
 It's done this way because ID's hard coded into template are bad mojo (templates are recycled) and because using data-binds to add id's caused some serious issues
 -->
-<div class='prodTabs tabbedProductContent'>
+<div class='prodTabs tabbedProductContent clearfix marginBottom'>
 
 	<ul class='tabs'>
 		<li class='prodDescTab'><a href='#prodDesc'>Description</a></li>
@@ -556,7 +574,7 @@ It's done this way because ID's hard coded into template are bad mojo (templates
 	</div>
 
 	<div class='tabContent' data-anytab-content='prodAccessories'>
-<ul class='listStyleNone fluidList clearfix noPadOrMargin lineItemProdlist' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
+<ul class='listStyleNone clearfix noPadOrMargin' data-bind="var: product(zoovy:accessory_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplateATC;hide_pagination:true;hide_summary:true; withReviews:1; withInventory:1; withVariations:1;"></ul>
 	</div>
 
 
@@ -564,11 +582,9 @@ It's done this way because ID's hard coded into template are bad mojo (templates
 
 </div>
 
-	</td>
-</tr>
-</table>
+
 <div class='prodlistRelatedContainer'>
-	<ul class='listStyleNone fluidList clearfix noPadOrMargin productList' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
+	<ul class='listStyleNone responsiveProdlist clearfix noPadOrMargin' data-bind="var: product(zoovy:related_products); format:productList; extension:store_prodlist;loadsTemplate:productListTemplate;hide_pagination:true;hide_summary:true; before:<h2>Similar Items</h2>; withReviews:1;"></ul>
 </div>
 
 
@@ -1157,17 +1173,23 @@ used on a product layout. Some product have 'children' which may represent the s
 <!-- individual review template -->
 <ul>
 	<li id='productReviewsTemplateDetail' class='reviewLineItem clearfix'>
-	<ul class='prodReviewInfo'>
-		<li data-bind='var:review(RATING); format:addClass; format:addClass; className:review_;' class='reviewSprite'></li>
-		<li data-bind='var:review(CUSTOMER_NAME); format:text;'></li>
-		<li data-bind='var:review(LOCATION); format:text; pretext:of ;'></li>
-		<li data-bind='var:review(CREATED_GMT); format:unix2mdy; pretext:on ;'></li>
+	
+	<div class='clearfix marginBottom'>
+		<span class='floatLeft marginRight reviewSprite' data-bind='var:review(RATING); format:addClass; format:addClass; className:review_;'></span>
+		<h3 class='floatLeft' data-bind='var:review(SUBJECT); format:text;'></h3>
+	</div>
+	
+	<div>
 
-	</ul>
+		<h4 data-bind='var:review(CUSTOMER_NAME); format:text;'></h4>
+		<h5 data-bind='var:review(LOCATION); format:text; pretext:of ;'></h5>
+		<h6 data-bind='var:review(CREATED_GMT); format:unix2mdy; pretext:on ;'></h6>
+
+	</div>
 	<blockquote>
-		<h2 data-bind='var:review(SUBJECT); format:text;'></h2>
 		<p data-bind='var:review(MESSAGE); format:text; ;'></p>
 	</blockquote>
+
 	</li>
 </ul>
 
