@@ -48,6 +48,8 @@ app.rq.push(['script',0,app.vars.baseURL+'resources/jquery.image-gallery.jt.js']
 
 app.rq.push(['script',0,app.vars.baseURL+'srcset-polyfill-1.1.1-jt.js']); //in zero pass in case product page is first page.
 
+app.rq.push(['script',0,app.vars.baseURL+'masonry.pkgd.min.js']); //allows varied sizing of items for cat & product lists
+
 
 //add tabs to product data.
 //tabs are handled this way because jquery UI tabs REALLY wants an id and this ensures unique id's between product

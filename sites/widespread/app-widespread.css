@@ -265,3 +265,15 @@ form.prodViewerAddToCartForm	{display:inline;}
 	.productSlideshowContainer	{width:20%;}
 	.responsiveProdlist li {height:270px;}
 	}
+	
+	
+	
+/*
+//////////			MASONRY 		\\\\\\\\\\\
+*/
+.positionAbs {width:100%; position:absolute; bottom:0; left:0; text-align:center; background:rgba(255, 255, 255, 0.5); padding:0 0 10px 0;}
+.moreDetails {height:15px; position:absolute; bottom:0; left:0;}
+.anyMasonry.masonOne {height:305px; width:305px; margin:0 0 0.5% 0.5em; background-color:pink;}
+.anyMasonry.masonTwo {height:148px; width:305px; margin:0 0 0.5% 0.5em; background-color:blue;}
+.anyMasonry.masonThree {height:305px; width:148px; margin:0 0 0.5% 0.5em; background-color:green;}
+.anyMasonry.masonFour  {height:148px; width:148px; margin:0 0 0.5% 0.5em; background-color:red;}

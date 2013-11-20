@@ -63,7 +63,8 @@ var app = {vars:{
 		{"namespace":"store_crm","filename":"extensions/store_crm.js"},
 		{"namespace":"store_cart","filename":"extensions/store_cart.js"},
 		{"namespace":"cco","filename":"extensions/cart_checkout_order.js"},
-		{"namespace":"orderCreate","filename":"extensions/checkout/extension.js"}
+		{"namespace":"orderCreate","filename":"extensions/checkout/extension.js"},
+		{"namespace":"store_masonry","filename":"extensions/store_masonry.js"}
 		]
 	},u:{},rq:[]};
 
@@ -250,7 +251,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 	<ul data-bind="var: category(@subcategoryDetail); format: categoryList; extension: store_navcats; loadsTemplate: categoryListTemplate; detail:max;" class='listStyleNone fluidList clearfix noPadOrMargin categoryList'></ul><!-- outputs a list of subcategories -->
 
-	<ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplate; withReviews:1; items_per_page: 25;" class='listStyleNone responsiveProdlist clearfix noPadOrMargin'></ul><!-- outputs the product list -->
+	<ul data-bind="var: category(@products); format: productList; editor: finder; extension: store_prodlist; loadsTemplate: productListTemplateMasonry; withReviews:1; items_per_page: 25;" class='listStyleNone responsiveProdlist clearfix noPadOrMargin'></ul><!-- outputs the product list -->
 
 	<p data-bind="var: category(%page.description2); format:wiki; wikiFormats:myRIA; editor: textarea;"></p>
 
@@ -317,6 +318,28 @@ remember to NOT put the button inside the 'onclick' container or two events will
 		<h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
 		<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite floatRight'></span>
 		<h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+	</div>
+
+</li>
+
+
+<!--
+Essentially the same as productListTemplate but allows for different size containers for each product.
+Leave the anyMasonry class, and the pickClass data-bind.
+-->
+<li id='productListTemplateMasonry' class='loadingBG anyMasonry' onMouseOver="$('.quickView',$(this)).show();" onMouseOut="$('.quickView').hide();" data-bind="useParentData:true; format:pickClass; extension:store_masonry;">
+
+	<button class='floatRight pointer quickView displayNone' onClick="quickView('product',{'templateID':'productTemplateQuickView','pid':$(this).closest('[data-pid]').attr('data-pid')});">Quickview</button>
+
+	<div onClick="showContent('product',{'pid':$(this).attr('data-pid')})" data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='pointer'>
+		<div class='prodThumbContainer'>
+			<div class='masonImage' data-bind="var:product(zoovy:prod_image1); format:assignAttribute; attribute:data-imgsrc;"></div> 
+			<div class='positionAbs' >
+				<h5 data-bind='var: product(zoovy:prod_name); format:text;'></h5>
+				<span data-bind='var: reviews(reviews.average); format:addClass; className:review_;' class='reviewSprite floatRight'></span>
+				<h6 data-bind='var: product(zoovy:base_price); format:money; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+			</div>
+		</div>	
 	</div>
 
 </li>
@@ -403,15 +426,16 @@ remember to NOT put the button inside the 'onclick' container or two events will
 
 SANITY -> if you change the height and width of this image, change the .minimalMode .searchResultsProduct in qs_styles.css to match
 -->
-<li id='productListTemplateResults' class='loadingBG searchResultsProduct ' >
+<li id='productListTemplateResults' class='loadingBG searchResultsProduct anyMasonry' data-bind="useParentData:true; format:pickClass; extension:store_masonry;">
 	<div onClick="app.ext.myRIA.a.handleProdPreview($(this).parent().attr('data-pid'));" class='pointer'>
 		<div class='prodThumbContainer'>
-		<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(images); format:imageURL;isElastic:1;bgcolor:ffffff;' width='120' height='120' />
+		<!-- <img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(images); format:imageURL;isElastic:1;bgcolor:ffffff;' width='120' height='120' /> -->
+			<div class='masonImage' data-bind="var:product(images); index:0; format:assignElasticImgSrc; extension:store_masonry;"></div>
+			<div class='positionAbs'>
+				<h5 class='hideInMinimalMode' data-bind='var: product(prod_name); format:text;'></h5>
+				<h6 class='hideInMinimalMode' data-bind='var: product(base_price); format:money; isElastic:1; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
+			</div>
 		</div>
-
-		<h5 class='hideInMinimalMode' data-bind='var: product(prod_name); format:text;'></h5>
-
-		<h6 class='hideInMinimalMode' data-bind='var: product(base_price); format:money; isElastic:1; currencySign: $;  hideZero:true; className:price; pretext: Our Price: ;'></h6>
 	</div>
 	<div class='hideInMinimalMode pointer moreDetails' onClick="showContent('product',{'pid':$(this).parent().attr('data-pid')});">more details</div>
 </li>
