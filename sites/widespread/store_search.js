@@ -184,6 +184,7 @@ P.query = { 'and':{ 'filters':[ {'term':{'profile':'E31'}},{'term':{'tags':'IS_S
 						else	{
 							//no error gets thrown here. it is an acceptable use case to display search results w/ no multipage functionality.
 							}
+						app.u.dump(" --------> GOT HERE <----------");
 						app.ext.store_masonry.u.masonImageInit($parent);
 						app.ext.store_masonry.u.runMasonry($parent);
 						}
@@ -294,14 +295,13 @@ app.u.dump(" -> pageInFocus: "+pageInFocus);
 //					app.u.dump(" -> newPage: " + newPage);
 					if(EQ)	{
 						var query = EQ;
-						app.u.dump("EQ:");
-						app.u.dump(EQ);
+//						app.u.dump("EQ:"); app.u.dump(EQ);
 						//query.size = EQ.size; //use original size, not what's returned in buildSimple...
 						query.from = (newPage - 1) * EQ.size; //page is passed in, which starts at 1. but elastic starts at 0.
 						app.ext.store_search.u.updateDataOnListElement($list,query,newPage);
 						app.ext.store_search.calls.appPublicSearch.init(query,_tag);
 						app.model.dispatchThis();
-						app.ext.store_masonry.u.masonImageInit($parent);
+						app.ext.store_masonry.u.masonImageInit($list);
 						app.ext.store_masonry.u.runMasonry($list);
 						}
 					else	{

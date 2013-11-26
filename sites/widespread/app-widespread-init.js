@@ -1,7 +1,6 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
 
-
 /*
 app.rq.push(['extension',0,'orderCreate','extensions/checkout/extension.js']);
 
@@ -79,6 +78,7 @@ app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 	}]);
 
 
+
 app.rq.push(['templateFunction','productTemplate','onCompletes',function(P) {
 /*
 w/ the new prodImages renderFormat, this isn't necessary anymore.	
@@ -102,7 +102,7 @@ w/ the new prodImages renderFormat, this isn't necessary anymore.
 
 
 
-
+app.u.dump(" -> RQ is built");
 //sample of an onDeparts. executed any time a user leaves this page/template type.
 //app.rq.push(['templateFunction','homepageTemplate','onDeparts',function(P) {app.u.dump("just left the homepage")}]);
 /*
@@ -196,6 +196,24 @@ app.u.loadApp = function() {
 //will pass in the page info object. (pageType, templateID, pid/navcat/show and more)
 app.u.appInitComplete = function(P)	{
 	app.u.dump("Executing myAppIsLoaded code...");
+
+	app.ext.myRIA.pageTransition = function($o,$n)	{
+		$('#hotwButton').show();
+//if $o doesn't exist, the animation doesn't run and the new element doesn't show up, so that needs to be accounted for.
+		if($o.length)	{
+			//$o wouldn't animate the way I wanted, so it's cloned and added to the root of the doc, then removed from the dom after animation.
+			var $newO = $o.clone().width($o.width()).css($o.offset()).css('position','absolute');
+			$newO.appendTo(document.body);
+			$o.hide();
+			$newO.animate({'height':20,'width':20,'overflow':'hidden','left':$('#hotwButton').offset().left,'top':$('#hotwButton').offset().top},'slow',function(){
+				$(this).hide().empty().remove(); //remove the inline styles so that when this page is returned to, it is't squished.
+				});
+			$n.fadeIn(1000);
+			}
+		else	{
+			$n.fadeIn(1000);
+			}
+		}
 	}
 
 
@@ -203,6 +221,10 @@ app.u.appInitComplete = function(P)	{
 
 //don't execute script till both jquery AND the dom are ready.
 $(document).ready(function(){
+	app.u.dump(" -> DOM and jQuery are both loaded. handle the RQ now");
+//	$('.productSlideshow','#homepageTemplate').on('complete.woot',function(){
+//		app.u.dump('woot!');
+//		});
 	app.u.handleRQ(0)
 	});
 
