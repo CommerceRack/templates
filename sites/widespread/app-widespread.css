@@ -535,7 +535,7 @@ widespread.css (contains a lot of the responsive code)
 
 
 
-
+#appView	{background-color: #FFF;}
 
 
 .loadingBG	{background-image:url(loading.gif) !important; background-repeat: no-repeat !important; background-position: center center; min-height:100px !important; min-width:100px;}
@@ -558,7 +558,6 @@ body {
 /* wraps around everything */
 .container {
 	width: 90%;
-	background-color: #FFF;
 	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
 	}
 
@@ -630,7 +629,8 @@ h2, h3, h4, h5, h6	{font-weight:normal;}
 #mastFoot	{list-style:none; margin:0; padding:0;}
 #mastFoot li	{float:none; width:100%; line-height:30px; text-align:center;}
 
-
+.footer	{padding:.3em 0; font-size:.75em; }
+.footer, .footer a	{color:#666666;}
 
 .labelsAsBreaks label, .labelsAsBreaks .label	{display:block; margin-bottom:.2em;}
 
