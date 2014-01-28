@@ -1,6 +1,6 @@
 var app = app || {vars:{},u:{}}; //make sure app exists.
 app.rq = app.rq || []; //ensure array is defined. rq = resource queue.
-
+console.log(">>>>>>>>>>>>>>>>>>>>>>");
 /*
 app.rq.push(['extension',0,'orderCreate','extensions/checkout/extension.js']);
 
