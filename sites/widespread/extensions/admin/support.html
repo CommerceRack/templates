@@ -181,25 +181,25 @@ Disposition: <select name='disposition'  data-app-change="admin|updateDMICmdVar"
 	</table>
 	
 	<div class='labelsAsBreaks alignedLabels alignedInputs'>
-		<div data-app-role='supportFileUploadContainer' class='clearfix marginBottom'></div><!-- intentionally outside the form. form is emptied on update -->
-		<table class='gridTable fullWidth marginBottom'>
-		<thead>
-		<tr>
-			<th>Filename</th>
-			<th>Added</th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody data-bind="var: ticket(@FILES); format:processList; loadsTemplate:supportTicketFilesRowTemplate;" data-app-role='ticketAttatchmentList'></tbody>
-		</table>
+	<button data-app-click="admin_support|fileAttach2TicketShow" class='marginBottom applyButton' data-text='true' data-icon-primary='ui-icon-arrowthickstop-1-n'>Add File(s) To Ticket</button><!-- intentionally outside the form. form is emptied on update -->
+	<table class='gridTable fullWidth marginBottom'>
+	<thead>
+	<tr>
+		<th>Filename</th>
+		<th>Added</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody data-bind="var: ticket(@FILES); format:processList; loadsTemplate:supportTicketFilesRowTemplate;" data-app-role='ticketAttatchmentList'></tbody>
+	</table>
 
-		<form class='marginTop'>
-		<fieldset>
-			<legend>Provide Additional Information:</legend>
-			<label><span>Message: </span><textarea name='note' required='required'></textarea></label>
-		</fieldset>
-		<button data-app-click='admin_support|adminTicketMacroUpdateExec' class='applyButton' data-icon-secondary='ui-icon-circle-arrow-e'>Add Message To Ticket</button>
-		</form>
+	<form class='marginTop'>
+	<fieldset>
+		<legend>Provide Additional Information:</legend>
+		<label><span>Message: </span><textarea name='note' required='required'></textarea></label>
+	</fieldset>
+	<button data-app-click='admin_support|adminTicketMacroUpdateExec' class='applyButton' data-icon-secondary='ui-icon-circle-arrow-e'>Add Message To Ticket</button>
+	</form>
 	</div>
 
 
@@ -259,9 +259,9 @@ WEBDOC
 		
 			<div class='buttonSet'>
 			<form class='searchBar floatRight' action='#' data-app-role='helpSearch'>
-				<input type='text' name='srsearch' class='hideInDetailMode'  />
+				<input type='text' name='keywords' class='hideInDetailMode'  />
 				<button data-app-event='admin_support|execHelpSearch' class='hideInDetailMode'>Search</button>
-				<button data-app-click='admin|toggleDMI' class='applyButton displayNone' data-text='false' data-icon-primary='ui-icon-seek-next'>Toggle between list and detail view</button>
+				<button data-app-event='admin|toggleDualMode'>Toggle between list and detail view</button>
 			</form>
 			</div>
 			
@@ -282,7 +282,7 @@ WEBDOC
 			<th ></th>
 		</tr>
 		</thead>
-		<tbody data-bind="var: users(query.search); format:processList; loadsTemplate:helpSearchResultsTemplate;" class='dualModeList' data-app-role='dualModeListContents'></tbody>
+		<tbody data-bind="var: users(@RESULTS); format:processList; loadsTemplate:helpSearchResultsTemplate;" class='dualModeList' data-app-role='dualModeListContents'></tbody>
 		</table>
 		</div>
 	</section>
@@ -293,12 +293,12 @@ WEBDOC
 <table>
 <tr id='helpSearchResultsTemplate' >
 	<td data-bind='var: help(title); format:text;' class='lookLikeLink' data-app-event="admin_support|showHelpDetail"></td>
-	<td class='hideInDetailMode' data-bind='var: help(snippet); format:text;'></td>
+	<td class='hideInDetailMode' data-bind='var: help(summary); format:text;'></td>
 	<td class='hideInDetailMode' data-bind='var: help(score); format:text;'></td>
 	<td class='alignRight'>
 <!-- showHelpInDialog only displayed when help opened within a tabContent -->
-	<span class='hideInDetailMode'><button data-app-click="admin_support|showHelpDocInDialog" class='showInTabContent applyButton' data-text='false' data-icon-primary='ui-icon-newwin'>Open In Dialog</button></span>
-	<button data-app-click="admin_support|showHelpDetail" class='applyButton' data-text='false' data-icon-primary='ui-icon-arrowthick-1-e'>View</button>
+	<span class='hideInDetailMode'><button data-app-event="admin_support|showHelpDetailInDialog" class='showInTabContent'>Open In Dialog</button></span>
+	<button data-app-event="admin_support|showHelpDetail">View</button>
 	</td>
 </tr>
 </table>

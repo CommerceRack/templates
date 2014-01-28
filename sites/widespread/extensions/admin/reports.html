@@ -6,34 +6,45 @@
 
 
 <div id='ebayListingsReportPageTemplate' class='ebayListingsReportPage'>
-<form action='#' data-app-submit="admin_reports|ebayReportViewSubmit">
+<form action='#'>
 
 <fieldset class='labelsAsBreaks floatLeft ui-widget ui-widget-content ui-corner-all marginRight oneThird'>
 	<legend>eBay Listings CSV Export</legend>
-	<label><input name='query' value="listing-active" type="radio" /> Active Listings</label>
-	<label><input name='query' value="listing-active-fixed" type="radio" /> Active Listings (Fixed Price)</label>
-	<label><input name='query' value="listing-active-store" type="radio" /> Active Listings (Store)</label>
-	<label><input name='query' value="listing-active-auction" type="radio" /> Active Listings (Auction)</label>
-	<label><input name='query' value="listing-all" type="radio" /> All Listings (including ended)</label>
-	<label><input name='query' value="listing-allattempts" type="radio" /> All Listings and Attempts</label>
+	<label><input name='query' value="listing-active" type="radio"> Active Listings</label>
+	<label><input name='query' value="listing-active-fixed" type="radio"> Active Listings (Fixed Price)</label>
+	<label><input name='query' value="listing-active-store" type="radio"> Active Listings (Store)</label>
+	<label><input name='query' value="listing-active-auction" type="radio"> Active Listings (Auction)</label>
+	<label><input name='query' value="listing-all" type="radio"> All Listings (including ended)</label>
+	<label><input name='query' value="listing-allattempts" type="radio"> All Listings and Attempts</label>
+</fieldset>
+
+
+<fieldset class='labelsAsBreaks floatLeft ui-widget ui-widget-content ui-corner-all marginRight oneThird'>
+	<legend>Powerlister CSV Export</legend>
+	<label><input name='query' value="power-all" type="radio"> All PowerListers</label>
+	<label><input name='query' value="power-active" type="radio"> - New/Active PowerListers</label>
+	<label><input name='query' value="power-paused" type="radio"> - Paused PowerListers</label>
+	<label><input name='query' value="power-error" type="radio"> - Errored PowerListers</label>
+	<label><input name='query' value="power-done" type="radio"> - Done PowerListers</label>
+	<label><input name='query' value="power-missing" type="radio"> Products without Powerlisters</label>
 </fieldset>
 
 <fieldset class='labelsAsBreaks floatLeft ui-widget ui-widget-content ui-corner-all oneThird'>
 	<legend>Event CSV Export</legend>
-	<label><input name='query' value="event-all" type="radio" /> All Events</label>
-	<label><input name='query' value="event-pending" type="radio" /> - Pending/Running</label>
-	<label><input name='query' value="event-error" type="radio" /> - Result: ERROR</label>
-	<label><input name='query' value="event-warning" type="radio" /> - Result: SUCCESS w/WARNING</label>
-	<label><input name='query' value="event-success" type="radio" /> - Result: SUCCESS</label>
-	<label><input name='query' value="event-target-powr.auction" type="radio" /> eBay Powerlister</label>
-	<label><input name='query' value="event-target-ebay.fixed" type="radio" /> eBay Fixed Price</label>
-	<label><input name='query' value="event-target-ebay.auction" type="radio" /> eBay Auctions</label>
-	<label>BatchID/Job#: <input name="batchid" size="10" value="" type='number' class='smallInput' /><span class='zhint'>optional</span></label>
+	<label><input name='query' value="event-all" type="radio"> All Events</label>
+	<label><input name='query' value="event-pending" type="radio"> - Pending/Running</label>
+	<label><input name='query' value="event-error" type="radio"> - Result: ERROR</label>
+	<label><input name='query' value="event-warning" type="radio"> - Result: SUCCESS w/WARNING</label>
+	<label><input name='query' value="event-success" type="radio"> - Result: SUCCESS</label>
+	<label><input name='query' value="event-target-powr.auction" type="radio"> eBay Powerlister</label>
+	<label><input name='query' value="event-target-ebay.fixed" type="radio"> eBay Fixed Price</label>
+	<label><input name='query' value="event-target-ebay.auction" type="radio"> eBay Auctions</label>
+	<label>BatchID/Job#: <input name="batchid" size="10" value="" type="number"><span class='zhint'>optional</span></label>
 </fieldset>
 <div class='clearfix'></div>
 <fieldset class='marginTop ui-widget ui-widget-content ui-corner-all'>
 
-<div class='floatRight'><button  class='applyButton'>View</button></div>
+<div class='floatRight'><button data-app-event="admin_reports|ebayReportView">View</button></div>
 
 <label>Time Period/since: <input type='number' class='datepicker' name='since_gmt' /></label>
 
@@ -379,7 +390,7 @@
 
 <div id='reportsPageTemplate'>
 
-	<div data-app-role='reportsTabsContainer' class='applyAnytabs'>
+	<div data-app-role='reportsTabsContainer'>
 
 		<ul>
 			<li><a href='#reports'>Reports</a></li>
@@ -414,22 +425,22 @@
 
 	<li>Order Detail: 
 	
-	<a href='#'	onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;" title="Today's Sales">Today</a> | 
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'yesterday','GUID':app.u.guidGenerator()}}); return false;" title="Yesterday's Sales">Yesterday</a> | 
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;" title="This Month's Sales">This Month</a>
+	<a href='#'	onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;" title="Today's Sales">Today</a> | 
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'yesterday','GUID':app.u.guidGenerator()}}); return false;" title="Yesterday's Sales">Yesterday</a> | 
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALES', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;" title="This Month's Sales">This Month</a>
 	</li>
 	
 	<li>Order Summary: 
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALE_SUMMARY', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;" >Today</a> |
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALE_SUMMARY', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;">This Month</a>
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALE_SUMMARY', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;" >Today</a> |
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALE_SUMMARY', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;">This Month</a>
 	</li>
 	
 	<li>Sales SKU Ranking: 
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALES_SKU_RANK', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;">Today</a> |
-	<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SALES_SKU_RANK', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;" >This Month</a>
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALES_SKU_RANK', '%vars':{'PERIOD':'today','GUID':app.u.guidGenerator()}}); return false;">Today</a> |
+	<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SALES_SKU_RANK', '%vars':{'PERIOD':'thismonth','GUID':app.u.guidGenerator()}}); return false;" >This Month</a>
 	</li>
 	
-	<li><b><a href='#' onclick="$(this).closest('[data-app-role=\'reportsTabsContainer\']').anytabs('reveal','salesReports'); return false;">More Options</a></b></li>
+	<li><b><a href='#' onclick="$(this).closest('[data-app-role=\'reportsTabsContainer\']').anytabs('reveal','#salesReports'); return false;">More Options</a></b></li>
 
 </ul>
 
@@ -438,16 +449,17 @@
 <h2>Inventory Reports</h2>
 <p>See how much inventory you have in stock, on-shelf and available, buy supplier, warehouse or everything.</p>
 <ul>
-	<li><a href='#' onclick="$(this).closest('.ui-widget-anytabs').anytabs('reveal','inventory'); return false;">Report Generator</a></b></li>
+	<li><a href='#' onclick="$(this).closest('.ui-widget-anytabs').anytabs('reveal','#inventory'); return false;">Report Generator</a></b></li>
 </ul>
 -->
 
 <h2>Listing Reports</h2>
 <p>Take a look at how many marketplaces each of your products is currently in.</p>
 <ul>
-	<li><a href='#' onclick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/EBAY_LISTING', '%vars':{'type':'ACTIVE-ALL', 'detail':'NONE'}}); return false;">eBay Active Listing w/Detail</a></li>
-	<li><a href='#' onclick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/PRODUCT_DISPOSITION', '%vars':{}}); return false;">Marketplace Disposition Report</a></li>
-	<li><b><a href='#' onClick="$(this).closest('[data-app-role=\'reportsTabsContainer\']').anytabs('reveal','eBayReports'); return false;">More Options</a></b></li>
+	<li><a href='#' onclick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/EBAY_POWER', '%vars':{}}); return false;">eBay Powerlister</a></li>
+	<li><a href='#' onclick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/EBAY_LISTING', '%vars':{'type':'ACTIVE-ALL', 'detail':'NONE'}}); return false;">eBay Active Listing w/Detail</a></li>
+	<li><a href='#' onclick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/PRODUCT_DISPOSITION', '%vars':{}}); return false;">Marketplace Disposition Report</a></li>
+	<li><b><a href='#' onClick="$(this).closest('[data-app-role=\'reportsTabsContainer\']').anytabs('reveal','#eBayReports'); return false;">More Options</a></b></li>
 </ul>
 
 
@@ -492,22 +504,24 @@
 					</label>
 		
 					<label><input type="checkbox" name="include_deleted" /> Gross Sales: Include Cancelled Orders</label>
-
+					
 					<label>
 						<span>Dates</span>
-						<select name='PERIOD' data-panel-selector=".formPeriodRange" data-input-change='show-panel' required='required'>
+						<select name='PERIOD' data-app-event="admin_reports|showSalesReportPeriodInputs" required='required'>
 							<option value=''>please choose</option>
 							<option value="today">Today Only</option><!-- lowercase is rel -->
 							<option value="thismonth">Month to Date</option>
 							<option value="4week">Last 4 Weeks</option>
 							<option value="all">All Orders</option>
-							<option value='BYMONTH' data-show-panel='formPeriodRange-BYMONTH'>by month</option><!-- uppercase is range -->
-							<option value='BYINVOICE' data-show-panel='formPeriodRange-BYINVOICE'>invoice range</option>
-							<option value='BYTIMESTAMP' data-show-panel='formPeriodRange-BYTIMESTAMP'>Date range</option>
+							<option value='BYMONTH'>by month</option><!-- uppercase is range -->
+							<option value='BYINVOICE'>invoice range</option>
+							<option value='BYTIMESTAMP'>Date range</option>
 						</select>
 					</label>
 					
-		<div class='formPeriodRange displayNone' data-panel-id='formPeriodRange-BYMONTH'>
+		
+		
+		<div class='formPeriodRange formPeriodRange-BYMONTH displayNone'>
 		<select name="month">
 			<option value="1">January</option>
 			<option value="2">February</option>
@@ -532,13 +546,14 @@
 			<option selected="selected" value="2013">2013</option>
 		</select>
 		</div>
-
-		<div class='formPeriodRange  displayNone'  data-panel-id='formPeriodRange-BYTIMESTAMP'>
+		
+		<div class='formPeriodRange formPeriodRange-BYTIMESTAMP displayNone'>
 			<label>Begins <input type="text" name="begints" size="20" class='datepicker' ></label>
 			<label>Ends <input type="text" name="endts" size="20" class='datepicker' ></label>
 		</div>
-
-		<div class='formPeriodRange  displayNone' data-panel-id='formPeriodRange-BYINVOICE'>
+		
+		
+		<div class='formPeriodRange formPeriodRange-BYINVOICE displayNone'>
 			<label>First Invoice: <input type="text" name="startinv" maxlength="15" size="15"> ####-##-####</label>
 			<label>Last Invoice: <input type="text" name="endinv" maxlength="15" size="15"> ####-##-####</label>
 		</div>
@@ -550,7 +565,7 @@
 		
 			</div>
 		
-			<div class='buttonset'><button data-app-click="admin_reports|execAdminReportCreate" class='applyButton'>Build Report</button></div>
+			<div class='buttonset'><button data-app-event="admin_reports|execAdminReportCreate">Build Report</button></div>
 		
 			</form>		
 		</section>
@@ -572,22 +587,22 @@
 	<div class='marginTop'>
 		<h3>Quick Reports</h3>
 		<div class='stdMargin'>
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
 				'%vars':{'GUID':app.u.guidGenerator(),'PERIOD':'4week','where':'TS,GT,$starts_gmt'}}); return false;">Recent changes</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
 				'%vars':{'GUID':app.u.guidGenerator(),'ALL':1}}); return false;">All skus (brief)</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
 				'%vars':{'GUID':app.u.guidGenerator(),'where':'QTY,LT,1'}}); return false;">Zero available qty</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SKU','%vars':{'GUID':app.u.guidGenerator(),'ALL':1,'headers':'SKU,sku:title,sku:price,sku:weight,inv:available,inv:onhand,inv:markets'}}); return false;">All skus (detailed)</a><br />
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SKU','%vars':{'GUID':app.u.guidGenerator(),'ALL':1,'headers':'SKU,sku:title,sku:price,sku:weight,inv:available,inv:onhand,inv:markets'}}); return false;">All skus (detailed)</a><br />
 			<!--
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/SKU', 
 				'%vars':{'ALL':1,}}); return false;">All skus (uber detailed)</a><br />
 			-->
 		</div>
 		<h3>Custom Reports</h3>
 		<div class='stdMargin'>
-			<div data-bind="forceRender:true; format:batchJobParametersList; extension:admin_batchjob; batch_exec:REPORT/SKU;"></div>
-			<a href='#' data-app-click="admin_reports|showReportBuilderDialog" data-batchexec='SKU'>Add custom report</a>
+			<div class='marginBottom' data-app-role='inventoryReportsCustomContainer_sku'></div>
+			<a href='#' data-app-event="admin_reports|showReportBuilderDialog" data-batchexec='SKU'>Add custom report</a>
 		</div>
 	</div>
 </div>
@@ -618,24 +633,24 @@
 	<div class='marginTop'>
 		<h3>Quick Reports</h3>
 			<div class='stdMargin'>
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
-				'%vars':{'GUID':app.u.guidGenerator(),'PERIOD':'4week','where':'TS,GT,$starts_gmt','+':'ALL'}}); return false;">Recent changes</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+				'%vars':{'GUID':app.u.guidGenerator(),'PERIOD':4week','where':'TS,GT,$starts_gmt','+':'ALL'}}); return false;">Recent changes</a><br />
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
 				'%vars':{'GUID':app.u.guidGenerator(),'ALL':1}}); return false;">All skus (brief)</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
 				'%vars':{'GUID':app.u.guidGenerator(),'BASETYPE':'SIMPLE'}}); return false;">Simple Inventory</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
 				'%vars':{'GUID':app.u.guidGenerator(),'BASETYPE':'WMS'}}); return false;">WMS Inventory</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
 				'%vars':{'GUID':app.u.guidGenerator(),'BASETYPE':'SUPPLIER'}}); return false;">Supplier Inventory</a><br />
-			<a href='#' onClick="app.ext.admin_batchjob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
+			<a href='#' onClick="app.ext.admin_batchJob.a.adminBatchJobCreate({'type':'REPORT/INVENTORY', 
 				'%vars':{'GUID':app.u.guidGenerator(),'BASETYPE':'PICK'}}); return false;">Pick Inventory</a><br />
 		</div>
 
 		<h3>Custom Reports</h3>
 		<div class='stdMargin'>
-			<div data-bind="forceRender:true; format:batchJobParametersList; extension:admin_batchjob; batch_exec:REPORT/INVENTORY;"></div>
-			<a href='#' data-app-click="admin_reports|showReportBuilderDialog" data-batchexec='INVENTORY'>Add custom report</a>
+			<div class='marginBottom' data-app-role='inventoryReportsCustomContainer_inventory'></div>
+			<a href='#' data-app-event="admin_reports|showReportBuilderDialog" data-batchexec='INVENTORY'>Add custom report</a>
 		</div>
 		
 	</div>
@@ -661,7 +676,7 @@
 <tr id='reportsRowTemplate'>
 	<td data-bind="var: user(ID); format:text;"></td>
 	<td data-bind="var: user(TITLE); format:truncText; numCharacters:45;"></td>
-	<td><button data-app-event="admin_batchjob|showReport" class='displayNone'>View Report</button><button data-app-event="admin_batchjob|showBatchDetail">Batch Details</button></td>
+	<td><button data-app-event="admin_batchJob|showReport" class='displayNone'>View Report</button><button data-app-event="admin_batchJob|showBatchDetail">Batch Details</button></td>
 </tr>
 </table>
 

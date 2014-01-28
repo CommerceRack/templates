@@ -195,40 +195,21 @@ A special translate template for product so that reviews can be merged into the 
 					tmp['reviews'] = app.ext.store_prodlist.u.summarizeReviews(pid); //generates a summary object (total, average)
 					tmp['reviews']['@reviews'] = app.data['appReviewsList|'+pid]['@reviews']
 					}
-
-				var $product =(tagObj.jqObj instanceof jQuery) ? tagObj.jqObj :  $(app.u.jqSelector('#',tagObj.parentID));
-				var $prodlist = $product.parent();
-				
-				$product.anycontent({'datapointer':tagObj.datapointer}).attr('data-template-role','listitem');
-				
-				$prodlist.data('pageProductLoaded',($prodlist.data('pageProductLoaded') + 1)); //tracks if page is done.
-				$prodlist.data('totalProductLoaded',($prodlist.data('totalProductLoaded') + 1)); //tracks if entire list is done. handy for last page which may have fewer than an entire pages worth of data.
-				if(($prodlist instanceof jQuery && $prodlist.data('pageProductLoaded')) && (($prodlist.data('pageProductLoaded') == $prodlist.data('prodlist').items_per_page) || ($prodlist.data('totalProductLoaded') == $prodlist.data('prodlist').total_product_count)))	{
-//					app.u.dump($._data($prodlist[0],'events')); //how to see what events are tied to an element. not a supported method.
-					$prodlist.trigger('complete');
-					}
-
-
+				(tagObj.jqObj instanceof jQuery) ? tagObj.jqObj.anycontent({'datapointer':tagObj.datapointer}) : $(app.u.jqSelector('#',tagObj.parentID)).anycontent({'datapointer':tagObj.datapointer})
 //				app.renderFunctions.translateTemplate(app.data[tagObj.datapointer],tagObj.parentID);
 				},
 //error needs to clear parent or we end up with orphans (especially in UI finder).
 			onError : function(responseData,uuid)	{
 				responseData.persistent = true; //throwMessage will NOT hide error. better for these to be pervasive to keep merchant fixing broken things.
 				var pid = responseData.pid;
-
-				var $product =(responseData.jqObj instanceof jQuery) ? responseData.jqObj :  $(app.u.jqSelector('#',responseData.parentID));
-				$product.empty().removeClass('loadingBG');
-				$product.anymessage(responseData,uuid);
-//even if the product errors out, productLoaded gets incremented so the oncomplete runs.
-				var $prodlist = $product.parent();
-				$prodlist.data('pageProductLoaded',($prodlist.data('pageProductLoaded') + 1));
-				$prodlist.data('totalProductLoaded',($prodlist.data('totalProductLoaded') + 1));
-				
+				var $parent = $('#'+responseData['_rtag'].parentID)
+				$parent.empty().removeClass('loadingBG');
+				$parent.anymessage(responseData,uuid);
 //for UI prod finder. if admin session, adds a 'remove' button so merchant can easily take missing items from list.
-				if(app.u.thisIsAnAdminSession())	{
+				if(app.vars.thisSessionIsAdmin)	{
 					$("<button \/>").text("Remove "+pid).button().on('click',function(){
 						app.ext.admin.u.removePidFromFinder($(this).closest("[data-pid]")); //function accepts a jquery object.
-						}).appendTo($('.ui-widget-anymessage',$product));
+						}).appendTo($('.ui-widget-anymessage',$parent));
 					}
 				}
 			},
@@ -373,7 +354,8 @@ the object created here is passed as 'data' into the mulitpage template. that's 
 */
 
 			setProdlistVars : function(obj)	{
-//				app.u.dump("BEGIN store_prodlist.u.setProdlistVars"); app.u.dump(obj);
+//				app.u.dump("BEGIN store_prodlist.u.setProdlistVars");
+//				app.u.dump(obj);
 				var r = false;
 				var hideMultipageControls = false; //if set to true, will hide just the dropdown/page controls.
 				
@@ -474,12 +456,12 @@ if no parentID is set, then this function gets the data into memory for later us
 
 */
 			getProductDataForList : function(plObj,$tag,Q)	{
-//				app.u.dump("BEGIN store_prodlist.u.getProductDataForList ["+plObj.parentID+"]"); app.u.dump(plObj);
+				app.u.dump("BEGIN store_prodlist.u.getProductDataForList ["+plObj.parentID+"]");
 
 				Q = Q || 'mutable';
 				var numRequests = 0; //# of requests that will b made. what is returned.
 				if(plObj && plObj.csv)	{
-//					app.u.dump(" -> csv defined. length: "+plObj.csv.length);
+					app.u.dump(" -> csv defined. length: "+plObj.csv.length);
 					var pageCSV = this.getSkusForThisPage(plObj);
 					var L = pageCSV.length;
 					var call = 'appProductGet';  //this call is used unless variations or inventory are needed. this call is 'light' and just gets basic info.
@@ -494,7 +476,7 @@ if no parentID is set, then this function gets the data into memory for later us
 							_tag = {'callback':'translateTemplate','extension':'store_prodlist','jqObj':magic.inspect('#'+this.getSkuSafeIdForList(plObj.parentID,pageCSV[i]))}
 							}
 						else if(plObj.parentID)	{
-							_tag = {'callback':'translateTemplate','extension':'store_prodlist','jqObj':$(plObj.placeholders[i]),'parentID':this.getSkuSafeIdForList(plObj.parentID,pageCSV[i])}
+							_tag = {'callback':'translateTemplate','extension':'store_prodlist','parentID':this.getSkuSafeIdForList(plObj.parentID,pageCSV[i])}
 							}
 						else	{}
 						numRequests += app.ext.store_prodlist.calls[call].init({
@@ -527,7 +509,8 @@ obj is most likely the databind object. It can be any params set in setProdlistV
 params that are missing will be auto-generated.
 */
 			buildProductList : function(obj,$tag)	{
-//				app.u.dump("BEGIN store_prodlist.u.buildProductList()"); app.u.dump(" -> obj: "); app.u.dump(obj);
+//				app.u.dump("BEGIN store_prodlist.u.buildProductList()");
+//				app.u.dump(" -> obj: "); app.u.dump(obj);
 
 //Need either the tag itself ($tag) or the parent id to build a list. recommend $tag to ensure unique parent id is created
 //also need a list of product (csv)
@@ -536,16 +519,17 @@ params that are missing will be auto-generated.
 					obj.csv = app.ext.store_prodlist.u.cleanUpProductList(obj.csv); //strip blanks and make sure this is an array. prod attributes are not, by default.
 
 
-// use child as template is used within KISS.
+//					app.u.dump(" -> plObj: "); app.u.dump(plObj);
+//					app.u.dump(" -> obj: "); app.u.dump(obj);
 					if(obj.useChildAsTemplate)	{
-//						app.u.dump(" -> obj.useChildAsTemplate is true.");
+						app.u.dump(" -> obj.useChildAsTemplate is true.");
 						obj.loadsTemplate = "_"+$tag.attr('id')+"ListItemTemplate";
 						if(app.templates[obj.loadsTemplate])	{
 							app.u.dump(" -> template already exists");
 							//child has already been made into a template. 
 							}
 						else	{
-//							app.u.dump(" -> template does not exist. create it");
+							app.u.dump(" -> template does not exist. create it");
 							if($tag.children().length)	{
 								app.u.dump(" -> tag has a child. create template: "+obj.loadsTemplate);
 								app.model.makeTemplate($("li:first",$tag),obj.loadsTemplate);
@@ -563,12 +547,7 @@ params that are missing will be auto-generated.
 //need a jquery obj. to work with.
 					if($tag)	{$tag.attr('id',plObj.parentID);}
 					else	{$tag = $('#'+plObj.parentID);}
-					
-				
-					$tag.data('pageProductLoaded',0); //used to count how many product have been loaded on this page (for prodlistComplete)
-					$tag.data('totalProductLoaded',0); //used to count how many product have been loaded for total count (for prodlistComplete)					
-					
-//a wrapper around all the prodlist content is created just once. Used in multipage to clear old multipage content. This allows for multiple multi-page prodlists on one page. Hey. it could happen.
+//a wrapper around all the prodlist content is created just one. Used in multipage to clear old multipage content. This allows for multiple multi-page prodlists on one page. Hey. it could happen.
 					if($('#'+plObj.parentID+'_container').length == 0)	{
 						if($tag.is('tbody'))	{
 							$tag.closest('table').wrap("<div id='"+plObj.parentID+"_container' />");
@@ -579,12 +558,7 @@ params that are missing will be auto-generated.
 						}
 //adds all the placeholders. must happen before getProductDataForList so individual product translation can occur.
 //can't just transmogrify beccause sequence is important and if some data is local and some isn't, order will get messed up.
-
-//***201352 Separating out the placeholders so that they can be used in getProductDataForList individually for the jqObj.
-//			Otherwise the callback tries to reference the placeholder by using the parentID, but in the case of anycontent
-//			when we already have the data, the placeholder is not yet on the DOM and then data is never rendered.  -mc
-					plObj.placeholders = this.getProdlistPlaceholders(plObj);
-					$tag.append(plObj.placeholders).removeClass('loadingBG');
+					$tag.append(this.getProdlistPlaceholders(plObj)).removeClass('loadingBG');
 					$tag.data('prodlist',plObj); //sets data object on parent
 
 					if(!obj.hide_summary)	{
@@ -651,21 +625,20 @@ $pageTag is the jquery object of whatever was clicked. the data to be used is st
 */
 
 			mpJumpToPage : function($pageTag)	{
-				if($pageTag.attr('disabled') != 'disabled'){
-//					app.u.dump("BEGIN app.ext.store_prodlist.u.mpJumpToPage");
-					var targetList = $pageTag.closest('[data-targetlist]').attr('data-targetlist');
-					var plObj = $('#'+targetList).data('prodlist');
+
+//				app.u.dump("BEGIN app.ext.store_prodlist.u.mpJumpToPage");
+				var targetList = $pageTag.closest('[data-targetlist]').attr('data-targetlist');
+				var plObj = $('#'+targetList).data('prodlist');
 
 //figure out what page to show next.
 //the multipage controls take care of enabling/disabling next/back buttons to ensure no 'next' appears/is clickable on last page.				
-					if($pageTag.attr('data-role') == 'next')	{plObj.page_in_focus += 1}
-					else if($pageTag.attr('data-role') == 'previous')	{plObj.page_in_focus -= 1}
-					else	{plObj.page_in_focus = $pageTag.attr('data-page')}
+				if($pageTag.attr('data-role') == 'next')	{plObj.page_in_focus += 1}
+				else if($pageTag.attr('data-role') == 'previous')	{plObj.page_in_focus -= 1}
+				else	{plObj.page_in_focus = $pageTag.attr('data-page')}
 
-					$('.mpControlContainer','#'+plObj.parentID+'_container').empty().remove(); //clear all summary/multipage for this prodlist.
-					$('#'+plObj.parentID).empty(); //empty prodlist so new page gets clean data.
-					this.buildProductList(plObj);
-					}
+				$('.mpControlContainer','#'+plObj.parentID+'_container').empty().remove(); //clear all summary/multipage for this prodlist.
+				$('#'+plObj.parentID).empty(); //empty prodlist so new page gets clean data.
+				this.buildProductList(plObj);
 				},
 			
 			showProdlistSummary : function(plObj,location){

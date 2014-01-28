@@ -257,23 +257,23 @@ var admin_medialib = function() {
 				app.model.fetchNLoadTemplates(app.vars.baseURL+'extensions/admin/medialib.html',theseTemplates);
 
 
-				app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/lazyload-v1.8.4.js']); //
+				app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/lazyload-v1.8.4.js']); //
 
-				app.rq.push(['css',0,app.vars.baseURL+'app-admin/resources/jquery.fileupload-ui.css','admin_medialib_fileupload_ui']); //CSS to style the file input field as button and adjust the jQuery UI progress bars
-				app.rq.push(['css',0,app.vars.baseURL+'app-admin/resources/jquery.image-gallery.min.css','admin_medialib_imagegallery_ui']); //CSS to style the file input field as button and adjust the jQuery UI progress bars
+				app.rq.push(['css',0,app.vars.baseURL+'extensions/admin/resources/jquery.fileupload-ui.css','admin_medialib_fileupload_ui']); //CSS to style the file input field as button and adjust the jQuery UI progress bars
+				app.rq.push(['css',0,app.vars.baseURL+'extensions/admin/resources/jquery.image-gallery.min.css','admin_medialib_imagegallery_ui']); //CSS to style the file input field as button and adjust the jQuery UI progress bars
 				app.rq.push(['css',0,app.vars.baseURL+'extensions/admin/medialib.css','admin_medialib']); //our native css for presentation.
 
-				app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.fileupload.js']); //
+				app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.fileupload.js']); //
 //here to solve a safari/chrome issue if these scripts load before fileupload.js
 //not a great solution. will have to come up with something better. callback?
 
 setTimeout(function(){
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/canvas-to-blob.min.js']); //
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.fileupload-fp.js']); //The File Upload file processing plugin
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.fileupload-ui.js']); //The File Upload user interface plugin
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.iframe-transport.js']); //The Iframe Transport is required for browsers without support for XHR file uploads
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.image-gallery.min.js']); //The Canvas to Blob plugin is included for image resizing functionality
-	app.rq.push(['script',0,app.vars.baseURL+'app-admin/resources/jquery.fileupload-jui.js']); //The File Upload jqueryui plugin
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/canvas-to-blob.min.js']); //
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.fileupload-fp.js']); //The File Upload file processing plugin
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.fileupload-ui.js']); //The File Upload user interface plugin
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.iframe-transport.js']); //The Iframe Transport is required for browsers without support for XHR file uploads
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.image-gallery.min.js']); //The Canvas to Blob plugin is included for image resizing functionality
+	app.rq.push(['script',0,app.vars.baseURL+'extensions/admin/resources/jquery.fileupload-jui.js']); //The File Upload jqueryui plugin
 	},3000);
 
 
@@ -386,7 +386,7 @@ setTimeout(function(){
 		handleFileUpload2Batch : {
 			onSuccess : function(tagObj){
 				var jobID = app.data[tagObj.datapointer].JOBID;
-				$("<div \/>").attr({'id':'batchDialog_'+jobID,'title':'Job ID: '+jobID}).append("<p class='pointer' onClick='navigateTo(\"#!batchManager\"); $(this).closest(\".ui-dialog-content\").dialog(\"close\");'>File uploaded. <span class='lookLikeLink'>click here</span> to see job status. job id: "+jobID+"<\/p>").dialog();
+				$("<div \/>").attr({'id':'batchDialog_'+jobID,'title':'Job ID: '+jobID}).append("<p class='pointer' onClick='showUI(\"#!batchManager\"); $(this).closest(\".ui-dialog-content\").dialog(\"close\");'>File uploaded. <span class='lookLikeLink'>click here</span> to see job status. job id: "+jobID+"<\/p>").dialog();
 				}
 			},
 
@@ -470,8 +470,9 @@ setTimeout(function(){
 
 //handles the buttons in the media lib header, such as add folder, delete selected, etc.
 					app.ext.admin_medialib.u.handleMediaLibButtons($target);
-					$("#mediaLibInfiniteScroller").anydelegate(); //media list of files (within each folder or search results)
-					$("#mediaLibraryFocusMediaDetails").anydelegate(); //currently selected file.
+//** 201338 -> file 'list' is using delegated events now. should be much faster w/ less memory consumption. eventually, the whole media lib should use this method.
+					app.u.handleEventDelegation($("#mediaLibInfiniteScroller")); //media list of files (within each folder or search results)
+					app.u.handleEventDelegation($("#mediaLibraryFocusMediaDetails")); //currently selected file.
 					
 					app.ext.admin_medialib.calls.adminImageFolderList.init({'callback':'showMediaLibrary','extension':'admin_medialib','parentID':'mediaModal','templateID':'mediaLibTemplate'},'immutable');
 
@@ -552,8 +553,7 @@ setTimeout(function(){
 //update the image on the page to show what has been selected.
 					if(mediaData.imageID)	{
 //						app.u.dump(" -> we have everything we need to proceed. Proceed.");
-						var $templateEditor = $("[data-templateeditor-role='container']",app.u.jqSelector('#',app.ext.admin.vars.tab+'Content'));
-						var $image = (mediaData.mode == 'kissTemplate') ? $('iframe',$templateEditor).contents().find(mediaData.imageID) : $(mediaData.imageID);
+						var $image = (mediaData.mode == 'kissTemplate') ? $('iframe',$('#templateEditor')).contents().find(mediaData.imageID) : $(mediaData.imageID);
 						var oldSrc = $image.src;
 //						app.u.dump(" -> $image.length: "+$image.length);
 //						app.u.dump(app.u.makeImage({'tag':0,'w':$image.attr('width'),'h':$image.attr('height'),'name':newFilename,'b':'ffffff'}));
@@ -703,20 +703,7 @@ setTimeout(function(){
 					app.u.dump(folderProperties);
 					}
 
-				}, //showMediaAndSubs
-
-			showFileImportPage : function($target,vars)	{
-				$target.anycontent({
-					'templateID' : 'pageFileImportTemplate',
-					'showLoading' : false
-					}).anydelegate();
-					
-				$("[data-app-role='fileImportMenu']",$target).menu();
-
-				vars = vars || {};
-				if(!vars.VERB)(vars.VERB = "HELP"); //default to showing the help page.
-				app.ext.admin_medialib.u.handleImportPageByVerb($("[data-app-role='slimLeftContentContainer']",$target),vars.VERB);
-				} //showCSVImports
+				} //showMediaAndSubs
 
 			}, //Actions
 
@@ -824,67 +811,6 @@ else	{
 
 		u : {
 
-			handleImportPageByVerb : function($contentArea,verb)	{
-				if(verb && $contentArea instanceof jQuery)	{
-
-					$contentArea.intervaledEmpty().append(app.renderFunctions.transmogrify({},'page-setup-import-'+verb.toLowerCase(),{})); //load the page template.
-					app.ext.admin_medialib.u.convertFormToJQFU('#csvUploadToBatchForm','csvUploadToBatch');
-					
-					if(verb == 'INVENTORY')	{
-						var $sc = $("[data-app-role='fileImportSupplierContainer']",$contentArea).showLoading({"message":"Fetching supplier list"}); //Supplier Container
-						var $wc = $("[data-app-role='fileImportWMSContainer']",$contentArea).showLoading({"message":"Fetching warehouse list"}); //Warehouses Container
-					
-						app.model.addDispatchToQ({
-							'_cmd':'adminSupplierList',
-							'_tag':	{
-								'datapointer' : 'adminSupplierList',
-								'callback':function(rd){
-									$sc.hideLoading();
-									if(app.model.responseHasErrors(rd)){
-										$('#globalMessaging').anymessage({'message':rd});
-										}
-									else	{
-										var suppliers = app.data[rd.datapointer]['@SUPPLIERS'];
-										for(var index in suppliers)	{
-											$sc.append("<label><input type='radio' name='HEADERS' value='BASETYPE=SUPPLIER|SUPPLIER_ID="+index+"'> SUPPLIER ID:"+index+" (%SKU,%QTY,%COST,%SUPPLIER_SKU) </label>");
-											}					
-										}
-									}
-								}
-							},'mutable');
-					
-						app.model.addDispatchToQ({
-							'_cmd':'adminWarehouseList',
-							'_tag':	{
-								'datapointer' : 'adminWarehouseList',
-								'callback':function(rd){
-									$wc.hideLoading();
-									if(app.model.responseHasErrors(rd)){
-										$('#globalMessaging').anymessage({'message':rd});
-										}
-									else	{
-										var L = app.data[rd.datapointer]['@ROWS'].length;
-										for(var i = 0; i < L; i += 1)	{
-											var tw = app.data[rd.datapointer]['@ROWS'][i]; //This Warehouse
-											$wc.append("<label><input type='radio' name='HEADERS' value='BASETYPE=WMS|WMS_GEO="+tw.GEO+"'> WMS GEO:"+tw.GEO+" (%SKU,%WMS_ZONE,%WMS_POS,%NOTE,%QTY,%COST)<</label>");
-											}
-										}
-									}
-								}
-							},'mutable');
-							
-							
-						app.model.dispatchThis('mutable');
-						}
-
-					app.u.handleButtons($contentArea);
-
-					}
-				else	{
-					$('#globalMessaging').anymessage({"message":"In admin_medialib.u.handleImportPageByVerb, either verb ["+verb+"] not passed or $contentArea is not a jquery instance ["+($contentArea instanceof jQuery)+"].","gMessage":true});
-					}
-				},
-
 //a way to consistently get the folder name for what folder is open.
 //is a function to regularize it and so that if where the name is stored changes, only one update needs to be made.
 			getOpenFolderName : function(){
@@ -894,9 +820,10 @@ else	{
 //this is what 'was' in main.js for jquery file upload. but it was too specific and I needed one where I could set the selector.
 //JQFU = JQuery File Upload.
 //this turns the upload form into a jquery file upload.
+//currently supported modes are: mediaLibrary
 //the mode set will impact the success callback.
 
-			convertFormToJQFU : function(selector,mode,vars)	{
+			convertFormToJQFU : function(selector,mode)	{
 
 //app.u.dump("BEGIN admin_medialib.u.convertFormToJQFU");
 //app.u.dump(" -> selector: "+selector);
@@ -909,8 +836,7 @@ if(selector && mode)	{
 	// *** 201324 -> selector can now be a jquery object OR a string of a selector.
 //	var $selector = $(app.u.jqSelector(selector.charAt(0),selector.substring(1)));
 	var $selector = (selector instanceof jQuery) ? selector : $(app.u.jqSelector(selector.charAt(0),selector.substring(1)));
-	vars = vars || {};
-	$selector.data('modeVars',vars); //mode specific variables. reset each time the media lib is opened. allows for some modes, such as template, to easily set some params for later use.
+
 //	app.u.dump(" -> $selector.length: "+$selector.length); //app.u.dump($selector);
 //	app.u.dump(" -> $selector: "); app.u.dump($selector);
 	var successCallbacks = {
@@ -926,6 +852,7 @@ if(selector && mode)	{
 				data[i].folder = folderName;
 				app.ext.admin_medialib.calls.adminImageUpload.init(data[i],{'callback':'handleImageUpload','extension':'admin_medialib','filename':data[i].filename},'immutable'); //on a successful response, add the file to the media library.
 				}
+//*** 201324 -> this wasn't getting dispatched!
 			app.model.dispatchThis('immutable');
 			}, 
 		'publicFileUpload' : function(data,textStatus)	{
@@ -942,11 +869,11 @@ if(selector && mode)	{
 //			app.u.dump(" -> data[0].ticketid: "+data[0].ticketid);
 //			app.u.dump(" -> data[0].uuid: "+data[0].uuid);
 			app.ext.admin_support.calls.adminTicketFileAttach.init(data[0],{'callback':'handleAdminTicketFileAttach','extension':'admin_support'},'immutable');
-//			app.calls.ping.init({'callback':'navigateTo','extension':'admin','path':'/biz/support/index.cgi?VERB=TICKET-VIEW&ID='+data[0].ticketid},'immutable'); //need to piggy-back this on the file attach so that the navigateTo request is triggered after the changes are reflected on the ticket.
+//			app.calls.ping.init({'callback':'showUI','extension':'admin','path':'/biz/support/index.cgi?VERB=TICKET-VIEW&ID='+data[0].ticketid},'immutable'); //need to piggy-back this on the file attach so that the showUI request is triggered after the changes are reflected on the ticket.
 			app.model.dispatchThis('immutable');
 			},
 		'adminFileUpload' : function(data,textStatus)	{
-			app.u.dump("Got to adminFileUpload success.");
+			app.u.dump("Got to adminEBAYProfileFileUpload success.");
 			$selector.showLoading({"message":"uncompressing and distributing zip file. This may take a minute. You may safely close the 'eBay Template Zip File Upload' window (do not close the browser) and we will alert you when this has finished."});
 //			app.u.dump(" -> data: "); app.u.dump(data);
 			var
@@ -983,8 +910,8 @@ if(selector && mode)	{
 			
 			},
 		
-		'templateMediaUpload' : function(data,textStatus)	{
-			app.u.dump("Got to templateMediaUpload success.");
+		'ebayTemplateMediaUpload' : function(data,textStatus)	{
+			app.u.dump("Got to ebayTemplateMediaUpload success.");
 			var L = data.length;
 			var tagObj;
 			var folderName = "_ebay/"+$('#ebayTemplateEditor').data('profile');
@@ -1103,6 +1030,10 @@ else	{
 
 
 				}, //convertFormToJQFU
+
+
+
+
 
 			getFolderInfoFromFID : function(FID)	{
 				var r = false; //what is returned. Will be an object if FID is a valid folder id.
@@ -1225,7 +1156,7 @@ else	{
 				else	{
 					app.u.throwGMessage("WARNING! no path specified an admin_medialib.u.openMediaFoldersByFilePath.");
 					}
-				}, //openMediaFolderByFilePath
+				},
 
 			resetAndGetMediaFolders : function(Q)	{
 				$('#mediaLibFolderListUL').addClass('loadingBG').children().remove(); //folders will be re-added later.
@@ -1237,15 +1168,43 @@ else	{
 //also gets run over the image details area in the header when opening media lib for a field that already has an image selected.
 			handleMediaFileButtons : function($target,mode)	{
 				app.u.handleButtons($target);
+
 //mode is set on the UL when the media library is initialized or reopened.
 // ### IMPORTANT ### run this AFTER lazy load, so that the click trigger there does NOT impact the click event here.
-				if(mode == 'manage')	{
-					$("button[data-btn-action='selectMedia']").hide(); //leave button selector or images will be hidden.
-					}
-				else	{
-					$("button[data-btn-action='selectMedia']").show();
-					}
+if(mode == 'manage')	{
+	$("button[data-btn-action='selectMedia']").hide(); //leave button selector or images will be hidden.
+	}
+else	{
+	$("button[data-btn-action='selectMedia']").show();
+	}
 
+/*
+** 201338 -> w/ delegated events in use, this is no longer necessary.
+				$("[data-btn-action='deleteMedia']",$target).addClass('btnDelete').button({text:false,icons: {primary: "ui-icon-trash"}}).off('click.deleteImage').on('click.deleteImage',function(event){
+					event.preventDefault(); //keeps button from submitting the form.
+					$(this).toggleClass('ui-state-error'); //NOTE - buildDeleteMediaRequests uses this class. if you change the class, change that function too.
+					});
+				$("[data-btn-action='selectMedia']",$target).addClass('btnSelect').button({text:false,icons: {primary: "ui-icon-circle-check"}}).off('click.selectMedia').on('click.selectMedia',function(event){
+					event.preventDefault(); //keeps button from submitting the form.
+					$(this).closest('li').find('img').click();
+					});
+				$("[data-btn-action='mediaDetails']",$target).addClass('btnDetails').button({text:false,icons: {primary: "ui-icon-info"}}).off('click.mediaDetails').on('click.mediaDetails',function(event){
+					event.preventDefault(); //keeps button from submitting the form.
+					app.ext.admin_medialib.a.showMediaDetailsInDialog($(this).closest('[data-path]').data());
+					});
+
+				$("[data-btn-action='clearMedia']",$target).addClass('btnClear').button({text:false,icons: {primary: "ui-icon-circle-close"}}).off('click.clearMedia').on('click.clearMedia',function(event){
+					event.preventDefault(); //keeps button from submitting the form.
+					app.ext.admin_medialib.a.selectThisMedia($(this),true);
+					});
+
+
+				
+				$("[data-btn-action='downloadMedia']",$target).addClass('btnDownload').button({text:false,icons: {primary: "ui-icon-image"}}).off('click.downloadMedia').on('click.downloadMedia',function(event){
+					event.preventDefault(); //keeps button from submitting the form.
+					window.open(app.u.makeImage({'name':$(this).closest('[data-path]').data('path')}));
+					});				
+				*/
 				}, //handleMediaFileButtons
 
 
@@ -1411,20 +1370,91 @@ $('#mediaLibActionsBar span ul',$target).hide().menu().selectable();
 				app.ext.admin_medialib.u.convertFormToJQFU('#publicFilesUploadForm','publicFileUpload');
 				app.ext.admin_medialib.calls.adminPublicFileList.init({'callback':'handlePublicFilesList','extension':'admin_medialib'});
 				app.model.dispatchThis();
+				},
+
+
+			showFileUploadPage : function(path,P)	{
+
+var tabs = [
+	{"link":"/biz/setup/import/index.cgi?VERB=","name":"HELP","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=PRODUCTS","name":"Products","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=INVENTORY","name":"Inventory","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=CUSTOMERS","name":"Customers","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=REVIEWS","name":"Reviews","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=NAVCATS","name":"Categories","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=VARIATIONS","name":"Variations","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=REWRITES","name":"URL Rewrites","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=ORDERS","name":"Orders","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=TRACKING","name":"Tracking","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=RULES","name":"Rules","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=LISTINGS","name":"Listings","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=IMAGES","name":"Images","selected":0},
+	{"link":"/biz/setup/import/index.cgi?VERB=OTHER","name":"Other","selected":0}
+	]
+
+//				app.u.dump("BEGIN admin_medialib.u.showFileUploadPage");
+				var $target = $('#setupContent')
+				pathParams = app.u.kvp2Array(path.split('?')[1]);
+				if(!pathParams.VERB)(pathParams.VERB = "HELP"); //default to showing the help page.
+//				app.u.dump(" -> pathParams: "); app.u.dump(pathParams);
+				$target.empty().append(app.renderFunctions.transmogrify({},'page-setup-import-'+pathParams.VERB.toLowerCase(),{})); //load the page template.
+				app.ext.admin_medialib.u.convertFormToJQFU('#csvUploadToBatchForm','csvUploadToBatch');
+if(pathParams.VERB == 'INVENTORY')	{
+	var $sc = $("[data-app-role='fileImportSupplierContainer']",$target).showLoading({"message":"Fetching supplier list"}); //Supplier Container
+	var $wc = $("[data-app-role='fileImportWMSContainer']",$target).showLoading({"message":"Fetching warehouse list"}); //Warehouses Container
+
+	app.model.addDispatchToQ({
+		'_cmd':'adminSupplierList',
+		'_tag':	{
+			'datapointer' : 'adminSupplierList',
+			'callback':function(rd){
+				$sc.hideLoading();
+				if(app.model.responseHasErrors(rd)){
+					$('#globalMessaging').anymessage({'message':rd});
+					}
+				else	{
+var suppliers = app.data[rd.datapointer]['@SUPPLIERS'];
+for(var index in suppliers)	{
+	$sc.append("<label><input type='radio' name='HEADERS' value='BASETYPE=SUPPLIER|SUPPLIER_ID="+index+"'> SUPPLIER ID:"+index+" (%SKU,%QTY,%COST,%SUPPLIER_SKU) </label>");
+	}					
+					}
+				}
+			}
+		},'mutable');
+
+	app.model.addDispatchToQ({
+		'_cmd':'adminWarehouseList',
+		'_tag':	{
+			'datapointer' : 'adminWarehouseList',
+			'callback':function(rd){
+				$wc.hideLoading();
+				if(app.model.responseHasErrors(rd)){
+					$('#globalMessaging').anymessage({'message':rd});
+					}
+				else	{
+var L = app.data[rd.datapointer]['@ROWS'].length;
+for(var i = 0; i < L; i += 1)	{
+	var tw = app.data[rd.datapointer]['@ROWS'][i]; //This Warehouse
+	$wc.append("<label><input type='radio' name='HEADERS' value='BASETYPE=WMS|WMS_GEO="+tw.GEO+"'> WMS GEO:"+tw.GEO+" (%SKU,%WMS_ZONE,%WMS_POS,%NOTE,%QTY,%COST)<</label>");
+	}
+					}
+				}
+			}
+		},'mutable');
+		
+		
+	app.model.dispatchThis('mutable');
+	}
+				app.ext.admin.u.uiHandleNavTabs(tabs);
+				app.u.handleAppEvents($target);
 				}
 
 			}, //u
 
 		e : {
 
-			fileImportPageShow : function($ele,P)	{
-				if($ele.data('verb'))	{
-					app.ext.admin_medialib.u.handleImportPageByVerb($ele.closest("[data-app-role='fileImportContainer']").find("[data-app-role='slimLeftContentContainer']"),$ele.data('verb'));
-					}
-				else	{
-					$('#globalMessaging').anymessage({"message":"In admin_medialib.e.fileImportPageShow, no data-verb set on trigger element.","gMessage":true});
-					}
-				}, //fileImportPageShow
+
+
 
 			handleMediaFileButton : function($ele,P)	{
 //				app.u.dump("BEGIN admin_medialib.e.handleMediaFileButton (Click!)");
@@ -1476,40 +1506,51 @@ $('#mediaLibActionsBar span ul',$target).hide().menu().selectable();
 				else	{
 					
 					}
-				}, //handleMediaFileButton
+				},
 
-			adminCSVExportRewritesExec : function($ele,p)	{
-				$ele.parent().showLoading({"message":"Building URL Rewrite File"});
-				app.model.addDispatchToQ({
-					'_cmd':'adminCSVExport',
-					'base64' : 1,
-					'export' : 'REWRITES',
-					'_tag':	{
-						'callback':'fileDownloadInModal',
-						'filename' : 'rewrites.csv',
-						'datapointer':'adminCSVExport|REWRITE',
-						'jqObj' : $ele.parent()
-						}
-					},'mutable');
-				app.model.dispatchThis('mutable');
-				}, //adminCSVExportRewritesExec
+/**/
 
-			adminCSVExportNavcatsExec : function($ele,p)	{
-				$ele.parent().showLoading({"message":"Building Category File"});
-				app.model.addDispatchToQ({
-					'_cmd':'adminCSVExport',
-					'export' : 'CATEGORY',
-					'base64' : 1,
-					'@OTHER_COLUMNS' : $('#navcatExportHeader').val() ? $('#navcatExportHeader').val().split(',') : [],
-					'_tag':	{
-						'callback':'fileDownloadInModal',
-						'datapointer':'adminCSVExport|CATEGORY',
-						'filename' : 'categories.csv',
-						'jqObj' : $ele.parent()
-						}
-					},'mutable');
-				app.model.dispatchThis('mutable');
-				} //adminCSVExportNavcatsExec
+
+
+			adminCSVExportRewritesExec : function($btn)	{
+				$btn.button({icons: {primary: "ui-icon-circle-arrow-s"},text: true});
+				$btn.off('click.helpSearch').on('click.helpSearch',function(event){
+$btn.parent().showLoading({"message":"Building URL Rewrite File"});
+app.model.addDispatchToQ({
+	'_cmd':'adminCSVExport',
+	'base64' : 1,
+	'export' : 'REWRITES',
+	'_tag':	{
+		'callback':'fileDownloadInModal',
+		'filename' : 'rewrites.csv',
+		'datapointer':'adminCSVExport|REWRITE',
+		'jqObj' : $btn.parent()
+		}
+	},'mutable');
+app.model.dispatchThis('mutable');
+
+					});
+				},		
+			adminCSVExportNavcatsExec : function($btn)	{
+				$btn.button({icons: {primary: "ui-icon-circle-arrow-s"},text: true});
+				$btn.off('click.helpSearch').on('click.helpSearch',function(event){
+$btn.parent().showLoading({"message":"Building Category File"});
+app.model.addDispatchToQ({
+	'_cmd':'adminCSVExport',
+	'export' : 'CATEGORY',
+	'base64' : 1,
+	'@OTHER_COLUMNS' : $('#navcatExportHeader').val() ? $('#navcatExportHeader').val().split(',') : [],
+	'_tag':	{
+		'callback':'fileDownloadInModal',
+		'datapointer':'adminCSVExport|CATEGORY',
+		'filename' : 'categories.csv',
+		'jqObj' : $btn.parent()
+		}
+	},'mutable');
+app.model.dispatchThis('mutable');
+
+					});
+				}
 			
 			}
 

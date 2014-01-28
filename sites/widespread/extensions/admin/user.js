@@ -56,14 +56,14 @@ var admin_user = function() {
 
 			showUserManager : function($target)	{
 				app.u.dump("BEGIN admin_user.a.showUserManager 2.0");
+
+				$target.intervaledEmpty();
 				var $DMI = app.ext.admin.i.DMICreate($target,{
 					'header' : 'User Manager',
 					'className' : 'userManager', //applies a class on the DMI, which allows for css overriding for specific use cases.
 					'thead' : ['id','Username','Name','Email','Roles','Created',''], //leave blank at end if last row is buttons.
 					'tbodyDatabind' : "var: tickets(@USERS); format:processList; loadsTemplate:userManagerUserRowTemplate;",
-					'buttons' : [
-						"<button data-app-click='admin|refreshDMI' class='applyButton' data-text='false' data-icon-primary='ui-icon-arrowrefresh-1-s'>Refresh<\/button>",
-						"<button class='applyButton' data-text='true' data-icon-primary='ui-icon-circle-plus' data-app-click='admin_user|bossUserCreateShow'>Create A New User</button>"],	
+					'buttons' : ["<button data-app-event='admin|refreshDMI'>Refresh<\/button><button class='applyButton' data-text='true' data-icon-primary='ui-icon-circle-plus' data-app-click='admin_user|bossUserCreateShow'>Create A New User</button>"],	
 					'cmdVars' : {
 						'_cmd' : 'bossUserList',
 						'limit' : '50', //not supported for every call yet.
@@ -77,8 +77,10 @@ var admin_user = function() {
 				else	{
 					app.model.addDispatchToQ({'_cmd':'bossRoleList','_tag':	{'datapointer' : 'bossRoleList'}},'mutable'); //have this handy.
 					}
-				app.u.handleButtons($target.anydelegate({'trackEdits':true}));
 				app.model.dispatchThis('mutable');
+				
+				app.u.handleButtons($DMI.closest("[data-app-role='dualModeContainer']").anydelegate({'trackEdits':true}));
+
 				}			
 				
 			}, //Actions
@@ -92,7 +94,16 @@ var admin_user = function() {
 
 		u : {
 
-
+/*
+not necessary in users 2.0
+			resetUsersTable : function()	{
+				var $table = $("[data-app-role='dualModeListContents']","#userManagerContent")
+				$table.empty();
+				app.renderFunctions.translateSelector("#userManagerContent [data-app-role='dualModeList']",app.data.bossUserList);
+				app.ext.admin.u.handleAppEvents($table);
+				app.ext.admin.u.toggleDualMode($('#userManagerContent'),$('#userManagerContent').data('app-mode'));
+				},
+*/
 			getRoleCheckboxesAsArray : function($parent)	{
 				var roles = new Array();
 				if($parent && $parent.length)	{
@@ -115,7 +126,7 @@ var admin_user = function() {
 
 			'bossUserCreateUpdate' : function(sfo,$form)	{
 				app.u.dump("BEGIN admin_support.macrobuilders.bossUserCreate");
-				sfo['@roles'] = app.ext.admin_user.u.getRoleCheckboxesAsArray($form);
+				sfo.roles = app.ext.admin_user.u.getRoleCheckboxesAsArray($form);
 //asdf				sfo._cmd = "bossUserCreate"
 //clean up sfo to minimize the request.
 				$(":checkbox",$form).each(function(){
@@ -160,7 +171,6 @@ var admin_user = function() {
 
 					var $panel = app.ext.admin.i.DMIPanelOpen($ele,{
 						'templateID' : 'userManagerUserCreateUpdateTemplate',
-						'showLoading' : false,
 						'panelID' : 'user_'+userID,
 						'header' : 'Edit User: '+luser
 						});
@@ -172,31 +182,23 @@ var admin_user = function() {
 						'_cmd':'bossUserDetail',
 						'login':luser,
 						'_tag':	{
-							'callback' : 'anycontent',
 							'datapointer' : 'bossUserDetail|'+userID,
-							'onComplete': function(rd){
-								//now handle role checkboxes.
-								var userData = app.data[rd.datapointer];
-								var L = userData['@roles'].length;
-							//loop backwards so that each row can be moved to the top but the original order will be preserved.
-								for(var i = (L-1); i >= 0; i -= 1)	{
-									$("[name='"+userData['@roles'][i]+"']",$panel).prop('checked','checked');
-									$("[name='"+userData['@roles'][i]+"']",$panel).closest('tr').insertBefore($("[data-app-role='roleList'] > tbody > tr:first",$panel)); //move checked roles to top of list.
+							'callback': function(rd){
+								if(app.model.responseHasErrors(rd)){
+									$('#globalMessaging').anymessage({'message':rd});
 									}
-//adds the save button to the bottom of the form. not part of the template because the template is shared w/ create.
-								$("<button \/>").attr({'data-app-click':'admin|submitForm','data-app-role':'saveButton'}).append("Save <span class='numChanges'></span> Changes").button({'disabled':'disabled'}).appendTo($('form',$panel));
-			
-								$("[data-app-role='roleListTbody']",$panel).sortable({
-									stop : function(event,ui)	{
-										$(":checkbox",ui.item).addClass('edited');
-										app.u.dump(" -> ui.item.closest('.eventDelegation').length: "+ui.item.closest('.eventDelegation').length);
-										ui.item.closest('.eventDelegation').anydelegate('updateChangeCounts');
+								else	{
+									//run through standard callback.
+									app.callbacks.anycontent.onSuccess(rd);
+									//now handle role checkboxes.
+									var userData = app.data[rd.datapointer];
+									var L = userData['@roles'].length;
+								//loop backwards so that each row can be moved to the top but the original order will be preserved.
+									for(var i = (L-1); i >= 0; i -= 1)	{
+										$("[name='"+userData['@roles'][i]+"']",$panel).attr('checked','checked');
+										$("[name='"+userData['@roles'][i]+"']",$panel).closest('tr').insertBefore($("[data-app-role='roleList'] > tbody > tr:first",$panel)); //move checked roles to top of list.
 										}
-									});
-			
-								$("[name='login']",$panel).attr('readonly','readonly').css({'border':'none','background':'none'}); //NOTE - if attr disabled is set, serializeJSON does NOT include that field.
-								$("[name='password']",$panel).prop('required','').removeProp('required');
-								$('.passwordContainer',$panel).append("<div class='hint'>leave password blank for no change<\/div>"); //password not editable from here.
+									}
 								},
 							'translateOnly' : true,
 							'jqObj' : $panel,
@@ -204,6 +206,22 @@ var admin_user = function() {
 							}
 						},'mutable');
 					app.model.dispatchThis('mutable');
+
+
+//adds the save button to the bottom of the form. not part of the template because the template is shared w/ create.
+					$("<button \/>").attr({'data-app-click':'admin|submitForm','data-app-role':'saveButton'}).html("Save <span class='numChanges'></span> Changes").button({'disabled':true}).appendTo($('form',$panel));
+
+					$("[data-app-role='roleListTbody']",$panel).sortable({
+						stop : function(event,ui)	{
+							$(":checkbox",ui.item).addClass('edited');
+							app.u.dump(" -> ui.item.closest('.eventDelegation').length: "+ui.item.closest('.eventDelegation').length);
+							ui.item.closest('.eventDelegation').anydelegate('updateChangeCounts');
+							}
+						});
+
+					$("[name='login']",$panel).attr('readonly','readonly').css({'border':'none','background':'none'}); //NOTE - if attr disabled is set, serializeJSON does NOT include that field.
+					$("[name='password']",$panel).prop('required','').removeProp('required');
+					$('.passwordContainer',$panel).append("<div class='hint'>leave password blank for no change<\/div>"); //password not editable from here.
 					}
 				else	{
 					//missing some required params. throw error.
@@ -231,7 +249,7 @@ var admin_user = function() {
 											}
 										else	{
 											$D.dialog('close');
-											$ele.closest("[data-app-role='dualModeContainer']").find("[data-app-click='admin|refreshDMI']").trigger('click');
+											$ele.closest("[data-app-role='dualModeContainer']").find("[data-app-event='admin|refreshDMI']").trigger('click');
 											}
 										}
 									}

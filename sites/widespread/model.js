@@ -42,7 +42,7 @@ The rest is in the controller or extension. The model will execute callbacks.CAL
  -> d is the data object returned by the server. one of the few cases the raw response is returned.
 
 
-execute the zModel function from within the controller. ex:  app.model = zModel();
+execute the zoovyModel function from within the controller. ex:  app.model = zoovyModel();
  -> this will return an object into the app.model namespace. ex: app.model.dispatchThis()
 
 
@@ -78,11 +78,11 @@ app.globalAjax.overrideAttempts - keeps track of how many times a dispatch has a
 app.globalAjax.lastDispatch - keeps track of when the last dispatch occurs. Not currently used for much, but could allow for some auto-passive dispatches when idle.
 */
 
-function zModel() {
+function zoovyModel() {
 	var r = {
 	
 		
-		version : "201352",
+		version : "201346",
 		
 		
 	// --------------------------- GENERAL USE FUNCTIONS --------------------------- \\
@@ -144,13 +144,16 @@ function zModel() {
 		addDispatchToQ : function(dispatch,QID) {
 //			app.u.dump('BEGIN: addDispatchToQ');
 //			app.u.dump(" -> QID: "+typeof QID);
-// QID default needs to be before the string check (because a blank value typeof != string.
+//** 201318 -> QID default needs to be before the string check (because a blank value typeof != string.
 			QID = (QID === undefined) ? 'mutable' : QID; //default to the mutable Q, but allow for PDQ to be passed in.
 			var r; // return value.
+// ** 201330 -> if _cmd wasn't set, this would cause a js error.
+//			if(dispatch['_cmd'] == 'undefined')	{
 			if(dispatch && !dispatch['_cmd'])	{
 				r = false;
+	//			zSTdErr(' -> _cmd not set. return false');
 				}
-// if QID was not a string, a catastropic JS error occured. could (and did) happen if call has bug in it.
+/** 201318 -> if QID was not a string, a catastropic JS error occured. could (and did) happen if call has bug in it. */				
 			else if(typeof QID != 'string') {
 				r = false;
 				app.u.dump("Unable to add dispatch to Queue. QID passed was not a string. dispatch and QID follow:","error");
@@ -159,18 +162,18 @@ function zModel() {
 				app.u.dump("QID: "); app.u.dump(QID);
 				}
 			else	{
-// there was an issue w/ a serialized form object being added directly to the Q (as opposed to going through a .call) and then the form being re-submitted after a correction
-// but the original dispatch was getting resent instead of the updated command. extend creates a duplicate w/ no pointers. solved the issue.
+//** 201324 -> 	there was an issue w/ a serialized form object being added directly to the Q (as opposed to going through a .call) and then the form being re-submitted after a correction
+//				but the original dispatch was getting resent instead of the updated command. extend creates a duplicate w/ no pointers. solved the issue.
 // full explanation here: https://github.com/zoovy/AnyCommerce-Development/commit/41396eb5546621c0b31e3273ecc314e686daf4bc
 				var tmp = $.extend(true,{},dispatch); 
 				var uuid = app.model.fetchUUID() //uuid is obtained, not passed in.
 				tmp["_uuid"] = uuid;
 				tmp._tag = tmp._tag || {}; //the following line will error if tag is not an object. define as such if not already defined.
 				tmp['_tag']["status"] = 'queued';
+//				dispatch["attempts"] = dispatch["attempts"] === undefined ? 0 : dispatch["attempts"];
 				app.q[QID][uuid] = tmp;
 				r = uuid;
-// this breaks stuff.
-//				app.model.writeLocal("response_"+uuid, JSON.stringify(tmp),'session'); //save a copy of each dispatch to sessionStorage for entymologist
+//				app.storageFunctions.writeLocal("response_"+uuid, JSON.stringify(tmp),'session'); //save a copy of each dispatch to sessionStorage for entymologist
 				}
 			return r;
 			},// addDispatchToQ
@@ -262,7 +265,39 @@ function zModel() {
 				app.u.throwGMessage("In model.abortRequest, either QID ["+QID+"] or UUID ["+UUID+"] blank or app.globalAjax.requests[QID][UUID] does not exist (request may have already completed)");
 				}
 			},
-		
+
+
+//if a request is in progress and a immutable request is made, execute this function which will change the status's of the uuid(s) in question.
+//function is also run when model.abortQ is executed.
+//don't need a QID because only the general dispatchQ gets muted... for now. ### add support for multiple qids
+// *** 201320 -> no longer used.
+/*		handleDualRequests : function()	{
+			var inc = 0;
+//			app.u.dump('BEGIN model.handleDualRequests');		
+			for(var index in app.q.mutable) {
+				if(app.q.mutable[index].status == 'requesting')	{
+					app.model.changeDispatchStatusInQ('mutable',index,"muted"); //the task was dominated by another request
+					inc += 1;
+					}
+				}
+			return inc;
+	//		app.u.dump('END model.handleDualRequests. '+inc+' requests set to overriden');
+			},
+*/
+//when an immutable request is in process, this is called which handles the re-attempts.
+		handleReDispatch : function(QID)	{
+			if(app.globalAjax.overrideAttempts < 30)	{
+				setTimeout("app.model.dispatchThis('"+QID+"')",500); //try again soon. if the first attempt is still in progress, this code block will get re-executed till it succeeds.
+				}
+			else if(app.globalAjax.overrideAttempts < 75)	{
+// slow down a bit. try every second for a bit and see if the last response has completed.
+				setTimeout("app.model.dispatchThis('"+QID+"')",1000); //try again. if the first attempt is still in progress, this code block will get re-executed till it succeeds or until
+				}
+			else	{
+				app.u.dump(' -> stopped trying to override because many attempts were already made.'); //!!! this needs to display an error message to the user saying connection seems to be lost or something.
+				}			
+			},
+			
 		
 /*
 	
@@ -282,14 +317,17 @@ either false (if no dispatch occurs) or the pipe uuid are returned. The pipe uui
 //used as the uuid on the 'parent' request (the one containing the pipelines).
 //set this early so that it can be added to each request in the Q as pipeUUID for error handling.
 //also used for ajax.requests[QID][UUID] which stores the ajax request itself (and is used for aborting later, if need be).
-			var pipeUUID = app.model.fetchUUID();
+			var pipeUUID = app.model.fetchUUID(); 			
+			
+//			app.u.dump(' -> Focus Q = '+QID);
+//			app.u.dump(app.q[QID]);
 
 //by doing our filter first, we can see if there is even anything to BE dispatched before checking for conflicts.
 //this decreases the likelyhood well set a timeout when not needed.
 			var Q = app.model.filterQ(QID,pipeUUID); //filters out all non-queued dispatches. may set a limit to the # of dispatches too. 
 			
 			
-//			var immutableRequestInProgress = $.isEmptyObject(app.globalAjax.requests.immutable) ? false : true; //if empty, no request is in progress.
+			var immutableRequestInProgress = $.isEmptyObject(app.globalAjax.requests.immutable) ? false : true; //if empty, no request is in progress.
 			var L = Q.length; //size of Q.
 //			app.u.dump(" -> Q.length = "+Q.length); app.u.dump(Q);
 //			app.u.dump("QID = "+QID+" and L = "+L+" and aRequestIsInProgress = "+aRequestIsInProgress);
@@ -298,6 +336,16 @@ either false (if no dispatch occurs) or the pipe uuid are returned. The pipe uui
 //				app.u.dump(" -> dispatch attempted, but q referenced has no 'queued' dispatches. Do nothing.");
 				r = false; //nothing to dispatch.
 				}
+			else if(immutableRequestInProgress)	{
+//				app.u.dump(" -> immutable dispatch in process. do NOT override. try again soon.");
+
+				app.globalAjax.overrideAttempts += 1; //tracks how many times the request in progress has been attempted to be usurped.
+				this.handleReQ(Q,QID);//changes status back to 'queued'  q.uuid.attempts not incremented (only increment only for requests that failed)
+
+				this.handleReDispatch(QID); //does the set timeout to relaunch, if needed.
+				r = false; //not moving forward with a dispatch because the one in process has priority.
+				}
+
 			else	{
 //				app.u.dump(" -> DQ has queued dispatches. no request in process. Move along... Move along...");
 				}
@@ -318,7 +366,7 @@ don't move this. if it goes before some other checks, it'll resed the Qinuse var
 //and your code breaks.
 //if this point is reached, we are exeuting a dispatch. Any vars used for tracking overrides, last dispatch, etc get reset.
 
-app.globalAjax.lastDispatch = app.u.epochNow();
+app.globalAjax.lastDispatch = app.u.unixNow();
 app.globalAjax.overrideAttempts = 0;
 
 //IMPORTANT
@@ -338,7 +386,7 @@ can't be added to a 'complete' because the complete callback gets executed after
 		contentType : "text/json",
 		dataType:"json",
 //ok to pass admin vars on non-admin session. They'll be ignored.
-		data: JSON.stringify({"_uuid":pipeUUID,"_session":app.vars._session,"_cmd":"pipeline","@cmds":Q,"_clientid":app.vars._clientid,"_domain":app.vars.domain,"_userid":app.vars.userid,"_deviceid":app.vars.deviceid,"_authtoken":app.vars.authtoken,"_version":app.model.version})
+		data: JSON.stringify({"_uuid":pipeUUID,"_session":app.vars._session,"_cartid": app.vars.cartID,"_cmd":"pipeline","@cmds":Q,"_clientid":app.vars._clientid,"_domain":app.vars.domain,"_userid":app.vars.userid,"_deviceid":app.vars.deviceid,"_authtoken":app.vars.authtoken,"_version":app.model.version})
 		});
 
 	app.globalAjax.requests[QID][pipeUUID].error(function(j, textStatus, errorThrown)	{
@@ -375,6 +423,24 @@ can't be added to a 'complete' because the complete callback gets executed after
 	//		app.u.dump('//END dispatchThis');
 		}, //dispatchThis
 	
+	
+	
+	/*
+when an immutable request is in progress and another request comes in, the secondary requests are reset to queued.
+ 
+the Q passed in is sometimes the 'already filtered' Q, not the entire dispatch Q. Makes for a smaller loop and only impacts these dispatches.
+also, when dispatchThis is run again, any newly added dispatches WILL get dispatched (if in the same Q).
+handleReQ is used in a few places. Sometimes you want to adjust the attempts (q.uuid.attempts) so that you max out after three (such as when a server error is returned in the response) and sometimes you don't want to adjust (such as when the q is adjusted because a priority dispatch was in progress).
+set adjustAttempts to true to increment by 1.
+*/
+		handleReQ : function(Q,QID,adjustAttempts)	{
+			app.u.dump("BEGIN handleReQ");
+			var uuid;
+			for(var index in Q) {
+				uuid = Q[index]['_uuid'];
+				app.model.changeDispatchStatusInQ(QID,uuid,'queued');
+				}
+			},
 
 //run when a request fails, most likely due to an ISE
 
@@ -416,7 +482,7 @@ can't be added to a 'complete' because the complete callback gets executed after
 //callback is defined in extension or controller as object (with onSuccess and maybe onError)
 					else if(typeof callback == 'string')	{
 						callback = Q[UUID]['_tag']['extension'] ? app.ext[Q[UUID]['_tag']['extension']].callbacks[Q[UUID]['_tag']['callback']] : app.callbacks[Q[UUID]['_tag']['callback']];
-						if(callback && typeof callback.onError == 'function'){
+						if(typeof callback.onError == 'function'){
 							callback.onError(responseData,UUID);
 							}
 						else{
@@ -533,7 +599,7 @@ QID is the dispatchQ ID (either passive, mutable or immutable. required for the 
 
 //handle all the call specific handlers.
 					for (var i = 0, j = responseData['@rcmds'].length; i < j; i += 1) {
-						responseData['@rcmds'][i].ts = app.u.epochNow()  //set a timestamp on local data
+						responseData['@rcmds'][i].ts = app.u.unixNow()  //set a timestamp on local data
 
 						if(typeof this['handleResponse_'+responseData['@rcmds'][i]['_rcmd']] == 'function')	{
 							this['handleResponse_'+responseData['@rcmds'][i]['_rcmd']](responseData['@rcmds'][i])	//executes a function called handleResponse_X where X = _cmd, if it exists.
@@ -568,109 +634,84 @@ QID is the dispatchQ ID (either passive, mutable or immutable. required for the 
 			}, //handleResponse
 
 
-//this will remove data from both local storage, session storage AND memory.
+//this will remove data from both local storage AND memory.
 //execute this on a field prior to a call when you want to ensure memory/local is not used (fresh data).
+//admittedly, this isn't the best way to handle this. for 2013XX we'll have something better. ###
 		destroy : function(key)	{
-//			app.u.dump(" -> destroying ["+key+"]");
+//			app.u.dump(" -> destroying "+key);
 			if(app.data[key])	{
 				delete app.data[key];
 				}
-			app.model.nukeLocal(key,'local');
-			app.model.nukeLocal(key,'session');
+			localStorage.removeItem(key);
 			},
 
 
-//this will write the respose both to local and/or session storage and into app.data
+//this will write the respose both to localStorage and into app.data
 		writeToMemoryAndLocal : function(responseData)	{
+//			app.u.dump("BEGIN model.writeToMemoryAndLocal");
+//			app.u.dump(" -> responseData: "); app.u.dump( responseData );
 
 			var datapointer = false;
 			if(responseData['_rtag'])	{datapointer = responseData['_rtag']['datapointer']}
 
+//			app.u.dump(" -> datapointer: "+datapointer);
 //if datapointer is not set, data is automatically NOT saved to localstorage or memory.
 //however, there is (ping) already, and could be more, cases where datapointers are set, but we don't want the data locally or in memory.
 //so we have simple functions to check by command.
 			if(datapointer && !app.model.responseHasErrors(responseData))	{
-//this is the data that will be saved into local or session.
-				var obj4Save = $.extend(true,{},responseData); //this makes a copy so that the responseData object itself isn't impacted.
-				obj4Save._rtag = null; //make sure _rtag doesn't get saved to localstorage. may contiain a jquery object, function, etc.
-// *** 201401 -> The data stored in memory no longer contains the _rtag.
-// the _tag data can be found w/ the original dispatch in app.q[QID][uuid]
-				if(this.thisGetsSaved2Memory(responseData['_rcmd']))	{
-					app.data[datapointer] = obj4Save;
-					}				
-				if(this.thisGetsSaved2Local(responseData['_rcmd'])){
-					app.u.dump(" -> passed check for save local: "+responseData['_rcmd']);
-					app.model.writeLocal(datapointer,obj4Save,'local'); //save to localStorage, if feature is available.
+				if(this.thisGetsSavedToMemory(responseData['_rcmd']))	{
+					app.data[datapointer] = responseData;
 					}
-				if(this.thisGetsSaved2Session(responseData['_rcmd']))	{
-					app.model.writeLocal(datapointer,obj4Save,'session'); //save to sessionStorage, if feature is available.
+				else	{}
+				if(this.thisGetsSavedLocally(responseData['_rcmd']))	{
+					var obj4Save = $.extend(true,{},responseData); //this makes a copy so that the responseData object itself isn't impacted.
+					obj4Save._rtag = null; //make sure _rtag doesn't get saved to localstorage. may contiain a jquery object, function, etc.
+					app.storageFunctions.writeLocal(datapointer,obj4Save); //save to local storage, if feature is available.
 					}
-
+				else	{}
 				}
 			else	{
 //catch. not writing to local. Either not necessary or an error occured.
 				}
+			
 			}, //writeToMemoryAndLocal
 
-		cmdIsAnAdminUpdate : function(cmd)	{
-			var r = false;
-			if(cmd.indexOf('admin') === 0)	{
-//admin updates don't need to be saved to memory.
-				if(cmd.indexOf('Update', cmd.length - 6) >= 0)	{r = true;}
-				else if(cmd.indexOf('Macro', cmd.length - 5) >= 0)	{r = true;}
-				}
-			return r;
-			},
-
-		thisGetsSaved2Memory : function(cmd)	{
+		thisGetsSavedToMemory : function(cmd)	{
 			var r = true;
-			if(this.cmdIsAnAdminUpdate(cmd))	{
-				r = false;
-				}
-			else	{
-				switch(cmd)	{
-					case 'appPageGet': //saved into category object earlier in process. redundant here.
-					case 'cartSet': //changes are reflected in cart object.
-//					case 'ping': //ping may be necessary in memory for anycontent in conjunction w/ extending by datapointers. rss is a good example of this.
-					r = false
-					break;
-					}				
-				}
-			return r;
-			},
-
-//localStorage is reserved for data that MUST be carried between sessions. For everything else, sessionStorage is used.
-		thisGetsSaved2Local : function(cmd){
-			var r = false;
 			switch(cmd)	{
-				case 'authAdminLogin':
-//				case 'appBuyerLogin':
-				r = true;
+				case 'appPageGet': //saved into category object earlier in process. redundant here.
+				case 'cartSet': //changes are reflected in cart object.
+				case 'ping':
+				r = false
+				break;
 				}
 			return r;
 			},
 
-//Session is a safe place to store most data, as it'll be gone once the browser is closed. Still, keep CC data out of there.
-		thisGetsSaved2Session : function(cmd)	{
+//some commands should not get saved locally, either because they contain sensitive data or because of the nature of the call.
+		thisGetsSavedLocally : function(cmd)	{
 			var r = true; //what is returned. is set to false if the cmd should not get saved to local storage.
-			if(this.cmdIsAnAdminUpdate(cmd))	{
-				r = false;
-				}
-			else	{
-				switch(cmd)	{
-					case 'adminCustomerWalletPeek': //contains cc #
-					case 'adminOrderCreate': //may contain cc
-					case 'adminOrderDetail': //may contain cc
-					case 'adminOrderPaymentAction': //may contain cc
-					case 'appBuyerLogin': //should be session specific. close/open will exec whoAmI which will put into memory if user is logged in.
-					case 'buyerWalletList': //conains some cc info.
-					case 'cartOrderCreate': //may contain cc
-					case 'cartPaymentQ': //may contain cc
-					case 'cartSet': //changes are reflected in cart object.
-					case 'ping':
-					r = false
-					break;
-					}
+			switch(cmd)	{
+				case 'adminCustomerUpdate': //may contain cc
+				case 'adminCustomerWalletPeek': //contains cc #
+				case 'adminOrderCreate': //may contain cc
+				case 'adminOrderDetail': //may contain cc
+				case 'adminOrderPaymentAction': //may contain cc
+				case 'adminOrderMacro': //may contain cc
+				case 'adminTicketCreate':
+				case 'adminTicketUpdate':
+				case 'adminTicketDetail': //should be updated each visit.
+				case 'appBuyerLogin': //should be session specific. close/open will exec whoAmI which will put into memory if user is logged in.
+				case 'appPageGet': //
+				case 'buyerWalletList': //conains some cc info.
+				case 'cartItemsInventoryVerify': //these adjustments are never stored.
+				case 'cartOrderCreate': //may contain cc
+				case 'cartPaymentQ': //may contain cc
+				case 'cartSet': //changes are reflected in cart object.
+				case 'ping':
+				case 'whoAmI': //contains login info. needs to be session specific.
+				r = false
+				break;
 				}
 			return r;
 			},
@@ -720,6 +761,8 @@ QID is the dispatchQ ID (either passive, mutable or immutable. required for the 
 					}
 				else	{
 					this.writeToMemoryAndLocal(responseData);
+//					app.data[datapointer] = responseData;
+//					app.storageFunctions.writeLocal(datapointer,responseData); //save to local storage, if feature is available.
 					}
 				}
 			else	{
@@ -788,6 +831,54 @@ uuid is more useful because on a high level error, rtag isn't passed back in res
 			app.model.handleResponse_authAdminLogin(responseData); //this will have the same response as a login if successful.
 			},
 
+	//this function gets executed upon a successful request for a create order.
+	//saves a copy of the old cart object to order|ORDERID in both local and memory for later reference (invoice, upsells, etc).
+		handleResponse_cartOrderCreate : function(responseData)	{
+	//currently, there are no errors at this level. If a connection or some other critical error occured, this point would not have been reached.
+//			app.u.dump("BEGIN model.handleResponse_createOrder ["+responseData.orderid+"]");
+			var datapointer = "order|"+responseData.orderid;
+			app.storageFunctions.writeLocal(datapointer,app.data.cartDetail);  //save order locally to make it available for upselling et all.
+			app.data[datapointer] = app.data.cartDetail; //saved to object as well for easy access.
+	//nuke cc fields, if present.		
+			app.data[datapointer].cart['payment/cc'] = null;
+			app.data[datapointer].cart['payment/cv'] = null;
+			app.model.handleResponse_defaultAction(responseData); //datapointer ommited because data already saved.
+			return responseData.orderid;
+			}, //handleResponse_cartOrderCreate
+	
+/*
+** 201334 --> removed.  path is now returned on the root level.
+//no special error handling or anything like that.  this is just here to get the category safe id into the response for easy reference.	
+		handleResponse_appNavcatDetail : function(responseData)	{
+//			app.u.dump("BEGIN model.handleResponse_appNavcatDetail");
+//save detail into response to make it easier to see what level of data has been requested during a fetch or call
+			if(responseData['_rtag'] && responseData['_rtag'].detail){
+				responseData.detail = responseData['_rtag'].detail;
+				}
+			if(responseData['@products'] && !$.isEmptyObject(responseData['@products']))	{
+				responseData['@products'] = $.grep(responseData['@products'],function(n){return(n);}); //strip blanks
+				}
+			if(responseData['_rtag'] && responseData['_rtag'].datapointer)
+				responseData.id = responseData['_rtag'].datapointer.split('|')[1]; //safe id into data for easy reference.
+			app.model.handleResponse_defaultAction(responseData);
+			return responseData.id;
+			}, //handleResponse_categoryDetail
+		
+		handleResponse_appNavcatDetail : function(responseData)	{
+//			app.u.dump("BEGIN model.handleResponse_appNavcatDetail");
+//save detail into response to make it easier to see what level of data has been requested during a fetch or call
+			if(responseData['_rtag'] && responseData['_rtag'].detail){
+				responseData.detail = responseData['_rtag'].detail;
+				}
+			if(responseData['@products'] && !$.isEmptyObject(responseData['@products']))	{
+				responseData['@products'] = $.grep(responseData['@products'],function(n){return(n);}); //strip blanks
+				}
+			if(responseData['_rtag'] && responseData['_rtag'].datapointer)
+				responseData.id = responseData['_rtag'].datapointer.split('|')[1]; //safe id into data for easy reference.
+			app.model.handleResponse_defaultAction(responseData);
+			return responseData.id;
+			}, //handleResponse_appNavcatDetail
+*/
 /*
 It is possible that multiple requests for page content could come in for the same page at different times.
 so to ensure saving to appPageGet|.safe doesn't save over previously requested data, we extend it the ['%page'] object.
@@ -802,7 +893,7 @@ so to ensure saving to appPageGet|.safe doesn't save over previously requested d
 				else	{
 					app.data[datapointer] = responseData;
 					}
-				app.model.writeLocal(datapointer,app.data[datapointer],'session'); //save to session storage, if feature is available.
+				app.storageFunctions.writeLocal(datapointer,app.data[datapointer]); //save to local storage, if feature is available.
 				}
 			app.model.handleResponse_defaultAction(responseData);
 			}, //handleResponse_appPageGet
@@ -823,35 +914,34 @@ so to ensure saving to appPageGet|.safe doesn't save over previously requested d
 				}
 			app.model.handleResponse_defaultAction(responseData); //datapointer ommited because data already saved.
 			},
+/*
+		handleResponse_adminUIExecuteCGI : function(responseData)	{
+			app.u.dump(" -> responseData: "); app.u.dump(responseData);
+			if(responseData.html)	{
+				app.ext.admin.u.uiHandleContentUpdate(responseData.uri,responseData,viewObj || {});
+				//app.ext.admin.u.uiHandleContentUpdate(path,data,viewObj)
+				}
 
+			},
+*/
 //this function gets executed upon a successful request for a new session id.
 //it is also executed if appAdminAuthenticate returns exists=1 (yes, you can).
 //formerly newSession
 		handleResponse_appCartCreate : function(responseData)	{
+//			app.u.dump(" --> appCartCreate Response executed. ("+responseData['_uuid']+")");
+//			app.u.dump("RESPONSE DATA:");
+//			app.u.dump(responseData);
+
 //no error handling at this level. If a connection or some other critical error occured, this point would not have been reached.
-//save session id locally to maintain session id throughout user experience.
-			this.addCart2Session(responseData['_cartid']);
+//save session id locally to maintain session id throughout user experience.	
+			app.storageFunctions.writeLocal('cartID',responseData['_cartid']);
+//			app.storageFunctions.writeLocal(app.vars['username']+"-cartid",responseData['_cartid']);  
+			app.vars.cartID = responseData['_cartid']; //saved to object as well for easy access.
 			app.model.handleResponse_defaultAction(responseData); //datapointer ommited because data already saved.
 			app.u.dump("cartID = "+responseData['_cartid']);
 			return responseData['_cartid'];
 			}, //handleResponse_appCartCreate
 
-
-		responseIsMissing : function(responseData)	{
-			var r = false; //what is returned.
-			if(responseData['_rtag'] && responseData['_rtag'].forceMissing)	{
-				r = true;
-				responseData.errid = "MVC-MISSING-000";
-				responseData.errtype = "missing";
-				responseData.errmsg = "forceMissing is true for _tag. cmd = "+responseData['_rcmd']+" and uuid = "+responseData['_uuid'];
-//			app.u.dump(responseData);
-				}
-			else if(responseData['errtype'] == 'missing')	{
-				r = true;
-				}
-			else	{}
-			return r;
-			},
 
 /*
 in most cases, the errors are handled well by the API and returned either as a single message (errmsg)
@@ -863,11 +953,11 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 //at the time of this version, some requests don't have especially good warning/error in the response.
 //as response error handling is improved, this function may no longer be necessary.
 			var r = false; //defaults to no errors found.
-			if(responseData['_rtag'] && responseData['_rtag'].forceError)	{
+			if(responseData['_rtag'] && responseData['_rtag'].forceError == 1)	{
 				r = true;
-				responseData.errid = "MVC-ERROR-000";
-				responseData.errtype = "debug";
-				responseData.errmsg = "forceError is true for _tag. cmd = "+responseData['_rcmd']+" and uuid = "+responseData['_uuid'];
+				responseData.errid = "MVC-M-000";
+				responseData.errtype = "intendedErr";
+				responseData.errmsg = "forceError is set to 1 on _tag. cmd = "+responseData['_rcmd']+" and uuid = "+responseData['_uuid'];
 //			app.u.dump(responseData);
 				}
 			else	{
@@ -881,16 +971,8 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 							responseData['errmsg'] = "could not find product "+responseData.pid+". Product may no longer exist. ";
 							} //db:id will not be set if invalid sku was passed.
 						break;
-//most of the time, a successful response w/out errors is taken as a success. however, due to the nature of appCartCreate, we verify we have what we need.
-					case 'appCartCreate':
-						if(!responseData._cartid)	{
-							r = true;
-							responseData['errid'] = "MVC-M-150";
-							responseData['errtype'] = "apperr"; 
-							responseData['errmsg'] = "appCartCreate response did not contain a _cartid.";
-							}
-						break;
 					case 'adminEBAYProfileDetail':
+//					app.u.dump("GOT HERE!@!!!!!!!!!!!!!!!"); app.u.dump(responseData);
 						if(!responseData['%PROFILE'] || !responseData['%PROFILE'].PROFILE)	{
 							r = true;
 							responseData['errid'] = "MVC-M-300";
@@ -907,6 +989,10 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 						break;
 		
 					case 'addSerializedDataToCart': //no break is present here so that case addSerializedDataToCart and case addToCart execute the same code.
+//call deprecated in 201311
+//					case 'cartItemsAdd':
+//						if(responseData['_msgs'] > 0)	{r = true};
+//						break;
 		
 					case 'cartOrderCreate':
 		//				app.u.dump(' -> case = createOrder');
@@ -970,10 +1056,10 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 			
 			if(app.vars.uuid)	{
 	//			app.u.dump(' -> isSet in app. use it.');
-				uuid = app.vars.uuid; //if the uuid is set in the control, trust it.
+				uuid = app.vars.uuid; //have to, at some point, assume app integrity. if the uuid is set in the control, trust it.
 				}
 //in this else, the L is set to =, not == because it's setting itself to the value of the return of readLocal so readLocal doesn't have to be executed twice.
-			else if(L = app.model.readLocal("uuid",'local'))	{
+			else if(L = app.storageFunctions.readLocal("uuid"))	{
 				L = Math.ceil(L * 1); //round it up (was occassionally get fractions for some odd reason) and treat as number.
 	//			app.u.dump(' -> isSet in local ('+L+' and typof = '+typeof L+')');
 				if($.isEmptyObject(app.q.mutable[L+1]) && $.isEmptyObject(app.q.immutable[L+1]) && $.isEmptyObject(app.q.passive[L+1])){
@@ -989,27 +1075,41 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 					uuid = 999;
 					}
 				else	{
+
+	//				uuid = math.max(model.getLastIndex(app.q.mutable),model.getLastIndex(app.q.immutable))  // 'math' not univerally supported.
 //get last request in both q's and determine the larger uuid for use.
-					uuid = Math.max(app.model.getLastIndex(app.q.immutable),app.model.getLastIndex(app.q.mutable),app.model.getLastIndex(app.q.passive));
+//  #### improve this.
+					var lastImutableUUID = app.model.getLastIndex(app.q.immutable);
+					var lastMutableUUID = app.model.getLastIndex(app.q.mutable);
+					var lastPassiveUUID = app.model.getLastIndex(app.q.passive);
+					uuid = lastMutableUUID >lastImutableUUID ? lastMutableUUID : lastImutableUUID;
+					uuid = uuid > lastPassiveUUID ? uuid : lastPassiveUUID;
 					}
 				}
 	
 			uuid += 1;
 			app.vars.uuid = uuid;
-			app.model.writeLocal('uuid',uuid); //save it locally.
-//			app.u.dump('//END fetchUUID. uuid = '+uuid);
+			app.storageFunctions.writeLocal('uuid',uuid); //save it locally.
+	//		app.u.dump('//END fetchUUID. uuid = '+uuid);
 			return uuid;
 			}, //fetchUUID
 	
-// pretty straightforward. pass in a uuid and this will return the QID.
+//currently, only three q's are present.  if more q's are added, this will need to be expanded. ###
+// ### loop through app.q and get value that way.
 		whichQAmIFrom : function(uuid)	{
-			var r = false;
-			for(var index in app.q)	{
-				if(app.q[index][uuid])	{
-					r = index;
-					break;
-					}
+			var r;
+			if(typeof app.q.mutable[uuid] !== 'undefined')
+				r = 'mutable'
+			else if(typeof app.q.immutable[uuid] !== 'undefined')
+				r = 'immutable'
+			else if(typeof app.q.passive[uuid] !== 'undefined')
+				r = 'passive'
+			else	{
+//not found in a matching q.  odd.
+				r = false;
 				}
+
+//			app.u.dump('whichQAmIFrom = '+r+' and uuid = '+uuid );
 			return r;
 			}, //whichQAmIFrom
 
@@ -1027,7 +1127,7 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 		checkForPipeUUIDInQID : function(QID,pipeUUID)	{
 			var r = false;
 			for(var index in app.q[QID])	{
-				if(app.q[QID][index].tag && app.q[QID][index].tag['pipeUUID'] == pipeUUID)	{
+				if(app.q[QID][index].tag &&app.q[QID][index].tag['pipeUUID'] == pipeUUID)	{
 					r = true;
 					break; //end once we have a match. pipeuuid is specific to one Q
 					}
@@ -1038,11 +1138,11 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 		getQIDFromPipeUUID : function(pipeUUID){
 			app.u.dump("BEGIN model.getQIDFromPipeUUID ["+pipeUUID+"]");
 			var r = false; //what is returned.
-			for(var index in app.q)	{
-				if(this.checkForPipeUUIDInQID(index,pipeUUID))	{
-					r = index;
-					break; //exit early once a match is found.
-					}
+			if(this.checkForPipeUUIDInQID('immutable',pipeUUID))	{r = 'immutable'}
+			else if(this.checkForPipeUUIDInQID('mutable',pipeUUID))	{r = 'mutable'}
+			else if(this.checkForPipeUUIDInQID('passive',pipeUUID))	{r = 'passive'}
+			else	{
+				//pipeUUID is not in any known Q
 				}
 			app.u.dump(" -> pipeUUID: "+pipeUUID+" and qid: "+r);
 			return r;
@@ -1050,6 +1150,7 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 
 
 //will get the _tag object from this request in it's original q. allows for _tag to NOT be pased in request, making for smaller requests.
+//this will (eventually) allow for the callback itself to be an anonymous function.
 		getRequestTag : function(uuid,qid){
 			var r = false; //what is retured. Either false (unable to get tag) or the tag object itself.
 			if(uuid)	{
@@ -1071,43 +1172,14 @@ or as a series of messages (_msg_X_id) where X is incremented depending on the n
 			return r;
 			},
 	
-// check to see if the cartID is already in carts. if so, remove old and add new id to top.
-// do we want a 'bringCartIntoFocus', which would move a cart id to the top? wait and see if it's necessary.
-		addCart2Session : function(cartID)	{
-			var carts = app.vars.carts || this.dpsGet('app','carts') || [];
-//each cart id should only be in carts once. if the cart id is already present, remove it.
-			var index = $.inArray(cartID,carts);
-			if(index >= 0)	{
-				carts.splice(index,1);
-				}
-			carts.unshift(cartID); //new carts get put on top. that way [0] is always the latest cart.
-			app.vars.carts = carts;
-			this.dpsSet('app','carts',carts); //update localStorage.
-			},
-
-//always use this to remove a cart from a session. That way all the storage containers are empty
-		removeCartFromSession : function(cartID)	{
-			if(cartID)	{
-				var carts = app.vars.carts || this.dpsGet('app','carts') || [];
-				carts.splice( $.inArray(cartID, carts), 1 );
-				app.model.destroy('cartDetail|'+cartID);
-				this.dpsSet('app','carts',carts); //update localStorage.
-				}
-			else	{
-				$('#globalMessaging').anymessage({'message':'In model.removeCartFromSession, no cartid passed','gMessage':true});
-				}
-			},
-
-//gets the cart id.  carts are stored as an array.  the latest cart is always put on top of the array, which is what this returns.
-//Check to see if it's already set. If not, request a new session via ajax.
-		fetchCartID : function()	{
+	//gets session id. The session id is used a ton.  It is saved to app.vars.cartID as well as a cookie and, if supported, localStorage.
+	//Check to see if it's already set. If not, request a new session via ajax.
+		fetchCartID : function(callback)	{
 //			app.u.dump('BEGIN: model.fetchCartID');
 			var s = false;
-			var carts = app.vars.carts || this.dpsGet('app','carts') || []; //will return an array.
-			if(carts.length)	{
-				s = carts[0]; //most recent carts are always added to the top of the stack.
+			if(s = app.storageFunctions.readLocal('cartID'))	{
+//				app.u.dump(' -> cartID is set in local from previous ajax session');										 
 				}
-			else	{}
 			return s;
 			}, //fetchCartID
 	
@@ -1127,47 +1199,70 @@ will return false if datapointer isn't in app.data or local (or if it's too old)
 			var expires = datapointer == 'authAdminLogin' ? (60*60*24*15) : (60*60*24); //how old the data can be before we fetch new.
 //checks to see if the request is already in app.data. IMPORTANT to check if object is empty in case empty objects are put up for extending defaults (checkout)
 			if(app.data && !$.isEmptyObject(app.data[datapointer]))	{
-//				app.u.dump(' -> data ['+datapointer+'] already in memory.');
+//				app.u.dump(' -> data already in memory.');
 				r = true;
 				}
-
-
-			if(!r)	{
-				local = app.model.readLocal(datapointer,'session');
-				if(!local)	{
-//					app.u.dump(" -> data not found in local. check session");
-					local = app.model.readLocal(datapointer,'local')
-					}
-				if(local)	{
-//					app.u.dump(" -> data was found in either session or local");		
-					if(local.ts)	{
-						if((app.u.epochNow() - local.ts) > expires)	{
-							//app.u.dump(" -> data is old. do not use it");
-							r = false; // data is more than 24 hours old.
-							}
-						else	{
-							app.data[datapointer] = local;
-							r = true;
-							}
+//then check local storage and, if present, update the control object
+			else if (local = app.storageFunctions.readLocal(datapointer))	{
+//				app.u.dump(' -> data in localStorage');
+	//			app.u.dump(local);
+				if(local.ts)	{
+					if((app.u.unixNow() - local.ts) > expires)	{
+						r = false; // data is more than 24 hours old.
 						}
 					else	{
-			//hhhmmm... data is in local, but no ts is set. better get new data.
-						r = false;
+						app.data[datapointer] = local;
+						r = true;
 						}
 					}
 				else	{
-			//				app.u.dump(' -> data not in memory or local storage.');
+//					app.u.dump(' -> data is local, but old.');
+	//hhhmmm... data is in local, but no ts is set. better get new data.
+					r = false;
 					}
 				}
+			else	{
+				r = false;
+//				app.u.dump(' -> data not in memory or local storage.');
+				}
+
+//set app.globalAjax.checkForLocalJSON to true and the app will look for local copies (not local storage) of the json
+//Not in use at this time. left here for future use though.
+/*			if(r === false && app.globalAjax.checkForLocalJSON)	{
+				if(app.globalAjax.localJSONFolder)	{
+//				app.u.dump(" -> Data not in memory or local.");
+					if(datapointer.indexOf("appProductGet") > -1)	{
+						pid = datapointer.split("|")[1]
+						var result = $.ajax({
+							type: "GET",
+							url: app.globalAjax.localJSONFolder+"/pid="+pid+".json",
+							async: false,
+							dataType:"json"
+							})
+						result.success(function(d){
+							r = true;
+							app.data[datapointer] = d;
+						app.u.dump(" -> d: ");
+						app.u.dump(d);
+							});
+						result.error(function(){
+							r = false;
+							});
+	
+						}
+					}
+				else	{
+					app.u.dump("WARNING! checkForLocalJSON enabled but localJSONFolder not set.");
+					}
+				}
+*/				
 //			app.u.dump("END fetchData for "+datapointer+". r = "+r);
 			return r;
 			}, //fetchData
 	
-
-
-
-
-/* functions for extending the controller (adding extensions and templates) */
+	
+	
+	/* functions for extending the controller (adding extensions and templates) */
 	
 	
 	
@@ -1220,7 +1315,7 @@ will return false if datapointer isn't in app.data or local (or if it's too old)
 		makeTemplate : function($templateSpec,templateID)	{
 			var r = true; //what is returned. if a template is created, true is returned.
 			if(templateID && typeof $templateSpec == 'object')	{
-				app.templates[templateID] = $templateSpec.attr('data-templateid',templateID).clone(true); //events needs to be copied from original
+				app.templates[templateID] = $templateSpec.attr('data-templateid',templateID).clone();
 				app.templates[templateID].removeAttr('id'); //get rid of the ID to reduce likelyhood of duplicate ID's on the DOM.
 				$('#'+templateID).empty().remove(); //here for templates created from existing DOM elements. They're removed to ensure no duplicate ID's exist.
 				}
@@ -1391,7 +1486,7 @@ extensions are like plugins. They are self-contained* objects that may include c
 the extension object passed in looks like so:
 
 [
-{"namespace":"order_create","extension":"checkout/extension.js","callback":"init"},
+{"namespace":"convertSessionToOrder","extension":"checkout_fast.js","callback":"init"},
 {"namespace":"name","extension":"filename","callback":"optional"}
 ]
 
@@ -1402,7 +1497,7 @@ namespace - the extension is saved to app.ext.namespace and would be 'called' us
 extension - the filename. full path.
 callback - a function to be executed once the extension is done loading.
 
-the 'order_create' namespace is reserved for checkout. only 1 checkout extension can be loaded at a time.
+the 'convertSessionToOrder' namespace is reserved for checkout. only 1 checkout extension can be loaded at a time.
 use a unique naming convention for any custom extensions, such as username_someusefulhint (ex: cubworld_jerseybuilder)
 
 The ajax request itself (fetchExtension) was originally in the addExtension function in the loop.  This caused issues.
@@ -1547,7 +1642,7 @@ This is checks for two things:
 // if set to true and in a non-admin mode, won't hurt anything, but is less clean.
 //these are whitelisted server side. add anything non supported and comatibility mode calls will die a most horrible death.
 		setHeader : function(xhr){
-			if(app.u.thisIsAnAdminSession())	{
+			if(app.vars.thisSessionIsAdmin)	{
 				xhr.setRequestHeader('x-clientid',app.vars._clientid); //set by app
 				xhr.setRequestHeader('x-session',app.vars._session); //set by app. 
 				xhr.setRequestHeader('x-domain',app.vars.domain); //what domain is in focus. set by app or user
@@ -1584,24 +1679,65 @@ ADMIN/USER INTERFACE
 				}
 
 
-			cmdObj = {
-				_cmd : 'adminUIExecuteCGI',
-				uri : path,
-				'_tag' : {
-					datapointer : 'adminUIExecuteCGI',
-					callback : function(rd)	{
-						if(app.model.responseHasErrors(rd)){app.u.throwMessage(rd);}
-						else	{
-							app.ext.admin.u.uiHandleContentUpdate(path,app.data[rd.datapointer],viewObj)
-							app.ext.admin.vars.uiRequest = {} //reset request container to easily determine if another request is in progress
-							}
+cmdObj = {
+	_cmd : 'adminUIExecuteCGI',
+	uri : path,
+	'_tag' : {
+		datapointer : 'adminUIExecuteCGI',
+		callback : function(rd)	{
+			if(app.model.responseHasErrors(rd)){app.u.throwMessage(rd);}
+			else	{
+				app.ext.admin.u.uiHandleContentUpdate(path,app.data[rd.datapointer],viewObj)
+				app.ext.admin.vars.uiRequest = {} //reset request container to easily determine if another request is in progress
+				}
+			}
+		}
+	};
+if(!$.isEmptyObject(data)) {cmdObj['%vars'] = data} //only pass vars if present. would be a form post.
+app.model.addDispatchToQ(cmdObj,'mutable');
+app.model.dispatchThis('mutable');
+
+/*
+			app.ext.admin.vars.uiRequest = $.ajax({
+				"url":URL,
+				"data":data,
+				"type":"POST", //changing to POST causes the URL params to get dropped, which means we may not get the right page (verb). so take that into account if changing.
+				"dataType": 'json',
+				error : function(a,b){
+					if(a.statusText == "abort")	{
+						app.u.dump("UI request aborted. It would destroy such life in favor of its new matrix."); //most likely, this abort happened intentionally because another action was requested (a link was clicked)
 						}
-					}
-				};
-			if(!$.isEmptyObject(data)) {cmdObj['%vars'] = data} //only pass vars if present. would be a form post.
-			app.model.addDispatchToQ(cmdObj,'mutable');
-			app.model.dispatchThis('mutable');
-			},
+					else	{
+						$('#'+app.ext.admin.u.getTabFromPath(pathParts[0])+'Content').empty(); ///empty out loading div and any template placeholder.
+
+//make sure a callback is defined.
+				var msgDetails = "A request failure occured. Please try again or if the error persists, please report the following information: <ul>";
+				msgDetails += "<li>issue: API request failure (likely an ISE)<\/li>";
+				msgDetails += "<li>uri: "+document.location+"<\/li>";
+				msgDetails += "<li>domain: "+app.vars.domain+"<\/li>";
+				msgDetails += "<li>release: "+app.model.version+"|"+app.vars.release+"<\/li>";
+				msgDetails += "<\/ul>";
+				
+				app.u.throwMessage({'errid':'ISE','errmsg':msgDetails,'errtype':'ISE','uiIcon':'alert','uiClass':'error'});
+
+
+						if(typeof viewObj.error == 'function'){viewObj.error()}
+						}
+					app.ext.admin.vars.uiRequest = {} //reset request container to easily determine if another request is in progress
+					},
+				success : function(data){
+					app.ext.admin.u.uiHandleContentUpdate(path,data,viewObj)
+
+					app.ext.admin.vars.uiRequest = {} //reset request container to easily determine if another request is in progress
+					
+					//here because builder > edit outputs a bunch of JS in the html returned. this is to compensate. may be able to remove later. ###
+//					window.loadElement = app.ext.admin.a.loadElement; -> commented out 20121114 20:07
+					
+				},
+				beforeSend: app.model.setHeader //uses headers to pass authentication info to keep them  off the uri.
+				});
+//			app.u.dump(" admin.vars.uiRequest:"); app.u.dump(app.ext.admin.vars.uiRequest);
+	*/		},
 
 
 /*
@@ -1610,152 +1746,53 @@ methods of getting data from non-server side sources, such as cookies, local or 
 
 */
 
-//location should be set to 'session' or 'local'.
-		writeLocal : function (key,value,location)	{
-			location = location || 'local';
-			var r = false;
-
-			if($.support[location+'Storage'])	{
-				if(typeof window[location+'Storage'].setItem == 'function' )	{
-					r = true;
-					if (typeof value == "object") {value = JSON.stringify(value);}
-
-//a try is used here so that if storage is full, the error is handled gracefully.
-					try	{
-						window[location+'Storage'].setItem(key, value);
-						}
-					catch(e)	{
-						r = false;
-						app.u.dump(' -> '+location+'Storage [key: '+key+'] defined but not available.');
-						app.u.dump(e.message);
-						}
-					
-					}
-				else	{
-					app.u.dump(" -> window."+location+"Storage.setItem is not a function.");
-					}
-				}
-			else	{
-				app.u.dump("in writeLocal for key ["+key+"], check for $.support."+location+"Storage returned: "+$.support[location+'Storage']);
-				}
-			return r;
-			}, //writeLocal
-
-		nukeLocal : function(key,location)	{
-//			app.u.dump("BEGIN nukeLocal for "+key+" in "+location+"Storage");
-			if($.support[location+'Storage'])	{
-				if(typeof window[location+'Storage'] == 'object' && typeof window[location+'Storage'].removeItem == 'function')	{
-					try	{
-						window[location+'Storage'].removeItem(key);
-						}
-					catch(e)	{
-						app.u.dump("The attempt to run window."+location+"Storage.removeItem("+key+") failed. This occured after the $.support for that storage method. The catch error follows:"); app.u.dump(e);
-						}
-					}
-				}
-			else	{
-				app.u.dump("in nukeLocal for key ["+key+"], check for $.support."+location+"Storage returned: "+$.support[location+'Storage']);
-				}
-			},
-
-		readLocal : function(key,location)	{
-			location = location || 'local';
-			if(!$.support[location+'Storage'])	{
-				return ''; //exit early is the storage mechanism isn't supported. return blank needed because getLocal is used to set vars in some if statements.
-				}
-			else	{
-				var value = null;
-				try{
-					value = window[location+'Storage'].getItem(key);
-					}
-				catch(e)	{
-					//app.u.dump("Local storage does not appear to be available. e = ");
-					//app.u.dump(e);
-					}
-				if(value == null)	{
-					return '';
-					}
-		// assume it is an object that has been stringified
-				if(value && value[0] == "{") {
-					value = JSON.parse(value);
-					}
-				return value
-				}
-			}, //readLocal
-/*
-A note about cookies:
-	They're not particularly mobile friendly. All modern browsers support localStorage, even ie7, supports local/session storage, which is the main mechanism used by the model for persistent data storage.
-	So the cookie functions are here (for now), but should probably be avoided.
-*/
-		readCookie : function(c_name){
-			var i,x,y,ARRcookies=document.cookie.split(";");
-			for (i=0;i<ARRcookies.length;i++)	{
-				x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-				y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-				x=x.replace(/^\s+|\s+$/g,"");
-				if (x==c_name)	{
-					return unescape(y);
-					}
-				}
-			return false;  //return false if not set.
-			},
-
-		writeCookie : function(c_name,value)	{
-var myDate = new Date();
-myDate.setTime(myDate.getTime()+(1*24*60*60*1000));
-document.cookie = c_name +"=" + value + ";expires=" + myDate + ";domain=.zoovy.com;path=/";
-document.cookie = c_name +"=" + value + ";expires=" + myDate + ";domain=www.zoovy.com;path=/";
-			},
-//deleting a cookie seems to cause lots of issues w/ iOS and some other mobile devices (where admin login is concerned, particularly. 
-//test before earlier.
-		deleteCookie : function(c_name)	{
-document.cookie = c_name+ "=; expires=Thu, 01-Jan-70 00:00:01 GMT; path=/";
-app.u.dump(" -> DELETED cookie "+c_name);
-			},
-
-
-
 //Device Persistent Settings (DPS) Get  ### here for search purposes:   preferences settings localstorage
 //false is returned if there are no matchings session vars.
 //if no extension is passed, return the entire sesssion object (if it exists).
 //this allows for one extension to read anothers preferences and use/change them.
 //ns is an optional param. NameSpace. allows for nesting.
 			dpsGet : function(ext,ns)	{
-//				app.u.dump(" <<<<< DPS GET. ext: "+ext+" and ns: "+ns+" >>>>>");
-				var r = false, DPS = app.model.readLocal('dps','local') || {};
-//				app.u.dump("DPS from local: "); app.u.dump(DPS);
-				if($.isEmptyObject(DPS))	{
-//					app.u.dump(" ^^ Entire 'DPS' object is empty.");
+//				app.u.dump(" ^ DPS GET. ext: "+ext+" and ns: "+ns);
+				var r = false, obj = app.storageFunctions.readLocal('session');
+//				app.u.dump("DPS 'session' obj: "); app.u.dump(obj);
+				if(obj == undefined)	{
+//					app.u.dump(" ^^ Entire 'session' object is empty.");
 					// if nothing is local, no work to do. this allows an early exit.
 					} 
 				else	{
-					if(ext && DPS[ext] && ns)	{r = DPS[ext][ns]} //an extension and namespace were passed and an object exists.
-					else if(ext && DPS[ext])	{r = DPS[ext]} //an extension was passed and an object exists.
-					else if(!ext)	{r = DPS} //return the global object. obj existing is already known by here.
+					if(ext && obj[ext] && ns)	{r = obj[ext][ns]} //an extension and namespace were passed and an object exists.
+					else if(ext && obj[ext])	{r = obj[ext]} //an extension was passed and an object exists.
+					else if(!ext)	{r = obj} //return the global object. obj existing is already known by here.
 					else	{} //could get here if ext passed but obj.ext doesn't exist.
 //					app.u.dump(" ^^ value for DPS Get: "); app.u.dump(r);
 					}
-//				app.u.dump("DPS returned: "); app.u.dump(r);
 				return r;
 				},
 
-//Device Persistent Storage (DPS) Set
-//For updating preferences, which are currently device specific.
-//Uses local storage
+//Device Persistent Settings (DPS) Set
+//For updating 'session' preferences, which are currently device specific.
 //for instance, in orders, what were the most recently selected filter criteria.
-//ext and namespace (ns) are required. reduces likelyhood of nuking entire preferences object.
+//ext is required (currently). reduces likelyhood of nuking entire preferences object.
 			dpsSet : function(ext,ns,varObj)	{
+//				app.u.dump(" * DPS SET. \next: "+ext+"\nns: "+ns);
+//				app.u.dump(" * varObj (value for dps set): "); app.u.dump(varObj);
 				if(ext && ns && (varObj || varObj == 0))	{
-					var DPS = app.model.readLocal('dps','local') || {}; //readLocal returns false if no data local.
-					if(typeof DPS[ext] === 'object'){
-						DPS[ext][ns] = varObj;
+//					app.u.dump("device preferences for "+ext+"["+ns+"] have just been updated");
+					var sessionData = app.storageFunctions.readLocal('session'); //readLocal returns false if no data local.
+//					app.u.dump(" ** sessionData: "); app.u.dump(sessionData);
+					sessionData = sessionData || {};
+					if(typeof sessionData[ext] === 'object'){
+						sessionData[ext][ns] = varObj;
 						}
 					else	{
-						DPS[ext] = {}; //each dataset in the extension gets a NameSpace. ex: orders.panelState
-						DPS[ext][ns] = varObj;
+						sessionData[ext] = {}; //each dataset in the extension gets a NameSpace. ex: orders.panelState
+						sessionData[ext][ns] = varObj;
 						} //object  exists already. update it.
-//SANITY -> can't extend, must overwrite. otherwise, turning things 'off' gets obscene.					
-					app.model.writeLocal('dps',DPS,'local'); //update the localStorage session var.
+
+//can't extend, must overwrite. otherwise, turning things 'off' gets obscene.					
+//					$.extend(true,sessionData[ext],varObj); //merge the existing data with the new. if new and old have matching keys, new overwrites old.
+
+					app.storageFunctions.writeLocal('session',sessionData,'local'); //update the localStorage session var.
 					}
 				else	{
 					app.u.throwGMessage("Either extension ["+ext+"] or ns["+ns+"] or varObj ["+(typeof varObj)+"] not passed into admin.u.dpsSet.");

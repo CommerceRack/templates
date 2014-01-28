@@ -96,7 +96,7 @@ $('#createTaskModal').dialog({'autoOpen':false,'modal':true,'width':500});
 				var L = tasks.length;
 				
 				for(var i = (L-1); i >= 0; i--)	{
-					if(Number(tasks[i].completed_gmt) > 0 && (app.u.epochNow() - Number(tasks[i].completed_gmt)) > (60*60*24*3)){
+					if(Number(tasks[i].completed_gmt) > 0 && (app.u.unixNow() - Number(tasks[i].completed_gmt)) > (60*60*24*3)){
 						app.u.dump("completed more than three days ago");
 						} //don't include tasks completed more than a few days ago
 					else	{
@@ -131,14 +131,14 @@ $('#createTaskModal').dialog({'autoOpen':false,'modal':true,'width':500});
 // later, we may add the ability to load directly into 'edit' mode and open a specific task. not supported just yet.
 			showTaskManager : function($target) {
 //				app.u.dump("BEGIN admin_task.a.showTaskManager");
+
+				$target.intervaledEmpty();
 				var $DMI = app.ext.admin.i.DMICreate($target,{
 					'header' : 'Task Manager',
 					'className' : 'taskManager', //applies a class on the DMI, which allows for css overriding for specific use cases.
 					'thead' : ['','Created','Task','Due Date','Priority','Type','Assigned To',''], //leave blank at end if last row is buttons.
 					'tbodyDatabind' : "var: tasks(@TASKS); format:processList; loadsTemplate:taskListRowTemplate;",
-					'buttons' : [
-						"<button data-app-click='admin|refreshDMI' class='applyButton' data-text='false' data-icon-primary='ui-icon-arrowrefresh-1-s'>Refresh<\/button>",
-						"<button class='applyButton' data-text='true' data-icon-primary='ui-icon-circle-plus' data-app-click='admin_task|adminTaskCreateShow'>Add Task<\/button>"],	
+					'buttons' : ["<button data-app-event='admin|refreshDMI'>Refresh<\/button><button class='applyButton' data-text='true' data-icon-primary='ui-icon-circle-plus' data-app-click='admin_task|adminTaskCreateShow'>Add Task<\/button>"],	
 					'controls' : "<button data-app-click='admin|checkAllCheckboxesExec' class='applyButton marginRight'>Select All<\/button><span class='applyButtonset smallButton'>Modify Selected:	<button data-app-click='admin_task|adminTaskCompletedBulkExec'>Tag as Completed</button><button data-app-click='admin_task|adminTaskRemoveBulkConfirm'>Deleted</button><\/span>",
 					'cmdVars' : {
 						'_cmd' : 'adminTaskList',
@@ -150,8 +150,9 @@ $('#createTaskModal').dialog({'autoOpen':false,'modal':true,'width':500});
 							}
 						}
 					});
+				$("[data-app-role='dualModeContainer']:first",$target).anydelegate();
 				app.model.dispatchThis('mutable');
-				app.u.handleButtons($target.anydelegate());
+				app.u.handleButtons($target);
 				$('.applyButtonset',$target).buttonset().off('change.handleModifyTasks').on('change.handleModifyTasks',function(){
 					app.ext.admin_task.u.handleModifyTasks(this);
 					});
@@ -165,13 +166,13 @@ $('#createTaskModal').dialog({'autoOpen':false,'modal':true,'width':500});
 		renderFormats : {
 			taskClass : function($tag,data)	{
 				if(Number(data.value.completed_gmt))	{
-					if((app.u.epochNow() - Number(data.value.completed_gmt)) > (60*60*24*7)){$tag.addClass('displayNone')} //hide tasks that were completed more than a week ago.
+					if((app.u.unixNow() - Number(data.value.completed_gmt)) > (60*60*24*7)){$tag.addClass('displayNone')} //hide tasks that were completed more than a week ago.
 					else	{} //do nothing.
 					}
 				else if(Number(data.value.due_gmt))	{
-					app.u.dump(" -> has a due date. Number(data.value.due_gmt) - app.u.epochNow(): "+(Number(data.value.due_gmt) - app.u.epochNow()));
-					if(app.u.epochNow() > Number(data.value.due_gmt)) {$tag.addClass('red');} //past due date.
-					else if ((Number(data.value.due_gmt) - app.u.epochNow()) < (60*60*24*2)){$tag.addClass('orange')} //due within 2 days. highlight.
+					app.u.dump(" -> has a due date. Number(data.value.due_gmt) - app.u.unixNow(): "+(Number(data.value.due_gmt) - app.u.unixNow()));
+					if(app.u.unixNow() > Number(data.value.due_gmt)) {$tag.addClass('red');} //past due date.
+					else if ((Number(data.value.due_gmt) - app.u.unixNow()) < (60*60*24*2)){$tag.addClass('orange')} //due within 2 days. highlight.
 					else	{} //not past due or too close to due date.
 					}
 				else	{} // no due data and not completed. do nothing.
