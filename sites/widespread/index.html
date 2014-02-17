@@ -17,77 +17,57 @@
 <meta name=viewport content="width=device-width, initial-scale=1">
 
 <base href='' /><!-- leave blank so it works for a local file. updated to / if protocol is not file: -->
+<script type="text/javascript">
+var _gaq = _gaq || {'push':function(){}} //here for testing. REPLACE BEFORE DEPLOYMENT!
+var myCreole, baseURL;
 
+//set base url so images, css, js, etc all load from appropriate location once deployed.
+//baseURL as blank lets loadScript function run off local copy when testing locally.
+if(document.location.protocol == 'file:')	{
+	baseURL  = "";
+	}
+else	{
+	baseURL = document.location.protocol+"//"+document.domain+"/";
+	}
+document.getElementsByTagName('base')[0].href = baseURL;
+</script>
 
+<link rel="stylesheet" type="text/css" href="app-quickstart.css">
 <link href='https://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="app-widespread.css">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
 <script src="controller.js"></script>
 <script src="model.js"></script>
 
+<script src="srcset-polyfill-1.1.1-jt.js"></script>
+<script type="text/javascript" src="includes.js"></script>
 
-
-
-<!-- here to see how much this impacts app load time. -->
-<script src="app-widespread.js"></script>
-<script src="store_prodlist.js"></script>
-<!-- <script src="store_masonry.js"></script> -->
-<script src="extensions/store_search.js"></script>
-<script src="extensions/prodlist_infinite.js"></script>
-<script src="extensions/store_product.js"></script>
-<script src="extensions/store_navcats.js"></script>
-<script src="extensions/store_crm.js"></script>
-<script src="extensions/store_cart.js"></script>
-<script src="extensions/cart_checkout_order.js"></script>
-<script src="extensions/checkout/extension.js"></script>
 
 <script type="text/javascript">
-
-var _gaq = _gaq || {'push':function(){}}  //remove this prior to going live. ### TODO ###
-var myCreole;
-
-var app = {vars:{
-	"release":"201346.c",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
-	"_clientid":"zmvc", //zmvc for store app, 1pc for one page checkout.
-	"baseURL":"", //used in non-local mode.
-	"checkoutAuthMode" : "active",//can be passive, active or required
-	"testURL":"http://app.sporks.zoovy.com/", //used ONLY if protocol is file: (for testing)
-	"extensions" : [
-		{"namespace":"widespread","filename":"app-widespread.js"},
-		{"namespace":"store_prodlist","filename":"store_prodlist.js"},
-//		{"namespace":"store_masonry","filename":"store_masonry.js"},
-		{"namespace":"store_search","filename":"extensions/store_search.js"},
-		{"namespace":"prodlist_infinite","filename":"extensions/prodlist_infinite.js"},
-		{"namespace":"store_product","filename":"extensions/store_product.js"},
-		{"namespace":"store_navcats","filename":"extensions/store_navcats.js"},
-		{"namespace":"store_crm","filename":"extensions/store_crm.js"},
-		{"namespace":"store_cart","filename":"extensions/store_cart.js"},
-		{"namespace":"cco","filename":"extensions/cart_checkout_order.js"},
-		{"namespace":"orderCreate","filename":"extensions/checkout/extension.js"}
-		]
-	},u:{},rq:[]};
-
-//set base url so images, css, js, etc all load from appropriate location once deployed.
-//baseURL as blank lets loadScript function run off local copy when testing locally.
-if(document.location.protocol == 'file:')	{
-	app.vars.baseURL  = "";
-	}
-else	{
-	app.vars.baseURL = document.location.protocol+"//"+document.domain+"/";
-	}
-document.getElementsByTagName('base')[0].href = app.vars.baseURL;
-	
+$(document).ready(function(){
+	window.myApp = new initApp({
+		"release":"201401.a",  //increment this with each change. should solve caching issues. format: YYYYMMDDHHMMSS
+		"_clientid":"zmvc", //zmvc for store app, 1pc for one page checkout.
+		"baseURL":baseURL, //used in non-local mode.
+		"checkoutAuthMode" : "active",//can be passive, active or required
+		"testURL":"http://app.sporks.zoovy.com/", //used ONLY if protocol is file: (for testing)
+		"addjQueryPointer" : true,
+		"initComplete" : function(t){
+			dump(" -> init is complete");
+			t.u.loadScript('app-widespread-init.js',function(){
+				var progress = t.u.loadResources(); //the object returns by loadResources will get updated as the resources finish loading.
+				t.u.showProgress(progress);
+				});
+			$('#appversion').text(t.vars.release);
+			}
+		});
+	myCreole = new Parse.Simple.Creole();
+	});
 </script>
-<!-- needs to be after the 'app' declaration above. -->
-<script type="text/javascript" src="loadscript.js"></script>
 
-<script>
-app.u.loadScript(app.vars.baseURL+'app-widespread-init.js');
-</script>
 </head>
 
 <body>
@@ -486,7 +466,7 @@ this will likely become more flexible in the future. ###
 	<div class='prodDetailImagesContainer'>
 	
 		<div data-bind="var: product(zoovy:prod_is_tags); format:addTagSpans;" class='tagsContainer'></div>
-		<a href='blank.gif' data-bind='var: product(zoovy:prod_image1); format:imageURL2Href; h:; w:;' data-gallery="gallery"  ><img src='blank.gif' class='prodBigImage' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset; extension:widespread; bgcolor:ffffff; range:prodDetailMainPic;'  /></a>
+		<a href='blank.gif' data-bind='var: product(zoovy:prod_image1); format:imageURL2Href; extension:widespread; h:; w:;' data-gallery="gallery"  ><img src='blank.gif' class='prodBigImage' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset; extension:widespread; bgcolor:ffffff; range:prodDetailMainPic;'  /></a>
 	
 		<div class='marginTop' data-bind="useParentData:true; format:prodThumbs; extension:widespread;"></div>
 	</div>
@@ -1282,7 +1262,7 @@ used on a product layout. Some product have 'children' which may represent the s
 
 		<h4 data-bind='var:review(CUSTOMER_NAME); format:text;'></h4>
 		<h5 data-bind='var:review(LOCATION); format:text; pretext:of ;'></h5>
-		<h6 data-bind='var:review(CREATED_GMT); format:unix2mdy; pretext:on ;'></h6>
+		<h6 data-bind='var:review(CREATED_GMT); format:epoch2mdy; pretext:on ;'></h6>
 
 	</div>
 	<blockquote>
@@ -1401,7 +1381,7 @@ used for store_crm.js
 	<div data-app-role='orderHeader' onClick="app.ext.myRIA.u.showOrderDetails($(this).parent());" class='ui-accordion-header ui-helper-reset ui-state-default ui-corner-top ui-corner-bottom' >
 	<span class="ui-icon ui-icon-triangle-1-e floatLeft marginRight"></span>
 	<span data-bind='var:order(ORDERID);format:text;pretext:Order ID: ;'></span>
-	<span data-bind='var:order(MODIFIED_GMT);format:unix2mdy; pretext: Placed on ;'></span>
+	<span data-bind='var:order(MODIFIED_GMT);format:epoch2mdy; pretext: Placed on ;'></span>
 	</div>
 
 	<div data-app-role='orderContents' class='ui-accordion-content ui-helper-reset displayNone ui-widget-content '></div>

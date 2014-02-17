@@ -16,12 +16,8 @@
 
 ************************************************************** */
 
-
-
-//    !!! ->   TODO: replace 'username' in the line below with the merchants username.     <- !!!
-
-var store_username = function(_app) {
-	var theseTemplates = new Array('');
+var control_panel = function(_app) {
+	var theseTemplates = new Array('controlPanelTemplate');
 	var r = {
 
 
@@ -35,7 +31,7 @@ var store_username = function(_app) {
 			onSuccess : function()	{
 				var r = false; //return false if extension won't load for some reason (account config, dependencies, etc).
 
-				//if there is any functionality required for this extension to load, put it here. such as a check for async google, the FB object, etc. return false if dependencies are not present. don't check for other extensions.
+				_app.model.fetchNLoadTemplates(_app.vars.baseURL+'extensions/admin/control_panel.html',theseTemplates);
 				r = true;
 
 				return r;

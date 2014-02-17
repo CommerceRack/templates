@@ -16,13 +16,14 @@ Where I left off:
 
 -->
 <div id='checkoutTemplate' class='checkoutFormContainer' data-app-role='checkout'>
-	<form action='#' data-skipvalidation='1'><!-- skipvalidation is checked for on the quick add to cart. -->
+	<form action='#' data-skipvalidation='1' novalidate="novalidate" onsubmit="return false;"><!-- skipvalidation is checked for on the quick add to cart. -->
 	<table class='fullWidth'>
 	<tr>
 		<td class='valignTop twoColumn'>
 	
 	<input type='hidden' name='bill/shortcut' data-bind="var: cart(bill/shortcut); format:popVal;" />
 	<input type='hidden' name='ship/shortcut' data-bind="var: cart(ship/shortcut); format:popVal;" />
+	<input type='hidden' name='_cartid' data-bind="var: cart(cart/cartid); format:popVal;" />
 
 <!-- define panel order -->
 	<fieldset data-app-role='chkoutPreflight' class='marginBottom ui-widget-content'>
@@ -43,15 +44,15 @@ Where I left off:
 		<legend class='smallPadding' >Billing Address</legend>
 		<p data-app-role='addressExists' class='displayNone clearfix'>Click the checkmark of the address you would like to use</p>
 		
-		<div class='panelContent displayNone addressList' data-app-role='addressExists' data-bind='var: buyer(@bill); format:processList; loadsTemplate: chkoutBuyerAddressTemplate;'></div><!-- for return customers -->
+		<div class='panelContent displayNone addressList' data-app-role='addressExists' data-bind='var: buyer(@BILL); format:processList; loadsTemplate: chkoutBuyerAddressTemplate;'></div><!-- for return customers -->
 		
-		<div class='clearfix marginBottom' data-app-role='addressExists'><button data-app-event='orderCreate|showBuyerAddressAdd' data-app-addresstype='bill'>Add New Address</button></div>
+		<div class='clearfix marginBottom' data-app-role='addressExists'><button class='applyButton' data-app-click="order_create|adminAddressCreateUpdateShow" data-mode='create' data-app-addresstype='bill'>Add New Address</button></div>
 		
 		<div class='panelContent' data-app-role='addressNew' data-bind='format:loadsTemplate; loadsTemplate: chkoutAddressBillTemplate;'></div><!-- for new customers -->
 		
 		<div data-app-role='billToShipContainer' >
 		<label>
-		<input type='checkbox' name='want/bill_to_ship' data-bind="var: cart(want/bill_to_ship); format:popVal; hideZero:false;" checked='checked' data-app-event='orderCreate|tagAsBillToShip' />
+		<input type='checkbox' name='want/bill_to_ship' data-bind="var: cart(want/bill_to_ship); format:popVal; hideZero:false;" checked='checked' class='applyAnycb' data-app-change='order_create|tagAsBillToShip' />
 		ship to billing address
 		</label>
 		</div>
@@ -61,9 +62,9 @@ Where I left off:
 
 	<fieldset data-app-role='chkoutAddressShip'  data-app-addresstype='ship' class='displayNone marginBottom ui-widget-content'>
 		<legend class='smallPadding' >Shipping Address</legend>
-		<div class='panelContent displayNone addressList' data-app-role='addressExists' data-bind='var: buyer(@ship); format:processList; loadsTemplate: chkoutBuyerAddressTemplate;'></div><!-- for return customers -->
+		<div class='panelContent displayNone addressList' data-app-role='addressExists' data-bind='var: buyer(@SHIP); format:processList; loadsTemplate: chkoutBuyerAddressTemplate;'></div><!-- for return customers -->
 		<div class='panelContent' data-app-role='addressNew' data-bind='format:loadsTemplate; loadsTemplate: chkoutAddressShipTemplate;'></div><!-- for new customers -->
-		<div class='clearfix' data-app-role='addressExists'><button data-app-event='orderCreate|showBuyerAddressAdd' data-app-addresstype='ship'>Add New Shipping Address</button></div>
+		<div class='clearfix' data-app-role='addressExists'><button class='applyButton' data-app-click='order_create|showBuyerAddressAdd' data-app-addresstype='ship'>Add New Shipping Address</button></div>
 	</fieldset>
 
 
@@ -95,23 +96,8 @@ Where I left off:
 <!-- line items -->	
 	<fieldset data-app-role='chkoutCartItemsList' class='marginBottom ui-widget-content'>
 		<legend class='smallPadding' >Contents</legend>
-		<div class='panelContent' data-bind='format:loadsTemplate; loadsTemplate: chkoutCartContentsTemplate;'></div>
-
-
-		<legend class='ui-widget-header ui-corner-all'>Add Item to Order</legend>
-		<input type="hidden" name="add" value="yes" />
-		<input type="hidden" name="override" value="1" />
 		
-		<label><span>Qty:</span><input type="text" name="qty" size="3" value="1"  /></label>
-		<label><span>Product id:</span><input type='text' name='sku' size='10' /></label>
-		<label><span>Price: </span><input type='number' class='price' size='5' name='price' step='0.01' min='0' /></label>
-		<button data-app-event="orderCreate|cartItemAddFromForm">Add</button>
-		<hr />
-	<button data-app-event="orderCreate|cartItemAddWithChooser">Use Chooser</button> <span class='hint'>use this for an easier method to select items with variations</span>
-	<hr />
-	Show previous orders for re-order:
-	ORDERS GO HERE.
-
+		<div class='panelContent marginBottom' data-bind='format:loadsTemplate; loadsTemplate: chkoutCartContentsTemplate;'></div>
 
 	</fieldset>
 
@@ -134,13 +120,18 @@ Where I left off:
 
 <section id='chkoutPreflightTemplate'>
 
-<h4 class='displayNone' data-app-role='username' data-bind="var:cart(bill/email); defaultVar: cart(customer/login); format:text;"></h4>
+	<h4 class='displayNone' data-app-role='username' data-bind="var:cart(bill/email); defaultVar: cart(customer/login); format:text;"></h4>
+	
+	<div data-app-role='login' class='clearfix marginBottom'>
+	
+		<input type='email' required='required' name='bill/email' size='30' placeholder="email address" data-bind="var:cart(bill/email); defaultVar:cart(customer/login); format:popVal;" data-app-blur='order_create|execBuyerEmailUpdate' /> <button class='applyButton' data-app-click="order_create|adminCustomerLookup">Lookup</button><br />
+		<label class='accountCreateContainer'><input type='checkbox' name='want/create_customer' class='applyAnycb' data-app-change='order_create|tagAsAccountCreate' />Create account</label>
+	</div>
 
-<div data-app-role='login'>
-
-	<input type='email' required='required' name='bill/email' size='30' placeholder="email address" data-bind="var:cart(bill/email); defaultVar:cart(customer/login); format:popVal;" data-app-event='orderCreate|execBuyerEmailUpdate' /> <button data-app-event="orderCreate|adminCustomerLookup">Lookup</button><br />
-	<label class='accountCreateContainer'><input type='checkbox' name='want/create_customer' data-app-event='orderCreate|tagAsAccountCreate' />Create customer account</label>
-</div>
+	<div class='displayNone' data-bind="var: customer(@ORDERS.length); format:showIfSet;">
+		<h2 data-input-click='show-selector' data-show-selector='.orderHistory' class='lookLikeLink'>&#187; Order history</h2>
+		<ol class='displayNone orderHistory' data-bind="var: customer(@ORDERS); format:processList; loadsTemplate:chkoutOrderHistoryLineItem;"></ol>
+	</div>	
 
 </section>
 
@@ -157,27 +148,27 @@ billing address panel spec
 This template is also used in the myAccount page, which is why a default using _ is present.
 -->
 
-<section id='chkoutAddressBillTemplate'>
+<section id='chkoutAddressBillTemplate' class='addressForm'>
 
-	<div><input type='text' placeholder='first name' name='bill/firstname' required='required' value='' data-bind='var: cart(bill/firstname); defaultVar: cart(bill/firstname); format:popVal;'  /></div>
-	<div><input type='text' placeholder='last name' name='bill/lastname' required='required' value='' data-bind='var: cart(bill/lastname); defaultVar: cart(bill/lastname); format:popVal;'  /></div>
+	<div><input type='text' placeholder='first name' name='bill/firstname' required='required' value='' data-bind='var: cart(bill/firstname); defaultVar: cart(bill_firstname); format:popVal;'  /></div>
+	<div><input type='text' placeholder='last name' name='bill/lastname' required='required' value='' data-bind='var: cart(bill/lastname); defaultVar: cart(bill_lastname); format:popVal;'  /></div>
 
-	<div class='bill_company'><input type='text' name='bill/company' placeholder='company' value='' data-bind='var: cart(bill/company); defaultVar: cart(bill/company); format:popVal;'  /></div><!-- class is added so it can be easily disabled w/ css -->
+	<div class='bill_company'><input type='text' name='bill/company' placeholder='company' value='' data-bind='var: cart(bill/company); defaultVar: cart(bill_company); format:popVal;'  /></div><!-- class is added so it can be easily disabled w/ css -->
 
-	<div><input type='text' name='bill/address1' placeholder='address' required='required' value='' data-bind='var: cart(bill/address1); defaultVar: cart(bill/address1); format:popVal;'  data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='bill/address1' placeholder='address' required='required' value='' data-bind='var: cart(bill/address1); defaultVar: cart(bill_address1); format:popVal;'  data-app-blur='order_create|execAddressUpdate' /></div>
 
-	<div><input type='text' name='bill/address2' placeholder='address 2' value='' data-bind='var: cart(bill/address2); defaultVar: cart(bill/address2); format:popVal;'  data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='bill/address2' placeholder='address 2' value='' data-bind='var: cart(bill/address2); defaultVar: cart(bill_address2); format:popVal;'  data-app-blur='order_create|execAddressUpdate' /></div>
 
-	<div><input type='text' name='bill/city' placeholder='city' required='required' value='' data-bind='var: cart(bill/city); defaultVar: cart(bill/city); format:popVal;'  data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='bill/city' placeholder='city' required='required' value='' data-bind='var: cart(bill/city); defaultVar: cart(bill_city); format:popVal;'  data-app-blur='order_create|execAddressUpdate' /></div>
 	
-	<div><input type='text' name='bill/region' placeholder='state/region' required='required' size='5' value='' data-bind='var: cart(bill/region); defaultVar: cart(bill/region); format:popVal;' maxlength='20' data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='bill/region' placeholder='state/region' required='required' size='5' value='' data-bind='var: cart(bill/region); defaultVar: cart(bill_region); format:popVal;' maxlength='20' data-app-blur='order_create|execAddressUpdate' /></div>
 	
 	<!-- postal not required for international. don't add it. -->
-	<div><input type='text'  name='bill/postal' placeholder='zip/postal code' required='required' size='14' value='' data-bind='var: cart(bill/postal); defaultVar: cart(bill/postal); format:popVal;' maxlength='10'  data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text'  name='bill/postal' placeholder='zip/postal code' required='required' size='14' value='' data-bind='var: cart(bill/postal); defaultVar: cart(bill_postal); format:popVal;' maxlength='10'  data-app-blur='order_create|execAddressUpdate' /></div>
 
-	<div class='billCountry' data-app-role='billCountry'><select name='bill/countrycode' placeholder='country' data-bind='var: cart(bill/countrycode); defaultVar: cart(bill/countrycode); defaultValue:US; format:countriesAsOptions; extension: cco;forceRender:1;' required='required' data-app-event="orderCreate|execCountryUpdate" ></select></div>
+	<div class='billCountry' data-app-role='billCountry'><select name='bill/countrycode' placeholder='country' data-bind='useParentData:true; format:countriesAsOptions; extension: cco; shiptype:bill;' required='required' data-app-change="order_create|execCountryUpdate" ></select></div>
 
-	<div><input type='tel' name='bill/phone' placeholder='phone number' required='required' value='' data-bind='var: cart(bill/phone); defaultVar: cart(bill/phone); format:popVal;'  /> <span class='hint zhint'>in case of billing/delivery problems</span></div>
+	<div><input type='tel' name='bill/phone' placeholder='phone number' required='required' value='' data-bind='var: cart(bill/phone); defaultVar: cart(bill_phone); format:popVal;'  /> <span class='hint zhint'>in case of billing/delivery problems</span></div>
 
 </section>
 
@@ -190,25 +181,25 @@ shipping address panel.
 don't add required to any inputs because if bill to ship is checked, NONE of these fields are required/populated.
 -->
 
-<section id='chkoutAddressShipTemplate'>
+<section id='chkoutAddressShipTemplate' class='addressForm'>
 
-	<div><input type='text' placeholder='first name' name='ship/firstname' required='required' value='' data-bind='var: cart(ship/firstname); defaultVar: cart(ship/firstname); format:popVal;'  /></div>
-	<div><input type='text' placeholder='last name' name='ship/lastname' required='required' value='' data-bind='var: cart(ship/lastname); defaultVar: cart(ship/lastname); format:popVal;'  /></div>
+	<div><input type='text' placeholder='first name' name='ship/firstname' required='required' value='' data-bind='var: cart(ship/firstname); defaultVar: cart(ship_firstname); format:popVal;'  /></div>
+	<div><input type='text' placeholder='last name' name='ship/lastname' required='required' value='' data-bind='var: cart(ship/lastname); defaultVar: cart(ship_lastname); format:popVal;'  /></div>
 
-	<div class='bill_company'><input type='text' name='ship/company' placeholder='company' value='' data-bind='var: cart(ship/company); defaultVar: cart(ship/company); format:popVal;'  /></div><!-- class is added so it can be easily disabled w/ css -->
+	<div class='bill_company'><input type='text' name='ship/company' placeholder='company' value='' data-bind='var: cart(ship/company); defaultVar: cart(ship_company); format:popVal;'  /></div><!-- class is added so it can be easily disabled w/ css -->
 
-	<div><input type='text' name='ship/address1' placeholder='address' required='required' value='' data-bind='var: cart(ship/address1); defaultVar: cart(ship/address1); format:popVal;' data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='ship/address1' placeholder='address' required='required' value='' data-bind='var: cart(ship/address1); defaultVar: cart(ship_address1); format:popVal;' data-app-blur='order_create|execAddressUpdate' /></div>
 
-	<div><input type='text' name='ship/address2' placeholder='address 2' value='' data-bind='var: cart(ship/address2); defaultVar: cart(ship/address2); format:popVal;' /></div>
+	<div><input type='text' name='ship/address2' placeholder='address 2' value='' data-bind='var: cart(ship/address2); defaultVar: cart(ship_address2); format:popVal;' /></div>
 
-	<div><input type='text' name='ship/city' placeholder='city' required='required' value='' data-bind='var: cart(ship/city); defaultVar: cart(ship/city); format:popVal;' data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text' name='ship/city' placeholder='city' required='required' value='' data-bind='var: cart(ship/city); defaultVar: cart(ship_city); format:popVal;' data-app-blur='order_create|execAddressUpdate' /></div>
 	
-	<div><input type='text'  name='ship/region' placeholder='state/region' required='required' size='5' value='' data-bind='var: cart(ship/region); defaultVar: cart(ship/region); format:popVal;' maxlength='20' data-app-event='orderCreate|execAddressUpdate' /></div>
+	<div><input type='text'  name='ship/region' placeholder='state/region' required='required' size='5' value='' data-bind='var: cart(ship/region); defaultVar: cart(ship_region); format:popVal;' maxlength='20' data-app-blur='order_create|execAddressUpdate' /></div>
 
 	
-	<div><input type='text'  name='ship/postal' placeholder='zip/postal code' required='required' size='14' value='' data-bind='var: cart(ship/postal); defaultVar: cart(ship/postal); format:popVal;' maxlength='10' data-app-event='orderCreate|execAddressUpdate'/></div>
+	<div><input type='text'  name='ship/postal' placeholder='zip/postal code' required='required' size='14' value='' data-bind='var: cart(ship/postal); defaultVar: cart(ship_postal); format:popVal;' maxlength='10' data-app-blur='order_create|execAddressUpdate'/></div>
 
-	<div class='shipCountry' data-app-role='shipCountry'><select name='ship/countrycode' placeholder='country' data-bind='var: cart(ship/countrycode); defaultVar: cart(ship/countrycode); defaultValue:US; format:countriesAsOptions; extension: cco;forceRender:1;'  data-app-event="orderCreate|execCountryUpdate" ></select></div>
+	<div class='shipCountry' data-app-role='shipCountry'><select name='ship/countrycode' placeholder='country' data-bind='useParentData:true; format:countriesAsOptions; extension: cco; shiptype:ship;'  data-app-change="order_create|execCountryUpdate" ></select></div>
 
 </section>
 
@@ -240,7 +231,7 @@ messaging are hidden by default, then displayed if needed. keeps panel from bein
 -->
 
 <div id='chkoutMethodsShipTemplate'>
-	<ul class='noPadOrMargin listStyleNone' data-bind='var: cart(@SHIPMETHODS); format:shipMethodsAsRadioButtons; extension: orderCreate;' data-app-event='orderCreate|addTriggerShipMethodUpdate'></ul>
+	<ul class='noPadOrMargin listStyleNone' data-bind='useParentData:true; format:shipMethodsAsRadioButtons; extension: order_create;' ></ul>
 </div>
 
 
@@ -260,8 +251,8 @@ do NOT change any div id's or messaging will not work properly.
 
 	<div class='giftCardContainer' data-app-role="giftcardContainer">
 	<label for='giftcardCode'>Gift Certificate Code:</label>
-	<input type='text' name='giftcard' size='16'  data-app-event='orderCreate|addTriggerButtonClick' />
-	<button data-app-event='orderCreate|execGiftcardAdd'>add</button> 
+	<input type='text' name='giftcard' size='16' data-input-keyup='trigger-button-id' data-input-format='alphanumeric' data-trigger-button-id='execGiftcardAdd' />
+	<button class='applyButton' data-app-click='order_create|execGiftcardAdd' data-button-id='execGiftcardAdd'>add</button> 
 	<small data-app-role='giftcardHint' class='zhint hint displayNone'>if you wish to combine gift cards with another payment method, enter them here</small>
 	</div>
 
@@ -270,20 +261,21 @@ do NOT change any div id's or messaging will not work properly.
 	</div>
 	
 <!-- used in paypal transactions to cancel as paypal -->	
-	<div data-app-event='orderCreate|execChangeFromPayPal' class='displayNone pointer zlink'>
+	<div data-app-click='order_create|execChangeFromPayPal' class='displayNone pointer zlink'>
 	Choose Alternate Payment Method
 	</div>
 
 <!-- more payment types is first but, when applicable, stored payments is shown. That way stored payments are easily selected but it's hard to miss that other payment choices are available. -->
-	<div data-app-role='paymentOptionsContainer' data-app-event="orderCreate|addTriggerPayMethodUpdate">
+	<div data-app-role='paymentOptionsContainer' data-app-event="order_create|addTriggerPayMethodUpdate">
 		
 		<h2 data-app-role='nonStoredPaymentsHeader' class='displayNone'>More Payment Choices</h2>
 		<div data-app-role='nonStoredPaymentsContent'>
-			<div data-bind='var: getPaymentMethods(@methods); format:payMethodsAsRadioButtons; extension: orderCreate;'></div>
+			<div data-bind='var: cart(cart/cartid); format:payMethodsAsRadioButtons; extension: order_create;'></div>
 		</div>
 		
-		<h2 data-app-role='storedPaymentsHeader' class='displayNone'>Your Stored Payments</h2>
-		<div data-app-role='storedPaymentsContent' class='displayNone' data-bind="var: buyerWalletList(@wallets); format:processList; loadsTemplate: chkoutBuyerWalletListItem;"></div>
+		<h2 data-app-role='storedPaymentsHeader' class='displayNone'>Stored Payments</h2>
+		<!-- The # of children in the storedPaymentContents triggers wallet display. Do not add any children to this div. -->
+		<div data-app-role='storedPaymentsContent' class='displayNone' data-bind="var: buyerWalletList(@WALLETS); format:processList; loadsTemplate: chkoutBuyerWalletListItem;"></div>
 
 
 	</div>
@@ -308,25 +300,53 @@ the defaultVar on prodName & image is for promotions, which have a 'description'
 	<div class='prodLatency' data-bind='var:product(%attribs.zoovy:ship_latency); format:text; pretext:Normally ships in ; posttext: day(s);'></div>
 	<div class='prodOptions' data-bind='var: variations(%options); format:selectedOptionsDisplay;'></div>
 	</td>
-	<td class='alignRight'><span data-bind='var: product(qty); format:text;'></span></td>
-	<td class='alignRight'><span data-bind='var: product(price); format:money; currencySign: $;  hideZero:false; pretext: x ;'></span></td>
+	<td class='alignRight'>
+		<input type='number' class='smallInput' name='qty' step='1' size='3' min='0' data-bind="var: product(qty); format:popVal;" data-app-change="order_create|cartItemUpdateExec" />
+	</td>
+	<td class='alignRight'>
+		<input type='number' class='smallInput' name='price' step='.01' size='8' min='0' data-bind="var: product(price); hideZero:false; format:popVal;" data-app-change="order_create|cartItemUpdateExec" />
+	</td>
 	<td class='alignRight'><span data-bind='var: product(extended); format:money; currencySign: $; hideZero:false; pretext: = ;'></span></td>
+	<td><button class='floatRight removeButton' data-bind='format:cartItemRemoveButton; extension:cco; useParentData:true;' data-app-click='cco|cartItemRemove'>Remove Item From Cart</button></td>
 </tr>
 </table>
 
 
-<section id='chkoutCartContentsTemplate'>
-<table class='fullWidth gridTable'>
-<thead>
-<tr>
-	<th colspan='2' class='alignLeft'>product information</th>
-	<th class='alignRight'>qty</th>
-	<th class='alignRight'>price</th>
-	<th class='alignRight'>item total</th>
-</tr>
-</thead>
-<tbody data-bind='var: cart(@ITEMS); format:processList; loadsTemplate:chkoutCartItemTemplate;'></tbody>
-</table>
+<section id='chkoutCartContentsTemplate' data-template-role='cart' data-bind='var:cart(cart/cartid);format:assignAttribute; attribute:data-cartid;' >
+	<div class='marginBottom' data-bind='var: cart(cart/cartid); format:text; pretext:Cart ID: ;'></div>
+	<table class='fullWidth gridTable applyAnytable marginBottom'>
+	<thead>
+	<tr>
+		<th colspan='2' class='alignLeft'>product information</th>
+		<th class='alignRight'>qty</th>
+		<th class='alignRight'>price</th>
+		<th class='alignRight'>item total</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody data-bind='var: cart(@ITEMS); format:processList; loadsTemplate:chkoutCartItemTemplate;'></tbody>
+	</table>
+	
+	<div class='clearfix marginBottom'>
+		<h4 class='floatLeft'>Add Item to Order : </h4>
+		<button class='applyButton floatLeft marginLeft' data-app-click="order_create|cartItemAddWithChooser">Chooser</button> 
+		<button class='applyButton floatLeft marginLeft' data-show-selector=".cartItemAddDirectShow" data-input-click='show-selector'>Direct Add</button>
+	</div>
+	
+	
+
+	
+	<div class='displayNone cartItemAddDirectShow' data-add2cart-role='container'>
+			<input type="hidden" name="add" value="yes" />
+			<input type="hidden" name="override" value="1" />
+			<input type="hidden" name="_cartid" value="" data-bind="var:cart(cart/cartid); format:popVal;"  /><!-- used in store_product.u.handleAddToCart -->
+	
+		<label><span>Qty:</span><input type='number' class='smallInput' step='1' min='0' name="qty" size="3" value="1"  /></label>
+		<label><span>Product id:</span><input type='text' name='sku' size='10' data-input-keyup='data-input-format' data-input-format='pid' /></label>
+		<label><span>Price: </span><input type='number' class='price smallInput' size='5' name='price' step='0.01' min='0' /></label>
+		<span class='applyButton' data-app-click="order_create|cartItemAddFromForm">Add</span>
+	</div>
+	
 </section>
 
 
@@ -340,7 +360,7 @@ the defaultVar on prodName & image is for promotions, which have a 'description'
 	
 	<div data-bind="var: cart(sum/items_total); format:money; className:orderSubtotal; hideZero:false; currencySign: $; pretext:Subtotal: ; "></div>
 	<div data-bind='var: cart(sum/tax_total); format:money; className:orderTax; hideZero:true;currencySign: $; pretext:Tax: ; '></div>
-	<div data-bind='var: cart(want/shipping_id); format:shipInfoById; className:orderShipping; hideZero:false; extension:cco;'></div>
+	<div class='orderShipping' data-bind='useParentData:true; format:shipInfoById; extension:cco;'></div>
 	<div data-bind='var: cart(sum/hnd_total); format:money; className:hndTotal; currencySign: $; pretext:Handling: ; '></div>
 	<div data-bind='var: cart(sum/order_total); format:money; className:orderTotal; hideZero:false; currencySign: $; pretext:Order Total: ; '></div>
 	<div data-bind='var: cart(sum/gfc_total); format:money; className:orderGiftcardTotal; currencySign: $; pretext:Giftcard(s): ; '></div>
@@ -352,14 +372,16 @@ the defaultVar on prodName & image is for promotions, which have a 'description'
 
 	<div class='couponEntryContainer clearfix marginBottom' data-app-role='couponContainer'>
 		<label for='coupon'>Coupon/Promo Code:</label>
-		<input type='text' name='coupon' size='8'  data-app-event='orderCreate|addTriggerButtonClick' />
-		<button data-app-event="orderCreate|execCouponAdd" >add</button>
+		<input type='text' name='coupon' size='8' data-input-keyup='trigger-button-id' data-trigger-button-id='execCouponAdd' data-input-format='alphanumeric' />
+		<span class='applyButton' data-app-click="order_create|execCouponAdd" data-button-id='execCouponAdd' >add</span>
 	</div>
 
 
-	<button data-app-event="orderCreate|execCartOrderCreate">
-		Place Order
-	</button>
+	<div class='buttonset alignRight'>
+	<button class='floatLeft applyButton' data-app-click='order_create|adminCartRemoveFromSession' title="This will remove the cart from your session. It will NOT delete the cart.">Remove Cart</button>
+	<button class='applyButton' data-app-role='saveButton' data-app-click='order_create|cartOrderSave' title="Save changes without creating an order. This will NOT save credit card numbers.">Save <span class='numChanges'></span> Changes</button>
+	<button class='applyButton ui-state-highlight' data-app-click="order_create|execCartOrderCreate">Create Order</button>
+	</div>
 
 <div data-app-role='referenceNumber' class='displayNone'>
 	<label>Purchase Order/Reference #: </label>
@@ -376,13 +398,13 @@ the defaultVar on prodName & image is for promotions, which have a 'description'
 
 
 
-
+<!-- there is display logic looking for the number of address elements in addressExists. do not change element try w/out updating display logic. -->
 <address id='chkoutBuyerAddressTemplate' class='ui-widget ui-widget-content ui-corner-all stdPadding'>
-	<div data-bind="var:address(bill/address1); defaultVar: address(ship/address1); format:text;"></div>
-	<div data-bind="var:address(bill/postal); defaultVar: address(ship/postal); format:text;"></div>
+	<div data-bind="var:address(bill_address1); defaultVar: address(ship_address1); format:text;"></div>
+	<div data-bind="var:address(bill_postal); defaultVar: address(ship_postal); format:text;"></div>
 	<div class='clearfix'>
-		<button class='floatRight' data-app-event='orderCreate|execBuyerAddressSelect'>Use This Address</button>
-		<button class='floatRight marginRight' data-app-event="orderCreate|showBuyerAddressUpdate">Edit This Address</button>
+		<button class='floatRight applyButton' data-app-role='addressSelectButton' data-app-click='order_create|execBuyerAddressSelect' data-icon='false' data-icon-primary='ui-icon-check'>Use This Address</button>
+		<button class='floatRight marginRight applyButton' data-app-role='addressEditButton' data-app-click="order_create|adminAddressCreateUpdateShow" data-icon='false' data-icon-primary='ui-icon-pencil' data-mode='update'>Edit This Address</button>
 	</div>
 </address>
 
@@ -395,7 +417,7 @@ the defaultVar on prodName & image is for promotions, which have a 'description'
 	<li id='cartPaymentQTemplate'>
 	<span data-bind="var:payment(TN); format:text;"></span>
 	<span class='marginLeft' data-bind="var:payment($$); format:money; currencySign: $;  hideZero:false;"></span><span data-bind="var:payment($#); format:money; currencySign: $; pretext:/;"></span>
-<!--	<button class='marginLeft' title='Remove this payment method'>X</button> -->
+<!--	<button class='marginLeft applyButton' title='Remove this payment method'>X</button> -->
 	</li>
 </ul>
 
@@ -417,7 +439,7 @@ do NOT change the input name or id or checkout will likely break.
 
 <div id='chkoutNotesTemplate'>
 <p>Please include any special instructions or comments here:</p>
-<textarea class='chkoutOrderNotes fullWidth' name='want/order_notes' data-app-event='orderCreate|execCartSet' data-bind='var: cart(want/order_notes); format:popVal;'></textarea>
+<textarea class='chkoutOrderNotes fullWidth' name='want/order_notes' data-app-blur='order_create|execCartSet' data-bind='var: cart(want/order_notes); format:popVal;'></textarea>
 </div>
 
 
@@ -429,25 +451,16 @@ do NOT change the input name or id or checkout will likely break.
 
 
 
-<!-- used after a successful checkout.  -->
+<!-- used after a successful order create.  -->
 
 <div id='chkoutCompletedTemplate' class='checkoutSuccess'>
 
-	<div class='floatRight ocmThirdParty'>
-		<h2>What next?</h2>
-<!-- the twitter and facebook actions are added post checkout. The order contents are included as part of the message -->
-		<div class='ocm ocmFacebookComment pointer zlink marginBottom checkoutSprite  '></div>
-		<div class='ocm ocmTwitterComment pointer zlink marginBottom checkoutSprit ' ></div>
-		<div class='ocm ocmContinue pointer zlink marginBottom checkoutSprite'></div>
-
-	</div>
-
-
+	<div class='floatRight ocmThirdParty' data-app-role='thirdPartyContainer'></div>
+	
 	<div class='orderSummaryDetails'>
-		<h2>Thank you! Your order has been placed.</h2>
+		<h2>The order has been created.</h2>
 		<h3 data-bind='var: order(orderid); format:text; pretext:Your order id is ;'></h3>
 		<div class='pointer marginBottom' data-app-role='paymentMessaging'>
-			Click here to view/print your invoice.
 			<div class='zwarn' data-bind="var: order(payment_status_msg); format:text;"></div><!-- displays payment issues/errors -->
 		</div>
 		<div data-bind="var:order(payment_status_detail); format:text;" class='marginBottom'></div>
@@ -463,9 +476,6 @@ do NOT change the input name or id or checkout will likely break.
 	<table class='orderContentsTable fullWidth'>
 	<tr>
 		<td colspan='2'>
-	<div class='floatRight hide4Print'>
-	<button data-app-event="orderCreate|execInvoicePrint">Print Invoice</button>
-	</div>
 	
 	<h3 data-bind='var:order(order/data/pool);format:text; pretext:Order Status: ;'></h3>
 	
@@ -592,16 +602,21 @@ If this gets recycled, test in order history after making changes.
 </div>
 	</td>
 	
-	<td class='alignRight hide4Print'>
-	<button class='writeReview' data-app-event="store_crm|showWriteReview" data-bind='var:product(product);format:assignAttribute; attribute:data-pid;'>Write Review</button>	
-	</td>
-
-
 	</tr>
 </table>
 
 
 
+<ol>
+	<li id='chkoutOrderHistoryLineItem' data-app-role='orderContainer' class='marginBottom'>
+	<span data-bind='var:order(ORDERID); format:text;' data-app-click='order_create|adminOrderDetailShow' class='lookLikeLink'></span> on <span data-bind='var:order(CREATED_GMT); format:epoch2pretty;'></span>
+	<button data-app-click='order_create|cartItemAppendAllSKUsFromOrder' class='applyButton' data-icon-primary='ui-icon-arrowrefresh-1-e'>Re-order</button><!-- ### TOTO -> after an add or add all, do an inventory check -->
+	<div class='displayNone marginBottom' data-app-role='orderContents' data-bind="var:order(@ITEMS); format:processList; loadsTemplate:chkoutOrderHistoryItemLineItem;"></div>
+	</li>
+</ol>
 
-
-
+<div id='chkoutOrderHistoryItemLineItem' data-app-role='cartItemContainer' class='marginTop'>
+	<span data-bind='var: item(stid); format:text;'></span> - 
+	<span data-bind='var: item(prod_name); format:text;'></span>
+	<button data-app-click='order_create|cartItemAppendSKU' class='applyButton' data-text='false' data-icon-primary='ui-icon-cart'>Add</button>
+</div>

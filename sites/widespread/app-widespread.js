@@ -16,7 +16,7 @@
 
 ************************************************************** */
 
-var widespread = function() {
+var widespread = function(_app) {
 	var theseTemplates = new Array('');
 	var r = {
 
@@ -44,9 +44,9 @@ var widespread = function() {
 		//resize the logo to maximum available space.
 		var $logo = $('.logo',$('#mastHead'));
 		var $container = $('.container:first'); //used to determine margin width so logo sides align with 'shop' sides.
-// app.data[rd.datapointer]['zoovy:company_name']
-		if(app.data['appProfileInfo|'+zGlobals.appSettings.domain_only])	{
-			$logo.html("<img alt='"+(app.data['appProfileInfo|'+zGlobals.appSettings.domain_only]['zoovy:company_name'] || "")+"' src='"+app.u.makeImage({"name":app.data['appProfileInfo|'+zGlobals.appSettings.domain_only]['zoovy:logo_website'],"w":Math.round(($logo.width() - ($container.width() * .02) )),"h":$logo.height(),"b":"TTTTTT","tag":0})+"' />"); //the 100% makes the logo scale on resize before being regenerated.
+// _app.data[rd.datapointer]['zoovy:company_name']
+		if(_app.data['appProfileInfo|'+zGlobals.appSettings.domain_only])	{
+			$logo.html("<img alt='"+(_app.data['appProfileInfo|'+zGlobals.appSettings.domain_only]['zoovy:company_name'] || "")+"' src='"+_app.u.makeImage({"name":_app.data['appProfileInfo|'+zGlobals.appSettings.domain_only]['zoovy:logo_website'],"w":Math.round(($logo.width() - ($container.width() * .02) )),"h":$logo.height(),"b":"TTTTTT","tag":0})+"' />"); //the 100% makes the logo scale on resize before being regenerated.
 			}
 		
 		if(typeof handleSrcSetUpdate == 'function')	{
@@ -74,12 +74,12 @@ var widespread = function() {
 	$('#hotwButton').button({icons: {primary: "ui-icon-circle-triangle-w"},text: false}).on('click',function(){
 		var
 			$menu = $('#hotwMenu').empty(),
-			hotw = app.ext.myRIA.vars.hotw;
+			hotw = _app.ext.myRIA.vars.hotw;
 // SANITY -> hotw has a fixed length (15 by default).
 //start at spot 1. spot 0 is the page in focus.
 		for(var i = 1; i < 8; i += 1)	{
 			if(hotw[i])	{
-				$menu.append($("<li \/>").data(hotw[i]).addClass('pointer').text(app.ext.widespread.u.formatInfoObj4HOTW(hotw[i])));
+				$menu.append($("<li \/>").data(hotw[i]).addClass('pointer').text(_app.ext.widespread.u.formatInfoObj4HOTW(hotw[i])));
 				}
 			else	{
 				break; //exit early once the end of hotw is reached.
@@ -103,7 +103,7 @@ var widespread = function() {
 			onError : function()	{
 //errors will get reported for this callback as part of the extensions loading.  This is here for extra error handling purposes.
 //you may or may not need it.
-				app.u.dump('BEGIN admin_orders.callbacks.init.onError');
+				dump('BEGIN admin_orders.callbacks.init.onError');
 				}
 			}
 		}, //callbacks
@@ -124,15 +124,23 @@ var widespread = function() {
 //on a data-bind, format: is equal to a renderformat. extension: tells the rendering engine where to look for the renderFormat.
 //that way, two render formats named the same (but in different extensions) don't overwrite each other.
 		renderFormats : {
-			
+
+			imageURL2Href : function($tag,data)	{
+				data.bindData.name = (data.bindData.valuePretext) ? data.bindData.valuePretext+data.value : data.value;
+				data.bindData.w = $tag.attr('width');
+				data.bindData.h = $tag.attr('height');
+				data.bindData.tag = 0;
+				$tag.attr('href',_app.u.makeImage(data.bindData)); //passing in bindData allows for using
+				},
+
 			prodThumbs : function($tag,data)	{
 				var attribs = data.value['%attribs']; //shortcut.
 				if(attribs['zoovy:prod_image2'])	{
-//					app.u.dump(" -> image 2 is set.");
+//					dump(" -> image 2 is set.");
 					var $ul = $("<ul>").addClass('listStyleNone noPadOrMargin');
 					for(var i = 1; i <= 25; i++)	{
 						if(attribs['zoovy:prod_image'+i])	{
-							$ul.append("<li class='floatLeft marginRight marginBottom'><a href='"+app.u.makeImage({'name':attribs['zoovy:prod_image'+i],'w':'','h':'','b':'ffffff','tag':0})+"' data-gallery='gallery'><img src='"+app.u.makeImage({'name':attribs['zoovy:prod_image'+i],'w':75,'h':75,'b':'ffffff','tag':0})+"' alt=''  width='75' height='75' /></a></li>");
+							$ul.append("<li class='floatLeft marginRight marginBottom'><a href='"+_app.u.makeImage({'name':attribs['zoovy:prod_image'+i],'w':'','h':'','b':'ffffff','tag':0})+"' data-gallery='gallery'><img src='"+_app.u.makeImage({'name':attribs['zoovy:prod_image'+i],'w':75,'h':75,'b':'ffffff','tag':0})+"' alt=''  width='75' height='75' /></a></li>");
 							}
 						else	{
 							//image not set.
@@ -141,14 +149,14 @@ var widespread = function() {
 					$tag.append($ul);
 					}
 				else	{
-//					app.u.dump(" -> image 2 is NOT set.");
+//					dump(" -> image 2 is NOT set.");
 					//if image2 isn't set, skip em all.
 					}
 				//<a href='blank.gif' data-bind='var: product(zoovy:prod_image2); format:imageURL2Href; h:; w:;' data-gallery="gallery"  ><img src='blank.gif' alt='' data-bind='var: product(zoovy:prod_image2); format:imageURL;' width='75' height='75' /></a>
 				},
 			
 			srcset : function($tag,data)	{
-	//			app.u.dump('got into displayFunctions.image: "'+data.value+'"');
+	//			dump('got into displayFunctions.image: "'+data.value+'"');
 				data.bindData.b = data.bindData.bgcolor || 'ffffff'; //default to white.
 				
 				if(data.bindData.isElastic) {
@@ -166,10 +174,10 @@ var widespread = function() {
 						data.bindData.h = 120;
 
 						var srcSet = new Array(
-							app.u.makeImage(data.bindData)+" 1040w 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:240,w:240}))+" 1040w 2x", //double the default size. for high density screens.
-							app.u.makeImage($.extend({},data.bindData,{h:220,w:220}))+" 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:440,w:440}))+" 2x"
+							_app.u.makeImage(data.bindData)+" 1040w 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:240,w:240}))+" 1040w 2x", //double the default size. for high density screens.
+							_app.u.makeImage($.extend({},data.bindData,{h:220,w:220}))+" 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:440,w:440}))+" 2x"
 							)
 						}
 					else if(data.bindData.range == 'lineItemProdlist')	{
@@ -178,10 +186,10 @@ var widespread = function() {
 						data.bindData.h = 100;
 
 						var srcSet = new Array(
-							app.u.makeImage(data.bindData)+" 1040w 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:200,w:200}))+" 1040w 2x", //double the default size. for high density screens.
-							app.u.makeImage($.extend({},data.bindData,{h:220,w:220}))+" 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:440,w:440}))+" 2x"
+							_app.u.makeImage(data.bindData)+" 1040w 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:200,w:200}))+" 1040w 2x", //double the default size. for high density screens.
+							_app.u.makeImage($.extend({},data.bindData,{h:220,w:220}))+" 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:440,w:440}))+" 2x"
 							)
 						}
 					else if(data.bindData.range == 'homeCycle')	{
@@ -190,12 +198,12 @@ var widespread = function() {
 						data.bindData.h = 220;
 
 						var srcSet = new Array(
-							app.u.makeImage(data.bindData)+" 800w 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:440,w:560}))+" 800w 2x", //double the default size. for high density screens.
-							app.u.makeImage($.extend({},data.bindData,{h:220,w:360}))+" 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:440,w:720}))+" 2x",
-							app.u.makeImage($.extend({},data.bindData,{h:220,w:500}))+" 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:440,w:1000}))+" 2x"
+							_app.u.makeImage(data.bindData)+" 800w 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:440,w:560}))+" 800w 2x", //double the default size. for high density screens.
+							_app.u.makeImage($.extend({},data.bindData,{h:220,w:360}))+" 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:440,w:720}))+" 2x",
+							_app.u.makeImage($.extend({},data.bindData,{h:220,w:500}))+" 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:440,w:1000}))+" 2x"
 							)
 						}
 					else if(data.bindData.range == 'prodDetailMainPic')	{
@@ -204,10 +212,10 @@ var widespread = function() {
 						data.bindData.h = 260;
 
 						var srcSet = new Array(
-							app.u.makeImage(data.bindData)+" 1025w 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:520,w:520}))+" 1025w 2x", //double the default size. for high density screens.
-							app.u.makeImage($.extend({},data.bindData,{h:360,w:360}))+" 1x",
-							app.u.makeImage($.extend({},data.bindData,{h:720,w:720}))+" 2x"
+							_app.u.makeImage(data.bindData)+" 1025w 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:520,w:520}))+" 1025w 2x", //double the default size. for high density screens.
+							_app.u.makeImage($.extend({},data.bindData,{h:360,w:360}))+" 1x",
+							_app.u.makeImage($.extend({},data.bindData,{h:720,w:720}))+" 2x"
 							)
 						}
 					else	{
@@ -215,7 +223,7 @@ var widespread = function() {
 						}
 
 
-					$tag.attr('src',app.u.makeImage(data.bindData)); //passing in bindData allows for using
+					$tag.attr('src',_app.u.makeImage(data.bindData)); //passing in bindData allows for using
 					$tag.attr("srcset",srcSet.join(','));
 					
 					}
@@ -235,11 +243,11 @@ var widespread = function() {
 				var r; //what is returned. a 'pretty' text for this history item.
 				switch(sotw.pageType)	{
 					case 'product':
-						r = "product: "+((app.data['appProductGet|'+sotw.pid]) ?  app.data['appProductGet|'+sotw.pid]['%attribs']['zoovy:prod_name'] : sotw.pid);
+						r = "product: "+((_app.data['appProductGet|'+sotw.pid]) ?  _app.data['appProductGet|'+sotw.pid]['%attribs']['zoovy:prod_name'] : sotw.pid);
 						break;
 					
 					case 'category':
-						r = "category: "+((app.data['appNavcatDetail|'+sotw.navcat]) ?  app.data['appNavcatDetail|'+sotw.navcat].pretty : sotw.navcat);
+						r = "category: "+((_app.data['appNavcatDetail|'+sotw.navcat]) ?  _app.data['appNavcatDetail|'+sotw.navcat].pretty : sotw.navcat);
 						break;
 					
 					case 'homepage':
