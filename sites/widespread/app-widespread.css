@@ -22,26 +22,24 @@ quickstart.css
 body,html	{font-size:100%;}
 
 #appTemplates {display:none;} /* container for all templates. should be hidden */
-#mainContentArea	{position:relative;}
+
+#appPreView	{width:550px; margin:0 auto;}
+
 
 /*
-loading class. add class to your templates if you want a loading graphic to appear while data is requested. add only to the parent element. 
-loadingBG classname is removed once template is rendered.
-note - wait should only be used in cases where the entire template is being reloaded. the class is NOT automatically removed ever.
-note - background- are use instead of background in case element this is applied to has a bgcolor and it's !important. (like a modal parent)
+loadingbg class not used in widespread.
 */
+.wait	{background:url(wait.gif) no-repeat top center !important; min-height:20px !important; min-width:20px;}
 span.wait	{display:inline-block;}
 
 /******* global styles - added for cross-browser uniformity or usability ******/
 
 img	{border:0; vertical-align: top; display:inline-block;} /* vertical-align: top; removes the whitespace sometimes added under an image.  */
+
 button {display:inline-block; margin: 0; padding: 0; cursor:pointer !important;}
 /* for small buttons */
 .smallButton .ui-button-text	{line-height:normal; font-size:.75em;} /* don't mess with padding. will effect icon buttons */
 .smallButton .ui-button-text-icon-primary .ui-button-icon-primary	{left:.25em}
-
-
-
 
 table {
 	border-collapse: collapse;
@@ -64,9 +62,7 @@ input:focus {
 input.numberInput	{width:50px}
 
 button:focus	{outline:none;}
-/* for small buttons */
-.smallButton .ui-button-text	{line-height:normal; font-size:.75em;} /* don't mess with padding. will effect icon buttons */
-.smallButton .ui-button-text-icon-primary .ui-button-icon-primary	{left:.25em}
+
 .zform_number	{width:50px;}
 
 /*
@@ -133,7 +129,6 @@ and offMenu is toggle off, hiding the change button.
 .edited		{border:1px solid #390;} /* added if a field is changed */
 
 
-
 .marginLeft	{margin-left:1em;}
 .marginRight	{margin-right:1em;}
 .marginTop	{margin-top:1em;}
@@ -142,6 +137,8 @@ and offMenu is toggle off, hiding the change button.
 .stdMargin	{margin:1em;}
 .headerPadding	{padding: .2em .4em;} /* for use in headings or legends that use the ui-state classes and need a little padding within. */
 .stdPadding	{padding:1em;}
+
+
 .fullWidth	{width:100%;}
 
 
@@ -154,6 +151,8 @@ and offMenu is toggle off, hiding the change button.
 .buyerLoggedIn .hideIfLoggedOut	{display: block;} /* may be 'block' */
 .buyerLoggedIn span.hideIfLoggedOut, .buyerLoggedIn a.hideIfLoggedOut	{display: inline;} /* ensures inline on span elements */
 
+
+/* ** 201346 -> messaging styles are now in anyplugins.css */
 
 
 /* used in order history and faq (possibly other places) in a format similar to an accordian, but more than one panel can be open. */
@@ -229,7 +228,7 @@ and override using classes or id's as needed.
 /* for variations */
 
 .variation	{margin-bottom:6px;} /* class applied to div containing a variation group */
-.pogType_radio span label	{display:block; margin-bottom:4px; margin-left:12px;}
+.variation_radio span label	{display:block; margin-bottom:4px; margin-left:12px;}
 
 
 
@@ -267,7 +266,7 @@ so the displayNone class is used, then a .grpType_PARENT class is added if the i
 
 .CRMButtonMenu	{margin:0; padding:0; margin-bottom:12px;}
 
-.pogType_attribs	{display:none;} /* don't show finder attributes */
+.variation_attribs	{display:none;} /* don't show finder attributes */
 
 /****** REVIEW GFX - used for review summary and in list of reviews on product detail page ******/
 
@@ -421,13 +420,17 @@ CART
 
 ***************************************************/
 
-
+/* ** 201346 -> css redux to make cart responsive. big update in template as well. see media query at bottom of doc too. */
 .cartStuffContainer	{width:100%; margin:0 0 1em 0;}
 #cartStuffList	{list-style:none; margin:0; padding:0; font-size:.85em;}
 #cartStuffList li	{display:block; margin:0 0 1em 0;}
 .cartButtons	{text-align:center;}
-.cartButtons span	{display:block; margin-bottom:.5em;}
+.cartButtons .thisButton	{display:block; margin-bottom:.5em;}
 .cartSummaryTotalsContainer h2	{font-size:.8em;} 
+
+
+
+
 
 
 
@@ -507,7 +510,37 @@ CHECKOUT
 
 
 
+
+
+
+
+
 .debug	{position:fixed; bottom:0; left:0; right:0; background:#ffffff; color:#000000; border-top:1px solid #666666; padding:5px;}
+
+
+
+
+
+
+/* ** 201346 -> for responsive cart layout. */
+/* cart product list */
+@media only screen and (max-width: 400px) {
+	.cartQuantityInput	{clear:both;} /* this is wide, so put it on it's own line so that it doesn't wrap (only in small screens) */
+	}
+	
+@media only screen and (min-width: 750px) {
+	.cartSummaryTotalsContainer, .cartStuffContainer	{width:49%;}
+	.cartStuffContainer	{float:left;}
+	.cartSummaryTotalsContainer	{float:right;}
+	.cartButtons .thisButton	{float:right; margin:0 0 .4em .4em;}
+	.cartButtons .continueShoppingSpan	{float:left; margin:0;}
+	}
+
+@media only screen and (min-width: 1024px) {
+	.cartTemplateShippingContainer		{float:left; width:48%;}
+	.cartSummary	{float:right; width:48%; text-align:right;}
+	}
+	
 
 
 
