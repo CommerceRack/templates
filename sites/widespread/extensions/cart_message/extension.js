@@ -79,6 +79,7 @@ if messages
 jqObj -> this is the chat dialog/context, not the message history pane, because not all messages will be 'chat'.
 
 */
+//					dump(" --------> onSucccess: rd._rtag.jqObj: "+_rtag.jqObj.data());
 					if(_rtag && _rtag.jqObj && _rtag.jqObj.data('cartid'))	{
 						var
 							messages = _app.data[_rtag.datapointer]['@MSGS'], 
@@ -120,6 +121,7 @@ jqObj -> this is the chat dialog/context, not the message history pane, because 
 						}
 					},
 				onError : function(rd)	{
+					dump(" --------> onError: rd._rtag.jqObj: "+rd._rtag.jqObj.data());
 					if(rd.errid == 4)	{
 						//this means the _cmd is not supported. not sense retrying every few seconds.
 						}
@@ -334,11 +336,10 @@ This intentionally does NOT reset the polling var. If that needs to be reset, se
 That way cartmessages can be fetched without impacting the polling time, if desired.
 */
 				fetchCartMessages : function(when,$context)	{
-//					_app.u.dump(" -> queued up the next cartMessages cmd");
+					_app.u.dump(" -> queued up the next cartMessages cmd");
 					var cartID = $context.data('cartid');
 					if(cartID)	{
 						_app.ext.cart_message.vars.carts[cartID].timeout = setTimeout(function(){
-
 							_app.model.addDispatchToQ({'_cmd':'cartMessageList','since':((_app.u.thisNestedExists("data.cartMessageList.SEQ",_app)) ? (_app.data.cartMessageList.SEQ) : 0),'_cartid':cartID,'_tag':	{'datapointer' : 'cartMessageList','callback':'handleCartMessageListPolling','extension' : 'cart_message','jqObj':$context}},'passive');
 							_app.model.dispatchThis('passive');
 							},when);
@@ -350,14 +351,14 @@ That way cartmessages can be fetched without impacting the polling time, if desi
 
 //a generic init for use on both sides of the force (buyer and admin). Any 'special' handling that is app specific should be added outside this function.
 				initCartMessenger : function(cartID,$context){
+//					dump("BEGIN initCartMessenger");
 					if(cartID && $context instanceof jQuery)	{
-						$context.data('cartid',cartID);
+						$context.attr('data-cartid',cartID);
 						var messagesDPS = _app.model.dpsGet('cartMessages',cartID) || []; //, TS = _app.model.dpsGet('cartMessages','lastMessageTS') || 0, since = 0;
 						_app.ext.cart_message.vars.carts[cartID] = {
 							frequency : 7000,
 							timeout : null
 							}
-
 						_app.model.addDispatchToQ({'_cmd':'cartMessageList','since':0,'_cartid':cartID,'_tag':	{
 							'datapointer' : 'cartMessageList',
 							'callback':'handleCartMessageListPolling',

@@ -100,7 +100,7 @@ var myRIA = function(_app) {
 
 		startMyProgram : {
 			onSuccess : function()	{
-			dump("BEGIN myRIA.callback.startMyProgram");
+//			dump("BEGIN myRIA.callback.startMyProgram");
 //			dump(" -> window.onpopstate: "+typeof window.onpopstate);
 //			dump(" -> window.history.pushState: "+typeof window.history.pushState);
 
@@ -118,15 +118,24 @@ var myRIA = function(_app) {
 				
 				if(_app.vars.apptimizer === true) {$.support.onpopstate = false} //disable uri rewrite and rely on hashChange
 
+initCM = function(cartID)	{
+	if($('#cartMessenger').length)	{
+		_app.ext.cart_message.u.initCartMessenger(cartID,$('#cartMessenger')); //starts the cart message polling
+		}
+	else	{
+		dump("#cartMessenger does NOT exist. That means the cart messaging extension won't work right.","warn");
+		}
+	}
+
 				if(cartID)	{
 					dump(" -> cartID is set, init messenger");
 					_app.model.addCart2Session(cartID); //this function updates _app.vars.carts
-					_app.ext.cart_message.u.initCartMessenger(cartID,$('#cartMessenger')); //starts the cart message polling
+					initCM(cartID);
 					}
 				else if(cartID = _app.model.fetchCartID())	{
 					dump(" -> cartID obtained from fetchCartID. cartid: "+cartID);
 					//no need to add this cartID to the session/vars.carts, because that's where fetch gets it from.
-					_app.ext.cart_message.u.initCartMessenger(cartID,$('#cartMessenger')); //starts the cart message polling
+					initCM(cartID);
 					}
 				else	{
 					dump(" -> no cart found. create a new one");
@@ -136,7 +145,7 @@ var myRIA = function(_app) {
 							}
 						else	{
 							//appCartCreate automatically updates session/vars.carts
-							_app.ext.cart_message.u.initCartMessenger(_app.model.fetchCartID(),$('#cartMessenger')); //starts the cart message polling
+							initCM(_app.model.fetchCartID());
 							}
 						}},'mutable');
 					}
@@ -383,7 +392,7 @@ document.write = function(v){
 					_app.ext.myRIA.renderFormats.productSearch($parent,{value:_app.data[tagObj.searchArray[i]]});
 					}
 				tagObj.state = 'complete'; //needed for handleTemplateEvents.
-				dump(" ----> running handleTemplateEvents complete from showPageContent");
+//				dump(" ----> running handleTemplateEvents complete from showPageContent");
 				_app.renderFunctions.handleTemplateEvents((tagObj.jqObj || $(_app.u.jqSelector('#',tagObj.parentID))),tagObj);
 
 				},

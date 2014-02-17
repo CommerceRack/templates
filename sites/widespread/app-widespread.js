@@ -156,7 +156,7 @@ var widespread = function(_app) {
 				},
 			
 			srcset : function($tag,data)	{
-	//			dump('got into displayFunctions.image: "'+data.value+'"');
+//				dump('got into displayFunctions.image: "'+data.value+'" and range: '+data.bindData.range);
 				data.bindData.b = data.bindData.bgcolor || 'ffffff'; //default to white.
 				
 				if(data.bindData.isElastic) {
@@ -196,7 +196,7 @@ var widespread = function(_app) {
 						//used for defaultimage.
 						data.bindData.w = 280;
 						data.bindData.h = 220;
-
+//						dump(" -----------> data.bindData for srcset: "); dump(data.bindData,'debug');
 						var srcSet = new Array(
 							_app.u.makeImage(data.bindData)+" 800w 1x",
 							_app.u.makeImage($.extend({},data.bindData,{h:440,w:560}))+" 800w 2x", //double the default size. for high density screens.

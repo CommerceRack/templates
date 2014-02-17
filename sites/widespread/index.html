@@ -143,6 +143,38 @@ $(document).ready(function(){
 
 
 
+<!--
+*************************************************************************************************************
+**
+**
+**										C A R T   M E S S A G E   U I      S T A R T S      H E R E
+**
+** A mechanism where buyers and merchants can communicate in real time.
+**
+*************************************************************************************************************
+-->
+
+
+
+<div id='cartMessenger' class='displayNone seoStrip' data-app-role='cartMessenger' title="help">
+	<form novalidate='novalidate'>
+		<div class='messageHistoryContainer'>
+			<section data-app-role='messageHistory'></section>
+		</div>
+		<fieldset data-app-role='messageInput' class='smallButton messageInputContainer displayNone'>
+			<textarea name='message' required='required' class='fullWidth' rows='5' placeholder='send a message'></textarea>
+			<button class='applyButton' data-app-click='cart_message|chatPostExec'>Send Message</button>
+		</fieldset>
+		<section data-app-role='messageCommands' class='messageCommandsContainer'>
+		<button class='applyButton displayNone show4ActiveChat' data-app-click="myRIA|cartMessagePageSend" title='Show the associate what page I am on.'>Send Page</button>
+		<button data-app-click="cart_message|cartCSRShortcutExec" class='applyButton hide4ActiveChat'>Get Cart ID</button><!-- if the buyer is already on the phone w/ the merchant, they could use this so the admin can access the cart -->
+		</section>
+	</form>
+</div>
+
+
+
+
 
 
 
@@ -207,9 +239,9 @@ the homepageTemplate template is loaded into mainContentArea by default when the
 			</div>
 		</div>
 	</div>
-
+<!--
 <ul id='homeProdSearchBestSellers' data-bind='var: elastic-native({"size":"10","mode":"elastic-native","filter":{"term":{"tags":"IS_BESTSELLER"}}}); format: productSearch; extension: myRIA; loadsTemplate: productListTemplateResultsNoPreview; before:<h2>Best Sellers</h2>;' class='listStyleNone clearfix noPadOrMargin responsiveProdlist'></ul>
-
+-->
 
 	
 
@@ -272,7 +304,7 @@ don't modify the 'data-templateid' unless you are changing template names and up
 
 <div class='slide' id='productListCycleTemplate' >
 	<div class='thumbContainer' >
-	<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:imageURL; format:srcset;extension:widespread; bgcolor:ffffff;range:homeCycle;' />
+	<img src='blank.gif' class='prodThumb' alt='' data-bind='var: product(zoovy:prod_image1); format:srcset;extension:widespread; bgcolor:ffffff; range:homeCycle;' />
 	</div>
 	<div class="cycle-overlay" data-bind='var: product(zoovy:prod_name); format:text;'></div>
 </div>
@@ -502,12 +534,12 @@ this will likely become more flexible in the future. ###
 		<div data-bind='var: product(zoovy:ship_latency); format:text;pretext:Normally ships in ;posttext: day(s);' class='latency marginBottom'></div>
 		<div data-app-role='timeInTransit' class='displayNone'></div>
 	
-		<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' onSubmit="app.ext.myRIA.u.addItemToCart($(this), {'action':'modal'}); return false;">
+		<form data-bind='var: product(pid); format:atcForm; extension:store_product;' class='prodViewerAddToCartForm clearfix' action='#' data-app-submit='myRIA|productAdd2Cart' data-show='inline'>
 	
 			<fieldset data-bind='var: product(pid); format:atcVariations; extension:store_product;' class='borderNone'></fieldset>
 			<fieldset data-bind='useParentData:true; format:atcQuantityInput; extension:store_product; pretext:Quantity: ; defaultValue:1;' class='borderNone'></fieldset>
 	
-			<input type='submit' value='Add to Cart' class='ui-button ui-button-text ui-corner-all ui-state-default addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;'  />
+			<input type='submit' value='Add to Cart' class='applyButton addToCartButton displayNone' data-bind='var: product(pid); format:addToCartButton; extension:store_product;'  />
 		</form>
 	
 		<div data-bind='var:product(zoovy:prod_cpsiawarning); format:cpsiaWarning; extension:myRIA;'></div>
@@ -520,9 +552,9 @@ this will likely become more flexible in the future. ###
 	
 		<menu data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;' class='CRMButtonMenu'>
 	
-		<a href='#' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).parent().attr("data-pid"),"templateID":"reviewFrmTemplate"}); return false;'>Write Review</a>	|
+		<a href='#' data-app-click="store_crm|productReviewShow">Write Review</a>	|
 	
-		<a href='#' onClick="app.ext.myRIA.a.add2BuyerList({sku:$(this).parent().attr('data-pid'),'listid':'wishlist'}); return false;">Add to Wishlist</a>
+		<a href='#' data-app-click="myRIA|productAdd2List" data-listid='wishlist'>Add to Wishlist</a>
 	
 		</menu>
 	
@@ -564,7 +596,7 @@ It's done this way because ID's hard coded into template are bad mojo (templates
 	<div  class='tabContent' data-anytab-content='prodReviews'>
 
 		<div class='clearfix alignRight'>
-			<button class='ui-button-text ui-button ui-state-default ui-corner-all' onClick='app.ext.store_crm.u.showReviewFrmInModal({"pid":$(this).attr("data-pid"),"templateID":"reviewFrmTemplate"});' data-bind='var:product(pid);format:assignAttribute; attribute:data-pid;'>Write Review</button>
+			<button class='applyButton' data-app-click="store_crm|productReviewShow" >Write Review</button>
 		</div>
 
 		<ul class='listStyleNone clearfix productReviewsList' data-bind="var: reviews(reviews.@reviews); format:processList; loadsTemplate:productReviewsTemplateDetail;"></ul>
