@@ -2805,7 +2805,7 @@ return $r;
 
 //infoObj.state = onCompletes or onInits. later, more states may be supported.
 			handleTemplateEvents : function($ele,infoObj)	{
-//				dump("BEGIN handleTemplateEvents. state: "+infoObj.state);
+				dump("BEGIN handleTemplateEvents. state: "+infoObj.state);
 				infoObj = infoObj || {};
 				if($ele instanceof jQuery && infoObj.state)	{
 					//the following code allows for a data-app-init/complete/depart to be set on the element. 
